@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'aulas',
     loadChildren: () => import('./gestao-aulas/gestao-aulas.module').then(m => m.GestaoAulasModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: '',
