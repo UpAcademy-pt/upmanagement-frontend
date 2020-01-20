@@ -5,6 +5,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './core/guards/auth/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { AdminGuard } from './core/guards/admin.guard';
+import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 
 
 
@@ -13,8 +14,14 @@ const routes: Routes = [
 
   {
     path: 'dummy',
-    loadChildren: () => import('./dummy/dummy.module').then(m => m.DummyModule),
+    redirectTo: '/questionario',
+    //loadChildren: () => import('./dummy/dummy.module').then(m => m.DummyModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'questionario',
+    loadChildren: () => import('./questionnaire/questionnaire.module').then(m => m.QuestionnaireModule),
+    canActivate: [AuthGuard] ,
   },
   {
     path: '',
