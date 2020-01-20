@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class GestaoAulasComponent implements OnInit {
 
   constructor() { }
-
+//metodo get userID - recebe o array de edicoes onde esta. 
   ngOnInit() {
   }
 
