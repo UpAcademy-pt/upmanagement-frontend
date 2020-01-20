@@ -1,0 +1,15 @@
+.btn-borderless {
+    width: 30px;
+    height: 30px;
+    border-color: transparent;
+    background-color: transparent;
+    color: grey;
+}
+
+.btn-edit:hover {
+    color: darkgray;
+}
+
+.btn-delete:hover {
+    color: red;
+}
