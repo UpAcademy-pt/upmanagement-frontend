@@ -17,6 +17,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'aulas',
+    loadChildren: () => import('./gestao-aulas/gestao-aulas.module').then(m => m.GestaoAulasModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: '',
     component: AdminComponent,
     canActivate: [AuthGuard,AdminGuard]
