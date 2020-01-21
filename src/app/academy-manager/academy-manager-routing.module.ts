@@ -5,6 +5,10 @@ import { AdminAcademiesComponent } from './admin-academies/admin-academies.compo
 import { AdminStudentsComponent } from './admin-students/admin-students.component';
 import { AdminTeachersComponent } from './admin-teachers/admin-teachers.component';
 import { AdminGuard } from '../core/guards/admin.guard';
+import { ContactAdminComponent } from './contact-admin/contact-admin.component';
+import { ContactTeacherComponent } from './contact-teacher/contact-teacher.component';
+import { MyAcademiesComponent } from './my-academies/my-academies.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 
 const routes: Routes = [
@@ -26,6 +30,22 @@ const routes: Routes = [
       path:'admin-teachers',
       component: AdminTeachersComponent,
       canActivate: [AdminGuard]
+      },
+      {
+      path:'contact-admin',
+      component: ContactAdminComponent
+      },
+      {
+      path:'contact-teacher',
+      component: ContactTeacherComponent
+      },
+      {
+      path:'my-academies',
+      component: MyAcademiesComponent
+      },
+      {
+      path:'my-profile',
+      component: MyProfileComponent
       }
     ]
   }
