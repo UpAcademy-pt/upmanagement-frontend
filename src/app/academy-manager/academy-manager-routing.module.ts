@@ -4,6 +4,7 @@ import { AcademyManagerComponent } from './academy-manager.component';
 import { AdminAcademiesComponent } from './admin-academies/admin-academies.component';
 import { AdminStudentsComponent } from './admin-students/admin-students.component';
 import { AdminTeachersComponent } from './admin-teachers/admin-teachers.component';
+import { AdminGuard } from '../core/guards/admin.guard';
 
 
 const routes: Routes = [
@@ -13,15 +14,18 @@ const routes: Routes = [
     children: [
       {
         path:'admin-academies',
-        component: AdminAcademiesComponent
+        component: AdminAcademiesComponent,
+        canActivate: [AdminGuard]
       },
       {
         path:'admin-students',
-        component: AdminStudentsComponent
+        component: AdminStudentsComponent,
+        canActivate: [AdminGuard]
       },
       {
       path:'admin-teachers',
-      component: AdminTeachersComponent
+      component: AdminTeachersComponent,
+      canActivate: [AdminGuard]
       }
     ]
   }
