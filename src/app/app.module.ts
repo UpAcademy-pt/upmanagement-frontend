@@ -16,6 +16,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSelectModule } from 'ngx-select-ex';
+import { ProfileComponent } from './profile/profile.component';
 import { ValidateComponent } from './validate/validate.component';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ValidateComponent } from './validate/validate.component';
     HeaderComponent,
     FooterComponent,
     AdminComponent,
+    ProfileComponent,
     ValidateComponent
   ],
   imports: [

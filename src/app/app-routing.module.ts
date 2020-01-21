@@ -5,6 +5,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './core/guards/auth/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { AdminGuard } from './core/guards/admin.guard';
+import { ProfileComponent } from './profile/profile.component';
 import { ValidateComponent } from './validate/validate.component';
 
 
@@ -27,6 +28,11 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     canActivate: [AuthGuard,AdminGuard]
+  },
+  {
+    path:'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'validate',

@@ -48,7 +48,7 @@ export class UserServiceService {
   }
 
   public getCurrentName():string {
-    return this.currentUser.username;
+    return this.currentUser.name;
   }
 
   public getCurrentUser() {
@@ -67,7 +67,7 @@ export class UserServiceService {
 
   public getUsers(nameField: string, emailField: string, roleField: string) {
     const params = new HttpParams();
-    params.set("username", nameField);
+    params.set("name", nameField);
     params.set("email", emailField);
     params.set("role", roleField);
     return this.http.get(this.url, {params});
@@ -78,7 +78,7 @@ export class UserServiceService {
   }
 
   public updateUser(user: User) {
-    return this.http.put(this.url, user, {responseType: 'text'});
+    return this.http.put(this.url + "edit", user, {responseType: 'text'});
   }
 
   public deleteUser(id: number) {
@@ -92,6 +92,18 @@ export class UserServiceService {
     params.set("newPassword", ""+newPassword);
     return this.http.put(this.url,{params})
 
+  }
+
+  public resetPassword(id: number) {
+    return this.http.post(this.url + "resetpassword/" + id, {responseType: 'text'});
+  }
+
+  public updatePassword(currentPassword: string, newPassword: string) {
+    const params = new HttpParams();
+    params.set("name", this.getCurrentName());
+    params.set("currentPassword", currentPassword);
+    params.set("newPassword", newPassword);
+    return this.http.post(this.url + "updatepassword", {params}, {responseType: 'text'});
   }
 
 }
