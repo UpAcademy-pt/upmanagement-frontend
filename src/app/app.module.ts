@@ -16,8 +16,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSelectModule } from 'ngx-select-ex';
-import { AcademiesComponent } from './gestao-aulas/academies/academies.component';
-
+import { ProfileComponent } from './profile/profile.component';
+import { ValidateComponent } from './validate/validate.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { AcademiesComponent } from './gestao-aulas/academies/academies.component
     HeaderComponent,
     FooterComponent,
     AdminComponent,
-    AcademiesComponent
+    ProfileComponent,
+    ValidateComponent
   ],
   imports: [
     BrowserModule,
