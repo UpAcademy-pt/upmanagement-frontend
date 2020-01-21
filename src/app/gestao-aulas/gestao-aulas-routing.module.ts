@@ -4,6 +4,7 @@ import { GestaoAulasComponent } from './gestao-aulas.component';
 import { ForumComponent } from './forum/forum.component';
 import { LessonsComponent } from './lessons/lessons.component';
 import { NotesComponent } from './notes/notes.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 const routes: Routes = [
@@ -16,12 +17,16 @@ const routes: Routes = [
         component: LessonsComponent,
       },
       {
-        path: 'blocoNotas',
+        path: 'notes',
         component: NotesComponent,
       },
       {
         path: 'forum',
         component: ForumComponent,
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent,
       },
     ]
   },

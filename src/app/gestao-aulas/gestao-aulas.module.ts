@@ -13,6 +13,8 @@ import { LessonsComponent } from './lessons/lessons.component';
 import { NotesComponent } from './notes/notes.component';
 import { CalendarComponent } from './calendar/calendar.component';
 
+
+
 @NgModule({
   declarations: [GestaoAulasComponent, ForumComponent, NotesComponent, AcademiesComponent, CalendarComponent, LessonsComponent, LessonsComponent, NotesComponent, CalendarComponent],
   imports: [
