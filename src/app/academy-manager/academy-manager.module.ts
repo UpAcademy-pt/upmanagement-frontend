@@ -12,13 +12,15 @@ import { MyAcademiesComponent } from './my-academies/my-academies.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactAdminComponent } from './contact-admin/contact-admin.component';
 import { ContactTeacherComponent } from './contact-teacher/contact-teacher.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent, AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, ContactAdminComponent, ContactTeacherComponent],
   imports: [
     CommonModule,
-    AcademyManagerRoutingModule
+    AcademyManagerRoutingModule,
+    SharedModule
   ]
 })
 export class AcademyManagerModule { }
