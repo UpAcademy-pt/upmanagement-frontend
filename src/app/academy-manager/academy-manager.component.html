@@ -1,2 +1,8 @@
 
 <p>academy-manager works!</p>
+
+<div *ngIf="showAdminSidebar===true" class="sidebar-sticky"><app-admin-sidebar></app-admin-sidebar></div>
+
+<div *ngIf="showAdminSidebar===false" class="sidebar-sticky"><app-sidebar></app-sidebar></div>
+
+<router-outlet></router-outlet>

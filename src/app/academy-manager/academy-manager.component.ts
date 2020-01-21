@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserServiceService } from '../core/services/user-service/user-service.service';
 
 @Component({
   selector: 'app-academy-manager',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AcademyManagerComponent implements OnInit {
 
-  constructor() { }
+  public showAdminSidebar: boolean = false;
+  
+
+  constructor(
+    private userService: UserServiceService
+  ) {
+    if (this.userService.isAdmin()) {
+      this.showAdminSidebar = true;
+    }
+  }
 
   ngOnInit() {
   }
+
+   /* public isAdmin(): boolean {
+    if (this.userService.isAdmin()) {
+      return true;
+    }
+    return false;
+    
+  } */
 
 }
