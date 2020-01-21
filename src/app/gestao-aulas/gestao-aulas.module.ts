@@ -9,12 +9,12 @@ import { SharedModule } from './shared/shared.module';
 import { GestaoAulasComponent } from './gestao-aulas.component';
 import { AcademiesComponent } from './academies/academies.component';
 import { ForumComponent } from './forum/forum.component';
-import { BlocoNotasComponent } from './bloco-notas/bloco-notas.component';
-import { CalendarioComponent } from './calendario/calendario.component';
-import { AulasComponent } from './aulas/aulas.component';
+import { LessonsComponent } from './lessons/lessons.component';
+import { NotesComponent } from './notes/notes.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
-  declarations: [GestaoAulasComponent, ForumComponent, BlocoNotasComponent, AcademiesComponent, CalendarioComponent, AulasComponent],
+  declarations: [GestaoAulasComponent, ForumComponent, NotesComponent, AcademiesComponent, CalendarComponent, LessonsComponent, LessonsComponent, NotesComponent, CalendarComponent],
   imports: [
     CommonModule,
     SharedModule,

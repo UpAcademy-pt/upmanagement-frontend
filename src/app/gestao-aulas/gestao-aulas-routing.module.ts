@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GestaoAulasComponent } from './gestao-aulas.component';
-import { AulasComponent } from './aulas/aulas.component';
-import { BlocoNotasComponent } from './bloco-notas/bloco-notas.component';
 import { ForumComponent } from './forum/forum.component';
+import { LessonsComponent } from './lessons/lessons.component';
+import { NotesComponent } from './notes/notes.component';
 
 
 const routes: Routes = [
@@ -13,11 +13,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: AulasComponent,
+        component: LessonsComponent,
       },
       {
         path: 'blocoNotas',
-        component: BlocoNotasComponent,
+        component: NotesComponent,
       },
       {
         path: 'forum',
