@@ -1,8 +1,16 @@
 <p>questionnaire works!</p>
-<button routerLink="/questionario" >questionarios</button>
-<label>Pergunta:</label>
+<!-- <button routerLink="/questionario" >questionarios</button>
+<label>Pergunta:</label> -->
 
-
+<div>
+    <label>name:
+        <input [(ngModel)]="a.question" placeholder="Pergunta"/>
+      </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="addTeste(a)">
+      add
+    </button>
+  </div>
 
 
 

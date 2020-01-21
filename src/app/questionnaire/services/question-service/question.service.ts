@@ -22,6 +22,7 @@ export class QuestionService {
   }
 
   public createQuestion(question: Question) {
+    console.log(question);
     return this.http.post(this.url, question, {responseType: 'text'});
   }
 
