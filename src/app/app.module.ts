@@ -27,7 +27,7 @@ import { ValidateComponent } from './validate/validate.component';
     HeaderComponent,
     FooterComponent,
     AdminComponent,
-    ProfileComponent,
+    ProfileComponent, 
     ValidateComponent
   ],
   imports: [
