@@ -6,18 +6,20 @@ import { QuestionnaireComponent } from './questionnaire.component';
 import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
   declarations: [
     QuestionnaireComponent,
     MainComponent,
-    NewQuestionnaireComponent
+    NewQuestionnaireComponent,
   ],
   imports: [
     CommonModule,
     QuestionnaireRoutingModule,
-    FormsModule
-  ]
+    FormsModule,
+  ],
+  bootstrap:    [ MainComponent ]
 })
 export class QuestionnaireModule { }
