@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { RouterModule } from '@angular/router';
 
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 
@@ -10,7 +11,8 @@ import { RouterModule } from '@angular/router';
   declarations: [SideBarComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    BsDropdownModule
   ],
   exports: [
     SideBarComponent,
