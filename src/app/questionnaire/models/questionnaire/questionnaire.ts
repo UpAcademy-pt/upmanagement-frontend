@@ -1,5 +1,7 @@
+import { Question } from '../question/question';
+
 export class Questionnaire {
-    'questionList': string[];
+    'questionList': Question[];
     'name': string;
     'template': boolean;
     'qType': string;

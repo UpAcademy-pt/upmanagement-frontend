@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   // providers: [{ provide: TooltipConfig, useFactory: getAlertConfig }]
 })
 export class MainComponent implements OnInit {
- // public collapsed = false;
+ public collapsed = false;
     constructor() { }
 
   ngOnInit() {

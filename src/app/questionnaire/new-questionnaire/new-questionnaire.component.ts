@@ -17,6 +17,7 @@ export class NewQuestionnaireComponent implements OnInit {
   ) {}
 
  private a: Question = new Question();
+ private b: Questionnaire = new Questionnaire();
 
   public addQuestion(question: Question) {
     console.log('data');
@@ -27,7 +28,11 @@ export class NewQuestionnaireComponent implements OnInit {
   public addQuestionnaire(questionnaire: Questionnaire) {
     console.log('data');
     console.log(questionnaire);
-    this.questionnaireService.createQuestionnaire(questionnaire).subscribe();
+    //this.questionnaireService.createQuestionnaire(questionnaire).subscribe();
+  }
+
+  public addNewQuestionOnForm(){
+    console.log("entrou")
   }
 
   ngOnInit() {
