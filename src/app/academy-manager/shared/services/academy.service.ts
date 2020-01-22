@@ -14,7 +14,9 @@ export class AcademyService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.getAllAcademies();
+  }
 
   public getAllAcademies() {
     this.http.get(this.url).subscribe(

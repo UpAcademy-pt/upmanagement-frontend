@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
+import { ReplaySubject } from 'rxjs';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-admin-teachers',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminTeachersComponent implements OnInit {
 
-  constructor() { }
+  public teachers$: ReplaySubject<User[]> = new ReplaySubject(1);
+
+  constructor(
+    private userService: UserServiceService
+  ) {
+    this.getAllTeachers();
+  }
 
   ngOnInit() {
+  }
+
+  public getAllTeachers() {
+    this.userService.getUsers('','','SUPERUSER').subscribe(
+      (res:any) => {
+      this.teachers$.next(res)
+      }
+    )
   }
 
 }
