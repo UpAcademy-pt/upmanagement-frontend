@@ -3,6 +3,7 @@ import { User } from '../../models/user';
 import { ReplaySubject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { isUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -35,13 +36,20 @@ export class UserServiceService {
     }
     return false;
   }
+  
+  public isSuperUser(){
+    if (this.currentUser && this.currentUser.role == "SUPERUSER") {
+      return true;
+    }
+    return false;
+  }
 
   public authenticateUser(user: User) {
     return this.http.post(this.url + "login", user);
   }
 
   public getCurrentName():string {
-    return this.currentUser.username;
+    return this.currentUser.name;
   }
 
   public getCurrentUser() {
@@ -59,11 +67,14 @@ export class UserServiceService {
   }
 
   public getUsers(nameField: string, emailField: string, roleField: string) {
-    const params = new HttpParams();
-    params.set("username", nameField);
-    params.set("email", emailField);
-    params.set("role", roleField);
-    return this.http.get(this.url, {params});
+    if (roleField == "todos") {
+      roleField = ""
+    }
+    const params = new HttpParams()
+    .set("name", nameField)
+    .set("email", emailField)
+    .set("role", roleField);
+    return this.http.get(this.url + 'q', {params});
   }
 
   public createUser(user: User) {
@@ -71,11 +82,32 @@ export class UserServiceService {
   }
 
   public updateUser(user: User) {
-    return this.http.put(this.url, user, {responseType: 'text'});
+    return this.http.put(this.url + "edit", user, {responseType: 'text'});
   }
 
   public deleteUser(id: number) {
     return this.http.delete(this.url + id, {responseType: 'text'});
+  }
+  public validatePassword(user: User, newPassword: string){
+    const params = new HttpParams();
+    params.set("newPassword",newPassword);
+    return this.http.put(this.url + user,{params})
+  }
+
+  public resetPassword(id: number) {
+    return this.http.put(this.url + "resetpassword/" + id, {responseType: 'text'});
+  }
+
+  user: User
+  public updatePassword(currentPassword: string, newPassword: string) {
+    this.user = this.getCurrentUser();
+    this.user.password = currentPassword;
+    
+    return this.http.put(this.url + "validate?newPass=" + newPassword, this.user, {responseType: 'text'});
+  }
+
+  public getUserById(id: number){
+    return this.http.get(this.url + id)
   }
 
 }

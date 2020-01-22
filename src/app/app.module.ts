@@ -17,6 +17,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ValidateComponent } from './validate/validate.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { QuestionnaireComponent } from './questionnaire/questionnaire.component'
     HeaderComponent,
     FooterComponent,
     AdminComponent,
+    ProfileComponent,
+    ValidateComponent
   ],
   imports: [
     BrowserModule,

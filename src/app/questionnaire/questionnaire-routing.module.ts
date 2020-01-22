@@ -5,6 +5,7 @@ import { MainComponent } from './main/main.component';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { NewQuizComponent } from './new-quiz/new-quiz.component';
+import { TemplatesComponent } from './templates/templates.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'dados',
         component: StatisticsComponent
+      },
+      {
+        path: 'template',
+        component: TemplatesComponent
       }
     ]
   } 

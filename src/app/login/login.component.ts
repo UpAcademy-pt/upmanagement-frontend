@@ -11,20 +11,20 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public user: User = new User();
-  public errorMsg: string = "Wrong Email or Password";
-  public showError: boolean = false;
+  public showPasswordError: boolean = false;
 
   constructor(
     private userApi: UserServiceService,
     private router: Router
   ) { }
+  
   public login() {
     this.userApi.authenticateUser(this.user).subscribe((result: any) => {
       console.log(result);
       this.userApi.setCurrentUser(result);
       this.router.navigate(['/'])
     }, (error) => {
-      this.showError = true;
+      this.showPasswordError = true;
     });
   }
 

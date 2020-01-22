@@ -7,6 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -17,16 +18,17 @@ import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 export class AdminComponent implements OnInit {
 
   modalRef: BsModalRef;
-  private nameField: string;
-  private emailField: string;
-  private roleField: string;
+  private nameField: string = "";
+  private emailField: string = "";
+  private roleField: string = "";
   private users: User[];
   private userToCreate: User = new User();
   private userToUpdate: User = new User();
   private rowUserToDelete: number;
-  private headers = ["username", "email", "role"];
-  private roles = [{'id': "USER", 'text': "User"}, {'id': "SUPERUSER", 'text': "Super User"}, {'id': "ADMIN", 'text': "Admin"}];
+  private headers = ["name", "email", "role"];
+  private roles = [{ 'id': "USER", 'text': "User" }, { 'id': "SUPERUSER", 'text': "Super User" }, { 'id': "ADMIN", 'text': "Admin" },{ 'id': "todos", 'text': "Todos" }];
   private showTable: boolean = false;
+  private resetPasswordConfirm: boolean = true;
   faSearch = faSearch;
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
@@ -53,30 +55,25 @@ export class AdminComponent implements OnInit {
   public createUser() {
     this.userApi.createUser(this.userToCreate).subscribe(
       (msg: string) => {
-      this.getUsers();
-      console.log(msg);
-    },(error: string) => {
-      console.log(error);
-    });
-    console.log(this.userToCreate);
-    
+        this.getUsers();
+        console.log(msg);
+      }, (error: string) => {
+        console.log(error);
+      });
     this.modalRef.hide();
-    this.userToCreate.email = "";
-    this.userToCreate.username = "";
-    this.userToCreate.role = "";
+    this.userToCreate = new User();
   }
 
   public updateUser() {
-    //this.userToUpdate.password = "1234";
     this.userApi.updateUser(this.userToUpdate).subscribe(
       (msg: string) => {
         this.getUsers();
         console.log(msg);
-      },(error: string) => {
+      }, (error: string) => {
         console.log(error);
       });
-      this.modalRef.hide();
-      console.log(this.userToUpdate);
+    this.modalRef.hide();
+    console.log(this.userToUpdate);
   }
 
   public deleteUser() {
@@ -87,10 +84,21 @@ export class AdminComponent implements OnInit {
         if (this.users.length <= 0) {
           this.showTable = false;
         }
-      },(error: string) => {
+      }, (error: string) => {
         console.log(error);
       });
-      this.modalRef.hide();
+    this.modalRef.hide();
+  }
+
+  public resetPassword() {
+    console.log("Reseting password");
+    this.userApi.resetPassword(this.userToUpdate.id).subscribe(
+      (msg: string) => {
+        console.log(msg);
+      }, (error: string) => {
+        console.log(error);
+      });
+    this.modalRef.hide();
   }
 
   openModalAddUser(template: TemplateRef<any>) {
@@ -106,5 +114,7 @@ export class AdminComponent implements OnInit {
     this.rowUserToDelete = rowIndex;
     this.modalRef = this.modalService.show(template);
   }
+
+
 
 }
