@@ -13,6 +13,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactAdminComponent } from './contact-admin/contact-admin.component';
 import { ContactTeacherComponent } from './contact-teacher/contact-teacher.component';
 import { SharedModule } from './shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class AcademyManagerModule { }
