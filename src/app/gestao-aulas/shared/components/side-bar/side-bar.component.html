@@ -1,36 +1,29 @@
- <!-- Sidebar -->
- <div class=" border-right" id="sidebar-wrapper">
+<!-- Sidebar -->
+<div class="border-right" id="sidebar-wrapper">
   <div class="sidebar-heading"></div>
-  
-  <div class="btn-group" dropdown>
-    <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-            aria-controls="dropdown-animated">
-      Button dropdown <span class="caret"></span>
-    </button>
-    <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
-        role="menu" aria-labelledby="button-animated">
-      <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-      <li role="menuitem"><a class="dropdown-item" href="#">Another action</a>
-      </li>
-      <li role="menuitem"><a class="dropdown-item" href="#">Something else
-        here</a></li>
-    </ul>
-  </div>
+
 
   <div class="list-group list-group-flush">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Academias
+    <div class="btn-group" dropdown>
+      <button id="button-animated" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
+        aria-controls="dropdown-animated">
+        Academias <span class="caret"></span>
       </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" type="button">Academia 1</button>
-        <button class="dropdown-item" type="button">Academia 3</button>
-        <button class="dropdown-item" type="button">Academia 3</button>
-      </div>
+      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+        <li role="menuitem"><a class="dropdown-item" routerLink="/lessons">Academia 1</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/lessons">Academia 2</a>
+        </li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/lessons">Academia 3</a>
+        </li>
+      </ul>
+    </div>
     <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons" routerLinkActive="active">Aulas</a>
-    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons/notes" routerLinkActive="active">Notas</a>
-    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons/forum" routerLinkActive="active">Forum</a>
-    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons/calendar" routerLinkActive="active">Calendario</a>
+    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons/notes"
+      routerLinkActive="active">Notas</a>
+    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons/forum"
+      routerLinkActive="active">Forum</a>
+    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons/calendar"
+      routerLinkActive="active">Calendario</a>
   </div>
 </div>
 <!-- /#sidebar-wrapper -->

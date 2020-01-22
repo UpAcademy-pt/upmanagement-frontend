@@ -8,8 +8,8 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss'],
   providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
-
 })
+
 export class SideBarComponent implements OnInit {
 
   constructor(

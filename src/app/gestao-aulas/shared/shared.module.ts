@@ -4,6 +4,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { RouterModule } from '@angular/router';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap';
 
 
 
@@ -12,7 +13,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
   imports: [
     CommonModule,
     RouterModule,
-    BsDropdownModule
+    BsDropdownModule,
+    CollapseModule
   ],
   exports: [
     SideBarComponent,
