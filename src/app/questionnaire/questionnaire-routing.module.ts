@@ -6,6 +6,7 @@ import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire
 import { StatisticsComponent } from './statistics/statistics.component';
 import { NewQuizComponent } from './new-quiz/new-quiz.component';
 import { TemplatesComponent } from './templates/templates.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 const routes: Routes = [

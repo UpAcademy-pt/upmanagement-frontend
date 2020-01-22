@@ -10,6 +10,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TemplatesComponent } from './templates/templates.component';
 import { NewQuizComponent } from './new-quiz/new-quiz.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ToAnswerComponent } from './to-answer/to-answer.component';
 
 
 
@@ -20,7 +22,9 @@ import { StatisticsComponent } from './statistics/statistics.component';
     NewQuestionnaireComponent,
     TemplatesComponent,
     NewQuizComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    SidebarComponent,
+    ToAnswerComponent
   ],
   imports: [
     CommonModule,
