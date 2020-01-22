@@ -1,28 +1,36 @@
-<body ng-app="">
-  
-
 <h1>Fazedor de Quests</h1>
+
+<div *ngFor="let question of questionnaire">
+
+</div>
 
 <div>
   <label for="questonnaireName">Nome: </label>
-  <input id="questonnaireName" type="text" placeholder="Nome">
+  <input id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="b.name">
 </div>
-<div ng-app="">
-<select name="selecter" id="select">
-  <option value="EVALUATION" [(ngModel)]="teste">Avaliação</option>
-  <option value="QUIZ" [(ngModel)]="teste1">Quiz</option>
-</select>
-<h1 ng-if="teste">Ava</h1>
-<h1 ng-show="teste1">Quiz</h1>
 
-<input type="checkbox" [(ngModel)]="teste3">
+<div>
+<select name="selecter" id="select" [(ngModel)]="b.qType">
+  <option value="EVALUATION">Avaliação</option>
+  <option value="QUIZ">Quiz</option>
+</select>
+</div>
+
+<div>
+  <label>Template:
+  <input type="checkbox" [(ngModel)]="b.template">
+  </label>
+</div>
+
+<div>
+  <button (click)="addNewQuestionOnForm()">Butao para adicionar questões (de 3 tipos)</button>
+</div>
+<!-- <h1 ng-if="teste">Ava</h1>
+<h1 ng-show="teste1">Quiz</h1> -->
+
+<!-- <input type="checkbox" [(ngModel)]="teste3">
 <h1 ng-show="teste3">TESTE</h1>
 </div>
-<div> 
-    <label>Questao: 
-        <input [(ngModel)]="a.question" placeholder="Pergunta"/>
-    </label>
-    <div>
 
     <div class="form-check" >
         <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
@@ -43,18 +51,22 @@
         </label>
         <button (click)="addOption()">Adicionar mais uma opção</button>
       </div>
-    </div>
+    </div> -->
 
-    <div ng-switch="myVar">
+    <!-- <div ng-switch="myVar">
         <div ng-switch-when="option1">
            <h1>Dogs</h1>
            <p>Welcome to a world of dogs.</p>
-    </div>
-
+    </div> -->
+    <div> 
+        <label>Questao: 
+            <input [(ngModel)]="a.question" placeholder="Pergunta"/>
+        </label>
+    <div>
     <button (click)="addQuestion(a)">
       add
     </button>
 </div>
 <div>
-  <button (click)="addQuestionnaire(quest)">Submeter Formulário</button>
-</div>
+  <button (click)="addQuestionnaire(b)">Submeter Formulário</button>
+</div> 

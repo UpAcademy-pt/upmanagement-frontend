@@ -5,12 +5,13 @@
 		<span class="divider"></span>
 		<div class="userArea">
 			<div class="userPicture">
-				<img src="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/3556/s200/up-academy-logo.png" alt="profile picture" />
+				<img src="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/3556/s200/up-academy-logo.png"
+					alt="profile picture" />
 			</div>
 			<div class="userName">
 				Administrador
 			</div>
-      <div class="ui pointing dropdown accountMenu" autoClose="outsideClick">
+			<div class="ui pointing dropdown accountMenu" autoClose="outsideClick">
 				<!-- <div class="text"><i class="fa fa-cogs"></i></div> -->
 				<!-- <div class="menu" suiDropdownMenu>
 					<div class="item"><i class="fa fa-user"></i> Profile</div>
@@ -21,24 +22,39 @@
 		<span class="divider"></span>
 		<ul class="navigation">
 			<li>
-				<a routerLink="/questionario/novo" href="#"><i><svg width="20" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"  fill-rule="nonzero"/></svg></i><span>Novo Questionario</span></a>
+				<a routerLink="/questionario/novo" href="#"><i><svg width="20" height="16"
+							xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"
+								fill-rule="nonzero" /></svg></i><span>Novo Questionario</span></a>
 			</li>
-      <li>
-				<a routerLink="/questionario/quiz"href="#"><i><svg width="20" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"  fill-rule="nonzero"/></svg></i><span>Novo Quiz</span></a>
+			<li>
+				<a routerLink="/questionario/quiz" href="#"><i><svg width="20" height="16"
+							xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"
+								fill-rule="nonzero" /></svg></i><span>Novo Quiz</span></a>
 			</li>
-      <li>
-				<a href="#"><i><svg width="20" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z" fill-rule="nonzero"/></svg></i><span>Template</span></a>
+			<li>
+				<a href="#"><i><svg width="20" height="16" xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"
+								fill-rule="nonzero" /></svg></i><span>Template</span></a>
 			</li>
-      <li>
-        <div class="divider"></div>
-      </li>
-      <li>
-				<a href="#"><i><svg width="20" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"  fill-rule="nonzero"/></svg></i><span>Estatisticas</span></a>
+			<li>
+				<div class="divider"></div>
+			</li>
+			<li>
+				<a routerLink="/questionario/dados" href="#"><i><svg width="20" height="16" xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"
+								fill-rule="nonzero" /></svg></i><span>Estatisticas</span></a>
 			</li>
 		</ul>
-    <div class="expandBtn btn-danger">
-      <span id="sidebarCollapse"><i  [class.fa-compress]="!collapsed" [class.fa-expand]="collapsed" (click)="collapsed = !collapsed"><svg width="20" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z" fill-rule="nonzero"/></svg></i></span>
-    </div>
+		<div class="expandBtn">
+			<span id="sidebarCollapse"><i class="fa fa-compress" [class.fa-compress]="!collapsed"
+					[class.fa-expand]="collapsed" (click)="collapsed = !collapsed"></i></span>
+		</div>
 	</nav>
 	<div id="content">
 		<div class="container-fluid">
@@ -51,7 +67,3 @@
 
 	</div>
 </div>
-
-
-
-
