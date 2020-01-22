@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { QuestionnaireComponent } from './questionnaire.component';
 import { MainComponent } from './main/main.component';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,11 @@ const routes: Routes = [
       },
       {
         path: 'novo',
-        component: NewQuestionnaireComponent
+        component: NewQuestionnaireComponent,
+      },
+      {
+        path: 'quiz',
+        component: QuizComponent
       }
     ]
   } 
