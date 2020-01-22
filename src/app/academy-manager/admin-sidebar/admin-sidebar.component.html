@@ -1,7 +1,24 @@
-<p>Menu</p>
+<div class="d-flex flex-column vh-100" style="background-color: grey; width: 220px;">
 
-<ul routerLinkActive = "active">
-    <li><a routerLink = "admin-academies">Gerir Academias</a></li>
-    <li><a routerLink = "admin-students"> Gerir Formandos</a></li>
-    <li><a routerLink = "admin-teachers"> Gerir Formadores</a></li>
-</ul>
+    <div style="background-color: rgb(59, 59, 59);">
+        <h3 class="mt-3 mb-3 ml-5" style="color: white;">Menu</h3>
+    </div>
+
+    <ul routerLinkActive = "active" class="nav-item mt-3" style="padding-left: 10px;">
+
+         
+            <button routerLink = "admin-academies" class="btn btn-link btn-lg mx-1 my-3 " style="color: white;">Gerir Academias</button> 
+        
+        <br>
+ 
+            <button routerLink = "admin-students" class="btn btn-link btn-lg mx-1 my-3" style="color: white;"> Gerir Formandos</button> 
+        
+        <br>
+
+            <button routerLink = "admin-teachers" class="btn btn-link btn-lg mx-1 my-3" style="color: white;"> Gerir Formadores</button> 
+
+        <br>
+
+    </ul>
+
+</div>
