@@ -7,6 +7,8 @@ import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { QuizComponent } from './quiz/quiz.component';
+
 
 
 @NgModule({
@@ -14,6 +16,7 @@ import { BrowserModule } from '@angular/platform-browser';
     QuestionnaireComponent,
     MainComponent,
     NewQuestionnaireComponent,
+    QuizComponent,
   ],
   imports: [
     CommonModule,
