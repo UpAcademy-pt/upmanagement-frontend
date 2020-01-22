@@ -7,7 +7,8 @@ import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { QuizComponent } from './quiz/quiz.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { NewQuizComponent } from './new-quiz/new-quiz.component';
 
 
 
@@ -16,7 +17,8 @@ import { QuizComponent } from './quiz/quiz.component';
     QuestionnaireComponent,
     MainComponent,
     NewQuestionnaireComponent,
-    QuizComponent,
+    StatisticsComponent,
+    NewQuizComponent
   ],
   imports: [
     CommonModule,
