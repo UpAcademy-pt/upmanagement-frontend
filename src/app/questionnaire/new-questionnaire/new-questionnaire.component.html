@@ -1,0 +1,60 @@
+<body ng-app="">
+  
+
+<h1>Fazedor de Quests</h1>
+
+<div>
+  <label for="questonnaireName">Nome: </label>
+  <input id="questonnaireName" type="text" placeholder="Nome">
+</div>
+<div ng-app="">
+<select name="selecter" id="select">
+  <option value="EVALUATION" [(ngModel)]="teste">Avaliação</option>
+  <option value="QUIZ" [(ngModel)]="teste1">Quiz</option>
+</select>
+<h1 ng-if="teste">Ava</h1>
+<h1 ng-show="teste1">Quiz</h1>
+
+<input type="checkbox" [(ngModel)]="teste3">
+<h1 ng-show="teste3">TESTE</h1>
+</div>
+<div> 
+    <label>Questao: 
+        <input [(ngModel)]="a.question" placeholder="Pergunta"/>
+    </label>
+    <div>
+
+    <div class="form-check" >
+        <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+        <label class="form-check-label" for="exampleRadios1">
+          Default radio
+        </label>
+      </div>
+      <div class="form-check" id="questionOptions">
+        <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+          Second default radio
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+        <label class="form-check-label" for="exampleRadios3">
+          Disabled radio
+        </label>
+        <button (click)="addOption()">Adicionar mais uma opção</button>
+      </div>
+    </div>
+
+    <div ng-switch="myVar">
+        <div ng-switch-when="option1">
+           <h1>Dogs</h1>
+           <p>Welcome to a world of dogs.</p>
+    </div>
+
+    <button (click)="addQuestion(a)">
+      add
+    </button>
+</div>
+<div>
+  <button (click)="addQuestionnaire(quest)">Submeter Formulário</button>
+</div>

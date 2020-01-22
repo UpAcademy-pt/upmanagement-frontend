@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
-import { Question } from './models/question/question';
-import { QuestionService } from './services/question-service/question.service';
 
 
 @Component({
@@ -13,16 +11,8 @@ export class QuestionnaireComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private questionService: QuestionService
   ) {}
 
- private a: Question = new Question();
-
-  public addTeste(data: Question) {
-    console.log('data');
-    console.log(data);
-    this.questionService.createQuestion(data).subscribe();
-  }
 
   ngOnInit() {
   }
