@@ -1,5 +1,5 @@
 <div class="container mb-4">
-    <button type="button" class="btn-borderless btn-edit" (click)="openModalAddAcademy(templateAddAcademy)">Nova Academia</button>
+    <button type="button" class="btn btn-primary btn-lg mt-4" (click)="openModalAddAcademy(templateAddAcademy)">Nova Academia</button>
 </div>
 
 <!-- Modal Add Academy -->
@@ -61,13 +61,13 @@
         <tr *ngFor="let academy of academies$ | async">
             <td>{{academy.edName}}</td>
             <td>
-                <button></button>
+                <button class="btn btn-success">Ver</button>
             </td>
             <td>
-                <button></button>
+                <button class="btn btn-primary">Editar</button>
             </td>
             <td>
-                <button></button>
+                <button class="btn btn-danger">Apagar</button>
             </td>
         </tr>
     </tbody>

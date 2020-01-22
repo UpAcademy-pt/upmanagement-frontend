@@ -31,7 +31,7 @@ export class AdminAcademiesComponent implements OnInit {
   ngOnInit() {
   }
 
-  getAllAcademies() {
+  public getAllAcademies() {
     this.academyService.getAllAcademies();
   }
 
