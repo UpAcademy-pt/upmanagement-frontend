@@ -8,13 +8,13 @@ import { UserServiceService } from 'src/app/core/services/user-service/user-serv
 })
 export class SidebarComponent implements OnInit {
 
-  public contactTeacher: boolean = true;
+  public isTeacher = false;
 
   constructor(
     private userService: UserServiceService
   ) {
     if (this.userService.isSuperUser()) {
-      this.contactTeacher = false;
+      this.isTeacher = true;
     }
   }
 
