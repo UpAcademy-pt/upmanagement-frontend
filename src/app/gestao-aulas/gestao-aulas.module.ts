@@ -13,10 +13,14 @@ import { ForumComponent } from './forum/forum.component';
 import { LessonsComponent } from './lessons/lessons.component';
 import { NotesComponent } from './notes/notes.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 
-
-
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [GestaoAulasComponent, ForumComponent, NotesComponent, AcademiesComponent, CalendarComponent, LessonsComponent, LessonsComponent, NotesComponent, CalendarComponent],
@@ -27,7 +31,14 @@ import { CalendarComponent } from './calendar/calendar.component';
     AccordionModule.forRoot(),
     BsDropdownModule,
     BsDropdownModule.forRoot(),
+    PerfectScrollbarModule,
     
+  ],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ]
 })
 export class GestaoAulasModule { }
