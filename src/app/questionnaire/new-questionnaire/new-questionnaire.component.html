@@ -1,14 +1,4 @@
 <h1>Quests Maker</h1>
-<p>As questoes vao ser colocadas aqui</p>
-<div *ngFor="let question of b.questionList">
-  <p>{{question.question}}</p>
-  <div class="row">
-  <div *ngFor="let option of question.options">
-      <input class="form-check-input" type="radio" value="option{{question.options[0]}}"> {{option}}
-  </div>
-  </div>  
-  <!-- <p>{{question.options}}</p> -->
-</div>
 
 <div>
   <label for="questonnaireName">Nome: </label>
@@ -98,6 +88,17 @@
       Adicionar Pergunta
     </button>
 </div>
+
+<div *ngFor="let question of b.questionList">
+    <p>{{question.question}}</p>
+    <div class="row">
+    <div *ngFor="let option of question.options">
+        <input class="form-check-input" type="radio" value="option{{question.options[0]}}"> {{option}}
+    </div>
+    </div>  
+    <!-- <p>{{question.options}}</p> -->
+  </div>
+
 <div>
   <button class="btn btn-primary" (click)="addQuestionnaire(b)">
     Submeter Formulário
