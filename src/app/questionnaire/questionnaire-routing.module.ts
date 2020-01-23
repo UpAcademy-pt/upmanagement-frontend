@@ -4,9 +4,11 @@ import { QuestionnaireComponent } from './questionnaire.component';
 import { MainComponent } from './main/main.component';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
 import { StatisticsComponent } from './statistics/statistics.component';
-import { NewQuizComponent } from './new-quiz/new-quiz.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { PendingComponent } from './pending/pending.component';
+import { HistoryComponent } from './history/history.component';
+import { AdminGuard } from '../core/guards/admin.guard';
 
 
 const routes: Routes = [
@@ -21,10 +23,11 @@ const routes: Routes = [
       {
         path: 'novo',
         component: NewQuestionnaireComponent,
+        canActivate: [AdminGuard],
       },
       {
-        path: 'quiz',
-        component: NewQuizComponent
+        path: 'historico',
+        component: HistoryComponent
       },
       {
         path: 'dados',
@@ -33,6 +36,10 @@ const routes: Routes = [
       {
         path: 'template',
         component: TemplatesComponent
+      },
+      {
+        path: 'pendentes',
+        component: PendingComponent
       }
     ]
   } 

@@ -12,6 +12,9 @@ import { NewQuizComponent } from './new-quiz/new-quiz.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToAnswerComponent } from './to-answer/to-answer.component';
+import { PendingComponent } from './pending/pending.component';
+import { HistoryComponent } from './history/history.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 
 
@@ -24,12 +27,15 @@ import { ToAnswerComponent } from './to-answer/to-answer.component';
     NewQuizComponent,
     StatisticsComponent,
     SidebarComponent,
-    ToAnswerComponent
+    ToAnswerComponent,
+    PendingComponent,
+    HistoryComponent
   ],
   imports: [
     CommonModule,
     QuestionnaireRoutingModule,
     FormsModule,
+    BsDropdownModule
   ],
   bootstrap:    [ MainComponent ]
 })
