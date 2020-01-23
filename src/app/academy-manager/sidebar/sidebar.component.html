@@ -1,6 +1,7 @@
 <p>Menu</p>
 
 <ul routerLinkActive = "active">
-    <li><a routerLink="my-academies">As Minhas Academias</a></li>
-    <li><a routerLink="my-profile">O Meu Perfil</a></li>
+    <li *ngIf="isTeacher===true"><a routerLink="my-academies">Academias</a></li>
+    <li *ngIf="isTeacher===false"><a routerLink="my-academies">Academia</a></li>
+    <li><a routerLink="my-profile">Perfil</a></li>
 </ul>
