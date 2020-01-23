@@ -1,7 +1,13 @@
 <h1>Quests Maker</h1>
-
-<div *ngFor="let question of questionnaire">
-
+<p>As questoes vao ser colocadas aqui</p>
+<div *ngFor="let question of b.questionList">
+  <p>{{question.question}}</p>
+  <div class="row">
+  <div *ngFor="let option of question.options">
+      <input class="form-check-input" type="radio" value="option{{question.options[0]}}"> {{option}}
+  </div>
+  </div>  
+  <!-- <p>{{question.options}}</p> -->
 </div>
 
 <div>
@@ -23,8 +29,6 @@
 </div>
 
 <div>
-  <button (click)="addNewQuestionOnForm()">Botão para adicionar questões (de 3 tipos)</button>
-</div>
 <!-- <h1 ng-if="teste">Ava</h1>
 <h1 ng-show="teste1">Quiz</h1> -->
 
@@ -62,11 +66,40 @@
         <label>Questao: 
             <input [(ngModel)]="a.question" placeholder="Pergunta"/>
         </label>
-    <div>
-    <button (click)="addQuestion(a)">
-      add
+    </div>
+
+    <div class="row">
+      <label>Respostas:</label>
+        <div *ngFor="let option of a.options">
+          <p>{{option}}</p>
+        </div>
+        <!-- <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> -->
+        <input [(ngModel)]="option" type="text" placeholder="Opção">
+        <button (click)="addMoreOptions(option)">Add</button>
+        <!-- ao contrario da questao, aqui tive de colocar option e nao a.options porque
+        se nao o ngfor a cada letra tentava actualizar 
+        No entanto nao dá para limpar da mesma forma-->
+      
+    </div>
+
+  
+    <!-- <div> 
+        <label>Opções: 
+            <input [(ngModel)]="a.options"/>
+        </label>
+    </div> -->
+
+        <!-- <div class="form-check" >
+            <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <input type="text" placeholder="Opção1">
+        </div> -->
+
+    <button class="btn btn-primary" (click)="addQuestion(a)">
+      Adicionar Pergunta
     </button>
 </div>
 <div>
-  <button (click)="addQuestionnaire(b)">Submeter Formulário</button>
+  <button class="btn btn-primary" (click)="addQuestionnaire(b)">
+    Submeter Formulário
+  </button>
 </div> 
