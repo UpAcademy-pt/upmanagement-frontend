@@ -1,8 +1,8 @@
+import { Questionnaire } from '../questionnaire/questionnaire';
+
 export class Account {
-    'permissions': string;
-    'userId': number;
-    'email': string;
-    'name': string;
+    'id': number;
+    'pendingQuestionnaires': Questionnaire;
     
 constructor (data?:any){
     Object.assign(this, data);

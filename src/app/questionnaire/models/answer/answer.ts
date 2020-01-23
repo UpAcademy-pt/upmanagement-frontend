@@ -1,8 +1,7 @@
-import { logging } from 'protractor';
-
 export class Answer {
+    'id': number;
+    'answeredquestionnaireId': number;
     'answer': string;
-    'rtype': string;
     'questionId': number;
 
 constructor(data?: any) {

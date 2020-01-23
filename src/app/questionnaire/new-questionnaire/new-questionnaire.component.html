@@ -1,21 +1,46 @@
-<h1>Quests Maker</h1>
+<body>
+  
 
+<h1>Quests Maker</h1>
+<p>----------------Dados do Questionário----------------</p>
+<div class="row">
+<div>
 <div>
   <label for="questonnaireName">Nome: </label>
   <input id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="b.name">
 </div>
 
 <div>
+    <label>Possibilidade de resposta certa:
+    <input type="checkbox" [(ngModel)]="b.qType">
+    </label>
+</div>
+
+<!-- <div>
 <select name="selecter" id="select" [(ngModel)]="b.qType">
   <option value="EVALUATION">Avaliação</option>
   <option value="QUIZ">Quiz</option>
 </select>
-</div>
+</div> -->
 
 <div>
   <label>Template:
   <input type="checkbox" [(ngModel)]="b.template">
   </label>
+</div>
+</div>
+<div>
+    <label>Template:
+        <input type="checkbox" [(ngModel)]="b.template">
+        </label>
+        <label>Template:
+            <input type="checkbox" [(ngModel)]="b.template">
+            </label>
+            <label>Template:
+                <input type="checkbox" [(ngModel)]="b.template">
+                </label>
+</div>
+
 </div>
 
 <div>
@@ -52,6 +77,8 @@
            <h1>Dogs</h1>
            <p>Welcome to a world of dogs.</p>
     </div> -->
+    <p>----------------Fazer Questões----------------</p>
+
     <div> 
         <label>Questao: 
             <input [(ngModel)]="a.question" placeholder="Pergunta"/>
@@ -88,6 +115,8 @@
       Adicionar Pergunta
     </button>
 </div>
+
+<p>----------------Display de Questões----------------</p>
 
 <div *ngFor="let question of b.questionList">
     <p>{{question.question}}</p>

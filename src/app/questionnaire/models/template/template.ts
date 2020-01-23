@@ -1,11 +1,10 @@
 import { Question } from '../question/question';
 
-export class Questionnaire {
+export class Template {
     'id': number;
-    'questionList': Question[];
     'name': string;
     'qType': string;
-    'accountIdList': number[];
+    'questionList': Question[];
     'editPrivacy': string[];
     'viewPrivacy': string[];
 
