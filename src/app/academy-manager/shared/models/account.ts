@@ -8,7 +8,6 @@ export class Account {
     'mobilePhone': number;
     'linkedInAdress': string;
     'themes': number[];
-    'evaluations': number[];
     'missedDays': string;
     'nif': number;
 
