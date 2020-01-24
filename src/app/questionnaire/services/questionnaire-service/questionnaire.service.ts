@@ -7,7 +7,7 @@ import { Questionnaire } from '../../models/questionnaire/questionnaire';
 })
 export class QuestionnaireService {
   
-  private url = 'http://localhost:8080/coreFinalProject/questionnaire/';
+  private url = 'http://localhost:8080/coreFinalProject/questionnaire/questionnaire/';
 
   constructor(private http: HttpClient) { }
 

@@ -7,7 +7,7 @@ import { AnsweredQuestionnaire } from '../../models/answeredQuestionnaire/answer
 })
 export class AnsweredQuestionnaireService {
 
-  private url: 'http://localhost:8080/coreFinalProject/AnsweredQuestionnaire/';
+  private url: 'http://localhost:8080/coreFinalProject/questionnaire/answeredQuestionnaire/';
 
   constructor(
     private http: HttpClient

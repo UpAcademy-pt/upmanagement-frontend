@@ -7,7 +7,7 @@ import { Answer } from '../../models/answer/answer';
 })
 export class AnswerService {
 
-  private url = 'http://localhost:8080/coreFinalProject/answer/';
+  private url = 'http://localhost:8080/coreFinalProject/questionnaire/answer/';
 
   constructor(private http: HttpClient) { }
 

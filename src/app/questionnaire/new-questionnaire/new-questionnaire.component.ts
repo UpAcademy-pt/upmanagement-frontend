@@ -25,7 +25,7 @@ export class NewQuestionnaireComponent implements OnInit {
  private template: boolean;
  private quiz: boolean;
  private anonymous: boolean;
- //private questions: Question[] = this.b.questionList;
+ private option: string[]; //testar para limpar
 
   public addQuestion(question: Question) {
     console.log('data');

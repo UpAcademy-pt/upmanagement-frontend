@@ -6,7 +6,7 @@ import { Template } from '../../models/template/template';
   providedIn: 'root'
 })
 export class TemplateService {
-  private url = 'http://localhost:8080/coreFinalProject/questionnaire/';
+  private url = 'http://localhost:8080/coreFinalProject/questionnaire/template/';
 
   constructor(private http: HttpClient) { }
 

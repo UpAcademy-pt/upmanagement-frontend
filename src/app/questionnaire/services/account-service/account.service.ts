@@ -7,7 +7,7 @@ import { Account } from '../../models/account/account';
 })
 export class AccountService {
 
-  private url: 'http://localhost:8080/coreFinalProject/account/';
+  private url: 'http://localhost:8080/coreFinalProject/questionnaire/account/';
 
   constructor(
     private http: HttpClient,
