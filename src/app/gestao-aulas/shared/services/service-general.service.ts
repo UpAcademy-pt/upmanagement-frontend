@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 import { Edition } from '../models/edition';
+import { Lesson } from '../models/lesson';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,9 @@ export class ServiceGeneralService {
   
 public getEditions(){
   return this.simulation
+}
+public getLessons(){
+  return this.simulationLessons
 }
 
 public simulation: Array<Edition> = [
@@ -83,6 +87,35 @@ public simulation: Array<Edition> = [
   }
 ];
 
+public simulationLessons: Array<Lesson> = [
+  {
+  'id': 1,
+  'name': "html",
+  'description': " ola coisas",
+	'materials': [1,2],
+	'notesIds': [1,2],
+     
+  }, {
+    'id': 2,
+    'name': "css",
+    'description': " ainda mal estamos ca",
+    'materials': [1,2],
+    'notesIds': [1,2],
+
+  }, {
+    'id': 3,
+    'name': "java",
+    'description': " ainda ca estou",
+    'materials': [1,2],
+    'notesIds': [1,2],
+  }, {
+    'id': 4,
+    'name': "angular",
+    'description': " adeus",
+    'materials': [1,2],
+    'notesIds': [1,2],
+  }
+];
 
 
 

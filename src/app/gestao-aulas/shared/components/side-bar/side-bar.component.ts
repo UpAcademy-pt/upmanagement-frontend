@@ -24,9 +24,8 @@ export class SideBarComponent implements OnInit {
   ) {
     if (this.userApi.isSuperUser()||this.userApi.isAdmin()) {
       this.showSuperUserTab = true;
-      this.edtions = this.serviceApi.getEditions();
-      
     }
+    this.edtions = this.serviceApi.getEditions();
    }
 
   ngOnInit() {
