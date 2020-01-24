@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
+import { Edition } from '../../models/edition';
+import { ServiceGeneralService } from '../../services/service-general.service';
 
 
 @Component({
@@ -11,12 +14,24 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 })
 
 export class SideBarComponent implements OnInit {
+  public showSuperUserTab: boolean = false;
+  private edtions: Edition[];
 
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    private userApi: UserServiceService,
+    private serviceApi: ServiceGeneralService,
+  ) {
+    if (this.userApi.isSuperUser()||this.userApi.isAdmin()) {
+      this.showSuperUserTab = true;
+      this.edtions = this.serviceApi.getEditions();
+      
+    }
+   }
 
   ngOnInit() {
+  
   }
+
 
 }

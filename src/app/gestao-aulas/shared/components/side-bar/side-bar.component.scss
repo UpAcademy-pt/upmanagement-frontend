@@ -1,6 +1,9 @@
 .active {
    background-color: black;
 }
+#dropdown-animated.show {
+  display: table !important;
+}
 
 #sidebar-wrapper {
     min-height: 100vh;

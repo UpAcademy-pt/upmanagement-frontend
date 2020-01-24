@@ -5,16 +5,15 @@
 
   <div class="list-group list-group-flush">
     <div class="btn-group" dropdown>
-      <button id="button-animated" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
+      <button *ngIf="showSuperUserTab" id="button-animated" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
         aria-controls="dropdown-animated">
         Academias <span class="caret"></span>
       </button>
       <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+        <li *ngFor="let edition of edtions" role="menuitem">
+          <a class="dropdown-item" routerLink="/lessons">{{edition.name}}</a>
+        </li>
         <li role="menuitem"><a class="dropdown-item" routerLink="/lessons">Academia 1</a></li>
-        <li role="menuitem"><a class="dropdown-item" routerLink="/lessons">Academia 2</a>
-        </li>
-        <li role="menuitem"><a class="dropdown-item" routerLink="/lessons">Academia 3</a>
-        </li>
       </ul>
     </div>
     <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons" routerLinkActive="active">Aulas</a>
