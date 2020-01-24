@@ -24,9 +24,9 @@ export class AcademyManagerComponent implements OnInit {
     this.accountService.getByUserId(this.userId).subscribe((res:any) => {
       if (res === null) {
         this.currentAccount.userId = this.userId;
-        this.accountService.create(this.currentAccount).subscribe((res:any) => this.currentAccount = res);
+        this.accountService.create(this.currentAccount).subscribe((res:any) => this.accountService.setCurrentAccount(res));
       } else {
-        this.currentAccount = res;
+        this.accountService.setCurrentAccount(res);
       }
     });
 

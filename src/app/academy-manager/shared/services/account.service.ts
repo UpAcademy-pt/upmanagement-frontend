@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Account } from '../models/account';
-/* import { ReplaySubject } from 'rxjs'; */
+import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,8 @@ import { Account } from '../models/account';
 export class AccountService {
 
   private url = 'http://localhost:8080/coreFinalProject/academy-manager/accounts/';
+  private currentAccount: Account = new Account();
+  public currentAccount$: ReplaySubject<Account> = new ReplaySubject(1);
   
   /* private accounts: Account[];
   public accounts$: ReplaySubject<Account[]> = new ReplaySubject(1);
@@ -16,7 +18,9 @@ export class AccountService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.currentAccount$.next(new Account());
+  }
 
   /* public getAllAccounts() {
     this.http.get(this.url).subscribe(
@@ -47,4 +51,9 @@ export class AccountService {
   public getByUserId(userId: number) {
     return this.http.get(this.url + 'user-id/' + userId);
   }
+
+  public setCurrentAccount(account: Account) {
+    this.currentAccount = account;
+    this.currentAccount$.next(this.currentAccount);
+   }
 }
