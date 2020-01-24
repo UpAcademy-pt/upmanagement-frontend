@@ -8,7 +8,7 @@ import { ReplaySubject } from 'rxjs';
 })
 export class AcademyService {
 
-  private url = 'http://localhost:8080/coreFinalProject/academies/';
+  private url = 'http://localhost:8080/coreFinalProject/academy-manager/academies/';
   private academies: Academy[];
   public academies$: ReplaySubject<Academy[]> = new ReplaySubject(1);
 

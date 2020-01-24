@@ -9,7 +9,7 @@ import { Account } from '../models/account';
 })
 export class AccountService {
 
-  private url = 'http://localhost:8080/coreFinalProject/accounts/';
+  private url = 'http://localhost:8080/coreFinalProject/academy-manager/accounts/';
   private http: HttpClient;
   private currentAccount: Account = new Account();
   private userId: number;
