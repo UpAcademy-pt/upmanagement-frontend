@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 import { Account } from '../models/account';
-/* import { ReplaySubject } from 'rxjs'; */
+import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +9,18 @@ import { Account } from '../models/account';
 export class AccountService {
 
   private url = 'http://localhost:8080/coreFinalProject/academy-manager/accounts/';
-  private http: HttpClient;
   private currentAccount: Account = new Account();
-  private userId: number;
+  public currentAccount$: ReplaySubject<Account> = new ReplaySubject(1);
+  
   /* private accounts: Account[];
   public accounts$: ReplaySubject<Account[]> = new ReplaySubject(1);
 */
 
   constructor(
-    private userService: UserServiceService
+    private http: HttpClient
   ) {
-    this.userId = this.userService.getCurrentUser().id;
-    if (this.getByUserId(this.userId) !== null) {
-      this.create(this.currentAccount);
-    } else {
-      this.currentAccount = this.getByUserId(this.userId);
-    }
-   }
+    this.currentAccount$.next(new Account());
+  }
 
   /* public getAllAccounts() {
     this.http.get(this.url).subscribe(
@@ -57,4 +51,9 @@ export class AccountService {
   public getByUserId(userId: number) {
     return this.http.get(this.url + 'user-id/' + userId);
   }
+
+  public setCurrentAccount(account: Account) {
+    this.currentAccount = account;
+    this.currentAccount$.next(this.currentAccount);
+   }
 }
