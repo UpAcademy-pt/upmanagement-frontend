@@ -1,4 +1,5 @@
 export class Account {
+    'id': number;
     'userId': number;
     'age': number;
     'academies': number[];
