@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../shared/services/account.service';
+import { AcademyService } from '../shared/services/academy.service';
 
 @Component({
   selector: 'app-my-academies',
@@ -7,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyAcademiesComponent implements OnInit {
 
-  constructor() { }
+  constructor( 
+    private accountService : AccountService,
+    private acamdeyService: AcademyService
+  ) { 
+
+
+
+    
+  }
 
   ngOnInit() {
   }
