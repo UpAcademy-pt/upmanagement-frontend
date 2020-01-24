@@ -2,24 +2,25 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { Academy } from '../shared/models/academy';
 import { AcademyService } from '../shared/services/academy.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef, BsDropdownConfig } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-admin-academies',
   templateUrl: './admin-academies.component.html',
-  styleUrls: ['./admin-academies.component.scss']
+  styleUrls: ['./admin-academies.component.scss'],
+  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
 })
 export class AdminAcademiesComponent implements OnInit {
 
   public academies$: ReplaySubject<Academy[]>;
 
   modalRef: BsModalRef;
-  private edNameField: string;
-  private startDateField: string;
-  private endDateField: string;
-  private clientField: string;
-  private academyToCreate: Academy = new Academy();
-  private showTable = false;
+  public edNameField: string;
+  public startDateField: string;
+  public endDateField: string;
+  public clientField: string;
+  public academyToCreate: Academy = new Academy();
+  public showTable = false;
 
   constructor(
     private academyService: AcademyService,
