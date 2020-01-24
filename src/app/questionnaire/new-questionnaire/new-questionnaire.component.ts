@@ -3,6 +3,8 @@ import { QuestionService } from '../services/question-service/question.service';
 import { Question } from '../models/question/question';
 import { QuestionnaireService } from '../services/questionnaire-service/questionnaire.service';
 import { Questionnaire } from '../models/questionnaire/questionnaire';
+import { Template } from '../models/template/template';
+import { TemplateService } from '../services/template-service/template.service';
 
 @Component({
   selector: 'app-new-questionnaire',
@@ -13,12 +15,16 @@ export class NewQuestionnaireComponent implements OnInit {
 
   constructor(
     private questionService: QuestionService,
-    private questionnaireService: QuestionnaireService
+    private questionnaireService: QuestionnaireService,
+    private templateService: TemplateService
   ) {}
 
  private a: Question = new Question();
  private b: Questionnaire = new Questionnaire();
 
+ private template: boolean;
+ private quiz: boolean;
+ private anonymous: boolean;
  //private questions: Question[] = this.b.questionList;
 
   public addQuestion(question: Question) {
@@ -46,10 +52,23 @@ export class NewQuestionnaireComponent implements OnInit {
   }
 
   public addQuestionnaire(questionnaire: Questionnaire) {
-    console.log('data');
-    console.log(questionnaire);
 
-    //this.questionnaireService.createQuestionnaire(questionnaire).subscribe();
+    if (this.quiz){
+      this.b.qType = "QUIZ";
+    } else {
+      this.b.qType = "EVALUATION";
+    }
+    
+    this.questionnaireService.createQuestionnaire(questionnaire).subscribe();
+
+    if (this.template) {
+      let c: Template = new Template(this.b);
+      this.templateService.createTemplate(c).subscribe();
+      console.log("template" );
+      console.log(c);
+    }
+    console.log("questionario")
+    console.log(questionnaire);
 
     this.b = new Questionnaire(); //ver se existe uma forma melhor
   }
