@@ -8,7 +8,7 @@ import { ReplaySubject } from 'rxjs';
 })
 export class AcademyService {
 
-  private url = 'http://localhost:8080/coreFinalProject/academies/';
+  private url = 'http://localhost:8080/coreFinalProject/academy-manager/academies/';
   private academies: Academy[];
   public academies$: ReplaySubject<Academy[]> = new ReplaySubject(1);
 
@@ -24,7 +24,7 @@ export class AcademyService {
     .set('startDate', startDateField)
     .set('endDate', endDateField)
     .set('client', clientField);
-    return this.http.get(this.url + 'q', {params});
+    return this.http.get(this.url, {params});
   }
 
   public createAcademy(academy: Academy) {
