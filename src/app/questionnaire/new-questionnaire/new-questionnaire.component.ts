@@ -31,7 +31,7 @@ export class NewQuestionnaireComponent implements OnInit {
     console.log('data');
     console.log(question);
     console.log(this.b);
-    this.questionService.createQuestion(question).subscribe();
+    //this.questionService.createQuestion(question).subscribe();
     if (this.b.questionList != undefined) {
       this.b.questionList.push(question);
     } else {

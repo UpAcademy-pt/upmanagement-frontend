@@ -3,10 +3,15 @@
   <div class="container-fluid m-auto text-center">
 
     <h1>Quests Maker</h1>
-    <div class="p-3 mb-2 bg-light text-dark">.bg-light</div>
-    <!-- .bg-gradient-light -->
+
+    <div>
+      <button class="btn btn-primary" (click)="addQuestionnaire(b)">
+        Submeter Formulário
+      </button>
+    </div>
+
     <label style="color: rgb(216, 216, 216);">Dados do Questionário
-      <div class="container-fluid" style="background-color: rgb(216, 216, 216); border-radius: 15px; color: black; border: 1px solid black; padding: 35px;">
+      <div class="container-fluid bg-light" style="border-radius: 15px; color: black; border: 1px solid black; padding: 35px;">
         <div class="row">
           <label class="col-2" for="questonnaireName">Nome: </label>
           <input class="col-8" id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="b.name">
@@ -108,10 +113,5 @@
       <!-- <p>{{question.options}}</p> -->
     </div>
 
-    <div>
-      <button class="btn btn-primary" (click)="addQuestionnaire(b)">
-        Submeter Formulário
-      </button>
-    </div>
   </div>
 </body>
