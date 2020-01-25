@@ -14,25 +14,13 @@
       <div class="container-fluid bg-light" style="border-radius: 15px; color: black; border: 1px solid black; padding: 35px;">
         <div class="row">
           <label class="col-2" for="questonnaireName">Nome: </label>
-          <input class="col-8" id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="b.name">
+          <input class="col-8 mb-3" id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="b.name">
         </div>
       
-        <div class="row">
-          <div>
-            <label>Template:
-              <input type="checkbox" [(ngModel)]="template">
-            </label>
-          </div>
-          <div>
-            <label>Possibilidade de resposta certa:
-              <input type="checkbox" [(ngModel)]="quiz">
-            </label>
-          </div>
-          <div>
-            <label>Questionário anônimo:
-              <input type="checkbox" [(ngModel)]="anonymous">
-            </label>
-          </div>
+        <div class="form-check-inline mb-3">
+          <input class="ml-4" type="checkbox" [(ngModel)]="template">Template
+          <input class="ml-4" type="checkbox" [(ngModel)]="quiz">Com resposta certa
+          <input class="ml-4" type="checkbox" [(ngModel)]="anonymous">Questionário anônimo:
         </div>
           <div class="row">
             <div class="form-group col-6">
@@ -52,11 +40,19 @@
               </select>
             </div>
         </div>
+        <div class="col-12 mx-auto">
+          <div class="form-row">
+            <input type="checkbox" [(ngModel)]="send">Enviar?
+            <ngx-select [items]="academies" [(ngModel)]="academy" name="academy"></ngx-select>
+            <ngx-select [multiple]="true" [items]="formandosId" [(ngModel)]="formandos" [ngModelOptions]="{standalone: true}"></ngx-select>
+            <!-- defaultValue={{formandosId[0]}} -->
+          </div>
+        </div>
 
       </div>
     </label>
     <div>
-      <p>----------------Fazer Questões----------------</p>
+      <p>----------------Criador de Questões----------------</p>
 
       <div>
         <label>Questao:
