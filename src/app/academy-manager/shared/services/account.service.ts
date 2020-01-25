@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Account } from '../models/account';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -7,22 +8,21 @@ import { ReplaySubject } from 'rxjs';
 })
 export class AccountService {
 
-  private url = 'http://localhost:8080/coreFinalProject/accounts/';
-  private accounts: Account[];
+  private url = 'http://localhost:8080/coreFinalProject/academy-manager/accounts/';
+  private currentAccount: Account = new Account();
+  public currentAccount$: ReplaySubject<Account> = new ReplaySubject(1);
+  
+  /* private accounts: Account[];
   public accounts$: ReplaySubject<Account[]> = new ReplaySubject(1);
-  private students: Account[];
-  public students$: ReplaySubject<Account[]> = new ReplaySubject(1);
-  private teachers: Account[];
-  private teachers$: ReplaySubject<Account[]> = new ReplaySubject(1);
+*/
 
   constructor(
     private http: HttpClient
   ) {
-    this.getALllStudents();
-    this.getAllTeachers();
-   }
+    this.currentAccount$.next(new Account());
+  }
 
-  public getAllAccounts() {
+  /* public getAllAccounts() {
     this.http.get(this.url).subscribe(
       (res:any) => {
         this.accounts = res;
@@ -30,24 +30,30 @@ export class AccountService {
       }
     );
   }
+ */
 
-  public getALllStudents() {
-    this.http.get(this.url + 'q?role=USER').subscribe(
-      (res:any) => {
-        this.students = res;
-        this.students$.next(res);
-        console.log(this.students);
-        console.log(this.students$);
-      }
-    );
+  public create(account: Account) {
+    return this.http.post(this.url, account, {responseType: 'text'});
   }
 
-  public getAllTeachers() {
-    this.http.get(this.url + 'q?role=SUPERUSER').subscribe(
-      (res:any) => {
-        this.teachers = res;
-        this.teachers$.next(res);
-      }
-    );
+  public getById(id: number) {
+    return this.http.get(this.url + id);
   }
+
+  public update(account: Account) {
+    return this.http.put(this.url, account, {responseType: 'text'});
+  }
+
+  public delete(id: number) {
+    return this.http.delete(this.url + id);
+  }
+
+  public getByUserId(userId: number) {
+    return this.http.get(this.url + 'user-id/' + userId);
+  }
+
+  public setCurrentAccount(account: Account) {
+    this.currentAccount = account;
+    this.currentAccount$.next(this.currentAccount);
+   }
 }
