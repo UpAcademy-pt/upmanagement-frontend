@@ -1,6 +1,8 @@
 <!-- <p>admin-students works!</p> -->
 
   <!-- Table -->
+  <h1>Formandos</h1>
+
   <div>
   <table class="table table-striped container m-3 col-12 text-center">
     <thead class="thead-dark">
@@ -12,10 +14,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor = "let student of students$ | async">
+    <tr *ngFor = "let student of studentUsers$ | async; let i = index;" id="{{i}}">
       <td >{{student.name}}</td>
       <td>
-        <button class="btn btn-success">Ver</button> 
+        <button (click)="openModalShowAccount(templateShowAccount, i)" class="btn btn-success">Ver</button> 
       </td>
       <td>
         <button class="btn btn-primary">Editar</button>
@@ -27,3 +29,13 @@
   </tbody>
   </table>
 </div>
+
+<!-- Modal Show Profile -->
+<ng-template #templateShowAccount>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Perfil</h4>
+  </div>
+  <div class="modal-body container">
+   
+  </div>
+</ng-template>
