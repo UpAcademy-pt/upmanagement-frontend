@@ -19,6 +19,7 @@ export class AdminAcademiesComponent implements OnInit {
   public startDateField: string;
   public endDateField: string;
   public clientField: string;
+  public academies: Academy[];
   public academyToCreate: Academy = new Academy();
   public showTable = false;
 
@@ -33,7 +34,13 @@ export class AdminAcademiesComponent implements OnInit {
   }
 
   public getAllAcademies() {
-    this.academyService.getAllAcademies();
+    this.academyService.getAllAcademies(this.edNameField, this.startDateField, this.endDateField, this.clientField)
+    .subscribe((academies: Academy[]) => {
+      this.academies = academies;
+      if (this.academies.length > 0) {
+        this.showTable = true;
+      }
+    });
   }
 
   public createAcademy() {
@@ -44,10 +51,6 @@ export class AdminAcademiesComponent implements OnInit {
     );
     this.modalRef.hide();
     this.academyToCreate = new Academy();
-    this.academyToCreate.edName = '';
-    this.academyToCreate.startDate = '';
-    this.academyToCreate.endDate = '';
-    this.academyToCreate.client = '';
   }
 
   openModalAddAcademy(template: TemplateRef<any>) {
