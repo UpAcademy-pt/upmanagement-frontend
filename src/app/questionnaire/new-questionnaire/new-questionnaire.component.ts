@@ -26,8 +26,8 @@ export class NewQuestionnaireComponent implements OnInit {
  private quiz: boolean;
  private anonymous: boolean;
  private option: string[]; //testar para limpar
- public academies: any = [1, 2, 3, 4, 5];
- public formandosId: any = [1, 2, 3, 4, 5];
+ public academies: any = [{ 'id': "1", 'text': "Academia 1" }, { 'id': "2", 'text': "Academia 1" }, { 'id': "3", 'text': "Academia 3" },{ 'id': "4", 'text': "Academia 4" }];
+ public formandosId: any = [{ 'id': "1", 'text': "Formando 1" }, { 'id': "2", 'text': "Formando 1" }, { 'id': "3", 'text': "Formando 3" },{ 'id': "4", 'text': "Formando 4" }];
 
 
   public addQuestion(question: Question) {
