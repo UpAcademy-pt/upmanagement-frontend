@@ -31,7 +31,6 @@ export class PendingComponent implements OnInit {
   }
 
   public solveThisQuestionnaire(i: number) {
-    console.log("Resolver questionário de id = " + this.pendingQuestionnaires[i].id);
     this.router.navigate(['/questionario/pendentes/responder'], {state: {id: this.pendingQuestionnaires[i].id}});
   }
 

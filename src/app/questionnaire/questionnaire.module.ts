@@ -16,7 +16,8 @@ import { PendingComponent } from './pending/pending.component';
 import { HistoryComponent } from './history/history.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
-
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -37,8 +38,10 @@ import { NgxSelectModule } from 'ngx-select-ex';
     QuestionnaireRoutingModule,
     FormsModule,
     BsDropdownModule,
-    NgxSelectModule
+    NgxSelectModule,
+    AccordionModule.forRoot(),
+    FontAwesomeModule
   ],
-  bootstrap:    [ MainComponent ]
+  bootstrap: [MainComponent]
 })
 export class QuestionnaireModule { }

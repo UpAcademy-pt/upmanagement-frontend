@@ -1,11 +1,11 @@
-<div class="container">
-    <div class="card-columns">
-        <div *ngFor = "let row of pendingQuestionnaires; let i = index;" (click)="solveThisQuestionnaire(i)" class="card card-hover">
-        <img class="card-img-top" src="https://www.easypooling.com/images/img-questionnaire.png" style="width: 200px; height: auto;" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">{{row["name"]}}</h5>
-            <p class="card-text"><small class="text-muted">Adicionado em: data</small></p>
-        </div>
+<div class="row row-cols-1 row-cols-md-3">
+    <div *ngFor="let row of pendingQuestionnaires; let i = index;" class="col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div (click)="solveThisQuestionnaire(i)" class="card-pointer card h-100">
+            <img src="https://www.easypooling.com/images/img-questionnaire.png" class="px-3 card-img-top" alt="Questionário">
+            <div class="card-body">
+                <h5 class="card-title">{{row["name"]}}</h5>
+                <p class="card-text"><small class="text-muted">Adicionado em: data</small></p>
+            </div>
         </div>
     </div>
 </div>
