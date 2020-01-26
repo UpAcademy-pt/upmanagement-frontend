@@ -59,29 +59,31 @@
 
   <p>----------------Criador de Questões----------------</p>
 
-  <div class="row col-12">
-    <div *ngIf="!quiz" class="row col-3">
-      <button [(ngModel)]="open" class="col-12 bg-light" style="border: 1px solid black; padding: 15px">Resposta <br>
-        aberta</button>
-      <button [(ngModel)]="choices" (click)="changecolor" class="col-12">Múltipla <br> escolha</button>
+  <div class="row bg-light" style="border: 1px solid black; border-radius: 15px;">
+    <div *ngIf="!quiz" class="row col-2" style="border-radius: 15px;">
+      <button [(ngModel)]="choices" (click)="choices=true" class="col-12 bg-light" style="border: unset; border-bottom: 1px solid black ;border-radius: 15px 0px 0px 0px;">Resposta <br>
+        múltipla</button>
+      <button [(ngModel)]="open" (click)="choices=false" class="col-12" style="border-right: 1px solid; border-radius: 0px 0px 0px 15px; background-color: gray;">Resposta <br> aberta</button>
     </div>
-    <div class="bg-light col-9" style="border: 1px solid black; padding: 15px">
+    <div class="col-10" style="padding: 15px; background-color: transparent;">
       <div>
         <label>Questao:
           <input [(ngModel)]="a.question" placeholder="Pergunta" />
         </label>
       </div>
-      <div>
+      <div *ngIf="choices || quiz">
         <label>Resposta:
           <input [(ngModel)]="option" type="text" placeholder="Opção">
-          <button (click)="addMoreOptions()">Adicionar</button>
+          <button (click)="addMoreOptions()">Adicionar</button>{{customHtml}}
         </label>
       </div>
       <div>
-        <div *ngFor="let option of a.options" class="form-check-inline" >
-            <input type="checkbox">{{option}}
+        <div *ngFor="let option of a.options; index as i" class="form-check-inline" >
+            <input [(ngModel)]="trueOrfalse[i]" *ngIf="option!=''" type="checkbox">{{option}}
+            <button *ngIf="option!=''" class="btn btn-danger" (click)="option=''">X</button>
         </div>
       </div>
+
       <!-- <div class="row">
         <label>Respostas:
           <div *ngFor="let option of a.options">

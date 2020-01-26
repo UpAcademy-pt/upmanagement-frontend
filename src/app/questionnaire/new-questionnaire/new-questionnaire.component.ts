@@ -31,11 +31,17 @@ export class NewQuestionnaireComponent implements OnInit {
  private formandosId: any = [{ 'id': "1", 'text': "Formando 1" }, { 'id': "2", 'text': "Formando 1" }, { 'id': "3", 'text': "Formando 3" },{ 'id': "4", 'text': "Formando 4" }, { 'id': "5", 'text': "Todos" }];
  private option: string;
  private testeOption: string[]
+ private customHtml: string
+ private trueOrfalse: boolean[] = [];
+ private choices: boolean = true;
 
   public addQuestion(question: Question) {
     console.log('data');
     console.log(question);
     console.log(this.b);
+    this.trueOrfalse.forEach( (element, index) => {
+      if (element){this.a.rightAnswer.push(index)}}); //ver se dá para fazer directamente no ngmodel
+
     //this.questionService.createQuestion(question).subscribe();
     if (this.b.questionList != undefined) {
       this.b.questionList.push(question);
@@ -48,13 +54,21 @@ export class NewQuestionnaireComponent implements OnInit {
 
   public addMoreOptions(){
     console.log(this.option)
-    if (this.a.options != undefined) {
+    if(this.option != undefined && this.option != ""){
+      if(this.a.options != undefined) {
       this.a.options.push(this.option);
-    } else {
+      this.customHtml = ""
+      } else {
       this.a.options = [this.option];
-    }
+      this.customHtml = ""
+      } 
+    } else {
+    this.customHtml = "erro";
+  }
     this.option = "";
-    console.log(this.testeOption);
+  
+    console.log(this.a.options);
+    console.log(this.a.rightAnswer)
   }
 
   public addQuestionnaire(questionnaire: Questionnaire) {
@@ -79,8 +93,8 @@ export class NewQuestionnaireComponent implements OnInit {
     this.b = new Questionnaire(); //ver se existe uma forma melhor
   }
 
-  public addNewQuestionOnForm(){
-    console.log("entrou")
+  public viewStuff(){
+    
   }
 
   ngOnInit() {
