@@ -15,6 +15,7 @@ import { ToAnswerComponent } from './to-answer/to-answer.component';
 import { PendingComponent } from './pending/pending.component';
 import { HistoryComponent } from './history/history.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { NgxSelectModule } from 'ngx-select-ex';
 
 
 
@@ -35,7 +36,8 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     CommonModule,
     QuestionnaireRoutingModule,
     FormsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    NgxSelectModule
   ],
   bootstrap:    [ MainComponent ]
 })

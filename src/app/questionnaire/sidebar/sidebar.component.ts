@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit {
   constructor(
     private userApi: UserServiceService,
     private router: Router) {
-      if (this.userApi.isAdmin()) {
+      if ((this.userApi.isAdmin())  || (this.userApi.isSuperUser()))  {
         this.showSideBar = true;
       }
      }

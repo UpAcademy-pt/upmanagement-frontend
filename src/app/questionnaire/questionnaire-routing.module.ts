@@ -30,10 +30,6 @@ const routes: Routes = [
         component: HistoryComponent
       },
       {
-        path: 'dados',
-        component: StatisticsComponent
-      },
-      {
         path: 'template',
         component: TemplatesComponent
       },
@@ -42,8 +38,12 @@ const routes: Routes = [
         component: PendingComponent
       },
       {
-        path: 'responder',
+        path: 'pendentes/responder',
         component: ToAnswerComponent
+      },
+      {
+        path: 'historico/estatisticas', // colocar titulo do formulario depois 
+        component: StatisticsComponent
       }
     ]
   } 

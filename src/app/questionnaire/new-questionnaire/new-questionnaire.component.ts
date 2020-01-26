@@ -5,11 +5,13 @@ import { QuestionnaireService } from '../services/questionnaire-service/question
 import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { Template } from '../models/template/template';
 import { TemplateService } from '../services/template-service/template.service';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 
 @Component({
   selector: 'app-new-questionnaire',
   templateUrl: './new-questionnaire.component.html',
-  styleUrls: ['./new-questionnaire.component.scss']
+  styleUrls: ['./new-questionnaire.component.scss'],
+  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
 })
 export class NewQuestionnaireComponent implements OnInit {
 
@@ -25,7 +27,10 @@ export class NewQuestionnaireComponent implements OnInit {
  private template: boolean;
  private quiz: boolean;
  private anonymous: boolean;
- private option: string[]; //testar para limpar
+ private academies: any = [1, 2, 3, 4, 5];
+ private formandosId: any = [{ 'id': "1", 'text': "Formando 1" }, { 'id': "2", 'text': "Formando 1" }, { 'id': "3", 'text': "Formando 3" },{ 'id': "4", 'text': "Formando 4" }, { 'id': "5", 'text': "Todos" }];
+ private option: string;
+ private testeOption: string[]
 
   public addQuestion(question: Question) {
     console.log('data');
@@ -41,14 +46,15 @@ export class NewQuestionnaireComponent implements OnInit {
     this.a = new Question(); //ver se existe uma forma melhor
   }
 
-  public addMoreOptions(option: string){
-    console.log(option)
+  public addMoreOptions(){
+    console.log(this.option)
     if (this.a.options != undefined) {
-      this.a.options.push(option);
+      this.a.options.push(this.option);
     } else {
-      this.a.options = [option];
+      this.a.options = [this.option];
     }
-    option = "";
+    this.option = "";
+    console.log(this.testeOption);
   }
 
   public addQuestionnaire(questionnaire: Questionnaire) {

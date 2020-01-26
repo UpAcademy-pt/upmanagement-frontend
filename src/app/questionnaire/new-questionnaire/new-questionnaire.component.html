@@ -1,117 +1,159 @@
-<body class="d-flex">
+<div class="container-fluid m-auto text-center">
 
-  <div class="container-fluid m-auto text-center">
+  <h1>Quests Maker</h1>
 
-    <h1>Quests Maker</h1>
+  <div>
+    <button class="btn btn-primary" (click)="addQuestionnaire(b)">
+      Submeter Formulário
+    </button>
+  </div>
 
-    <div>
-      <button class="btn btn-primary" (click)="addQuestionnaire(b)">
-        Submeter Formulário
-      </button>
+  <label for="questdata" style="color: rgb(216, 216, 216);">Dados do Questionário</label>
+  <div id="questdata" class="container-fluid bg-light"
+    style="border-radius: 15px; color: black; border: 1px solid black; padding: 35px;">
+    <div class="row">
+      <label class="col-2" for="#questonnaireName">Nome: </label>
+      <input class="col-8 mb-3" id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="b.name">
     </div>
 
-    <label style="color: rgb(216, 216, 216);">Dados do Questionário
-      <div class="container-fluid bg-light" style="border-radius: 15px; color: black; border: 1px solid black; padding: 35px;">
-        <div class="row">
-          <label class="col-2" for="questonnaireName">Nome: </label>
-          <input class="col-8" id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="b.name">
-        </div>
-      
-        <div class="row">
-          <div>
-            <label>Template:
-              <input type="checkbox" [(ngModel)]="template">
-            </label>
-          </div>
-          <div>
-            <label>Possibilidade de resposta certa:
-              <input type="checkbox" [(ngModel)]="quiz">
-            </label>
-          </div>
-          <div>
-            <label>Questionário anônimo:
-              <input type="checkbox" [(ngModel)]="anonymous">
-            </label>
-          </div>
-        </div>
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="editPermissionSelect">Permissão para editar:</label>
-              <select multiple class="form-control" id="editPermissionSelect" [(ngModel)]="b.editPrivacy">
-                <option value="ADMIN">Admin</option>
-                <option value="SUPERUSER">Formador</option>
-                <option value="USER">Formando</option>
-              </select>
-            </div>
-            <div class="form-group col-6">
-              <label for="viewPermissionSelect">Permissão para visualizar:</label>
-              <select multiple class="form-control" id="viewPermissionSelect" [(ngModel)]="b.viewPrivacy">
-                <option value="ADMIN">Admin</option>
-                <option value="SUPERUSER">Formador</option>
-                <option value="USER">Formando</option>
-              </select>
-            </div>
-        </div>
-
+    <div class="form-check-inline mb-3">
+      <input class="ml-4" type="checkbox" [(ngModel)]="template">Template
+      <input class="ml-4" type="checkbox" [(ngModel)]="quiz">Com resposta certa
+      <input class="ml-4" type="checkbox" [(ngModel)]="anonymous">Questionário anônimo:
+    </div>
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="editPermissionSelect">Permissão para editar:</label>
+        <select multiple class="form-control" id="editPermissionSelect" [(ngModel)]="b.editPrivacy">
+          <option value="ADMIN">Admin</option>
+          <option value="SUPERUSER">Formador</option>
+          <option value="USER">Formando</option>
+        </select>
       </div>
-    </label>
-    <div>
-      <p>----------------Fazer Questões----------------</p>
+      <div class="form-group col-6">
+        <label for="viewPermissionSelect">Permissão para visualizar:</label>
+        <select multiple class="form-control" id="viewPermissionSelect" [(ngModel)]="b.viewPrivacy">
+          <option value="ADMIN">Admin</option>
+          <option value="SUPERUSER">Formador</option>
+          <option value="USER">Formando</option>
+        </select>
+      </div>
+    </div>
+    <div class="row container">
+      <div class="col-2">
+        <input type="checkbox" [(ngModel)]="send">Enviar?
+      </div>
+      <div class="col-3">
+        <p>Academia</p>
+        <ngx-select [disabled]="!send" [items]="academies" [(ngModel)]="academy" name="academy"
+          [ngModelOptions]="{standalone: true}">Academia</ngx-select>
+      </div>
+      <div class="col-4">
+        <p>Para</p>
+        <ngx-select [disabled]="!formandosId.empty" [multiple]="true" [items]="formandosId" [(ngModel)]="formandos"
+          [ngModelOptions]="{standalone: true}">Quem?</ngx-select>
+      </div>
+    </div>
 
+  </div>
+
+  <p>----------------Criador de Questões----------------</p>
+
+  <div class="row col-12">
+    <div *ngIf="!quiz" class="row col-3">
+      <button [(ngModel)]="open" class="col-12 bg-light" style="border: 1px solid black; padding: 15px">Resposta <br>
+        aberta</button>
+      <button [(ngModel)]="choices" (click)="changecolor" class="col-12">Múltipla <br> escolha</button>
+    </div>
+    <div class="bg-light col-9" style="border: 1px solid black; padding: 15px">
       <div>
         <label>Questao:
           <input [(ngModel)]="a.question" placeholder="Pergunta" />
         </label>
       </div>
-
-      <div class="row">
-        <label>Respostas:</label>
-        <div class="form-check">
+      <div>
+        <label>Resposta:
+          <input [(ngModel)]="option" type="text" placeholder="Opção">
+          <button (click)="addMoreOptions()">Adicionar</button>
+        </label>
+      </div>
+      <div>
+        <div *ngFor="let option of a.options" class="form-check-inline" >
+            <input type="checkbox">{{option}}
+        </div>
+      </div>
+      <!-- <div class="row">
+        <label>Respostas:
           <div *ngFor="let option of a.options">
             <p>{{option}}</p>
           </div>
+      </label> -->
+      <!-- <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> -->
+      <!-- <input [(ngModel)]="option" type="text" placeholder="Opção">
+      <button (click)="addMoreOptions(option)">Adicionar</button> -->
+      <!-- ao contrario da questao, aqui tive de colocar option e nao a.options porque
+                se nao o ngfor a cada letra tentava actualizar 
+                No entanto nao dá para limpar da mesma forma-->
+
+      <!-- </div> -->
+
+    </div>
+  </div>
+
+
+  <button class="btn btn-primary" (click)="addQuestion(a)">
+    Adicionar Pergunta
+  </button>
+
+  <!-- <div> -->
+  <!-- <div>
+      <label>Questao:
+        <input [(ngModel)]="a.question" placeholder="Pergunta" />
+      </label>
+    </div> -->
+
+  <!-- <div class="row">
+      <label>Respostas:</label>
+      <div class="form-check">
+        <div *ngFor="let option of a.options">
+          <p>{{option}}</p>
         </div>
-        <!-- <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> -->
-        <input [(ngModel)]="option" type="text" placeholder="Opção">
-        <button (click)="addMoreOptions(option)">Add</button>
-        <!-- ao contrario da questao, aqui tive de colocar option e nao a.options porque
-        se nao o ngfor a cada letra tentava actualizar 
-        No entanto nao dá para limpar da mesma forma-->
+      </div> -->
+  <!-- <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> -->
+  <!-- <input [(ngModel)]="option" type="text" placeholder="Opção">
+      <button (click)="addMoreOptions(option)">Add</button> -->
+  <!-- ao contrario da questao, aqui tive de colocar option e nao a.options porque
+            se nao o ngfor a cada letra tentava actualizar 
+            No entanto nao dá para limpar da mesma forma-->
 
-      </div>
-
-
-      <!-- <div> 
+  <!-- </div> -->
+  <!-- <div> 
         <label>Opções: 
             <input [(ngModel)]="a.options"/>
         </label>
     </div> -->
 
-      <!-- <div class="form-check" >
+  <!-- <div class="form-check" >
             <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
             <input type="text" placeholder="Opção1">
         </div> -->
 
-      <button class="btn btn-primary" (click)="addQuestion(a)">
-        Adicionar Pergunta
-      </button>
-    </div>
 
-    <p>----------------Display de Questões----------------</p>
+  <!-- </div> -->
 
-    <div *ngFor="let question of b.questionList">
-      <p>{{question.question}}</p>
-      <div class="row">
-        <div *ngFor="let option of question.options">
-          <div class="form-check">
-            <label class="form-check-label">{{option}}
-              <input class="form-check-input" type="radio">
-            </label>
-          </div>
+  <p>----------------Display de Questões----------------</p>
+
+  <div *ngFor="let question of b.questionList">
+    <p>{{question.question}}</p>
+    <div class="row">
+      <div *ngFor="let option of question.options">
+        <div class="form-check">
+          <label class="form-check-label">{{option}}
+            <input class="form-check-input" type="radio">
+          </label>
         </div>
       </div>
-      <!-- <p>{{question.options}}</p> -->
     </div>
-
+    <!-- <p>{{question.options}}</p> -->
   </div>
-</body>
+</div>
