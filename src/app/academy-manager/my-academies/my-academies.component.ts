@@ -12,24 +12,25 @@ import { Academy } from '../shared/models/academy';
 })
 export class MyAcademiesComponent implements OnInit {
  
-  public currentAccount : Account;
+  public currentAccount: Account;
   public currentAccount$: ReplaySubject<Account>;
   public academy: Academy;
 
-  constructor( 
-    private accountService : AccountService,
+  constructor(
+    private accountService: AccountService,
     private academyService: AcademyService
 
-  ) { 
+  ) {
     this.currentAccount$ = this.accountService.currentAccount$;
-    this.currentAccount= this.currentAccount$.subscribe((account) => console.log(account));
-
-    this.currentAccount.academies.forEach(element => { this.academyService.getbyId(element).subscribe((academy:any) => this.academy = academy);
+    this.currentAccount$.subscribe((account) => {
+      this.currentAccount = account;
+      this.currentAccount.academyIds.forEach(element => {
+        this.academyService.getbyId(element).subscribe((academy:any) => this.academy = academy);
+      });
     });
 
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
 }

@@ -12,24 +12,11 @@ import { Account } from './shared/models/account';
 export class AcademyManagerComponent implements OnInit {
 
   public showAdminSidebar: boolean = false;
-  private userId: number;
-  private currentAccount: Account = new Account();
 
   constructor(
     private userService: UserServiceService,
-    private router: Router,
-    private accountService: AccountService
+    private router: Router
   ) {
-    this.userId = this.userService.getCurrentUser().id;
-    this.accountService.getByUserId(this.userId).subscribe((res:any) => {
-      if (res === null) {
-        this.currentAccount.userId = this.userId;
-        this.accountService.create(this.currentAccount).subscribe((res:any) => this.accountService.setCurrentAccount(res));
-      } else {
-        this.accountService.setCurrentAccount(res);
-      }
-    });
-
     if (this.userService.isAdmin()) {
       this.showAdminSidebar = true;
       this.router.navigate
