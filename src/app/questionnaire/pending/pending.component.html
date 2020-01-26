@@ -1,1 +1,11 @@
-<p>pending works!</p>
+<div class="container">
+    <div class="card-columns">
+        <div *ngFor = "let row of pendingQuestionnaires; let i = index;" (click)="solveThisQuestionnaire(i)" class="card card-hover">
+        <img class="card-img-top" src="https://www.easypooling.com/images/img-questionnaire.png" style="width: 200px; height: auto;" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{row["name"]}}</h5>
+            <p class="card-text"><small class="text-muted">Adicionado em: data</small></p>
+        </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-to-answer',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToAnswerComponent implements OnInit {
 
-  constructor() { }
+  private questionnaireId: number;
+
+  constructor(
+    private router: Router,
+    private dataRoure: ActivatedRoute
+  ) {
+    this.questionnaireId = this.router.getCurrentNavigation().extras.state.id; //Number(this.dataRoure.snapshot.paramMap.get('id'));
+    console.log("Respondendo o questionário de id = " + this.questionnaireId);
+    
+   }
 
   ngOnInit() {
   }
+
+
 
 }

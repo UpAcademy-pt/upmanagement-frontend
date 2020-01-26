@@ -9,7 +9,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { PendingComponent } from './pending/pending.component';
 import { HistoryComponent } from './history/history.component';
 import { AdminGuard } from '../core/guards/admin.guard';
-
+import { ToAnswerComponent } from './to-answer/to-answer.component';
 
 const routes: Routes = [
   {
@@ -40,6 +40,10 @@ const routes: Routes = [
       {
         path: 'pendentes',
         component: PendingComponent
+      },
+      {
+        path: 'responder',
+        component: ToAnswerComponent
       }
     ]
   } 
