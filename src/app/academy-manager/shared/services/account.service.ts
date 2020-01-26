@@ -28,7 +28,10 @@ export class AccountService {
         this.newAccount.userId = this.userId;
         this.newAccount.academyIds =[];
         this.newAccount.themeIds = [];
-        this.create(this.newAccount).subscribe((newAccount:any) => this.setCurrentAccount(newAccount));
+        this.setCurrentAccount(this.newAccount);
+        this.create(this.newAccount).subscribe((newAccount:any) => {
+          console.log(newAccount);
+        });
       } else {
         this.setCurrentAccount(account);
       }
