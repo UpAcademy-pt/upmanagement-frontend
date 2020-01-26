@@ -1,13 +1,15 @@
-<div class="container col-md-12 ">
-    <div class="row text-center  ">
+<div class="container col-md-12">
+    <div class="row text-center " >
         <div class="col-md-3 mt-3 text-left ">
             <img class="rounded-circle center-block" style="width: auto; max-height: 200px;" alt="100x100"
                 src="https://vignette.wikia.nocookie.net/aleixo/images/7/75/Renato_disco.jpg/revision/latest?cb=20121207145720"
                 data-holder-rendered="true">
 
             <button type="button" class="btn btn-success" (click)='MakeEdit()'>EDITA_ME</button>
+            <!-- <button type="button" class="btn btn-warning" (click)='getMisses()'>EDITA_ME</button> -->
+
             <div *ngIf="isShown"><button type="button" class="btn btn-danger" (click)='MakeEdit()'>SAVE</button></div>
-            
+
         </div>
 
         <div class="col-md-8 text-left mb-3 mt-3 ml-3">
@@ -34,12 +36,12 @@
         </div>
     </div>
     <div class="row text-center" >
-        <div class="col-md-3 text-right " >
+        <div class="col-md-3 text-right" >
             <div style="font-weight: bolder; font-style: italic; font-size: large;">Contactos:</div>
         </div>
-        <div class="col-md-8 ml-3 text-left " >
+        <div class="col-md-8 ml-3 text-left">
             <form [formGroup]="profileForm">
-                <div> <label style="font-weight: bolder;">Email:<input type="text" placeholder={{name}}
+                <div> <label style="font-weight: bolder;">Email:<input type="text" placeholder={{email}}
                             class="form-control" id="firstName" formControlName="notEditable"></label> </div>
                 <div class="h-divider"></div>
                 <label style="font-weight: bolder;">Linkedin:<input type="text" placeholder="12/04/2018"
@@ -51,13 +53,16 @@
             </form>
         </div>
     </div>
-    <div class="row text-center" style="background-color:red">
-        <div class="col-md-12 mb-3 mt-3 text-left ">
-            <div>
-                <div style="font-weight: bolder;">FALTAS</div>
-                <div>{{name}}</div>
-                <div class="h-divider"></div>
+        <div class="row text-center" *ngIf="misses != null">
+            <div class="col-md-3 text-right" >
+                <div style="font-weight: bolder; font-style: italic; font-size: large;">Faltas:</div>
             </div>
-        </div>
+            <div class="col-md-8 ml-3 text-left">
+                <div *ngFor="let missed of misses | async" >
+                <div><p *ngIf="missed.justified == true">Data:{{missed.data}} <img style="height: 25px; width: auto;" data-toggle="tooltip" title="Justificada"  src="https://cdn.pixabay.com/photo/2012/05/07/02/13/accept-47587_960_720.png"></p></div>
+                <div><p *ngIf="missed.justified != true">Data:{{missed.data}} <img style="height: 25px; width: auto;" data-toggle="tooltip" title="Não Justificada"  src="https://cdn.pixabay.com/photo/2012/05/07/02/13/cancel-47588_960_720.png"></p></div>
+            </div>
+            </div>
+        
     </div>
 </div>
