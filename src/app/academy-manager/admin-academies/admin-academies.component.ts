@@ -18,6 +18,11 @@ export class AdminAcademiesComponent implements OnInit {
   public startDateField: string;
   public endDateField: string;
   public clientField: string;
+  public modulesField: string[];
+  public studentsField: string[];
+  public warningField: string;
+  public usefulInfoField: string;
+  public academyTypeField: string;
   public academies: Academy[];
   public academyToCreate: Academy = new Academy();
   public showTable = false;
