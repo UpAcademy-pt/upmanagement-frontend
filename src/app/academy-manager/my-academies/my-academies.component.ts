@@ -34,3 +34,7 @@ export class MyAcademiesComponent implements OnInit {
   ngOnInit() {  }
 
 }
+
+/*/$('#myAlert').on('closed.bs.alert', function () {
+  // do something…
+})*/
