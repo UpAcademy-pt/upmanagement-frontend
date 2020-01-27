@@ -25,6 +25,7 @@ export class AdminStudentsComponent implements OnInit {
   public inUpdate = false;
   public index: number;
   public confirmDelete = false;
+  public misses: any;
 
 
   constructor(
@@ -92,6 +93,10 @@ export class AdminStudentsComponent implements OnInit {
         this.modalRef.hide();
         this.confirmDelete = !this.confirmDelete;
       });
+  }
+
+  public getMisses() {
+    //this.misses = this.http.get(this.URL);
   }
 
 }

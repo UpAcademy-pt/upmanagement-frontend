@@ -1,7 +1,7 @@
 <!-- <p>admin-students works!</p> -->
 
   <!-- Table -->
-  <h1>Formandos</h1>
+  <h3>Formandos</h3>
 
   <div class="container">
   <table class="table table-striped table-hover container m-3 col-12 text-center">
@@ -53,14 +53,14 @@
       <div class="col-md-7 text-left my-3 ml-3">
 
         <div>
-                <label style="font-weight: bolder;">Idade:<input [readonly]="!inUpdate" #ageField="ngModel" [(ngModel)]="accountToUpdate.age" name="age" id="age" type="number"
+                <label style="font-weight: bolder;">Data de Nascimento:<input [readonly]="!inUpdate" #ageField="ngModel" [(ngModel)]="accountToUpdate.age" name="age" id="age" type="date"
                   [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.age"></label>
                 <div class="h-divider"></div>
                 <label style="font-weight: bolder;">Área de Formação:<input [readonly]="!inUpdate" #academicBackgroundField="ngModel" [(ngModel)]="accountToUpdate.academicBackground" id="academicBackground" name="academicBackground" type="text"
-                  [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.academicBackground"></label>
+                  [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" [placeholder]="accountToUpdate.academicBackground === null ? '' : accountToUpdate.academicBackground"></label>
                 <div class="h-divider"></div>
                 <label style="font-weight: bolder;">Grau académico:<input [readonly]="!inUpdate" #academicDegreeField="ngModel" [(ngModel)]="accountToUpdate.academicDegree" id="academicDegree" name="academicDegree" type="text"
-                  [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.academicDegree"></label>
+                  [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" [placeholder]="accountToUpdate.academicDegree === null ? '' : accountToUpdate.academicDegree"></label>
                 <div class="h-divider"></div>
                 <label style="font-weight: bolder;">NIF:<input [readonly]="!inUpdate" #nifField="ngModel" [(ngModel)]="accountToUpdate.nif" id="nif" name="nif" type="number"
                   [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.nif"></label>
@@ -74,16 +74,27 @@
       <div style="font-weight: bolder; font-style: italic; font-size: large;">Contactos:</div>
   </div>
   <div class="col-md-7 ml-3 text-left " >
-          <div> <label style="font-weight: bolder;">Email: </label> <span> {{userToShow.email}}</span> </div>
+          <div> <label style="font-weight: bolder;">Email: </label> <div> {{userToShow.email}}</div> </div>
           <div class="h-divider"></div>
           <label style="font-weight: bolder;">Linkedin:<input [readonly]="!inUpdate" #linkedInAdressField="ngModel" [(ngModel)]="accountToUpdate.linkedInAdress" id="linkedInAdress" name="linkedInAdress" type="text"
-            [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.linkedInAdress"></label>
+            [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" [placeholder]="accountToUpdate.linkedInAdress === null ? '' : accountToUpdate.linkedInAdress"></label>
           <div class="h-divider"></div>
           <label style="font-weight: bolder;">Telemovel:<input [readonly]="!inUpdate" #mobilePhoneField="ngModel" [(ngModel)]="accountToUpdate.mobilePhone" id="mobilePhone" name="mobilePhone" type="text"
             [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.mobilePhone"></label>
           <div class="h-divider"></div>
   </div>
 </div>
+<div class="row text-center" *ngIf="misses != null">
+  <div class="col-md-3 text-right" >
+      <div style="font-weight: bolder; font-style: italic; font-size: large;">Faltas:</div>
+  </div>
+  <div class="col-md-8 ml-3 text-left">
+      <!-- <div *ngFor="let missed of misses | async" >
+      <div><p *ngIf="missed.justified == true">Data:{{missed.data}} <img style="height: 25px; width: auto;" data-toggle="tooltip" title="Justificada"  src="https://cdn.pixabay.com/photo/2012/05/07/02/13/accept-47587_960_720.png"></p></div>
+      <div><p *ngIf="missed.justified != true">Data:{{missed.data}} <img style="height: 25px; width: auto;" data-toggle="tooltip" title="Não Justificada"  src="https://cdn.pixabay.com/photo/2012/05/07/02/13/cancel-47588_960_720.png"></p></div> -->
+  </div>
+  </div>
+
 <div class="row">
   <button *ngIf="inUpdate===true" type="submit" class="btn btn-primary mx-auto">Atualizar</button>
 </div>

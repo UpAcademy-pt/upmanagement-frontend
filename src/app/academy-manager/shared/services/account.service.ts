@@ -26,8 +26,6 @@ export class AccountService {
     this.getByUserId(this.userId).subscribe((account:any) => {
       if (account === null) {
         this.newAccount.userId = this.userId;
-        this.newAccount.academyIds =[];
-        this.newAccount.themeIds = [];
         this.setCurrentAccount(this.newAccount);
         this.create(this.newAccount).subscribe((newAccount:any) => {
           console.log(newAccount);

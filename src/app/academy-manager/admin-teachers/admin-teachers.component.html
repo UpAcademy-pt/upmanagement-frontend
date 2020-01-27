@@ -1,9 +1,11 @@
 <!-- <p>admin-teachers works!</p> -->
 
+<h3>Formadores</h3>
+
 <!-- Table -->
-<div>
-    <table class="table table-striped table-hover container m-3 col-12 text-center">
-      <thead class="thead-dark">
+<div class="container">
+  <table class="table table-striped table-hover container m-3 col-12 text-center">
+    <thead class="thead-dark">
       <tr>
         <th></th>
         <th>Nome</th>
@@ -11,80 +13,108 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let teacher of teacherUserAccounts$ | async">
-        <td class="text-center"><img alt="" class="rounded-circle" 
-          src="https://vignette.wikia.nocookie.net/aleixo/images/7/75/Renato_disco.jpg/revision/latest?cb=20121207145720" width="40"></td>
-        <td >{{teacher.teacherUser.name}}</td>
+      <tr *ngFor="let teacher of teacherUserAccounts$ | async; let i = index;" id="{{i}}">
+        <td class="text-center"><img alt="" class="rounded-circle"
+            src="https://vignette.wikia.nocookie.net/aleixo/images/7/75/Renato_disco.jpg/revision/latest?cb=20121207145720"
+            width="40"></td>
+        <td>{{teacher.teacherUser.name}}</td>
         <td>
-          <button class="btn btn-success">Ver</button> 
+          <button (click)="openModalShowAccount(templateShowAccount, i)" class="btn btn-success">Ver</button>
         </td>
       </tr>
     </tbody>
-    </table>
-  </div>
+  </table>
+</div>
 
-  <!-- Modal Show Profile -->
+<!-- Modal Show Profile -->
 <ng-template #templateShowAccount>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Perfil de {{userToShow.name}}</h4>
     <button class="btn btn-primary" *ngIf="inUpdate===false" (click)="toggleUpdateAccount()">Editar</button>
-    <button class= "btn btn-danger" *ngIf="inUpdate===true" (click)="askToConfirmDelete()">Remover Formando</button>
+    <button class="btn btn-danger" *ngIf="inUpdate===true" (click)="askToConfirmDelete()">Remover Formando</button>
   </div>
   <div class="modal-body container">
     <div *ngIf="confirmDelete" id="confirmDeleteDialog">
-    <h2>Tem a certeza que quer remover o formando?</h2>
-    <button class="btn btn-danger mx-2" (click)="deleteTeacherAccount()">Sim</button>
-    <button class="btn btn-primary mx-2" (click)="askToConfirmDelete()">Cancelar</button>
-  </div>
-    <form #updateStudentAccountForm="ngForm" (ngSubmit) = "updateTeacherAccount()">
-      <div class="row text-center  ">
-          <div class="col-md-4 mt-3 text-center ">
-              <img class="rounded-circle center-block" style="width: auto; max-height: 200px;" alt="100x100"
-                  src="https://vignette.wikia.nocookie.net/aleixo/images/7/75/Renato_disco.jpg/revision/latest?cb=20121207145720"
-                  data-holder-rendered="true">
-    
-              <!-- <button type="button" class="btn btn-success" >EDITA_ME</button>
-              <div *ngIf="inUpdate===true"><button type="button" class="btn btn-danger" >SAVE</button></div> -->
-              
-          </div>
-          
-      <div class="col-md-7 text-left my-3 ml-3">
-
-        <div>
-                <label style="font-weight: bolder;">Idade:<input [readonly]="!inUpdate" #ageField="ngModel" [(ngModel)]="accountToUpdate.age" name="age" id="age" type="number"
-                  [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.age"></label>
-                <div class="h-divider"></div>
-                <label style="font-weight: bolder;">Área de Formação:<input [readonly]="!inUpdate" #academicBackgroundField="ngModel" [(ngModel)]="accountToUpdate.academicBackground" id="academicBackground" name="academicBackground" type="text"
-                  [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.academicBackground"></label>
-                <div class="h-divider"></div>
-                <label style="font-weight: bolder;">Grau académico:<input [readonly]="!inUpdate" #academicDegreeField="ngModel" [(ngModel)]="accountToUpdate.academicDegree" id="academicDegree" name="academicDegree" type="text"
-                  [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.academicDegree"></label>
-                <div class="h-divider"></div>
-                <label style="font-weight: bolder;">NIF:<input [readonly]="!inUpdate" #nifField="ngModel" [(ngModel)]="accountToUpdate.nif" id="nif" name="nif" type="number"
-                  [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.nif"></label>
-                <div class="h-divider"></div>
-        
-        </div>
+      <h2>Tem a certeza que quer remover o formando?</h2>
+      <button class="btn btn-danger mx-2" (click)="deleteTeacherAccount()">Sim</button>
+      <button class="btn btn-primary mx-2" (click)="askToConfirmDelete()">Cancelar</button>
     </div>
-</div>
-<div class="row text-center" >
-  <div class="col-md-4 text-right " >
-      <div style="font-weight: bolder; font-style: italic; font-size: large;">Contactos:</div>
+    <form #updateStudentAccountForm="ngForm" (ngSubmit)="updateTeacherAccount()">
+      <div class="row text-center  ">
+        <div class="col-md-4 mt-3 text-center ">
+          <img class="rounded-circle center-block" style="width: auto; max-height: 200px;" alt="100x100"
+            src="https://vignette.wikia.nocookie.net/aleixo/images/7/75/Renato_disco.jpg/revision/latest?cb=20121207145720"
+            data-holder-rendered="true">
+
+          <!-- <button type="button" class="btn btn-success" >EDITA_ME</button>
+              <div *ngIf="inUpdate===true"><button type="button" class="btn btn-danger" >SAVE</button></div> -->
+
+        </div>
+
+        <div class="col-md-7 text-left my-3 ml-3">
+
+          <div>
+            <label style="font-weight: bolder;">Data de Nascimento:<input [readonly]="!inUpdate" #ageField="ngModel"
+                [(ngModel)]="accountToUpdate.age" name="age" id="age" type="date"
+                [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}"
+                placeholder="accountToUpdate.age"></label>
+            <div class="h-divider"></div>
+            <label style="font-weight: bolder;">Área de Formação:<input [readonly]="!inUpdate"
+                #academicBackgroundField="ngModel" [(ngModel)]="accountToUpdate.academicBackground"
+                id="academicBackground" name="academicBackground" type="text"
+                [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}"
+                [placeholder]="accountToUpdate.academicBackground === null ? '' : accountToUpdate.academicBackground"></label>
+            <div class="h-divider"></div>
+            <label style="font-weight: bolder;">Grau académico:<input [readonly]="!inUpdate"
+                #academicDegreeField="ngModel" [(ngModel)]="accountToUpdate.academicDegree" id="academicDegree"
+                name="academicDegree" type="text"
+                [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}"
+                [placeholder]="accountToUpdate.academicDegree === null ? '' : accountToUpdate.academicDegree"></label>
+            <div class="h-divider"></div>
+            <label style="font-weight: bolder;">NIF:<input [readonly]="!inUpdate" #nifField="ngModel"
+                [(ngModel)]="accountToUpdate.nif" id="nif" name="nif" type="number"
+                [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}"
+                placeholder="accountToUpdate.nif"></label>
+            <div class="h-divider"></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-4 text-right ">
+          <div style="font-weight: bolder; font-style: italic; font-size: large;">Contactos:</div>
+        </div>
+        <div class="col-md-7 ml-3 text-left ">
+          <div> <label style="font-weight: bolder;">Email: </label>
+            <div> {{userToShow.email}}</div>
+          </div>
+          <div class="h-divider"></div>
+          <label style="font-weight: bolder;">Linkedin:<input [readonly]="!inUpdate" #linkedInAdressField="ngModel"
+              [(ngModel)]="accountToUpdate.linkedInAdress" id="linkedInAdress" name="linkedInAdress" type="text"
+              [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}"
+              [placeholder]="accountToUpdate.linkedInAdress === null ? '' : accountToUpdate.linkedInAdress"></label>
+          <div class="h-divider"></div>
+          <label style="font-weight: bolder;">Telemovel:<input [readonly]="!inUpdate" #mobilePhoneField="ngModel"
+              [(ngModel)]="accountToUpdate.mobilePhone" id="mobilePhone" name="mobilePhone" type="text"
+              [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}"
+              placeholder="accountToUpdate.mobilePhone"></label>
+          <div class="h-divider"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 text-right">
+          <div style="font-weight: bolder; font-style: italic; font-size: large;">Temas que o formador lecciona:</div>
+        </div>
+        <div class="col-md-7 ml-3 text-left">
+          <div *ngFor="let theme of accountToUpdate.themes | async">
+            <p *ngIf="!inUpdate">{{theme.name}} </p>
+          </div>
+          <input *ngIf="inUpdate" type="text" [placeholder]="accountToUpdate.themes === null ? '' : accountToUpdate.themes">
+        </div>
+      </div>
+      <div class="row">
+        <button *ngIf="inUpdate===true" type="submit" class="btn btn-primary mx-auto">Atualizar</button>
+      </div>
+    </form>
   </div>
-  <div class="col-md-7 ml-3 text-left " >
-          <div> <label style="font-weight: bolder;">Email: </label> <span> {{userToShow.email}}</span> </div>
-          <div class="h-divider"></div>
-          <label style="font-weight: bolder;">Linkedin:<input [readonly]="!inUpdate" #linkedInAdressField="ngModel" [(ngModel)]="accountToUpdate.linkedInAdress" id="linkedInAdress" name="linkedInAdress" type="text"
-            [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.linkedInAdress"></label>
-          <div class="h-divider"></div>
-          <label style="font-weight: bolder;">Telemovel:<input [readonly]="!inUpdate" #mobilePhoneField="ngModel" [(ngModel)]="accountToUpdate.mobilePhone" id="mobilePhone" name="mobilePhone" type="text"
-            [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" placeholder="accountToUpdate.mobilePhone"></label>
-          <div class="h-divider"></div>
-  </div>
-</div>
-<div class="row">
-  <button *ngIf="inUpdate===true" type="submit" class="btn btn-primary mx-auto">Atualizar</button>
-</div>
-</form>
-</div>
 </ng-template>
