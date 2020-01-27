@@ -60,12 +60,18 @@
   <p>----------------Criador de Questões----------------</p>
 
   <div class="row bg-light" style="border: 1px solid black; border-radius: 15px;">
-    <div *ngIf="!quiz" class="row col-2" style="border-radius: 15px;">
-      <button [(ngModel)]="choices" (click)="choices=true" class="col-12 bg-light" style="border: unset; border-bottom: 1px solid black ;border-radius: 15px 0px 0px 0px;">Resposta <br>
+    <div *ngIf="!quiz" class="row col-3" style="border-radius: 15px;">
+      <button [(ngModel)]="choices" (click)="choices=true" class="col-12" 
+      style="border: unset; border-bottom: 1px solid black; border-radius: 15px 0px 0px 0px; background-color: gray;" [ngClass]="{'bg-light':choices }" [ngStyle]="{'border-right': choices ? '0':'1px solid black'}">Resposta <br>
         múltipla</button>
-      <button [(ngModel)]="open" (click)="choices=false" class="col-12" style="border-right: 1px solid; border-radius: 0px 0px 0px 15px; background-color: gray;">Resposta <br> aberta</button>
+        <!-- ng-class="{'activeState' :choices == true, 'clicked' : choices == false }" -->
+        <!-- ng-click="clicked='default'" ng-class="multiClass"  -->
+        <!-- [ngStyle]="{'background-color': this.choices == this.choices?'green':'red'}" -->
+        <!-- [ngStyle]="{'border-right:': 'choices' == 'true'?'10px solid black':'10px solid red'}" -->
+        <button [(ngModel)]="open" (click)="choices=false" class="col-12" 
+        style="border-right: 1px solid; border-radius: 0px 0px 0px 15px; background-color: gray;" [class.bg-light]="!choices" [ngStyle]="{'border-right': choices ? '1px solid black':'0'}">Resposta <br> aberta</button>
     </div>
-    <div class="col-10" style="padding: 15px; background-color: transparent;">
+    <div class="col-9" style="padding: 15px; background-color: transparent;">
       <div>
         <label>Questao:
           <input [(ngModel)]="a.question" placeholder="Pergunta" />
@@ -74,7 +80,7 @@
       <div *ngIf="choices || quiz">
         <label>Resposta:
           <input [(ngModel)]="option" type="text" placeholder="Opção">
-          <button (click)="addMoreOptions()">Adicionar</button>{{customHtml}}
+          <button (click)="addMoreOptions()">Adicionar</button><span [innerHTML] = 'customHtml' class="ml-2" style="color: red;"></span>
         </label>
       </div>
       <div>

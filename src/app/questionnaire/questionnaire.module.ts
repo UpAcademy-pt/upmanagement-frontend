@@ -31,7 +31,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SidebarComponent,
     ToAnswerComponent,
     PendingComponent,
-    HistoryComponent
+    HistoryComponent,
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
-<div id="wrapper">
-    <nav id="sidebar" [class.collapsed]="collapsed">
+<div id="wrapper" >
+    <nav id="sidebar"  [class.collapsed]="collapsed" class="fixed-left">
         <div class="header">
         </div>
         <span class="divider"></span>
@@ -76,8 +76,8 @@
                                 fill-rule="nonzero" /></svg></i><span>Estatisticas</span></a>
             </li> -->
         </ul>
-        <div class="expandBtn">
-            <span id="sidebarCollapse"><i class="fa fa-compress" [class.fa-compress]="!collapsed"
+        <div  class="expandBtn">
+            <span id="sidebarCollapse"><i class=" fa-compress" [class.fa-compress]="!collapsed"
                     [class.fa-expand]="collapsed" (click)="collapsed = !collapsed"></i></span>
         </div>
     </nav>

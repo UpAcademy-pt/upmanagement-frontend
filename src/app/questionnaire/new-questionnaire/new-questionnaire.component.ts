@@ -63,7 +63,7 @@ export class NewQuestionnaireComponent implements OnInit {
       this.customHtml = ""
       } 
     } else {
-    this.customHtml = "erro";
+    this.customHtml = "Necessário escrever opção";
   }
     this.option = "";
   
