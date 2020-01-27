@@ -6,6 +6,7 @@ import { UserServiceService } from 'src/app/core/services/user-service/user-serv
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 import { ReplaySubject, Subscription } from 'rxjs';
 import { Question } from '../models/question/question';
+import { Answer } from '../models/answer/answer';
 
 @Component({
   selector: 'app-to-answer',
@@ -27,22 +28,32 @@ export class ToAnswerComponent implements OnInit {
     private userService: UserServiceService
   ) {
     this.userName = userService.getCurrentName();
-
     this.questionnaireService.getQuestionnaire(this.router.getCurrentNavigation().extras.state.id).subscribe(
       (currentQuestionnaire: Questionnaire) => {
-      this.currentQuestionnaire = currentQuestionnaire;
-      //this.currentQuestionnaire$.next(this.currentQuestionnaire);
-      console.log(this.currentQuestionnaire);
-    });
+        this.currentQuestionnaire = currentQuestionnaire;
+        //this.currentQuestionnaire$.next(this.currentQuestionnaire);
+        console.log("Antes: " + this.currentQuestionnaire);
+
+        for (let i = 0; i < this.currentQuestionnaire.questionList.length; i++) {
+          this.currentQuestionnaire.answerList.push(new Answer());
+        }
+
+        console.log("Depois: " + this.currentQuestionnaire);
+      });
     this.numbers = [];
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public sendQuestionnaire() {
     console.log("Sending questionnaire");
-    
+
     //console.log("Questionnaire sent");
     //this.router.navigate(['/questionario/pendentes']);
+    console.log(this.currentQuestionnaire);
+
+
+
   }
+
 }

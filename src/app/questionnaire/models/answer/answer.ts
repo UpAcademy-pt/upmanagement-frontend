@@ -1,6 +1,6 @@
 export class Answer {
     'id': number;
-    'answeredquestionnaireId': number;
+    'questionnaireId': number;
     'answer': string;
     'questionId': number;
 
