@@ -15,6 +15,7 @@ export class MyAcademiesComponent implements OnInit {
   public currentAccount: Account;
   public currentAccount$: ReplaySubject<Account>;
   public academy: Academy;
+  
 
   constructor(
     private accountService: AccountService,
@@ -25,7 +26,10 @@ export class MyAcademiesComponent implements OnInit {
     this.currentAccount$.subscribe((account) => {
       this.currentAccount = account;
       this.currentAccount.academyIds.forEach(element => {
-        this.academyService.getbyId(element).subscribe((academy:any) => this.academy = academy);
+        this.academyService.getbyId(element).subscribe((academy:any) => {
+          this.academy = academy;
+          console.log(academy);
+        });
       });
     });
 
@@ -35,6 +39,3 @@ export class MyAcademiesComponent implements OnInit {
 
 }
 
-/*/$('#myAlert').on('closed.bs.alert', function () {
-  // do something…
-})*/

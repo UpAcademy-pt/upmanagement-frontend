@@ -6,6 +6,10 @@ export class Academy {
     'modulesIds': number[];
     'studentsIds': number[];
     'status': string;
+    'warning': string;
+    'usefulInfo': string;
+    'academyType': string;
+
 
     constructor(data?: any) {
         Object.assign(this, data);
