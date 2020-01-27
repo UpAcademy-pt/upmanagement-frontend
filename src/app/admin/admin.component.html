@@ -34,7 +34,7 @@
   </thead>
   <tbody>
     <tr *ngFor = "let row of users; let i = index;" id="{{i}}">
-      <th scope="row"></th>
+      <th ></th>
       <td *ngFor = "let column of headers">{{row[column]}}</td>
       <td>
         <button (click)="openModalUpdateUser(templateUpdateUser, i)" type="button" class="btn-borderless btn-edit">

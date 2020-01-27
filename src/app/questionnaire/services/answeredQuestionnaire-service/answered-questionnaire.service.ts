@@ -7,7 +7,7 @@ import { AnsweredQuestionnaire } from '../../models/answeredQuestionnaire/answer
 })
 export class AnsweredQuestionnaireService {
 
-  private url: 'http://localhost:8080/coreFinalProject/questionnaire/answeredQuestionnaire/';
+  private url = 'http://localhost:8080/coreFinalProject/questionnaire/answeredquestionnaire/';
 
   constructor(
     private http: HttpClient
@@ -30,6 +30,11 @@ export class AnsweredQuestionnaireService {
   }
 
   public deleteAnsweredQuestionnaire(id: number) {
-    return this.http.delete(this.url + id)
+    return this.http.delete(this.url + id);
+  }
+
+  public getAnsweredQuestionnaireByAccountId (id: number) {
+    return this.http.get(this.url + 'account/' + id);
+    
   }
 }
