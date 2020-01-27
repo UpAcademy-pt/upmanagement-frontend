@@ -12,9 +12,8 @@ import { BsModalService, BsModalRef, BsDropdownConfig } from 'ngx-bootstrap';
 })
 export class AdminAcademiesComponent implements OnInit {
 
-  public academies$: ReplaySubject<Academy[]>;
-
   modalRef: BsModalRef;
+  public academies$: ReplaySubject<Academy[]> = new ReplaySubject(1);
   public edNameField: string;
   public startDateField: string;
   public endDateField: string;
@@ -27,16 +26,17 @@ export class AdminAcademiesComponent implements OnInit {
     private academyService: AcademyService,
     private modalService: BsModalService
   ) {
-    this.academies$ = this.academyService.academies$;
+    this.getAllAcademies();
   }
 
   ngOnInit() {
   }
 
   public getAllAcademies() {
-    this.academyService.getAllAcademies(this.edNameField, this.startDateField, this.endDateField, this.clientField)
+    this.academyService.getAllAcademies()
     .subscribe((academies: Academy[]) => {
       this.academies = academies;
+      this.academies$.next(academies);
       if (this.academies.length > 0) {
         this.showTable = true;
       }
