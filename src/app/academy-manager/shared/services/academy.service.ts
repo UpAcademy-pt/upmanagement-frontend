@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Academy } from '../models/academy';
 import { ReplaySubject } from 'rxjs';
 
@@ -8,26 +8,42 @@ import { ReplaySubject } from 'rxjs';
 })
 export class AcademyService {
 
-  private url = 'http://localhost:8080/coreFinalProject/academies/';
+  private url = 'http://localhost:8080/coreFinalProject/academy-manager/academies/';
   private academies: Academy[];
   public academies$: ReplaySubject<Academy[]> = new ReplaySubject(1);
 
   constructor(
     private http: HttpClient
   ) {
-    this.getAllAcademies();
+    this.academies$.next(new Array<Academy>());
   }
 
-  public getAllAcademies() {
-    this.http.get(this.url).subscribe(
-      (res: any) => {
-        this.academies = res;
-        this.academies$.next(res);
-      }
-    );
+  public getAllAcademies(edNameField: string, startDateField: string, endDateField: string, clientField: string) {
+    const params = new HttpParams()
+    .set('edName', edNameField)
+    .set('startDate', startDateField)
+    .set('endDate', endDateField)
+    .set('client', clientField);
+    return this.http.get(this.url, {params});
   }
 
   public createAcademy(academy: Academy) {
-    return this.http.post(this.url, academy, {responseType: 'text'});
+    return this.http.post(this.url, academy, { responseType: 'text' });
   }
+
+  public getbyId(id: number) {
+
+    return this.http.get(this.url + id);
+  }
+
+  public update(academy: Academy) {
+
+    return this.http.put(this.url, academy, { responseType: 'text' });
+  }
+
+  public delete(id: number) {
+
+    return this.http.delete(this.url + id);
+  }
+
 }

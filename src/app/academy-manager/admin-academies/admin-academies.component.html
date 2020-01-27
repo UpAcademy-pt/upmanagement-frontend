@@ -12,37 +12,41 @@
     </div>
     <div class="modal-body container">
       Preencha os dados abaixo:
-      <form class="mg-5 mt-3 container">
+      <form class="mg-5 mt-3 container" #addAcademyForm="ngForm" (ngSubmit) = "createAcademy()">
         <div class="form-group row">
           <label for="edName" class="col-sm-2 col-form-label">Nome:</label>
           <div class="col-sm-10">
-            <input [(ngModel)]="academyToCreate.edName" name="edName" id="edName" type="text" class="form-control"
+            <input #edNameField="ngModel" [(ngModel)]="academyToCreate.edName" name="edName" id="edName" type="text" class="form-control"
               placeholder="Digite aqui o nome desta edição" required>
+              <small class="text-danger" [hidden]="edNameField.valid || !edNameField.touched">Campo Obrigatório</small>
           </div>
         </div>
         <div class="form-group row">
           <label for="startDate" class="col-sm-2 col-form-label">Data de Início:</label>
           <div class="col-sm-10">
-            <input [(ngModel)]="academyToCreate.startDate" id="startDate" name="startDate" type="text" class="form-control"
+            <input #startDateField="ngModel" [(ngModel)]="academyToCreate.startDate" id="startDate" name="startDate" type="text" class="form-control"
               placeholder="Digite aqui a data de início" required>
+              <small class="text-danger" [hidden]="startDateField.valid || !startDateField.touched">Campo Obrigatório</small> 
           </div>
         </div>
         <div class="form-group row">
             <label for="startDate" class="col-sm-2 col-form-label">Data de Término:</label>
             <div class="col-sm-10">
-              <input [(ngModel)]="academyToCreate.endDate" id="endDate" name="endDate" type="text" class="form-control"
+              <input #endDateField="ngModel" [(ngModel)]="academyToCreate.endDate" id="endDate" name="endDate" type="text" class="form-control"
                 placeholder="Digite aqui a data de término" required>
+                <small class="text-danger" [hidden]="endDateField.valid || !endDateField.touched">Campo Obrigatório</small>
             </div>
         </div>
         <div class="form-group row">
             <label for="client" class="col-sm-2 col-form-label">Cliente:</label>
             <div class="col-sm-10">
-              <input [(ngModel)]="academyToCreate.client" id="client" name="client" type="text" class="form-control"
+              <input #clientField="ngModel" [(ngModel)]="academyToCreate.client" id="client" name="client" type="text" class="form-control"
                 placeholder="Digite aqui o nome do cliente" required>
+                <small class="text-danger" [hidden]="clientField.valid || !clientField.touched">Campo Obrigatório</small>
             </div>
         </div>
         <div class="row">
-          <button (click)="createAcademy()" type="submit" class="btn btn-primary mx-auto">Criar</button>
+          <button type="submit" [disabled]="!addAcademyForm.valid" class="btn btn-primary mx-auto">Criar</button>
         </div>
       </form>
     </div>
