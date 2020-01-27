@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { LessonsComponent } from './lessons.component';
+
 
 describe('LessonsComponent', () => {
   let component: LessonsComponent;
@@ -23,3 +26,4 @@ describe('LessonsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+//////////////////////////
