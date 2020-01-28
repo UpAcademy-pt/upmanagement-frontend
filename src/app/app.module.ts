@@ -18,6 +18,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { ProfileComponent } from './profile/profile.component';
 import { ValidateComponent } from './validate/validate.component';
+import { MaterialsComponent } from './gest-aulas/materials/materials.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ValidateComponent } from './validate/validate.component';
     FooterComponent,
     AdminComponent,
     ProfileComponent, 
-    ValidateComponent
+    ValidateComponent, MaterialsComponent
   ],
   imports: [
     BrowserModule,
