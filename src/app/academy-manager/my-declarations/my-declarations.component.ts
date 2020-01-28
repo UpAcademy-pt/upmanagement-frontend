@@ -4,6 +4,7 @@ import { AccountService } from '../shared/services/account.service';
 import { DeclarationsService } from '../shared/services/declarations.service';
 import {Account} from '../shared/models/account';
 import { Declarations } from '../shared/models/declarations';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-my-declarations',
@@ -12,10 +13,13 @@ import { Declarations } from '../shared/models/declarations';
 })
 export class MyDeclarationsComponent implements OnInit {
 
+  faArrowDown = faArrowDown;
+
   public currentAccount: Account;
   public currentAccount$: ReplaySubject<Account>;
   public declarations: Declarations[];
   public declarations$: ReplaySubject<Declarations[]> = new ReplaySubject(1);
+  
 
   constructor(
     private accountApi: AccountService,
