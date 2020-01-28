@@ -22,14 +22,14 @@
         <span class="divider"></span>
         <ul class="navigation">
             <li>
-                <a routerLink="/questionario/pendentes" href="#"><i><svg width="20" height="16"
+                <a [ngClass]="{'active': pending}" (click)="pending=true; history=false; new=false;" routerLink="/questionario/pendentes" href="#"><i><svg width="20" height="16"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"
                                 fill-rule="nonzero" /></svg></i><span>Pendentes</span></a>
             </li>
             <li>
-                <a routerLink="/questionario/historico" href="#"><i><svg width="20" height="16"
+                <a  [ngClass]="{'active': history}" (click)="pending=false; history=true; new=false;" routerLink="/questionario/historico" href="#"><i><svg width="20" height="16"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"
@@ -38,7 +38,7 @@
             <li *ngIf="showSideBar" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                 class="nav-item dropdown" dropdown triggers="hover" #dp="bs-dropdown" role="menu"
                 >
-                <a class="nav-link dropdown-toggle" id="navbardrop"
+                <a [ngClass]="{'active': new}" (click)="pending=false; history=false; new=true;" class="nav-link dropdown-toggle" id="navbardrop"
                     data-toggle="dropdown" dropdownToggle><i><svg width="20" height="16"
                             xmlns="http://www.w3.org/2000/svg">
                             <path

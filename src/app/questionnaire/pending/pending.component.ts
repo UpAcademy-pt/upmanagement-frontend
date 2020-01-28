@@ -20,10 +20,7 @@ export class PendingComponent implements OnInit {
 
     this.pendingQuestionnaires = [{id: 1, name: "Questionário teste 1", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
     {id: 2, name: "Questionário teste 2", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
-    {id: 3, name: "Questionário teste 3", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
-    {id: 4, name: "Questionário teste 4", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
-    {id: 5, name: "Questionário teste 5", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
-    {id: 6, name: "Questionário teste 6", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3}];
+    {id: 3, name: "Questionário teste 3", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3}];
    }
 
   ngOnInit() {

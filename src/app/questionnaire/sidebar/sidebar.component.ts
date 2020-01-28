@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { BsDropdownConfig } from 'ngx-bootstrap';
 import { faCompress } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+
 
 
 
@@ -19,11 +21,12 @@ import { faExpand } from '@fortawesome/free-solid-svg-icons';
   providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
 })
 export class SidebarComponent implements OnInit {
-
   public showSideBar = false;
   public role: string;
   faCompress = faCompress;
   faExpand = faExpand;
+
+  private pending = true;
 
   constructor(
     private userApi: UserServiceService,
@@ -35,5 +38,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
 }
