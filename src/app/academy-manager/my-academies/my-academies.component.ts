@@ -11,21 +11,25 @@ import { Academy } from '../shared/models/academy';
   styleUrls: ['./my-academies.component.scss']
 })
 export class MyAcademiesComponent implements OnInit {
- 
   public currentAccount: Account;
   public currentAccount$: ReplaySubject<Account>;
+  public academies: Academy[];
   public academy: Academy;
 
   constructor(
     private accountService: AccountService,
-    private academyService: AcademyService
+    private academyService: AcademyService,
 
   ) {
     this.currentAccount$ = this.accountService.currentAccount$;
     this.currentAccount$.subscribe((account) => {
       this.currentAccount = account;
       this.currentAccount.academyIds.forEach(element => {
-        this.academyService.getbyId(element).subscribe((academy:any) => this.academy = academy);
+        this.academyService.getbyId(element).subscribe((academy:any) => {
+          this.academies.push(academy);
+          this.academy = this.academies[0];
+          console.log(academy);
+        });
       });
     });
 
@@ -34,3 +38,4 @@ export class MyAcademiesComponent implements OnInit {
   ngOnInit() {  }
 
 }
+

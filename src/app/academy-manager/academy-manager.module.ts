@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { AcademyManagerRoutingModule } from './academy-manager-routing.module';
 import { AcademyManagerComponent } from './academy-manager.component';
@@ -23,7 +24,9 @@ import { SharedModule } from './shared/shared.module';
     AcademyManagerRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    AlertModule.forRoot()
   ]
 })
 export class AcademyManagerModule { }
