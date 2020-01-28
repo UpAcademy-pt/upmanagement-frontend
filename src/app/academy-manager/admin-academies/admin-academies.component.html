@@ -13,16 +13,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let academy of academies$ | async">
+    <tr *ngFor="let academy of academies$ | async; let i = index;" id="{{i}}">
       <td>{{academy.edName}}</td>
       <td>
         <button class="btn btn-success">Ver</button>
       </td>
       <td>
-        <button class="btn btn-primary" (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)">Editar</button>
+        <button (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)" class="btn-borderless btn-edit">Editar</button>
       </td>
       <td>
-        <button class="btn btn-danger">Apagar</button>
+        <button (click)="openModalConfirmDeleteAcademy(templateConfirmDeleteAcademy, i)" class="btn-borderless btn-delete">Apagar</button>
       </td>
     </tr>
   </tbody>
@@ -59,14 +59,14 @@
         <label for="startDate" class="col-sm-5 col-form-label">Data de Início:</label>
         <div class="col-sm-7">
           <input #startDateField="ngModel" [(ngModel)]="academyToCreate.startDate" id="startDate" name="startDate"
-            type="text" class="form-control" placeholder="Digite aqui a data de início" required>
+            type="date" class="form-control" placeholder="Digite aqui a data de início" required>
           <small class="text-danger" [hidden]="startDateField.valid">Campo Obrigatório</small>
         </div>
       </div>
       <div class="form-group row">
         <label for="endDate" class="col-sm-5 col-form-label">Data de Término:</label>
         <div class="col-sm-7">
-          <input #endDateField="ngModel" [(ngModel)]="academyToCreate.endDate" id="endDate" name="endDate" type="text"
+          <input #endDateField="ngModel" [(ngModel)]="academyToCreate.endDate" id="endDate" name="endDate" type="date"
             class="form-control" placeholder="Digite aqui a data de término" required>
           <small class="text-danger" [hidden]="endDateField.valid">Campo Obrigatório</small>
         </div>
@@ -120,7 +120,7 @@
   </div>
   <div class="modal-body container">
     Edite os dados abaixo:
-    <form class="mg-5 mt-3 container" #updateAcademyForm="ngForm" (ngSubmit) = "updateAcademy()">
+    <form class="mg-5 mt-3 container" #updateAcademyForm="ngForm" (ngSubmit)="updateAcademy()">
       <div class="form-group row">
         <label for="edName" class="col-sm-2 col-form-label">Nome:</label>
         <div class="col-sm-10">
@@ -141,14 +141,14 @@
         <label for="startDate" class="col-sm-5 col-form-label">Data de Início:</label>
         <div class="col-sm-7">
           <input #startDateField="ngModel" [(ngModel)]="academyToUpdate.startDate" id="startDate" name="startDate"
-            type="text" class="form-control" placeholder="Digite aqui a data de início" required>
+            type="date" class="form-control" placeholder="Digite aqui a data de início" required>
           <small class="text-danger" [hidden]="startDateField.valid">Campo Obrigatório</small>
         </div>
       </div>
       <div class="form-group row">
         <label for="endDate" class="col-sm-5 col-form-label">Data de Término:</label>
         <div class="col-sm-7">
-          <input #endDateField="ngModel" [(ngModel)]="academyToUpdate.endDate" id="endDate" name="endDate" type="text"
+          <input #endDateField="ngModel" [(ngModel)]="academyToUpdate.endDate" id="endDate" name="endDate" type="date"
             class="form-control" placeholder="Digite aqui a data de término" required>
           <small class="text-danger" [hidden]="endDateField.valid">Campo Obrigatório</small>
         </div>
@@ -192,5 +192,14 @@
         <button type="submit" [disabled]="!updateAcademyForm.valid" class="btn btn-primary mx-auto">Atualizar</button>
       </div>
     </form>
+  </div>
+</ng-template>
+
+<!-- Modal Confirm Delete Academy -->
+<ng-template #templateConfirmDeleteAcademy>
+  <div class="modal-body text-center">
+    <p>Tem a certeza que deseja apagar a academia?</p>
+    <button type="button" class="btn btn-danger" (click)="deleteAcademy()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Não</button>
   </div>
 </ng-template>
