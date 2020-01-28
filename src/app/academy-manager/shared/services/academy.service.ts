@@ -27,17 +27,14 @@ export class AcademyService {
   }
 
   public getbyId(id: number) {
-
     return this.http.get(this.url + id);
   }
 
-  public update(academy: Academy) {
-
+  public updateAcademy(academy: Academy) {
     return this.http.put(this.url, academy, { responseType: 'text' });
   }
 
-  public delete(id: number) {
-
+  public deleteAcademy(id: number) {
     return this.http.delete(this.url + id);
   }
 

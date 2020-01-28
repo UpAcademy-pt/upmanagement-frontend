@@ -3,6 +3,31 @@
     Academia</button>
 </div>
 
+<table class="table table-striped container m-3 col-12 text-center">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome</th>
+      <th>Ver</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let academy of academies$ | async">
+      <td>{{academy.edName}}</td>
+      <td>
+        <button class="btn btn-success">Ver</button>
+      </td>
+      <td>
+        <button class="btn btn-primary" (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)">Editar</button>
+      </td>
+      <td>
+        <button class="btn btn-danger">Apagar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <!-- Modal Add Academy -->
 <ng-template #templateAddAcademy>
   <div class="modal-header">
@@ -25,8 +50,8 @@
       <div class="form-group row">
         <label for="academyType" class="col-sm-2 col-form-label">Tipo:</label>
         <div class="col-sm-10">
-          <input #academyTypeField="ngModel" [(ngModel)]="academyToCreate.academyType" name="academyType" id="academyType" type="text"
-            class="form-control" placeholder="Digite aqui o tipo desta academia" required>
+          <input #academyTypeField="ngModel" [(ngModel)]="academyToCreate.academyType" name="academyType"
+            id="academyType" type="text" class="form-control" placeholder="Digite aqui o tipo desta academia" required>
           <small class="text-danger" [hidden]="academyTypeField.valid">Campo Obrigatório</small>
         </div>
       </div>
@@ -34,14 +59,16 @@
         <label for="startDate" class="col-sm-5 col-form-label">Data de Início:</label>
         <div class="col-sm-7">
           <input #startDateField="ngModel" [(ngModel)]="academyToCreate.startDate" id="startDate" name="startDate"
-            type="text" class="form-control" placeholder="Digite aqui a data de início">
+            type="text" class="form-control" placeholder="Digite aqui a data de início" required>
+          <small class="text-danger" [hidden]="startDateField.valid">Campo Obrigatório</small>
         </div>
       </div>
       <div class="form-group row">
-        <label for="startDate" class="col-sm-5 col-form-label">Data de Término:</label>
+        <label for="endDate" class="col-sm-5 col-form-label">Data de Término:</label>
         <div class="col-sm-7">
           <input #endDateField="ngModel" [(ngModel)]="academyToCreate.endDate" id="endDate" name="endDate" type="text"
-            class="form-control" placeholder="Digite aqui a data de término">
+            class="form-control" placeholder="Digite aqui a data de término" required>
+          <small class="text-danger" [hidden]="endDateField.valid">Campo Obrigatório</small>
         </div>
       </div>
       <div class="form-group row">
@@ -61,8 +88,8 @@
       <div class="form-group row">
         <label for="students" class="col-sm-2 col-form-label">Alunos:</label>
         <div class="col-sm-10">
-          <input #studentsField="ngModel" [(ngModel)]="academyToCreate.students" id="students" name="students" type="text"
-            class="form-control" placeholder="Digite aqui os nomes dos alunos">
+          <input #studentsField="ngModel" [(ngModel)]="academyToCreate.students" id="students" name="students"
+            type="text" class="form-control" placeholder="Digite aqui os nomes dos alunos">
         </div>
       </div>
       <div class="form-group row">
@@ -75,8 +102,8 @@
       <div class="form-group row">
         <label for="usefulInfo" class="col-sm-3 col-form-label">Informação útil:</label>
         <div class="col-sm-9">
-          <input #usefulInfoField="ngModel" [(ngModel)]="academyToCreate.usefulInfo" id="usefulInfo" name="usefulInfo" type="text"
-            class="form-control" placeholder="Digite aqui informação útil">
+          <input #usefulInfoField="ngModel" [(ngModel)]="academyToCreate.usefulInfo" id="usefulInfo" name="usefulInfo"
+            type="text" class="form-control" placeholder="Digite aqui informação útil">
         </div>
       </div>
       <div class="row">
@@ -86,27 +113,84 @@
   </div>
 </ng-template>
 
-<table class="table table-striped container m-3 col-12 text-center">
-  <thead class="thead-dark">
-    <tr>
-      <th>Nome</th>
-      <th>Ver</th>
-      <th>Editar</th>
-      <th>Eliminar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let academy of academies$ | async">
-      <td>{{academy.edName}}</td>
-      <td>
-        <button class="btn btn-success">Ver</button>
-      </td>
-      <td>
-        <button class="btn btn-primary">Editar</button>
-      </td>
-      <td>
-        <button class="btn btn-danger">Apagar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<!-- Modal Update Academy -->
+<ng-template #templateUpdateAcademy>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Editar Academia</h4>
+  </div>
+  <div class="modal-body container">
+    Edite os dados abaixo:
+    <form class="mg-5 mt-3 container" #updateAcademyForm="ngForm" (ngSubmit) = "updateAcademy()">
+      <div class="form-group row">
+        <label for="edName" class="col-sm-2 col-form-label">Nome:</label>
+        <div class="col-sm-10">
+          <input #edNameField="ngModel" [(ngModel)]="academyToUpdate.edName" name="edName" id="edName" type="text"
+            class="form-control" placeholder="Digite aqui o nome desta edição" required>
+          <small class="text-danger" [hidden]="edNameField.valid">Campo Obrigatório</small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="academyType" class="col-sm-2 col-form-label">Tipo:</label>
+        <div class="col-sm-10">
+          <input #academyTypeField="ngModel" [(ngModel)]="academyToUpdate.academyType" name="academyType"
+            id="academyType" type="text" class="form-control" placeholder="Digite aqui o tipo desta academia" required>
+          <small class="text-danger" [hidden]="academyTypeField.valid">Campo Obrigatório</small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="startDate" class="col-sm-5 col-form-label">Data de Início:</label>
+        <div class="col-sm-7">
+          <input #startDateField="ngModel" [(ngModel)]="academyToUpdate.startDate" id="startDate" name="startDate"
+            type="text" class="form-control" placeholder="Digite aqui a data de início" required>
+          <small class="text-danger" [hidden]="startDateField.valid">Campo Obrigatório</small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="endDate" class="col-sm-5 col-form-label">Data de Término:</label>
+        <div class="col-sm-7">
+          <input #endDateField="ngModel" [(ngModel)]="academyToUpdate.endDate" id="endDate" name="endDate" type="text"
+            class="form-control" placeholder="Digite aqui a data de término" required>
+          <small class="text-danger" [hidden]="endDateField.valid">Campo Obrigatório</small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="client" class="col-sm-2 col-form-label">Cliente:</label>
+        <div class="col-sm-10">
+          <input #clientField="ngModel" [(ngModel)]="academyToUpdate.client" id="client" name="client" type="text"
+            class="form-control" placeholder="Digite aqui o nome do cliente">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="modules" class="col-sm-2 col-form-label">Módulos:</label>
+        <div class="col-sm-10">
+          <input #modulesField="ngModel" [(ngModel)]="academyToUpdate.modules" id="modules" name="modules" type="text"
+            class="form-control" placeholder="Digite aqui os módulos da academia">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="students" class="col-sm-2 col-form-label">Alunos:</label>
+        <div class="col-sm-10">
+          <input #studentsField="ngModel" [(ngModel)]="academyToUpdate.students" id="students" name="students"
+            type="text" class="form-control" placeholder="Digite aqui os nomes dos alunos">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="warning" class="col-sm-2 col-form-label">Aviso:</label>
+        <div class="col-sm-10">
+          <input #warningField="ngModel" [(ngModel)]="academyToUpdate.warning" id="warning" name="warning" type="text"
+            class="form-control" placeholder="Digite aqui o primeiro aviso">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="usefulInfo" class="col-sm-3 col-form-label">Informação útil:</label>
+        <div class="col-sm-9">
+          <input #usefulInfoField="ngModel" [(ngModel)]="academyToUpdate.usefulInfo" id="usefulInfo" name="usefulInfo"
+            type="text" class="form-control" placeholder="Digite aqui informação útil">
+        </div>
+      </div>
+      <div class="row">
+        <button type="submit" [disabled]="!updateAcademyForm.valid" class="btn btn-primary mx-auto">Atualizar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

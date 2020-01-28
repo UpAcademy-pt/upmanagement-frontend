@@ -25,6 +25,7 @@ export class AdminAcademiesComponent implements OnInit {
   public academyTypeField: string;
   public academies: Academy[];
   public academyToCreate: Academy = new Academy();
+  public academyToUpdate: Academy = new Academy();
   public showTable = false;
 
   constructor(
@@ -58,7 +59,33 @@ export class AdminAcademiesComponent implements OnInit {
     this.academyToCreate = new Academy();
   }
 
+  public updateAcademy() {
+    this.academyService.updateAcademy(this.academyToUpdate).subscribe(
+      (msg: string) => {
+        this.getAllAcademies();
+        console.log(msg);
+      }, (error: string) => {
+        console.log(error);
+      });
+    this.modalRef.hide();
+  }
+
+  public deleteAcademy() {
+    
+  }
+
   openModalAddAcademy(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  openModalUpdateAcademy(template: TemplateRef<any>, academyToUpdate: Academy) {
+    this.academyToUpdate = academyToUpdate;
+    
+    
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openModalConfirmDeleteAcademy() {
+
   }
 }
