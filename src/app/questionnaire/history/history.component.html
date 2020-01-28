@@ -10,8 +10,9 @@
   <tbody>
     <tr *ngFor="let row of history; let i= index; ">
       <th>{{i+1}}</th>
-      <td>{{row.accountId}}</td>
-      <button routerLink="/questionario/historico/estatisticas">Est</button>
+      <td>{{row.name}}</td>
+      <button *ngIf="showStatsBtn" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+        routerLink="/questionario/historico/estatisticas">Est</button>
     </tr>
   </tbody>
 </table>
