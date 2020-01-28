@@ -12,11 +12,12 @@ import { MyAcademiesComponent } from './my-academies/my-academies.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { AccountProfileComponent } from './account-profile/account-profile.component';
 
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
-    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent],
+    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent],
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,
