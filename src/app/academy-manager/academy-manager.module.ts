@@ -13,17 +13,18 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { SharedModule } from './shared/shared.module';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
 
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
-    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent],
+    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent],
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,
-    SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AcademyManagerModule { }
