@@ -7,35 +7,40 @@ import { AdminTeachersComponent } from './admin-teachers/admin-teachers.componen
 import { AdminGuard } from '../core/guards/admin.guard';
 import { MyAcademiesComponent } from './my-academies/my-academies.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
 
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: AcademyManagerComponent,
     children: [
       {
-        path:'admin-academies',
+        path: 'admin-academies',
         component: AdminAcademiesComponent,
         canActivate: [AdminGuard]
       },
       {
-        path:'admin-students',
+        path: 'admin-students',
         component: AdminStudentsComponent,
         canActivate: [AdminGuard]
       },
       {
-      path:'admin-teachers',
-      component: AdminTeachersComponent,
-      canActivate: [AdminGuard]
+        path: 'admin-teachers',
+        component: AdminTeachersComponent,
+        canActivate: [AdminGuard]
       },
       {
-      path:'my-academies',
-      component: MyAcademiesComponent
+        path: 'my-academies',
+        component: MyAcademiesComponent
       },
       {
-      path:'my-profile',
-      component: MyProfileComponent
+        path: 'my-profile',
+        component: MyProfileComponent
+      },
+      {
+        path: 'my-declarations',
+        component: MyDeclarationsComponent
       }
     ]
   }
