@@ -10,19 +10,20 @@ import { AdminStudentsComponent } from './admin-students/admin-students.componen
 import { AdminTeachersComponent } from './admin-teachers/admin-teachers.component';
 import { MyAcademiesComponent } from './my-academies/my-academies.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
-import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
-    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent],
+    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, MyDeclarationsComponent],
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,
-    SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AcademyManagerModule { }

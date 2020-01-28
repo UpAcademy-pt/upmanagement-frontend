@@ -15,6 +15,10 @@
         <li>
             <button routerLink = "my-profile" class="btn btn-link btn-md mx-1 my-3" style="color: white;">Perfil</button>
         </li>
+        <li *ngIf="isTeacher===false">
+            <button routerLink = "my-declarations" class="btn btn-link btn-md mx-1 my-3" 
+            style="color: white;">Declarações Recebimento</button>
+        </li>
     </ul>
 
 </div>
