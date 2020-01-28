@@ -1,7 +1,7 @@
 export class Account {
-    'id'?: number;
+    'id': number;
     'userID': number;
-    'editions': number[];
+    'editions': any[];
     
     constructor(data?: any) {
       Object.assign(this, data);

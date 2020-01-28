@@ -15,6 +15,7 @@ export class ServiceGeneralService {
 
   private currentAccount: Account = new Account();
   private edtions: Edition[];
+  
 
   constructor(
     private router: Router,
@@ -28,16 +29,17 @@ export class ServiceGeneralService {
       (account: Account) => {
         this.currentAccount = account;
         this.getEditions();
+        console.log(account);
+        
         }
       )
+      
   }
 
   public getAccount(){
     return this.http.get(this.url + "user/" + this.currentAccount.userID)
   }
 
-
-  
 public getEditions(){
   return this.simulation
 }

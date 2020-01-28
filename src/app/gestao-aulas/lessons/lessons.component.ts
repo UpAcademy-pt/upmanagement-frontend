@@ -10,7 +10,8 @@ import { Lesson } from '../shared/models/lesson';
   styleUrls: ['./lessons.component.scss']
 })
 export class LessonsComponent implements OnInit {
-  private lessons: Lesson[]
+  private lessons: Lesson[];
+  private notes: any[];
 
   constructor(
     private router: Router,
@@ -20,10 +21,12 @@ export class LessonsComponent implements OnInit {
     this.lessons=this.serviceApi.getLessons()
   }
 
-  ngOnInit() {
+  ngOnInit() {  
+  }
 
+  public getNotesBYId(){
     
   }
 
 }
-//////////
+
