@@ -11,8 +11,8 @@ import { AdminTeachersComponent } from './admin-teachers/admin-teachers.componen
 import { MyAcademiesComponent } from './my-academies/my-academies.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { SharedModule } from './shared/shared.module';
-import { FormsModule } from '@angular/forms';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { AccountProfileComponent } from './account-profile/account-profile.compo
     CommonModule,
     AcademyManagerRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AcademyManagerModule { }
