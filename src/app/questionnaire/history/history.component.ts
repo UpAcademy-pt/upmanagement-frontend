@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AnsweredQuestionnaireService } from '../services/answeredQuestionnaire-service/answered-questionnaire.service';
 import { AccountService } from '../services/account-service/account.service';
 import { Account } from '../models/account/account';
 import { QuestionnaireService } from '../services/questionnaire-service/questionnaire.service';
-import { AnsweredQuestionnaire } from '../models/answeredQuestionnaire/answered-questionnaire';
+import { Questionnaire } from '../models/questionnaire/questionnaire';
+import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-history',
@@ -13,27 +14,42 @@ import { AnsweredQuestionnaire } from '../models/answeredQuestionnaire/answered-
 export class HistoryComponent implements OnInit {
 
   private account: Account = new Account();
-  private history: AnsweredQuestionnaire[];
+  private history: Questionnaire[];
   // Table
   private headers: ["accountId"]
 // Lembrar OnDestroy()
+  public showStatsBtn = false;
+  private user: User;
 
   constructor(
-    private answeredQuestService: AnsweredQuestionnaireService,
-    private questService: QuestionnaireService
-  ) { }
+    private questService: QuestionnaireService,
+  ) {
+    /* this.history.forEach(element => {
+      element.viewPrivacy.includes(this.user.role)
+    }) 
+    this.showStatsBtn = true; */
+  }
 
   ngOnInit(
 
   ) {
     this.getPendingQuestionnaires();
+    this.showStats();
   }
 
   public getPendingQuestionnaires() {
-    this.answeredQuestService.getAnsweredQuestionnaireByAccountId(this.account.id).subscribe((history: AnsweredQuestionnaire[]) => {
+    this.questService.getAnsweredQuestionnaireByAccountId(this.account.idTeste).subscribe((history: Questionnaire[]) => {
       this.history = history; console.log(history);
     });
+  }
+  public showStats() {
+    this.history.forEach(element => {
+      element.viewPrivacy.includes(this.user.role)
+    })
+    this.showStatsBtn = true;
+    }
+
 
   }
 
-}
+

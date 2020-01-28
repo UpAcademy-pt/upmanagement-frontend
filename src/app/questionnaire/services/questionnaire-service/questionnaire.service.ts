@@ -33,4 +33,8 @@ export class QuestionnaireService {
   public deleteQuestionnaire(id: number) {
     return this.http.delete(this.url + id, {responseType: 'text'});
   }
+
+  public getAnsweredQuestionnaireByAccountId(id: number) {
+    return this.http.get(this.url + 'account/' + id);
+  }
 }
