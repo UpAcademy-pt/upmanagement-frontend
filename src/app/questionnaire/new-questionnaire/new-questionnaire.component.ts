@@ -6,6 +6,8 @@ import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { Template } from '../models/template/template';
 import { TemplateService } from '../services/template-service/template.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import { faTrash, faCheck, faEdit } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-new-questionnaire',
@@ -16,7 +18,7 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 export class NewQuestionnaireComponent implements OnInit {
 
   constructor(
-    private questionService: QuestionService,
+    //private questionService: QuestionService,
     private questionnaireService: QuestionnaireService,
     private templateService: TemplateService
   ) {}
@@ -28,12 +30,16 @@ export class NewQuestionnaireComponent implements OnInit {
  private quiz: boolean;
  private anonymous: boolean;
  private academies: any = [1, 2, 3, 4, 5];
- private formandosId: any = [{ 'id': "1", 'text': "Formando 1" }, { 'id': "2", 'text': "Formando 1" }, { 'id': "3", 'text': "Formando 3" },{ 'id': "4", 'text': "Formando 4" }, { 'id': "5", 'text': "Todos" }];
+ private traineesId: any = [{ 'id': "1", 'text': "Formando 1" }, { 'id': "2", 'text': "Formando 1" }, { 'id': "3", 'text': "Formando 3" },{ 'id': "4", 'text': "Formando 4" }, { 'id': "5", 'text': "Todos" }];
+ private trainees: any;
  private option: string;
- private testeOption: string[]
  private customHtml: string
  private trueOrfalse: boolean[] = [];
- private choices: boolean = true;
+ private editOp: boolean[] = [];
+ private multi: boolean = true;
+ faTrash = faTrash;
+ faCheck = faCheck;
+ faEdit = faEdit
 
   public addQuestion(question: Question) {
     console.log('data');
@@ -42,7 +48,6 @@ export class NewQuestionnaireComponent implements OnInit {
     this.trueOrfalse.forEach( (element, index) => {
       if (element){this.a.rightAnswer.push(index)}}); //ver se dá para fazer directamente no ngmodel
 
-    //this.questionService.createQuestion(question).subscribe();
     if (this.b.questionList != undefined) {
       this.b.questionList.push(question);
     } else {
@@ -78,7 +83,7 @@ export class NewQuestionnaireComponent implements OnInit {
     } else {
       this.b.qType = "EVALUATION";
     }
-    
+    this.b.answerList = [];
     this.questionnaireService.createQuestionnaire(questionnaire).subscribe();
 
     if (this.template) {
@@ -94,8 +99,15 @@ export class NewQuestionnaireComponent implements OnInit {
   }
 
   public viewStuff(){
-    
+    console.log(this.trainees);
   }
+
+  // public questionChanger(answer: boolean[]){
+  //   answer[1] = true;
+  //   answer[2] = false;
+  //   answer[3] = false;
+  //   return answer;
+  // }
 
   ngOnInit() {
   }
