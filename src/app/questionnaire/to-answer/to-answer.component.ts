@@ -32,13 +32,14 @@ export class ToAnswerComponent implements OnInit {
       (currentQuestionnaire: Questionnaire) => {
         this.currentQuestionnaire = currentQuestionnaire;
         //this.currentQuestionnaire$.next(this.currentQuestionnaire);
-        console.log("Antes: " + this.currentQuestionnaire);
+        console.log("Antes: " + JSON.stringify(this.currentQuestionnaire.answerList));
 
         for (let i = 0; i < this.currentQuestionnaire.questionList.length; i++) {
-          this.currentQuestionnaire.answerList.push(new Answer());
+          let answer: Answer = new Answer({questionnaireId: this.currentQuestionnaire.id, answer: [], questionId: this.currentQuestionnaire.questionList[i].id});
+          this.currentQuestionnaire.answerList.push(answer);
         }
 
-        console.log("Depois: " + this.currentQuestionnaire);
+        console.log("Depois: " + JSON.stringify(this.currentQuestionnaire.answerList));
       });
     this.numbers = [];
   }
@@ -46,14 +47,20 @@ export class ToAnswerComponent implements OnInit {
   ngOnInit() { }
 
   public sendQuestionnaire() {
-    console.log("Sending questionnaire");
-
-    //console.log("Questionnaire sent");
+    for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
+      if (this.currentQuestionnaire.questionList[i].aType == "MULTIPLE") {
+        this.currentQuestionnaire.answerList[i].answer = this.currentQuestionnaire.answerList[i].answer
+          .map((option, index) => option = "true" ? "" + index : "false")
+          .filter(option => option != "false");
+      }
+    }
+    console.log("Questionário enviadas: " + JSON.stringify(this.currentQuestionnaire));
+    this.questionnaireService.updateQuestionnaire(this.currentQuestionnaire);
+    
+    for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
+      this.currentQuestionnaire.answerList[i].answer = [];
+    }
     //this.router.navigate(['/questionario/pendentes']);
-    console.log(this.currentQuestionnaire);
-
-
-
   }
 
 }

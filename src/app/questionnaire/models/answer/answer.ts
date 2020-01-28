@@ -1,7 +1,7 @@
 export class Answer {
     'id': number;
     'questionnaireId': number;
-    'answer': string;
+    'answer': string[];
     'questionId': number;
 
 constructor(data?: any) {
