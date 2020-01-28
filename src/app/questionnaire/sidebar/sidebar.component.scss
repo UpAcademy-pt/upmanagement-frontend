@@ -11,6 +11,7 @@ $grey: #FAFBFF;
 $white: #ffffff;
 $black: #343a40;
 
+
 // @mixin smoothTrans {
 //   -webkit-transition: all 0.3s ease-in-out;
 //       -ms-transition: all 0.3s ease-in-out;
@@ -117,7 +118,7 @@ $black: #343a40;
     margin-top:22px;
     padding: 0;
     li{
-      margin-left: 32px;
+      margin-left: 24px;
       a{
         font-size: 1em;
         padding: 11px 24px;
@@ -129,11 +130,14 @@ $black: #343a40;
           background-color: rgba(0,32,74, 0.4);
         }
         &.active{
-          border-color: $brightGreen;
-          color: $brightGreen;
+          border-color: #e07e37;
+          color: #e07e37;
           svg{
-            fill: $brightGreen;
+            fill: #e07e37;
           }
+        }
+        .disabled {
+          background: #343a40;
         }
         i{
           margin-right: 12px;
