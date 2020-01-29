@@ -1,32 +1,36 @@
-<div class="container mb-4">
-  <button type="button" class="btn btn-primary btn-lg mt-4" (click)="openModalAddAcademy(templateAddAcademy)">Nova
-    Academia</button>
-</div>
+<div class="ml-4">
 
-<table class="table table-striped container m-3 col-12 text-center">
-  <thead class="thead-dark">
-    <tr>
-      <th>Nome</th>
-      <th>Ver</th>
-      <th>Editar</th>
-      <th>Eliminar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let academy of academies$ | async; let i = index;" id="{{i}}">
-      <td>{{academy.edName}}</td>
-      <td>
-        <button class="btn btn-success">Ver</button>
-      </td>
-      <td>
-        <button (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)" class="btn-borderless btn-edit">Editar</button>
-      </td>
-      <td>
-        <button (click)="openModalConfirmDeleteAcademy(templateConfirmDeleteAcademy, i)" class="btn-borderless btn-delete">Apagar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div class="float-left mb-4 ml-3">
+    <button type="button" class="btn btn-primary btn-md mt-4 float-left" (click)="openModalAddAcademy(templateAddAcademy)">Nova
+      Academia</button>
+  </div>
+
+  <table class="table table-sm table-striped container m-3 ml-3 col-12 text-center" style="width: 1300px;">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Ver</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let academy of academies$ | async; let i = index;" id="{{i}}">
+        <td>{{academy.edName}}</td>
+        <td>
+          <button class="btn btn-success">Ver</button>
+        </td>
+        <td>
+          <button (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)" class="btn-borderless btn-edit">Editar</button>
+        </td>
+        <td>
+          <button (click)="openModalConfirmDeleteAcademy(templateConfirmDeleteAcademy, i)" class="btn-borderless btn-delete">Apagar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
 
 <!-- Modal Add Academy -->
 <ng-template #templateAddAcademy>
