@@ -28,12 +28,9 @@ import { MyDeclarationsComponent } from './my-declarations/my-declarations.compo
     ReactiveFormsModule,
     SharedModule,
     FormsModule,
-<<<<<<< HEAD
     ReactiveFormsModule,
     NgxBootstrapMultiselectDropdownModule,
-=======
     AlertModule.forRoot()
->>>>>>> dev
   ]
 })
 export class AcademyManagerModule { }
