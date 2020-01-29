@@ -171,7 +171,7 @@
 
   <p>----------------Display de Questões----------------</p>
 
-  <div *ngFor="let question of b.questionList">
+  <!-- <div *ngFor="let question of b.questionList">
     <p>{{question.question}}</p>
     <div class="row">
       <div *ngFor="let option of question.options">
@@ -181,10 +181,32 @@
           </label>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- <p>{{question.options}}</p> -->
-  </div>
-</div>
+  <!-- </div>
+</div> -->
+
+<accordion [isAnimated]="true">
+  <accordion-group *ngFor="let question of b.questionList; let i = index;" class="mb-4">
+    <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
+      <div class="pull-left float-left">Questão {{i + 1}}</div>
+      <span class="badge badge-secondary float-right pull-right btn-borderless btn-down">
+        <fa-icon size="2x" [icon]="faAngleDoubleDown"></fa-icon>
+      </span>
+    </button>
+    <p>{{question.question}}</p>
+    <div *ngFor="let option of question.options; let j = index;" class="form-check">
+      <input class="form-check-input" type="radio" id="checkbox{{i}}.{{j}}" name="{{i}}">
+      <label class="form-check-label" for="checkbox{{i}}.{{j}}">{{option}}</label>
+    </div>
+  </accordion-group>
+</accordion>
+
+
+
+
+
+
 
 <!-- Div para o editar para escolher as opçoes correctas
 <div>
