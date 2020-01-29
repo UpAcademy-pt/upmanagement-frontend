@@ -29,14 +29,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
     ReactiveFormsModule,
     SharedModule,
     FormsModule,
-<<<<<<< HEAD
     ReactiveFormsModule,
     NgxBootstrapMultiselectDropdownModule,
-    AlertModule.forRoot()
-=======
     AlertModule.forRoot(),
     BsDatepickerModule.forRoot(),
->>>>>>> martina
   ]
 })
 export class AcademyManagerModule { }
