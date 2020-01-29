@@ -5,6 +5,7 @@ import { QuestionnaireService } from '../services/questionnaire-service/question
 import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 import { User } from 'src/app/core/models/user';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-history',
@@ -15,41 +16,43 @@ export class HistoryComponent implements OnInit {
 
   private account: Account = new Account();
   private history: Questionnaire[];
-  // Table
-  private headers: ["accountId"]
-// Lembrar OnDestroy()
+  public pageOfItems: Array<any>;
+  // Lembrar OnDestroy()
   public showStatsBtn = false;
-  private user: User;
+  counter: number[];
 
   constructor(
     private questService: QuestionnaireService,
-  ) {
-    /* this.history.forEach(element => {
-      element.viewPrivacy.includes(this.user.role)
-    }) 
-    this.showStatsBtn = true; */
-  }
+    private userService: UserServiceService
+  ) { }
 
   ngOnInit(
 
   ) {
-    this.getPendingQuestionnaires();
-    this.showStats();
+    this.getQuestionnaires();
+  }
+  public getCurrentUser(){
+    return this.userService.getCurrentUser();
   }
 
-  public getPendingQuestionnaires() {
+  public getQuestionnaires() {
     this.questService.getAnsweredQuestionnaireByAccountId(this.account.idTeste).subscribe((history: Questionnaire[]) => {
       this.history = history; console.log(history);
+      this.showStats();
     });
   }
   public showStats() {
     this.history.forEach(element => {
-      element.viewPrivacy.includes(this.user.role)
+      element.viewPrivacy.includes(this.getCurrentUser().role);
     })
     this.showStatsBtn = true;
-    }
-
-
   }
+
+
+  public onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+  }
+}
 
 
