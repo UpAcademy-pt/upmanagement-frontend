@@ -4,8 +4,6 @@ import { QuestionnaireService } from '../services/questionnaire-service/question
 import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
-import { ReplaySubject, Subscription } from 'rxjs';
-import { Question } from '../models/question/question';
 import { Answer } from '../models/answer/answer';
 
 @Component({
@@ -16,7 +14,6 @@ import { Answer } from '../models/answer/answer';
 export class ToAnswerComponent implements OnInit {
 
   private currentQuestionnaire: Questionnaire;
-  //public currentQuestionnaire$: ReplaySubject<Questionnaire> = new ReplaySubject(1);
   private userName: string;
   faAngleDoubleDown = faAngleDoubleDown;
 
@@ -26,16 +23,14 @@ export class ToAnswerComponent implements OnInit {
     private userService: UserServiceService
   ) {
     this.userName = userService.getCurrentName();
-    this.questionnaireService.getQuestionnaire(this.router.getCurrentNavigation().extras.state.id).subscribe(
+    let questionnaireId: number = this.router.getCurrentNavigation().extras.state.id;
+    this.questionnaireService.getQuestionnaire(questionnaireId).subscribe(
       (currentQuestionnaire: Questionnaire) => {
         this.currentQuestionnaire = currentQuestionnaire;
-        //this.currentQuestionnaire$.next(this.currentQuestionnaire);
-
         for (let i = 0; i < this.currentQuestionnaire.questionList.length; i++) {
           let answer: Answer = new Answer({questionnaireId: this.currentQuestionnaire.id, answer: [], questionId: this.currentQuestionnaire.questionList[i].id});
           this.currentQuestionnaire.answerList.push(answer);
         }
-
       });
   }
 
@@ -53,12 +48,11 @@ export class ToAnswerComponent implements OnInit {
     this.questionnaireService.updateQuestionnaire(this.currentQuestionnaire).subscribe(
       (msg: string) => {
         console.log(msg);
+        for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
+          this.currentQuestionnaire.answerList[i].answer = [];
+        }
+        this.router.navigate(['/questionario/pendentes']);
       });
-    
-    for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
-      this.currentQuestionnaire.answerList[i].answer = [];
-    }
-    //this.router.navigate(['/questionario/pendentes']);
   }
 
 }
