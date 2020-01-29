@@ -1,10 +1,12 @@
+import { Module } from './module';
+
 export class Academy {
     'id': number;
     'client': string;
     'startDate': string;
     'endDate': string;
     'edName': string;
-    'modulesIds': number[];
+    'modules': Module[];
     'studentsIds': number[];
     'status': string;
     'warning': string;
