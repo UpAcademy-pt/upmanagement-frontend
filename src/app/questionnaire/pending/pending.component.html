@@ -1,11 +1,21 @@
-<div class="row row-cols-1 row-cols-md-3">
-    <div *ngFor="let row of pendingQuestionnaires; let i = index;" class="col-sm-6 col-md-4 col-lg-3 mb-4">
-        <div (click)="solveThisQuestionnaire(i)" class="card-pointer card h-100">
-            <img src="https://www.easypooling.com/images/img-questionnaire.png" class="px-3 card-img-top" alt="Questionário">
+<div class="container row row-cols-1 row-cols-md-3">
+    <div *ngFor="let questionnaire of pendingQuestionnaires$ | async; let i = index;" class="col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div (click)="solveThisQuestionnaire(questionnaire.id)" class="card-pointer card h-100">
+            <div *ngIf="questionnaire.qType=='QUIZ'">
+                <img src="https://resultadosdigitais.com.br/blog/files/2015/07/07-02-capa-quiz-marketing-digital.jpg" class="px-3 card-img-top" alt="Quiz">
+            </div>
+            <div *ngIf="questionnaire.qType=='EVALUATION'">
+                <img src="https://www.easypooling.com/images/img-questionnaire.png" class="px-3 card-img-top" alt="Questionário">
+            </div>
             <div class="card-body">
-                <h5 class="card-title">{{row["name"]}}</h5>
+                <h5 class="card-title">{{questionnaire["name"]}}</h5>
                 <p class="card-text"><small class="text-muted">Adicionado em: data</small></p>
             </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="(pendingQuestionnaires$ | async)?.length==0" class="my-5 text-center">
+    <fa-icon size="9x" style="color: green;" [icon]="faCheckCircle"></fa-icon>
+    <h5 class="my-5">Nenhum questionário pendente</h5>
 </div>

@@ -11,18 +11,12 @@ $grey: #FAFBFF;
 $white: #ffffff;
 $black: #343a40;
 
-// @mixin smoothTrans {
-//   -webkit-transition: all 0.3s ease-in-out;
-//       -ms-transition: all 0.3s ease-in-out;
-//           transition: all 0.3s ease-in-out;
-// }
-  
 #wrapper{
   display: flex;
 }
 
   #sidebar{
-   //@include smoothTrans;
+
    background-color: $black;
    background: linear-gradient(180deg, #343a40 15%, $black 100%);
    height: 100vh;
@@ -31,7 +25,6 @@ $black: #343a40;
      text-align: center;
      img{
        margin: 20px 0;
-       //@include smoothTrans;
      }
      .logoSmall{
        width: 28px;
@@ -51,7 +44,6 @@ $black: #343a40;
     max-width: 160px;
     margin: 0 auto;
     .userPicture{
-      //@include smoothTrans;
       margin: 0 auto;
       border-radius: 100%;
       max-width: 54px;
@@ -92,7 +84,6 @@ $black: #343a40;
       opacity: 0.5;
       font-size: 1.2em;
       text-align: center;
-      //@include smoothTrans;
       margin: 6px auto;
       display: block;
       &:hover, &.active{
@@ -103,7 +94,6 @@ $black: #343a40;
         left: 31px;
         .item{
           color: $darkBlue;
-          //@include smoothTrans;
           &:hover{
             color: $darkBlue;
           }
@@ -117,22 +107,21 @@ $black: #343a40;
     margin-top:22px;
     padding: 0;
     li{
-      margin-left: 32px;
+      margin-left: 24px;
       a{
         font-size: 1em;
         padding: 11px 24px;
         color: $white;
         display: block;
         border-left:3px solid transparent;
-       // @include smoothTrans;
         &:hover, &.active{
           background-color: rgba(0,32,74, 0.4);
         }
         &.active{
-          border-color: $brightGreen;
-          color: $brightGreen;
+          border-color: #e07e37;
+          color: #e07e37;
           svg{
-            fill: $brightGreen;
+            fill: #e07e37;
           }
         }
         i{
@@ -156,27 +145,33 @@ $black: #343a40;
       margin: 12px auto;
     }
   }
-  .expandBtn{
-    color: $red;
-    font-size: 1em;
-    text-align: center;
-    position: absolute;
-    bottom: 6px;
-    width: 218px;
-    i{
-      cursor: pointer;
-      padding:20px;
-      opacity: 0.5;
-      //@include smoothTrans;
-      &:hover{
-        opacity: 1;
-        text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
-        transform: scale(1.2, 1.2);
-        -webkit-transform: scale(1.2, 1.2);
-        -ms-transform:scale(1.2, 1.2);
-      }
-    }
+
+  #navbardrop{
+    color: $black;
   }
+
+  .expandBtn{
+    font-size: 16px;
+    text-align: center;
+    //position: absolute;
+    bottom: 6px;
+    //width: 218px;
+    //cursor: pointer;
+      // padding:20px;
+      // opacity: 0.5;
+      // &:hover{
+      //   opacity: 1;
+      //   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+      //   transform: scale(1.2, 1.2);
+      //   -webkit-transform: scale(1.2, 1.2);
+      //   -ms-transform:scale(1.2, 1.2);
+     // }
+     .visible {
+      visibility: hidden;
+    }
+    }
+
+  
   
   #sidebar.collapsed {
       min-width: 64px;
@@ -198,7 +193,6 @@ $black: #343a40;
       }
       .expandBtn{
         width:64px;
-
       }
       .divider{
         width: 20px;

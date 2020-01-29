@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { Router } from '@angular/router';
+import { AccountService } from '../services/account-service/account.service';
+import { Account } from '../models/account/account';
+import { ReplaySubject } from 'rxjs';
+import { QuestionnaireService } from '../services/questionnaire-service/questionnaire.service';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-pending',
@@ -9,28 +13,24 @@ import { Router } from '@angular/router';
 })
 export class PendingComponent implements OnInit {
 
-  private pendingQuestionnaires: Questionnaire[];
-  
+  private currentAccount: Account;
+  public pendingQuestionnaires$: ReplaySubject<any[]>;
+  faCheckCircle = faCheckCircle;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private accountService: AccountService,
+    private questionnaireService: QuestionnaireService
   ) {
-
-    
-    // Fazer getAcount à API e gravar accountId na AccountService e usar a lista de questionários pendentes aqui.
-
-    this.pendingQuestionnaires = [{id: 1, name: "Questionário teste 1", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
-    {id: 2, name: "Questionário teste 2", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
-    {id: 3, name: "Questionário teste 3", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
-    {id: 4, name: "Questionário teste 4", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
-    {id: 5, name: "Questionário teste 5", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3},
-    {id: 6, name: "Questionário teste 6", questionList: [], answerList: [], qType: "EVALUATION", accountId: 1, editPrivacy: [], viewPrivacy: [], "score": 3}];
-   }
+    this.questionnaireService.getPendingQuestionnaires();
+    this.pendingQuestionnaires$ = questionnaireService.pendingQuestionnaires$;
+  }
 
   ngOnInit() {
   }
 
-  public solveThisQuestionnaire(i: number) {
-    this.router.navigate(['/questionario/pendentes/responder'], {state: {id: this.pendingQuestionnaires[i].id}});
+  public solveThisQuestionnaire(questionnaireId: number) {
+    this.router.navigate(['/questionario/pendentes/responder'], { state: { id: questionnaireId} });
   }
 
 }
