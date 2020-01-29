@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../services/account-service/account.service';
 import { Account } from '../models/account/account';
 import { QuestionnaireService } from '../services/questionnaire-service/questionnaire.service';
+import { Questionnaire } from '../models/questionnaire/questionnaire';
+import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-history',
@@ -11,27 +14,41 @@ import { QuestionnaireService } from '../services/questionnaire-service/question
 export class HistoryComponent implements OnInit {
 
   private account: Account = new Account();
-  //private history: AnsweredQuestionnaire[];
+  private history: Questionnaire[];
   // Table
   private headers: ["accountId"]
 // Lembrar OnDestroy()
+  public showStatsBtn = false;
+  private user: User;
 
   constructor(
-    //private answeredQuestService: AnsweredQuestionnaireService,
-    private questService: QuestionnaireService
-  ) { }
+    private questService: QuestionnaireService,
+  ) {
+    /* this.history.forEach(element => {
+      element.viewPrivacy.includes(this.user.role)
+    }) 
+    this.showStatsBtn = true; */
+  }
 
   ngOnInit(
 
-  ) 
-  {
-    //this.getPendingQuestionnaires();
+  ) {
+    this.getPendingQuestionnaires();
+    this.showStats();
   }
 
-  // public getPendingQuestionnaires() {
-  //   this.answeredQuestService.getAnsweredQuestionnaireByAccountId(this.account.id).subscribe((history: AnsweredQuestionnaire[]) => {
-  //     this.history = history; console.log(history);
-  //   });
+  public getPendingQuestionnaires() {
+    this.questService.getAnsweredQuestionnaireByAccountId(this.account.idTeste).subscribe((history: Questionnaire[]) => {
+      this.history = history; console.log(history);
+    });
+  }
+  public showStats() {
+    this.history.forEach(element => {
+      element.viewPrivacy.includes(this.user.role)
+    })
+    this.showStatsBtn = true;
+    }
+
 
   }
 
