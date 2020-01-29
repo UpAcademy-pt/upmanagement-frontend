@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { AcademyManagerRoutingModule } from './academy-manager-routing.module';
 import { AcademyManagerComponent } from './academy-manager.component';
@@ -27,7 +29,9 @@ import { MyDeclarationsComponent } from './my-declarations/my-declarations.compo
     ReactiveFormsModule,
     SharedModule,
     FormsModule,
-    AlertModule.forRoot()
-  ]
+    AlertModule.forRoot(),
+    TabsModule.forRoot(),
+    CollapseModule.forRoot(),
+    ]
 })
 export class AcademyManagerModule { }
