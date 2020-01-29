@@ -13,3 +13,16 @@
         <li class="list-group-item"></li>
       </ul>
 </div>
+
+<p>If you missed alert under me, just press <code>Add more</code> button</p>
+<div *ngFor="let alert of alerts">
+  <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{ testeeee</alert>
+</div>
+<button type="button" class="btn btn-primary" (click)="add()">Add more</button>
+
+
+<alert type="success">
+  <h4 class="alert-heading">Well done!</h4>
+  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+</alert>

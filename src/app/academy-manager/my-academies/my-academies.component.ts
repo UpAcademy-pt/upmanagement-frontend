@@ -25,7 +25,7 @@ export class MyAcademiesComponent implements OnInit {
     this.currentAccount$.subscribe((account) => {
       this.currentAccount = account;
       this.currentAccount.academyIds.forEach(element => {
-        this.academyService.getbyId(element).subscribe((academy:any) => {
+        this.academyService.getbyId(element).subscribe((academy: any) => {
           this.academies.push(academy);
           this.academy = this.academies[0];
           console.log(academy);
