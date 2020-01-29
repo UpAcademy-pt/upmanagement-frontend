@@ -13,7 +13,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { SharedModule } from './shared/shared.module';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect-dropdown';
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
@@ -23,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AcademyManagerRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxBootstrapMultiselectDropdownModule,
   ]
 })
 export class AcademyManagerModule { }
