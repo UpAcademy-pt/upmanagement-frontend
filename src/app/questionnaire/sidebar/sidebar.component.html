@@ -1,5 +1,5 @@
 <div id="wrapper" >
-    <nav id="sidebar"  [class.collapsed]="collapsed" class="fixed-left">
+    <nav id="sidebar" [class.collapsed]= "collapsed" >
         <div class="header">
         </div>
         <span class="divider"></span>
@@ -31,12 +31,12 @@
             <li>
                 <a  [ngClass]="{'active': history}" (click)="pending=false; history=true; new=false;" routerLink="/questionario/historico" href="#"><i><svg width="20" height="16"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path
+                            <path 
                                 d="M20 1.341V0L10 1.36 0 0v14.64l9.632 1.31L10 16l.368-.05L20 14.64V2.683l-1.333.185V13.48l-8.003 1.089V2.612l8.003-1.088v.002L20 1.34zM9 15l-8-1.084V2l8 1.084V15z"
                                 fill-rule="nonzero" /></svg></i><span>Histórico</span></a>
             </li>
             <li *ngIf="showSideBar" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                class="nav-item dropdown" dropdown triggers="hover" #dp="bs-dropdown" role="menu"
+                class="nav-item dropright" dropdown triggers="hover" #dp="bs-dropdown" role="menu"
                 >
                 <a [ngClass]="{'active': new}" (click)="pending=false; history=false; new=true;" class="nav-link dropdown-toggle" 
                     data-toggle="dropdown" dropdownToggle><i><svg width="20" height="16"
@@ -76,17 +76,10 @@
                                 fill-rule="nonzero" /></svg></i><span>Estatisticas</span></a>
             </li> -->
         </ul>
-    
-        <div class="expandBtn" id="sidebar"> 
-            <button [ngClass]="{'visible': compress}" id="sidebarCompress"> <fa-icon [icon]="faCompress"
-                     (click)="compress=false; expand=true" ></fa-icon></button>
-            <button [ngClass]="{'visible': expand}" id="sidebarExpand" > <fa-icon [icon]="faExpand"
-                     (click)="compress=true; expand=false"></fa-icon></button>
-        </div> 
-       
-        <!-- <div  class="expandBtn">
-            <span id="sidebarCollapse"><i class=" fa-compress" [class.fa-compress]="!collapsed"
-                    [class.fa-expand]="collapsed" (click)="collapsed = !collapsed"></i></span>
-        </div> -->
+
+         <div  class="expandBtn">
+            <span id="sidebarCollapsed"><fa-icon [icon]="collapsed ? faExpand : faCompress " (click)="collapsed = !collapsed"
+                    ></fa-icon></span>
+            </div>
     </nav>
 </div>
