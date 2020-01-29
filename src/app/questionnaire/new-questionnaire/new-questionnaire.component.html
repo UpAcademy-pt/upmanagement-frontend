@@ -50,7 +50,7 @@
       </div>
       <div class="col-2">Para</div>
       <div class="col-3">
-        <ngx-select size="large" [disabled]="!traineesId.empty" [multiple]="true" [items]="traineesId"
+        <ngx-select [disabled]="traineesId.empty" [multiple]="true" [items]="traineesId"
           [(ngModel)]="trainees">
         </ngx-select>
       </div>
@@ -61,17 +61,17 @@
 
   <div class="row bg-light" style="border: 1px solid black; border-radius: 15px;">
     <div *ngIf="!quiz" class="row col-3" style="border-radius: 15px;">
-      <button [(ngModel)]="multi" (click)="multi=true; single=false; open=false; a.options=[]" class="col-12"
+      <button [(ngModel)]="multi" (click)="multi=true; single=false; open=false; a.options=[]; select='MULTIPLE'" class="col-12"
         style="border: unset; border-bottom: 1px solid black; border-radius: 15px 0px 0px 0px; background-color: gray;"
         [ngClass]="{'bg-light':multi }" [ngStyle]="{'border-right': multi ? '0':'1px solid black'}">Resposta <br>
         múltipla</button>
 
-      <button [(ngModel)]="single" (click)="single=true; multi=false; open=false; a.options=[]" class="col-12"
+      <button [(ngModel)]="single" (click)="single=true; multi=false; open=false; a.options=[]; select='SINGLE_OPTION'" class="col-12"
         style="background-color: gray;" [ngClass]="{'bg-light':single}"
         [ngStyle]="{'border-right': single ? '0':'1px solid black'}">
         Resposta <br> única</button>
 
-      <button [(ngModel)]="open" (click)="open=true; multi=false; single=false; a.options=[]" class="col-12"
+      <button [(ngModel)]="open" (click)="open=true; multi=false; single=false; a.options=[]; select='OPEN'" class="col-12"
         style="border: unset; border-right: 1px solid; border-top: 1px solid black; border-radius: 0px 0px 0px 15px; background-color: gray;"
         [ngClass]="{'bg-light':open }" [ngStyle]="{'border-right': open ? '0':'1px solid black'}">Resposta <br>
         aberta</button>
@@ -85,24 +85,28 @@
       <div>
         <div *ngFor="let option of a.options; index as i">
           <div class="row">
-            <div [(ngModel)]="trueOrfalse[i]" class="col-8">{{option}}</div>
-            <!-- <input *ngIf="editOp{{i}}=" type="text"> -->
+            <div *ngIf="!trueOrfalse[i]" [(ngModel)]="a.rightAnswer[i]" class="col-8">{{option}}</div>
+            <input [(ngModel)]="a.rightAnswer[i]" *ngIf="trueOrfalse[i]" type="text" class="col-8">
             <fa-icon *ngIf="a.rightAnswer.includes[i]" class="col-1" style="color: green;" [icon]="faCheck"></fa-icon>
-            <button class="btn btn-danger col-1" (click)="a.options.splice(i,1)">
+            <button class="btn btn-borderless col-1" (click)="a.options.splice(i,1); trueOrfalse.splice(i,1); a.rightAnswer.splice(i,1)" style=" color: red;">
               <fa-icon [icon]="faTrash"></fa-icon>
             </button>
-            <button class="btn btn-primary col-1" >
-              <fa-icon [icon]="faEdit"></fa-icon>
+            <button class="btn btn-borderless col-1" [ngStyle]="{'color': trueOrfalse[i] ? 'green':'blue'}" (click)="trueOrfalse[i]=!trueOrfalse[i]; console.log(a.rightAnswer[i])" >
+              <fa-icon [icon]="trueOrfalse[i]?faSave:faEdit"></fa-icon>
             </button>
-            <!-- <input [(ngModel)]="editOp{{i}}=true"type="button" class="btn-primary" *ngIf="editOp{{i}}=true" (click)="editOp{{i}}=false">SAVE -->
+            <!-- <button *ngIf="trueOrfalse[i]" class="btn btn-borderless col-1" (click)="trueOrfalse[i]=false" style="color:green">
+              <fa-icon [icon]="trueOrfalse[i]?faSave:faEdit"></fa-icon>
+            </button> -->
           </div>
         </div>
       </div>
       <div *ngIf="multi || single || quiz">
         <label>Resposta:
           <input [(ngModel)]="option" type="text" placeholder="Opção">
-          <button (click)="addMoreOptions()">Adicionar</button><span [innerHTML]='customHtml' class="ml-2"
-            style="color: red;"></span>
+          <label>Reposta certa
+          <input [(ngModel)]="rightCheck" type="checkbox">
+          </label>
+          <button (click)="addMoreOptions(rightCheck)">Adicionar</button><span [innerHTML]='customHtml' class="ml-2"></span>
         </label>
       </div>
 
@@ -125,7 +129,7 @@
   </div>
 
 
-  <button class="btn btn-primary" (click)="addQuestion(a)">
+  <button class="btn btn-primary" (click)="addQuestion(a, select)">
     Adicionar Pergunta
   </button>
 
@@ -185,7 +189,7 @@
 <!-- Div para o editar para escolher as opçoes correctas
 <div>
   <div *ngFor="let option of a.options; index as i" class="form-check-inline" >
-      <input [(ngModel)]="trueOrfalse[i]" *ngIf="option!=''" type="text">{{option}}
+      <input [(ngModel)]="trueOrfalse[i] ? " *ngIf="option!=''" type="text">{{option}}
       <button *ngIf="option!=''" class="btn btn-danger" (click)="option=''">X</button>
   </div>
 </div> -->

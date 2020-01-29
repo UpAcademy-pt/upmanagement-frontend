@@ -54,4 +54,15 @@ export class QuestionnaireService {
   public getAnsweredQuestionnaireByAccountId(id: number) {
     return this.http.get(this.url + 'account/' + id);
   }
+
+  // Ir buscar
+  // public createQuestionnaireWithAccount(id: number, arrayIds: number[]){
+  //   return this.http.post(this.url + id + "/accounts", arrayIds, {responseType: 'text'});
+  // }
+
+  public createQuestionnaireWithAccountId(questionnaire: Questionnaire, arrayIds: number[]) {
+    let query = "?id=";
+    arrayIds.forEach(element => { query += "," + String(element) });
+    return this.http.post(this.url + query, questionnaire, {responseType : 'text'});
+  }
 }
