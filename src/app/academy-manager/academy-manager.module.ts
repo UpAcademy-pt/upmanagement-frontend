@@ -16,6 +16,7 @@ import { AccountProfileComponent } from './account-profile/account-profile.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect-dropdown';
 import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -28,9 +29,14 @@ import { MyDeclarationsComponent } from './my-declarations/my-declarations.compo
     ReactiveFormsModule,
     SharedModule,
     FormsModule,
+<<<<<<< HEAD
     ReactiveFormsModule,
     NgxBootstrapMultiselectDropdownModule,
     AlertModule.forRoot()
+=======
+    AlertModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+>>>>>>> martina
   ]
 })
 export class AcademyManagerModule { }
