@@ -28,7 +28,7 @@ export class AccountService {
         this.newAccount.userId = this.userId;
         this.setCurrentAccount(this.newAccount);
         this.create(this.newAccount).subscribe((newAccount:any) => {
-          console.log(newAccount);
+          console.log(this.newAccount);
         });
       } else {
         this.setCurrentAccount(account);
