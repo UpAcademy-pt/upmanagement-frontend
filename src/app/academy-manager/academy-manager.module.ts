@@ -11,14 +11,15 @@ import { AdminStudentsComponent } from './admin-students/admin-students.componen
 import { AdminTeachersComponent } from './admin-teachers/admin-teachers.component';
 import { MyAcademiesComponent } from './my-academies/my-academies.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { SharedModule } from './shared/shared.module';
+import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
-import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
-    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, MyDeclarationsComponent],
+    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent],
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,
