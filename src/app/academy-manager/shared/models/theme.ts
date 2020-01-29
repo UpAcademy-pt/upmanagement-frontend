@@ -1,6 +1,6 @@
 export class Theme {
     'id': number;
-    'name': String;
+    'name': string;
 
     constructor(data?: any) {
         Object.assign(this, data);

@@ -9,6 +9,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   declarations: [],
   imports: [
     CommonModule,
+    FormsModule,
     FontAwesomeModule
   ],
   exports:[
