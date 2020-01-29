@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -8,7 +9,11 @@ import { FormsModule } from '@angular/forms';
   declarations: [],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
+  ],
+  exports:[
+    FontAwesomeModule
   ]
 })
 export class SharedModule { }

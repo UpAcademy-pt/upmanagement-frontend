@@ -3,6 +3,7 @@ import { ReplaySubject } from 'rxjs';
 import { Academy } from '../shared/models/academy';
 import { AcademyService } from '../shared/services/academy.service';
 import { BsModalService, BsModalRef, BsDropdownConfig } from 'ngx-bootstrap';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-academies',
@@ -11,6 +12,9 @@ import { BsModalService, BsModalRef, BsDropdownConfig } from 'ngx-bootstrap';
   providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
 })
 export class AdminAcademiesComponent implements OnInit {
+
+  faEdit = faEdit;
+  faTrashAlt = faTrashAlt;
 
   modalRef: BsModalRef;
   public academies$: ReplaySubject<Academy[]> = new ReplaySubject(1);
@@ -25,6 +29,8 @@ export class AdminAcademiesComponent implements OnInit {
   public academyTypeField: string;
   public academies: Academy[];
   public academyToCreate: Academy = new Academy();
+  public academyToUpdate: Academy = new Academy();
+  public academyToDeleteRow: number;
   public showTable = false;
 
   constructor(
@@ -58,7 +64,41 @@ export class AdminAcademiesComponent implements OnInit {
     this.academyToCreate = new Academy();
   }
 
+  public updateAcademy() {
+    this.academyService.updateAcademy(this.academyToUpdate).subscribe(
+      (msg: string) => {
+        this.getAllAcademies();
+        console.log(msg);
+      }, (error: string) => {
+        console.log(error);
+      });
+    this.modalRef.hide();
+  }
+
+  public deleteAcademy() {
+    this.academyService.deleteAcademy(this.academies[this.academyToDeleteRow].id).subscribe(
+      (msg: string) => {
+        this.academies.splice(this.academyToDeleteRow, 1);
+        if (this.academies.length <= 0) {
+          this.showTable = false;
+        }
+      }, (error: string) => {
+        console.log(error);
+      });
+    this.modalRef.hide();
+  }
+
   openModalAddAcademy(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openModalUpdateAcademy(template: TemplateRef<any>, academyToUpdate: Academy) {
+    this.academyToUpdate = academyToUpdate;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openModalConfirmDeleteAcademy(template: TemplateRef<any>, rowIndex: number) {
+    this.academyToDeleteRow = rowIndex;
     this.modalRef = this.modalService.show(template);
   }
 }

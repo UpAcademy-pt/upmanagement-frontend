@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { AcademyManagerRoutingModule } from './academy-manager-routing.module';
 import { AcademyManagerComponent } from './academy-manager.component';
@@ -14,17 +15,25 @@ import { SharedModule } from './shared/shared.module';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect-dropdown';
+import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
+
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
-    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent],
+    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent],
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,
-    SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
+    FormsModule,
+<<<<<<< HEAD
+    ReactiveFormsModule,
     NgxBootstrapMultiselectDropdownModule,
+=======
+    AlertModule.forRoot()
+>>>>>>> dev
   ]
 })
 export class AcademyManagerModule { }

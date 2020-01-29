@@ -23,21 +23,18 @@ export class AcademyService {
   }
 
   public createAcademy(academy: Academy) {
-    return this.http.post(this.url, academy, { responseType: 'text' });
+    return this.http.post(this.url, academy);
   }
 
   public getbyId(id: number) {
-
     return this.http.get(this.url + id);
   }
 
-  public update(academy: Academy) {
-
-    return this.http.put(this.url, academy, { responseType: 'text' });
+  public updateAcademy(academy: Academy) {
+    return this.http.put(this.url, academy);
   }
 
-  public delete(id: number) {
-
+  public deleteAcademy(id: number) {
     return this.http.delete(this.url + id);
   }
 
