@@ -81,7 +81,7 @@ export class NewQuestionnaireComponent implements OnInit {
     } else {
     this.customHtml = "Necessário escrever opção";
   }
-    this.a.rightAnswer.push(rightCheck);
+    //this.a.rightAnswer.push(rightCheck);
     
     this.option = "";
   

@@ -61,7 +61,7 @@ export class QuestionnaireService {
   // }
 
   public createQuestionnaireWithAccountId(questionnaire: Questionnaire, arrayIds: number[]) {
-    let query = "?id=";
+    let query = "query?id=";
     arrayIds.forEach(element => { query += "," + String(element) });
     return this.http.post(this.url + query, questionnaire, {responseType : 'text'});
   }

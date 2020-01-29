@@ -13,18 +13,18 @@
     style="border-radius: 15px; color: black; border: 1px solid black; padding: 35px;">
     <div class="row">
       <label class="col-2" for="#questonnaireName">Nome: </label>
-      <input class="col-8 mb-3" id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="b.name">
+      <input class="col-8 mb-3" id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="b.name" name="questonnaireName">
     </div>
 
     <div class="form-check-inline mb-3">
-      <input class="ml-4" type="checkbox" [(ngModel)]="template">Template
-      <input class="ml-4" type="checkbox" [(ngModel)]="quiz">Com resposta certa
-      <input class="ml-4" type="checkbox" [(ngModel)]="anonymous">Questionário anônimo:
+      <input class="ml-4" type="checkbox" [(ngModel)]="template" name="template">Template
+      <input class="ml-4" type="checkbox" [(ngModel)]="quiz" name="quiz">Com resposta certa
+      <input class="ml-4" type="checkbox" [(ngModel)]="anonymous" name="anonymous">Questionário anônimo:
     </div>
     <div class="row">
       <div class="form-group col-6">
         <label for="editPermissionSelect">Permissão para editar:</label>
-        <select multiple class="form-control" id="editPermissionSelect" [(ngModel)]="b.editPrivacy">
+        <select multiple class="form-control" id="editPermissionSelect" [(ngModel)]="b.editPrivacy" name="editPermissionSelect">
           <option value="ADMIN">Admin</option>
           <option value="SUPERUSER">Formador</option>
           <option value="USER">Formando</option>
@@ -32,7 +32,7 @@
       </div>
       <div class="form-group col-6">
         <label for="viewPermissionSelect">Permissão para visualizar:</label>
-        <select multiple class="form-control" id="viewPermissionSelect" [(ngModel)]="b.viewPrivacy">
+        <select multiple class="form-control" id="viewPermissionSelect" [(ngModel)]="b.viewPrivacy" name="viewPermissionSelect">
           <option value="ADMIN">Admin</option>
           <option value="SUPERUSER">Formador</option>
           <option value="USER">Formando</option>
@@ -41,7 +41,7 @@
     </div>
     <div class="form-row">
       <div class="col-2">
-        <input type="checkbox" [(ngModel)]="send">Enviar?
+        <input type="checkbox" [(ngModel)]="send" name="sendCheckBox">Enviar?
       </div>
       <div class="col-2">Academia</div>
       <div class="col-3">
@@ -51,7 +51,7 @@
       <div class="col-2">Para</div>
       <div class="col-3">
         <ngx-select [disabled]="traineesId.empty" [multiple]="true" [items]="traineesId"
-          [(ngModel)]="trainees">
+          [(ngModel)]="trainees" nome="trainees">
         </ngx-select>
       </div>
     </div>
@@ -61,17 +61,17 @@
 
   <div class="row bg-light" style="border: 1px solid black; border-radius: 15px;">
     <div *ngIf="!quiz" class="row col-3" style="border-radius: 15px;">
-      <button [(ngModel)]="multi" (click)="multi=true; single=false; open=false; a.options=[]; select='MULTIPLE'" class="col-12"
+      <button name="multiButton" [(ngModel)]="multi" (click)="multi=true; single=false; open=false; a.options=[]; select='MULTIPLE'" class="col-12"
         style="border: unset; border-bottom: 1px solid black; border-radius: 15px 0px 0px 0px; background-color: gray;"
         [ngClass]="{'bg-light':multi }" [ngStyle]="{'border-right': multi ? '0':'1px solid black'}">Resposta <br>
         múltipla</button>
 
-      <button [(ngModel)]="single" (click)="single=true; multi=false; open=false; a.options=[]; select='SINGLE_OPTION'" class="col-12"
+      <button name="singleButton" [(ngModel)]="single" (click)="single=true; multi=false; open=false; a.options=[]; select='SINGLE_OPTION'" class="col-12"
         style="background-color: gray;" [ngClass]="{'bg-light':single}"
         [ngStyle]="{'border-right': single ? '0':'1px solid black'}">
         Resposta <br> única</button>
 
-      <button [(ngModel)]="open" (click)="open=true; multi=false; single=false; a.options=[]; select='OPEN'" class="col-12"
+      <button name="openButton" [(ngModel)]="open" (click)="open=true; multi=false; single=false; a.options=[]; select='OPEN'" class="col-12"
         style="border: unset; border-right: 1px solid; border-top: 1px solid black; border-radius: 0px 0px 0px 15px; background-color: gray;"
         [ngClass]="{'bg-light':open }" [ngStyle]="{'border-right': open ? '0':'1px solid black'}">Resposta <br>
         aberta</button>
@@ -79,14 +79,14 @@
     <div class="col-9" style="padding: 15px; background-color: transparent;">
       <div>
         <label>Questao:
-          <input [(ngModel)]="a.question" placeholder="Pergunta" />
+          <input name="question" [(ngModel)]="a.question" placeholder="Pergunta" />
         </label>
       </div>
       <div>
         <div *ngFor="let option of a.options; index as i">
           <div class="row">
-            <div *ngIf="!trueOrfalse[i]" [(ngModel)]="a.rightAnswer[i]" class="col-8">{{option}}</div>
-            <input [(ngModel)]="a.rightAnswer[i]" *ngIf="trueOrfalse[i]" type="text" class="col-8">
+            <div *ngIf="!trueOrfalse[i]" name="{{option}}" [(ngModel)]="a.rightAnswer[i]" class="col-8">{{option}}</div>
+            <input name="rightCheckBoxEdit" [(ngModel)]="a.rightAnswer[i]" *ngIf="trueOrfalse[i]" type="text" class="col-8">
             <fa-icon *ngIf="a.rightAnswer.includes[i]" class="col-1" style="color: green;" [icon]="faCheck"></fa-icon>
             <button class="btn btn-borderless col-1" (click)="a.options.splice(i,1); trueOrfalse.splice(i,1); a.rightAnswer.splice(i,1)" style=" color: red;">
               <fa-icon [icon]="faTrash"></fa-icon>
@@ -102,9 +102,9 @@
       </div>
       <div *ngIf="multi || single || quiz">
         <label>Resposta:
-          <input [(ngModel)]="option" type="text" placeholder="Opção">
+          <input name="optionText" [(ngModel)]="option" type="text" placeholder="Opção">
           <label>Reposta certa
-          <input [(ngModel)]="rightCheck" type="checkbox">
+          <input name="rightCheckBox" [(ngModel)]="rightCheck" type="checkbox">
           </label>
           <button (click)="addMoreOptions(rightCheck)">Adicionar</button><span [innerHTML]='customHtml' class="ml-2"></span>
         </label>
