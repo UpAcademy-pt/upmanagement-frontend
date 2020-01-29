@@ -18,7 +18,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 @NgModule({
   declarations: [
@@ -32,6 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ToAnswerComponent,
     PendingComponent,
     HistoryComponent,
+    JwPaginationComponent
   ],
   imports: [
     CommonModule,

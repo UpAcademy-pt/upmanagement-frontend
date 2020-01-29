@@ -1,21 +1,24 @@
-<table class="table table-striped container m-3 col-12 text-center">
-  <thead class="thead-dark">
-    <tr>
-      <th></th>
-      <th>Título</th>
-      <!-- <th scope="col-2">Data</th> -->
-      <!-- <th scope="col-1">Ordenar</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of history; let i= index; ">
-      <th>{{i+1}}</th>
-      <td>{{row.name}}</td>
-      <button *ngIf="showStatsBtn" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-        routerLink="/questionario/historico/estatisticas">Est</button>
-    </tr>
-  </tbody>
-</table>
+<div>
+  <table class="table table-striped container m-3 col-9 text-center">
+    <thead class="thead-dark">
+      <tr>
+        <th>Título</th>
+        <!-- <th scope="col-2">Data</th> -->
+        <!-- <th scope="col-1">Ordenar</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of pageOfItems; let i= index,let ola of counter">
+        <td>{{row.name}} <button id="btnStat" *ngIf="showStatsBtn" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}" routerLink="/questionario/historico/estatisticas">Est</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div align="center">
+  <jw-pagination [items]="history" (changePage)="onChangePage($event)"></jw-pagination>
+</div>
 
 <!--   <a routerLink= "/questionario/historico/estatisticas">Estatisticas do Formulario Especifico</a>
  -->
