@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -14,11 +15,13 @@ import { CollapseModule } from 'ngx-bootstrap';
     CommonModule,
     RouterModule,
     BsDropdownModule,
-    CollapseModule
+    CollapseModule,
+    FormsModule
   ],
   exports: [
     SideBarComponent,
-    RouterModule
+    RouterModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

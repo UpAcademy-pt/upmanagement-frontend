@@ -5,6 +5,7 @@ import { ForumComponent } from './forum/forum.component';
 import { LessonsComponent } from './lessons/lessons.component';
 import { NotesComponent } from './notes/notes.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { MaterialsComponent } from './materials/materials.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
         path: 'calendar',
         component: CalendarComponent,
       },
+      {
+        path: 'materiais',
+        component: MaterialsComponent
+      }
     ]
   },
   
