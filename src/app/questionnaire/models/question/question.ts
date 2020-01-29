@@ -2,7 +2,7 @@ export class Question {
     'id': number;
     'question': string;
     'aType': string;
-    'rightAnswer': number[] = []
+    'rightAnswer': string[] = []
     'options': string[];
     'questionnaireId': number;
 
