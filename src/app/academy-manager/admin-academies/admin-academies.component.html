@@ -19,10 +19,14 @@
         <button class="btn btn-success">Ver</button>
       </td>
       <td>
-        <button (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)" class="btn-borderless btn-edit">Editar</button>
+        <button (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)" class="btn-borderless btn-edit">
+          <fa-icon [icon]="faEdit"></fa-icon>
+        </button>
       </td>
       <td>
-        <button (click)="openModalConfirmDeleteAcademy(templateConfirmDeleteAcademy, i)" class="btn-borderless btn-delete">Apagar</button>
+        <button (click)="openModalConfirmDeleteAcademy(templateConfirmDeleteAcademy, i)" class="btn-borderless btn-delete">
+          <fa-icon [icon]="faTrashAlt"></fa-icon>
+        </button>
       </td>
     </tr>
   </tbody>

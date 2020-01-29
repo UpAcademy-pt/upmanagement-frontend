@@ -3,6 +3,7 @@ import { ReplaySubject } from 'rxjs';
 import { Academy } from '../shared/models/academy';
 import { AcademyService } from '../shared/services/academy.service';
 import { BsModalService, BsModalRef, BsDropdownConfig } from 'ngx-bootstrap';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-academies',
@@ -11,6 +12,9 @@ import { BsModalService, BsModalRef, BsDropdownConfig } from 'ngx-bootstrap';
   providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
 })
 export class AdminAcademiesComponent implements OnInit {
+
+  faEdit = faEdit;
+  faTrashAlt = faTrashAlt;
 
   modalRef: BsModalRef;
   public academies$: ReplaySubject<Academy[]> = new ReplaySubject(1);
