@@ -5,6 +5,8 @@ export class Question {
     'rightAnswer': number[] = []
     'options': string[];
     'questionnaireId': number;
+    'createDate': number;
+    'lastModifiedDate': number;
 
     constructor(data?: any) {
         Object.assign(this, data);

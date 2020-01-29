@@ -11,7 +11,9 @@ export class Questionnaire {
     'editPrivacy': string[];
     'viewPrivacy': string[];
     'score': number;
-
+    'createDate': number;
+    'lastModifiedDate': number;
+    
     constructor(data?: any) {
         Object.assign(this, data);
     }
