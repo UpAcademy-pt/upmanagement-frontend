@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MyDeclarationsComponent } from './my-declarations/my-declarations.compo
     ReactiveFormsModule,
     SharedModule,
     FormsModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ]
 })
 export class AcademyManagerModule { }
