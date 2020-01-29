@@ -42,10 +42,15 @@ export class HistoryComponent implements OnInit {
     });
   }
   public showStats() {
-    this.history.forEach(element => {
-      element.viewPrivacy.includes(this.getCurrentUser().role);
-    })
-    this.showStatsBtn = true;
+    // this.history.forEach(element => {
+    //   element.viewPrivacy.includes(this.getCurrentUser().role);
+    // })
+    // this.showStatsBtn = true;
+    for(let i= 0; i< this.history.length; i++) {
+      if(this.history[i].viewPrivacy.includes(this.getCurrentUser().role)){
+        this.showStatsBtn = true
+      }
+    }
   }
 
 
