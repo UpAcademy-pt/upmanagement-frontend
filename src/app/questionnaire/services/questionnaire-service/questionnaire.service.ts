@@ -27,6 +27,7 @@ export class QuestionnaireService {
   }
 
   public updateQuestionnaire(questionnaire: Questionnaire) {
+    console.log("Answers no Questionnaire Service" + JSON.stringify(questionnaire.answerList));
     return this.http.put(this.url, questionnaire, {responseType : 'text'});
   }
 

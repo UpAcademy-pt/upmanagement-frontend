@@ -20,8 +20,6 @@ export class ToAnswerComponent implements OnInit {
   private userName: string;
   faAngleDoubleDown = faAngleDoubleDown;
 
-  private numbers: number[];
-
   constructor(
     private router: Router,
     private questionnaireService: QuestionnaireService,
@@ -32,16 +30,13 @@ export class ToAnswerComponent implements OnInit {
       (currentQuestionnaire: Questionnaire) => {
         this.currentQuestionnaire = currentQuestionnaire;
         //this.currentQuestionnaire$.next(this.currentQuestionnaire);
-        console.log("Antes: " + JSON.stringify(this.currentQuestionnaire.answerList));
 
         for (let i = 0; i < this.currentQuestionnaire.questionList.length; i++) {
           let answer: Answer = new Answer({questionnaireId: this.currentQuestionnaire.id, answer: [], questionId: this.currentQuestionnaire.questionList[i].id});
           this.currentQuestionnaire.answerList.push(answer);
         }
 
-        console.log("Depois: " + JSON.stringify(this.currentQuestionnaire.answerList));
       });
-    this.numbers = [];
   }
 
   ngOnInit() { }
@@ -54,8 +49,11 @@ export class ToAnswerComponent implements OnInit {
           .filter(option => option != "false");
       }
     }
-    console.log("Questionário enviadas: " + JSON.stringify(this.currentQuestionnaire));
-    this.questionnaireService.updateQuestionnaire(this.currentQuestionnaire);
+    console.log("Respontas a enviar: " + JSON.stringify(this.currentQuestionnaire.answerList));
+    this.questionnaireService.updateQuestionnaire(this.currentQuestionnaire).subscribe(
+      (msg: string) => {
+        console.log(msg);
+      });
     
     for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
       this.currentQuestionnaire.answerList[i].answer = [];
