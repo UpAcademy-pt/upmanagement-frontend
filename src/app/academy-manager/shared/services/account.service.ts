@@ -47,7 +47,7 @@ export class AccountService {
  */
 
   public create(account: Account) {
-    return this.http.post(this.url, account, {responseType: 'text'});
+    return this.http.post(this.url, account);
   }
 
   public getById(id: number) {
@@ -55,7 +55,7 @@ export class AccountService {
   }
 
   public update(account: Account) {
-    return this.http.put(this.url, account, {responseType: 'text'});
+    return this.http.put(this.url, account);
   }
 
   public delete(id: number) {

@@ -1,4 +1,5 @@
 export class Missed {
+    'id': number;
     'accountId': number;
     'data': string;
     'justified': boolean;
