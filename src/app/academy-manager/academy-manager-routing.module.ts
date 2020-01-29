@@ -7,6 +7,7 @@ import { AdminTeachersComponent } from './admin-teachers/admin-teachers.componen
 import { AdminGuard } from '../core/guards/admin.guard';
 import { MyAcademiesComponent } from './my-academies/my-academies.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
 
 
@@ -37,6 +38,14 @@ const routes: Routes = [
       {
         path: 'my-profile',
         component: MyProfileComponent
+      },
+      {
+        path: 'my-profile',
+        component: MyProfileComponent
+      },
+      {
+        path: 'profile/:userId',
+        component: AccountProfileComponent
       },
       {
         path: 'my-declarations',

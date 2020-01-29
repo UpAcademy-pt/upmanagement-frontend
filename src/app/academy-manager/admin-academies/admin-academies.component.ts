@@ -3,6 +3,8 @@ import { ReplaySubject } from 'rxjs';
 import { Academy } from '../shared/models/academy';
 import { AcademyService } from '../shared/services/academy.service';
 import { BsModalService, BsModalRef, BsDropdownConfig } from 'ngx-bootstrap';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-academies',
@@ -12,11 +14,23 @@ import { BsModalService, BsModalRef, BsDropdownConfig } from 'ngx-bootstrap';
 })
 export class AdminAcademiesComponent implements OnInit {
 
+  currentDate = new Date();
+
+  datesForm = new FormGroup({
+    dateRange: new FormControl([
+      new Date(),
+      new Date(this.currentDate.setDate(this.currentDate.getDate() + 7))
+    ])
+  });
+
+  faEdit = faEdit;
+  faTrashAlt = faTrashAlt;
+
   modalRef: BsModalRef;
   public academies$: ReplaySubject<Academy[]> = new ReplaySubject(1);
   public edNameField: string;
-  public startDateField: string;
-  public endDateField: string;
+  public dates: string;
+  public datesArray: string[];
   public clientField: string;
   public modulesField: string[];
   public studentsField: string[];
@@ -25,6 +39,8 @@ export class AdminAcademiesComponent implements OnInit {
   public academyTypeField: string;
   public academies: Academy[];
   public academyToCreate: Academy = new Academy();
+  public academyToUpdate: Academy = new Academy();
+  public academyToDeleteRow: number;
   public showTable = false;
 
   constructor(
@@ -49,16 +65,62 @@ export class AdminAcademiesComponent implements OnInit {
   }
 
   public createAcademy() {
+    this.getDates(this.academyToCreate);
     this.academyService.createAcademy(this.academyToCreate).subscribe(
       (msg: string) => {
         this.getAllAcademies();
       }
     );
+    console.log(this.academyToCreate);
     this.modalRef.hide();
     this.academyToCreate = new Academy();
   }
 
+  public updateAcademy() {
+    this.academyService.updateAcademy(this.academyToUpdate).subscribe(
+      (msg: string) => {
+        this.getAllAcademies();
+        console.log(msg);
+      }, (error: string) => {
+        console.log(error);
+      });
+    this.modalRef.hide();
+  }
+
+  public deleteAcademy() {
+    this.academyService.deleteAcademy(this.academies[this.academyToDeleteRow].id).subscribe(
+      (msg: string) => {
+        this.academies.splice(this.academyToDeleteRow, 1);
+        if (this.academies.length <= 0) {
+          this.showTable = false;
+        }
+      }, (error: string) => {
+        console.log(error);
+      });
+    this.modalRef.hide();
+  }
+
   openModalAddAcademy(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  openModalUpdateAcademy(template: TemplateRef<any>, academyToUpdate: Academy) {
+    this.academyToUpdate = academyToUpdate;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openModalConfirmDeleteAcademy(template: TemplateRef<any>, rowIndex: number) {
+    this.academyToDeleteRow = rowIndex;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  public getDates(academy) {
+    this.dates = (<HTMLInputElement>document.getElementById("datesArray")).value;
+    console.log(this.dates);
+    this.datesArray = this.dates.split(' - ');
+    academy.startDate = this.datesArray[0];
+    academy.endDate = this.datesArray[1];
+    console.log(academy.startDate);
+    console.log(academy.endDate);
   }
 }
