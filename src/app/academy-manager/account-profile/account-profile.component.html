@@ -1,6 +1,6 @@
 <div *ngIf="user$ | async as user">
     <div *ngIf="account$ | async as account">
-        <form #updateAccountForm="ngForm" (ngSubmit)="updateAccount()">
+        <form class="ml-4" #updateAccountForm="ngForm" (ngSubmit)="updateAccount()">
             <div class="py-2">
                 <button class="btn btn-primary float-right" *ngIf="inUpdate===false"
                     (click)="toggleUpdateAccount()">Editar</button>
@@ -13,12 +13,12 @@
             <div class="row text-center  ">
                 <div class="col-md-4 mt-3 text-center ">
                     <img class="rounded-circle center-block" style="width: auto; max-height: 200px;" alt="100x100"
-                        src="https://vignette.wikia.nocookie.net/aleixo/images/7/75/Renato_disco.jpg/revision/latest?cb=20121207145720"
+                        [src]="account.photoLink === null ? 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png' : account.photoLink"
                         data-holder-rendered="true">
-
-                    <!-- <button type="button" class="btn btn-success" >EDITA_ME</button>
-                <div *ngIf="inUpdate===true"><button type="button" class="btn btn-danger" >SAVE</button></div> -->
-
+                    <div *ngIf="inUpdate" class="text-left">
+                        <label style="font-weight: bolder;">Mudar Foto:<input #photoLinkField="ngModel" [(ngModel)]="account.photoLink" 
+                            name="photoLink" id="photoLink" type="text" class="form-control" [placeholder]="account.photoLink === null ? '' : account.photoLink"></label>
+                        </div>
                 </div>
 
                 <div class="col-md-7 text-left my-3 ml-3">
@@ -121,9 +121,6 @@
                         <div class="mt-3" *ngIf="misses$ | async as misses">
 
                             <div style="font-weight: bolder; font-style: italic; font-size: large;">Faltas:</div>
-
-
-                            <!--  falta pôr campo para adicionar faltas -->
                             
                                 <div *ngIf="misses?.length === 0">
                                     <p><i>Sem faltas</i></p>
