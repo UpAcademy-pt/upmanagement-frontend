@@ -9,6 +9,8 @@ import { MyAcademiesComponent } from './my-academies/my-academies.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
+import { AcademyViewComponent } from './academy-view/academy-view.component';
+import { TeacherAcademyComponent } from './teacher-academy/teacher-academy.component';
 
 
 const routes: Routes = [
@@ -50,6 +52,14 @@ const routes: Routes = [
       {
         path: 'my-declarations',
         component: MyDeclarationsComponent
+      },
+      {
+        path: 'academy/:academyId',
+        component: AcademyViewComponent
+      },
+      {
+        path: 'academy-teacher/:academyId',
+        component: TeacherAcademyComponent
       }
     ]
   }

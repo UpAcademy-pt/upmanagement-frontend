@@ -1,22 +1,36 @@
-<!-- <p>admin-students works!</p> -->
-
-  <div class="ml-4">
+  
 
   <h3 class="ml-3 mt-4">Formandos</h3>  
+
+  <!-- Filter Fields -->
+
+  <div class="row ml-4">
+    <div class= col-6>
+      <input name="nameFilter" #nameFilter type="text" class="form-control" placeholder="Nome" (input) = "filterTable(nameFilter.value, academyFilter.value)">
+    </div>
+    <ngx-select [items]="allAcademiesNames" name="academyFilter" #academyFilter defaultValue="allAcademiesNames[0].id" class=col-6 placeholder="Todas as Academias" (change) = "filterTable(nameFilter.value, academyFilter.value)">
+    </ngx-select>
+  </div>
+  
   <!-- Table -->  
+  <div class="ml-4">
   <table class="table table-sm table-striped container m-3 col-12 text-center" style="width: 1300px;">
     <thead class="thead-dark">
     <tr>
       <th></th>
-      <th>Nome</th>
+      <th (click) = "sortTable()">Nome <fa-icon [icon]="faSort"></fa-icon></th>
+      <th>Academias</th>
       <th>Perfil</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor = "let student of studentUserAccounts$ | async; let i = index;" id="{{i}}">
       <td class="text-center"><img alt="" class="rounded-circle" 
-        src="https://vignette.wikia.nocookie.net/aleixo/images/7/75/Renato_disco.jpg/revision/latest?cb=20121207145720" width="40"></td>
-      <td >{{student.studentUser.name}}</td>
+        [src]="student.studentAccount.photoLink === null ? 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png' : student.studentAccount.photoLink" width="40"></td>
+      <td>{{student.studentUser.name}}</td>
+      <td>
+        <div *ngFor="let academy of student.academyNames"><p>{{academy}}</p></div>
+      </td>
       <td>
         <button (click)="showProfile(student.studentUser.id)" class="btn btn-success">Ver</button> 
       </td>

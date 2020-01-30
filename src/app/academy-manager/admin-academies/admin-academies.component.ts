@@ -55,13 +55,13 @@ export class AdminAcademiesComponent implements OnInit {
 
   public getAllAcademies() {
     this.academyService.getAllAcademies()
-    .subscribe((academies: Academy[]) => {
-      this.academies = academies;
-      this.academies$.next(academies);
-      if (this.academies.length > 0) {
-        this.showTable = true;
-      }
-    });
+      .subscribe((academies: Academy[]) => {
+        this.academies = academies;
+        this.academies$.next(academies);
+        if (this.academies.length > 0) {
+          this.showTable = true;
+        }
+      });
   }
 
   public createAcademy() {
@@ -77,6 +77,7 @@ export class AdminAcademiesComponent implements OnInit {
   }
 
   public updateAcademy() {
+    this.getDates(this.academyToUpdate);
     this.academyService.updateAcademy(this.academyToUpdate).subscribe(
       (msg: string) => {
         this.getAllAcademies();
@@ -84,6 +85,7 @@ export class AdminAcademiesComponent implements OnInit {
       }, (error: string) => {
         console.log(error);
       });
+    console.log(this.academyToUpdate);
     this.modalRef.hide();
   }
 
@@ -116,11 +118,8 @@ export class AdminAcademiesComponent implements OnInit {
 
   public getDates(academy) {
     this.dates = (<HTMLInputElement>document.getElementById("datesArray")).value;
-    console.log(this.dates);
     this.datesArray = this.dates.split(' - ');
     academy.startDate = this.datesArray[0];
     academy.endDate = this.datesArray[1];
-    console.log(academy.startDate);
-    console.log(academy.endDate);
   }
 }
