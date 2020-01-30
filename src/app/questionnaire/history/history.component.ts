@@ -14,7 +14,7 @@ import { element } from 'protractor';
 })
 export class HistoryComponent implements OnInit {
 
-  private account: Account = new Account();
+  private account: Account;
   private history: Questionnaire[];
   public pageOfItems: Array<any>;
   // Lembrar OnDestroy()
@@ -23,8 +23,11 @@ export class HistoryComponent implements OnInit {
 
   constructor(
     private questService: QuestionnaireService,
-    private userService: UserServiceService
-  ) { }
+    private userService: UserServiceService,
+    private accountService: AccountService
+  ) { 
+    this.account = accountService.getCurrentAccount();
+  }
 
   ngOnInit(
 
@@ -36,7 +39,7 @@ export class HistoryComponent implements OnInit {
   }
 
   public getQuestionnaires() {
-    this.questService.getAnsweredQuestionnaireByAccountId(this.account.idTeste).subscribe((history: Questionnaire[]) => {
+    this.questService.getAnsweredQuestionnaireByAccountId(this.account.id).subscribe((history: Questionnaire[]) => {
       this.history = history; console.log(history);
       this.showStats();
     });
