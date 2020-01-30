@@ -32,7 +32,7 @@ export class NewQuestionnaireComponent implements OnInit {
  private academies: any = [1, 2, 3, 4, 5];
  private traineesId: any = [{ 'id': "1", 'text': "Zé Carlos" }, { 'id': "2", 'text': "Carlota" }, { 'id': "3", 'text': "Zé das Couves" },{ 'id': "4", 'text': "Margarette" }, { 'id': "5", 'text': "Todos" }];
  private trainees: any[] = [];
- private option: string;
+ private option: string = "";
  private customHtml: string
  private trueOrfalse: boolean[] = [];
  private editOp: boolean[] = [];
@@ -41,22 +41,19 @@ export class NewQuestionnaireComponent implements OnInit {
  faCheck = faCheck;
  faEdit = faEdit;
  faSave = faSave;
+ private rightCheck = false
+ private teste = false
 
   public addQuestion(question: Question, type: string) {
-    console.log('data');
     console.log(question);
-    console.log(this.b);
-    console.log(this.trainees);
-    // this.trueOrfalse.forEach( (element, index) => {
-    //   if (element){this.a.rightAnswer.push(index)}}); //ver se dá para fazer directamente no ngmodel
+    
+    //Add the rightAnswer to the question
+    this.a.rightAnswer = this.a.rightAnswer.map((option, index) => option == "true" ? String(index) : "false")
+    .filter(option => option != "false");
+    console.log(this.a.rightAnswer)
 
     //Add the type of the question
-    if (type == undefined){
-      this.a.aType = "MULTIPLE";
-    } else {
       this.a.aType=type;
-    }
-    
 
     //Add questions to the questionnaire questionList
     if (this.b.questionList != undefined) {
@@ -70,18 +67,14 @@ export class NewQuestionnaireComponent implements OnInit {
 
   public addMoreOptions(rightCheck: boolean){
     console.log(this.option)
-    if(this.option != undefined && this.option != ""){
-      if(this.a.options != undefined) {
+    console.log(rightCheck);
+    if(this.option != ""){
       this.a.options.push(this.option);
-      this.customHtml = ""
-      } else {
-      this.a.options = [this.option];
-      this.customHtml = ""
-      } 
+      this.a.rightAnswer.push(String(rightCheck));
+      this.customHtml = "";
     } else {
     this.customHtml = "Necessário escrever opção";
   }
-    //this.a.rightAnswer.push(rightCheck);
     
     this.option = "";
   
@@ -129,8 +122,10 @@ export class NewQuestionnaireComponent implements OnInit {
     this.b = new Questionnaire(); //ver se existe uma forma melhor
   }
 
-  public viewStuff(){
-    console.log(this.trainees);
+  public viewStuff(thing){
+    console.log(this.a.rightAnswer);
+    console.log(this.a.options);
+    console.log(thing);
   }
 
 
