@@ -1,39 +1,42 @@
 <div class="ml-4">
 
   <div class="float-left mb-4 ml-3">
-    <button type="button" class="btn btn-primary btn-md mt-4 float-left" (click)="openModalAddAcademy(templateAddAcademy)">Nova
+    <button type="button" class="btn btn-primary btn-md mt-4 float-left"
+      (click)="openModalAddAcademy(templateAddAcademy)">Nova
       Academia</button>
   </div>
 
-<table class="table table-sm table-striped container m-3 ml-3 col-12 text-center" style="width: 1100px;">
-  <thead class="thead-dark">
-    <tr>
-      <th>Nome</th>
-      <th>Ver</th>
-      <th>Editar</th>
-      <th>Eliminar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let academy of academies$ | async; let i = index;" id="{{i}}">
-      <td>{{academy.edName}}</td>
-      <td>
-        <button class="btn btn-success">Ver</button>
-      </td>
-      <td>
-        <button (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)" class="btn-borderless btn-edit">
-          <fa-icon [icon]="faEdit"></fa-icon>
-        </button>
-      </td>
-      <td>
-        <button (click)="openModalConfirmDeleteAcademy(templateConfirmDeleteAcademy, i)" class="btn-borderless btn-delete">
-          <fa-icon [icon]="faTrashAlt"></fa-icon>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+  <table class="table table-sm table-striped container m-3 ml-3 col-12 text-center" style="width: 1100px;">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Ver</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let academy of academies$ | async; let i = index;" id="{{i}}">
+        <td>{{academy.edName}}</td>
+        <td>
+          <button (click)="openAcademyById(academy.id)" class="btn btn-success">Ver</button>
+        </td>
+        <td>
+          <button (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)" class="btn-borderless btn-edit">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+        </td>
+        <td>
+          <button (click)="openModalConfirmDeleteAcademy(templateConfirmDeleteAcademy, i)"
+            class="btn-borderless btn-delete">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
 <!-- Modal Add Academy -->
 <ng-template #templateAddAcademy>
   <div class="modal-header">
@@ -67,19 +70,14 @@
       <div class="form-group row">
         <label for="dates" class="col-sm-2 col-form-label">Data:</label>
         <div [formGroup]="datesForm" class="col-sm-7">
-          <input type="text"
-            id="datesArray"
-            class="form-control"
-            formControlName="dateRange"
-            #daterangepicker="bsDaterangepicker"
-            bsDaterangepicker
-            [bsConfig]="{ rangeInputFormat : 'YYYY-MM-DD', dateInputFormat: 'YYYY-MM-DD' }"
-            (change)="getDates()"
-            placement="bottom"
-            required>
+          <input type="text" id="datesArray" class="form-control" formControlName="dateRange"
+            #daterangepicker="bsDaterangepicker" bsDaterangepicker
+            [bsConfig]="{ rangeInputFormat : 'YYYY-MM-DD', dateInputFormat: 'YYYY-MM-DD' }" (change)="getDates()"
+            placement="bottom" required>
         </div>
         <div class="col-sm-1 form-group">
-          <button class="btn-sm btn-success" (click)="daterangepicker.toggle()" [attr.aria-expanded]="daterangepicker.isOpen" type="button">Selecionar Datas</button>
+          <button class="btn-sm btn-success" (click)="daterangepicker.toggle()"
+            [attr.aria-expanded]="daterangepicker.isOpen" type="button">Selecionar Datas</button>
         </div>
       </div>
 
@@ -122,7 +120,7 @@
             type="text" class="form-control" placeholder="Digite aqui informação útil">
         </div>
       </div>
-      
+
       <div class="row">
         <button type="submit" [disabled]="!addAcademyForm.valid" class="btn btn-primary mx-auto">Criar</button>
       </div>
@@ -159,19 +157,14 @@
       <div class="form-group row">
         <label for="dates" class="col-sm-2 col-form-label">Data:</label>
         <div [formGroup]="datesForm" class="col-sm-7">
-          <input type="text"
-            id="datesArray"
-            class="form-control"
-            formControlName="dateRange"
-            #daterangepicker="bsDaterangepicker"
-            bsDaterangepicker
-            [bsConfig]="{ rangeInputFormat : 'YYYY-MM-DD', dateInputFormat: 'YYYY-MM-DD' }"
-            (change)="getDates()"
-            placement="bottom"
-            required>
+          <input type="text" id="datesArray" class="form-control" formControlName="dateRange"
+            #daterangepicker="bsDaterangepicker" bsDaterangepicker
+            [bsConfig]="{ rangeInputFormat : 'YYYY-MM-DD', dateInputFormat: 'YYYY-MM-DD' }" (change)="getDates()"
+            placement="bottom" required>
         </div>
         <div class="col-sm-1 form-group">
-          <button class="btn-sm btn-success" (click)="daterangepicker.toggle()" [attr.aria-expanded]="daterangepicker.isOpen" type="button">Selecionar Datas</button>
+          <button class="btn-sm btn-success" (click)="daterangepicker.toggle()"
+            [attr.aria-expanded]="daterangepicker.isOpen" type="button">Selecionar Datas</button>
         </div>
       </div>
 

@@ -5,6 +5,7 @@ import { AcademyService } from '../shared/services/academy.service';
 import { BsModalService, BsModalRef, BsDropdownConfig } from 'ngx-bootstrap';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-academies',
@@ -44,6 +45,7 @@ export class AdminAcademiesComponent implements OnInit {
   public showTable = false;
 
   constructor(
+    private router: Router,
     private academyService: AcademyService,
     private modalService: BsModalService
   ) {
@@ -116,10 +118,14 @@ export class AdminAcademiesComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  public getDates(academy) {
-    this.dates = (<HTMLInputElement>document.getElementById("datesArray")).value;
+  public getDates(academy: Academy) {
+    this.dates = ( document.getElementById('datesArray') as HTMLInputElement).value;
     this.datesArray = this.dates.split(' - ');
     academy.startDate = this.datesArray[0];
     academy.endDate = this.datesArray[1];
+  }
+
+  public openAcademyById(id: number) {
+    this.router.navigate(['academy-manager/modules/' + id]);
   }
 }

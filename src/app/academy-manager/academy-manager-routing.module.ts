@@ -10,6 +10,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
 import { AcademyViewComponent } from './academy-view/academy-view.component';
+import { ModulesComponent } from './modules/modules.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,10 @@ const routes: Routes = [
       {
         path: 'academy/:academyId',
         component: AcademyViewComponent
+      },
+      {
+        path: 'module/:moduleId',
+        component: ModulesComponent
       }
     ]
   }
