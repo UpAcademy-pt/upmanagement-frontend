@@ -10,6 +10,7 @@ import { PendingComponent } from './pending/pending.component';
 import { HistoryComponent } from './history/history.component';
 import { AdminGuard } from '../core/guards/admin.guard';
 import { ToAnswerComponent } from './to-answer/to-answer.component';
+import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'historico',
-        component: HistoryComponent
+        component: HistoryComponent,
       },
       {
         path: 'template',
@@ -41,9 +42,13 @@ const routes: Routes = [
         path: 'pendentes/responder',
         component: ToAnswerComponent
       },
+      // {
+      //   path: 'historico/estatisticas', // colocar titulo do formulario depois 
+      //   component: StatisticsComponent
+      // },
       {
-        path: 'historico/estatisticas', // colocar titulo do formulario depois 
-        component: StatisticsComponent
+        path: 'historico/ver' ,
+        component: ViewComponent
       }
     ]
   } 

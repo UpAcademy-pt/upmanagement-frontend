@@ -8,9 +8,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of pageOfItems; let i= index,let ola of counter">
-        <td>{{row.name}} <button id="btnStat" *ngIf="showStatsBtn" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}" routerLink="/questionario/historico/estatisticas">Est</button>
+      <tr *ngFor="let row of pageOfItems; let i= index">
+        <td>{{row.name}} <button id="btnStat" *ngIf="showViewBtn[i]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}" routerLink="/questionario/historico/ver" (click)="viewThisQuestionnaire(row.id)">Est</button>
         </td>
       </tr>
     </tbody>
