@@ -19,8 +19,8 @@ $black: #343a40;
   position: fixed;
    background-color: $black;
    background: linear-gradient(180deg, #343a40 15%, $black 100%);
-   height: 100vh;
-   min-width: 218px;
+   height: 86vh;
+   min-width: 100px;
    .header{
      text-align: center;
      img{
@@ -31,6 +31,9 @@ $black: #343a40;
        display: none;
      }
    }
+  //  #bottom {
+  //    margin-top: 39vh;
+  //  }
   }
    .divider{
      display: block;
@@ -126,18 +129,20 @@ $black: #343a40;
   }
 
   #navbardrop {
-    background-color: $black;
+    background-color: #494c50;
+    margin-left: 20px;
   }
 
   .expandBtn{
+   margin-top: 360px;
     color: #e07e37;
     font-size: 24px;
     text-align: center;
-    position: fixed;
+    position: relative;
     bottom: 6px;
     width: 218px;
     cursor: pointer;
-      padding:60px;
+      padding:6px;
       opacity: 0.8;
       &:hover{
         opacity: 1;
@@ -168,14 +173,20 @@ $black: #343a40;
       }
       .expandBtn{
         margin-right: 24px;
+        margin-left: 10px;
         width:64px;
         font-size: 16px;
-        padding:50px;
+        padding:40px;
+       
       }
       .divider{
         width: auto;
         display: block;
       }
+
+      // #bottom{
+      //    padding-top: 31px;
+      // }
       .userPicture{
         margin-left: 24px;
         transform: scale(0.8, 0.8);
@@ -203,6 +214,22 @@ $black: #343a40;
         left: 0;
       }
   }
+
+  .pushStatsDown{
+    margin-top: 100px;
+    div.expandBtn {
+      margin-block-end: auto;
+      
+    }
+  }
+
+  div span.only-show-on-hover {
+    visibility: hidden;
+  }
+  div:hover span.only-show-on-hover  {
+    visibility: visible;
+  }
+  
 
  
 
