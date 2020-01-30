@@ -19,6 +19,11 @@
             <button routerLink = "my-declarations" class="btn btn-link btn-md mx-1 my-2" 
             style="color: white;">Declarações<br>Recebimento</button>
         </li>
+
+        <li *ngIf="isTeacher===true">
+            <button routerLink = "academy-teacher/1" class="btn btn-link btn-md mx-1 my-2" style="color: white;">Academias do formador</button>
+        </li>
+
     </ul>
 
 </div>
