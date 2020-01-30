@@ -6,7 +6,6 @@
 
     <div>
         <accordion [isAnimated]="true">
-            <!-- <accordion-group *ngFor="let question of (currentQuestionnaire$.questionList | async); let i = index;" class="mb-4"></accordion-group> -->
             <accordion-group *ngFor="let question of currentQuestionnaire?.questionList; let i = index;" class="mb-4">
                 <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
                     <div class="pull-left float-left">Questão {{i + 1}}</div>
