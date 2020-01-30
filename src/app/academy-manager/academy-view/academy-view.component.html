@@ -1,1 +1,23 @@
-<p>academy-view works!</p>
+<div class="ml-4" *ngIf="academy$ | async as academy">
+    <form>
+    <div class="py-2">
+        <div class="custom-control custom-switch">
+            <label class="custom-control-label" for="statusSwitch">Activa
+                <input type="checkbox" class="custom-control-input" id="statusSwitch">Inactiva</label>
+          </div>
+    <button class="btn btn-primary float-right" *ngIf="inUpdate===false"
+                    (click)="toggleUpdateAcademy()">Editar</button>
+                <button *ngIf="inUpdate===true" type="submit"
+                    class="btn btn-primary float-right mx-2">Atualizar</button>
+                <button class="btn btn-danger float-right mx-2" *ngIf="inUpdate===true"
+                    (click)="openModal(templateConfirmDeleteAcademy)">Remover Academia</button>
+<h3>{{academy.edName}}</h3>
+</div>
+
+<div class="row">
+    <div class="col-4">
+
+    </div>
+</div>
+</form>
+</div>

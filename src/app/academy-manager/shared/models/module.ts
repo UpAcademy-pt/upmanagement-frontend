@@ -1,5 +1,6 @@
 export class Module {
 
+'id': number;
 'evaluationIds': number[];
 'themesIds': number[];
 'name': string;

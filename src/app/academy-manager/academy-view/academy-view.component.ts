@@ -13,6 +13,7 @@ export class AcademyViewComponent implements OnInit {
 
   private academy: Academy;
   public academy$: ReplaySubject<Academy> = new ReplaySubject(1);
+  public inUpdate = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,5 +30,9 @@ export class AcademyViewComponent implements OnInit {
 
   ngOnInit() {
   }
+
+   public toggleUpdateAcademy() {
+     this.inUpdate = true;
+   }
 
 }
