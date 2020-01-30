@@ -59,7 +59,7 @@
 
   <p>----------------Criador de Questões----------------</p>
 
-  <div class="row bg-light" style="border: 1px solid black; border-radius: 15px;">
+  <div class="row bg-light" style="border: 1px solid black; border-radius: 15px;" >
     <div *ngIf="!quiz" class="row col-3" style="border-radius: 15px;">
       <button  [(ngModel)]="multi" (click)="multi=true; single=false; open=false; a.options=[]; select='MULTIPLE'" class="col-12"
         style="border: unset; border-bottom: 1px solid black; border-radius: 15px 0px 0px 0px; background-color: gray;"
@@ -78,24 +78,18 @@
     </div>
     <div class="col-9" style="padding: 15px; background-color: transparent;">
       <div>
-        <label>Questao:
-          <input name="question" [(ngModel)]="a.question" placeholder="Pergunta" />
-        </label>
+        <textarea style="width: 80%;" name="question" [(ngModel)]="a.question" placeholder="Pergunta"></textarea>
       </div>
       <div>
-        <div *ngFor="let option of a.options; index as i">
+        <div *ngFor="let option of a.options; index as i; let toggle = false">
           <div class="form-row">
-            <!-- <p>{{option}}<br></p>
-            <input type="text" [(ngModel)]="option" name="edit{{in}}" [ngModelOptions]="{updateOn: 'blur'}">
-            <button (click)="viewStuff(option)"></button> -->
-            <div *ngIf="!trueOrfalse[i]" class="col-8">{{option}}</div>
-            <div *ngIf="trueOrfalse[i]" class="col-1"></div>
-            <input style="height: 25px;" [(ngModel)]="option"  name="rightCheckBoxEdit" *ngIf="trueOrfalse[i]" type="text" class="col-7">
-            <fa-icon *ngIf="a.rightAnswer[i]=='true'" class="col-1" style="color: green;" [icon]="faCheck" (click)="trueOrfalse[i]?a.rightAnswer[i]='false':a.rightAnswer[i]='true'"></fa-icon>
-            <fa-icon *ngIf="a.rightAnswer[i]=='false' && trueOrfalse[i]" class="col-1" style="color: black;" [icon]="faCheck" (click)="a.rightAnswer[i]='true'"></fa-icon>
-            <div *ngIf="a.rightAnswer[i]=='false' && !trueOrfalse[i]" class="col-1"></div>
-            <fa-icon *ngIf="!trueOrfalse[i]" style="color: blue;" [icon]="faEdit" class="col-1" (click)="trueOrfalse[i]=!trueOrfalse[i]; a.options[i]=option "></fa-icon>
-            <fa-icon *ngIf="trueOrfalse[i]" style="color: darkcyan;" [icon]="faSave" class="col-1" (click)="trueOrfalse[i]=!trueOrfalse[i]; a.options[i]=option"></fa-icon>
+            <div *ngIf="!toggle" class="col-8">{{option}}</div>
+            <div *ngIf="toggle" class="col-1"></div>
+            <input style="height: 25px;" [(ngModel)]="option"  name="rightCheckBoxEdit" *ngIf="toggle" type="text" class="col-7">
+            <fa-icon *ngIf="a.rightAnswer[i]=='true'" class="col-1" style="color: green;" [icon]="faCheck" (click)="toggle?a.rightAnswer[i]='false':a.rightAnswer[i]='true'"></fa-icon>
+            <fa-icon *ngIf="a.rightAnswer[i]=='false' && toggle" class="col-1" style="color: black;" [icon]="faCheck" (click)="a.rightAnswer[i]='true'"></fa-icon>
+            <div *ngIf="a.rightAnswer[i]=='false' && !toggle" class="col-1"></div>
+            <fa-icon [ngStyle]="{'color': toggle ? 'darkcyan':'blue'}" [icon]="toggle?faSave:faEdit" class="col-1" (click)="toggle=!toggle; a.options[i]=option "></fa-icon>
             <fa-icon [icon]="faTrash" (click)="a.options.splice(i,1); trueOrfalse.splice(i,1); a.rightAnswer.splice(i,1)" style=" color: red;" class="col-1"></fa-icon>
           </div>
         </div>
@@ -109,22 +103,6 @@
           <button (click)="addMoreOptions(rightCheck); rightCheck=false">Adicionar</button><span [innerHTML]='customHtml' class="ml-2"></span>
         </label>
       </div>
-
-      <!-- <div class="row">
-        <label>Respostas:
-          <div *ngFor="let option of a.options">
-            <p>{{option}}</p>
-          </div>
-      </label> -->
-      <!-- <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> -->
-      <!-- <input [(ngModel)]="option" type="text" placeholder="Opção">
-      <button (click)="addMoreOptions(option)">Adicionar</button> -->
-      <!-- ao contrario da questao, aqui tive de colocar option e nao a.options porque
-                se nao o ngfor a cada letra tentava actualizar 
-                No entanto nao dá para limpar da mesma forma-->
-
-      <!-- </div> -->
-
     </div>
   </div>
 
@@ -133,71 +111,27 @@
     Adicionar Pergunta
   </button>
 
-  <!-- <div> -->
-  <!-- <div>
-      <label>Questao:
-        <input [(ngModel)]="a.question" placeholder="Pergunta" />
-      </label>
-    </div> -->
-
-  <!-- <div class="row">
-      <label>Respostas:</label>
-      <div class="form-check">
-        <div *ngFor="let option of a.options">
-          <p>{{option}}</p>
-        </div>
-      </div> -->
-  <!-- <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> -->
-  <!-- <input [(ngModel)]="option" type="text" placeholder="Opção">
-      <button (click)="addMoreOptions(option)">Add</button> -->
-  <!-- ao contrario da questao, aqui tive de colocar option e nao a.options porque
-            se nao o ngfor a cada letra tentava actualizar 
-            No entanto nao dá para limpar da mesma forma-->
-
-  <!-- </div> -->
-  <!-- <div> 
-        <label>Opções: 
-            <input [(ngModel)]="a.options"/>
-        </label>
-    </div> -->
-
-  <!-- <div class="form-check" >
-            <input ng-model="myVar" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <input type="text" placeholder="Opção1">
-        </div> -->
-
-
-  <!-- </div> -->
-
   <p>----------------Display de Questões----------------</p>
 
-  <!-- <div *ngFor="let question of b.questionList">
-    <p>{{question.question}}</p>
-    <div class="row">
-      <div *ngFor="let option of question.options">
-        <div class="form-check">
-          <label class="form-check-label">{{option}}
-            <input class="form-check-input" type="radio">
-          </label>
-        </div>
-      </div>
-    </div> -->
-    <!-- <p>{{question.options}}</p> -->
-  <!-- </div>
-</div> -->
 
 <accordion [isAnimated]="true">
-  <accordion-group *ngFor="let question of b.questionList; let i = index;" class="mb-4">
-    <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
+  <accordion-group *ngFor="let question of b.questionList; let i = index; let toggle = true; let editToggle = false" class="mb-4">
+    <button class="btn btn-link btn-block clearfix" accordion-heading type="button" (click)="toggle=!toggle">
       <div class="pull-left float-left">Questão {{i + 1}}</div>
       <span class="badge badge-secondary float-right pull-right btn-borderless btn-down">
-        <fa-icon size="2x" [icon]="faAngleDoubleDown"></fa-icon>
+        <fa-icon size="2x" [icon]="toggle?faAngleDoubleUp:faAngleDoubleDown"></fa-icon>
       </span>
     </button>
     <p>{{question.question}}</p>
     <div *ngFor="let option of question.options; let j = index;" class="form-check">
-      <input class="form-check-input" type="radio" id="checkbox{{i}}.{{j}}" name="{{i}}">
-      <label class="form-check-label" for="checkbox{{i}}.{{j}}">{{option}}</label>
+      <input [checked]="checkRightAnswer(i, j)" class="form-check-input" type="radio" id="checkbox{{i}}.{{j}}" name="{{i}}">
+      <label *ngIf="!editToggle" class="form-check-label" for="checkbox{{i}}.{{j}}">{{option}}</label>
+      <input *ngIf="editToggle" [(ngModel)]="option" style="height: 20px;" type="text">
+      <button (click)="checkRightAnswer(i, j)"></button>
+    </div>
+    <div>
+        <fa-icon [ngStyle]="{'color': editToggle ? 'darkcyan':'blue'}" [icon]="editToggle?faSave:faEdit" class="col-1" (click)="editToggle=!editToggle" ></fa-icon>
+        <fa-icon [icon]="faTrash" (click)="b.questionList.splice(i,1); colapse.splice(i,1)" style=" color: red;" class="col-1"></fa-icon>
     </div>
   </accordion-group>
 </accordion>
@@ -207,11 +141,3 @@
 
 
 
-
-<!-- Div para o editar para escolher as opçoes correctas
-<div>
-  <div *ngFor="let option of a.options; index as i" class="form-check-inline" >
-      <input [(ngModel)]="trueOrfalse[i] ? " *ngIf="option!=''" type="text">{{option}}
-      <button *ngIf="option!=''" class="btn btn-danger" (click)="option=''">X</button>
-  </div>
-</div> -->

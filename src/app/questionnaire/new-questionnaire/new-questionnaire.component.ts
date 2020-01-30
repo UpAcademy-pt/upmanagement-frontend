@@ -6,7 +6,7 @@ import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { Template } from '../models/template/template';
 import { TemplateService } from '../services/template-service/template.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { faTrash, faCheck, faEdit, faSave,faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faCheck, faEdit, faSave,faAngleDoubleDown, faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -35,7 +35,6 @@ export class NewQuestionnaireComponent implements OnInit {
  private option: string = "";
  private customHtml: string
  private trueOrfalse: boolean[] = [];
- private editOp: boolean[] = [];
  private multi: boolean = true;
  faTrash = faTrash;
  faCheck = faCheck;
@@ -44,6 +43,8 @@ export class NewQuestionnaireComponent implements OnInit {
  private rightCheck = false
  private teste = false
  faAngleDoubleDown = faAngleDoubleDown;
+ faAngleDoubleUp = faAngleDoubleUp;
+ private lala: boolean[] = [];
 
   public addQuestion(question: Question, type: string) {
     console.log(question);
@@ -124,11 +125,20 @@ export class NewQuestionnaireComponent implements OnInit {
   }
 
   public viewStuff(thing){
-    console.log(this.a.rightAnswer);
-    console.log(this.a.options);
-    console.log(thing);
+    console.log(this.lala);
+    
   }
 
+  public checkRightAnswer(index: number, jindex: number){
+    console.log("entou");
+    return this.b.questionList[index].rightAnswer.includes(String(jindex));
+    //this.b.questionList[index].rightAnswer.includes(String(jindex)) 
+    // if (this.b.questionList[index].rightAnswer.includes(String(jindex))){
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+  }
 
   ngOnInit() {
   }
