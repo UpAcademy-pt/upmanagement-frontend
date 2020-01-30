@@ -1,0 +1,36 @@
+<div class="ml-4">
+
+    <div class="float-left mb-4 ml-3">
+      <button type="button" class="btn btn-primary btn-md mt-4 float-left">Novo Componente</button>
+    </div>
+  
+    <table class="table table-sm table-striped container m-3 ml-3 col-12 text-center" style="width: 1100px;">
+      <thead class="thead-dark">
+        <tr>
+          <th>Formandos</th>
+          <th>Dinâmicos</th>
+          <th>Comentário</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let academy of academies$ | async; let i = index;" id="{{i}}">
+          <td>{{academy.edName}}</td>
+          <td>
+            <button (click)="openAcademyById(academy.id)" class="btn btn-success">Ver</button>
+          </td>
+          <td>
+            <button (click)="openModalUpdateAcademy(templateUpdateAcademy, academy)" class="btn-borderless btn-edit">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+          </td>
+          <td>
+            <button (click)="openModalConfirmDeleteAcademy(templateConfirmDeleteAcademy, i)"
+              class="btn-borderless btn-delete">
+              <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
