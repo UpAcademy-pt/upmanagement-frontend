@@ -6,7 +6,7 @@ import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { Template } from '../models/template/template';
 import { TemplateService } from '../services/template-service/template.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { faTrash, faCheck, faEdit, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faCheck, faEdit, faSave,faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -43,6 +43,7 @@ export class NewQuestionnaireComponent implements OnInit {
  faSave = faSave;
  private rightCheck = false
  private teste = false
+ faAngleDoubleDown = faAngleDoubleDown;
 
   public addQuestion(question: Question, type: string) {
     console.log(question);
