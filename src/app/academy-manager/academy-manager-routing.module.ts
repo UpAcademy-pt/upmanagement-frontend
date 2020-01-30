@@ -11,6 +11,7 @@ import { AccountProfileComponent } from './account-profile/account-profile.compo
 import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
 import { AcademyViewComponent } from './academy-view/academy-view.component';
 import { TeacherAcademyComponent } from './teacher-academy/teacher-academy.component';
+import { ModulesComponent } from './modules/modules.component';
 
 
 const routes: Routes = [
@@ -60,6 +61,10 @@ const routes: Routes = [
       {
         path: 'academy-teacher/:academyId',
         component: TeacherAcademyComponent
+      },
+      {
+        path: 'module/:moduleId',
+        component: ModulesComponent
       }
     ]
   }
