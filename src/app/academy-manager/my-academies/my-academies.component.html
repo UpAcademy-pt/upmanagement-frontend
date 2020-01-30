@@ -1,3 +1,32 @@
+<div class="row">
+  <div class="md-3">
+<button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
+[attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Toggle collapse
+</button>
+<hr>
+<div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+<div class="well well-lg card card-block card-header">Some content</div>
+</div>
+<hr>
+<div id="collapseEvent"
+[isAnimated]="true"
+[collapse]="isCollapsed"
+(collapses)="collapses()"
+(expands)="expands()"
+(collapsed)="collapsed()"
+(expanded)="expanded()">
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <div class="container mt-4 ml-3">
 
 <div> 
@@ -19,9 +48,44 @@
   </tab>
   <tab heading="Second tab" class="mt-2" (selectTab)="onSelect($event)">
     <h4>Title 2</h4>
+<div class= "mr-5">
+  <ul class="list-group">
+      <!--  <H3 class="list-group-item">{{academy.usefulInfo}}</H3> -->
+    <li class="list-group-item"> </li>
+    <li class="list-group-item"></li>
+    <li class="list-group-item"></li>
+    <li class="list-group-item"></li>
+  </ul>
+</div>
+
+
+
     <p>It has survived not only five centuries, but also the leap into electronic typesetting,
       remaining essentially unchanged. It was popularised in the 1960s with the release of
       Letraset sheets containing Lorem Ipsum passages</p>
   </tab>
 </tabset>
 </div>  
+
+
+<tabset>
+  <tab heading="Static title" customClass="customClass">Static content</tab>
+  <tab *ngFor="let tabz of tabs"
+       [heading]="tabz.title"
+       [customClass]="tabz.customClass">
+    {{tabz?.content}}
+  </tab>
+</tabset>
+
+
+<div class= "mr-5">
+  <ul class="list-group">
+      <!--  <H3 class="list-group-item">{{academy.usefulInfo}}</H3> -->
+    <li class="list-group-item"> </li>
+    <li class="list-group-item"></li>
+    <li class="list-group-item"></li>
+    <li class="list-group-item"></li>
+  </ul>
+</div>
+
+
