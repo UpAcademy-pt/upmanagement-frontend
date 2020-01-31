@@ -25,8 +25,10 @@ export class ModulesComponent implements OnInit {
   private evaluations$: ReplaySubject<Evaluation[]> = new ReplaySubject(1);
 
   public evaluationToCreate: Evaluation = new Evaluation();
-  public grade: Grade;
-  public gradesArray: Grade[];
+  public grade: Grade = new Grade();
+  public gradesArray: Grade[] = [];
+
+  public showTable = false;
 
   modalRef: BsModalRef;
 
@@ -57,6 +59,9 @@ export class ModulesComponent implements OnInit {
     this.userService.getUsers('', '', 'USER').subscribe(
       (res: any) => {
         this.students$.next(res);
+        if (this.gradesArray.length > 0) {
+          this.showTable = true;
+        }
       }
     );
   }
@@ -72,7 +77,7 @@ export class ModulesComponent implements OnInit {
     });
   }
 
-  public createEvaluation(grades: Grade[]) {
+  public createEvaluation() {
     this.evaluationToCreate.grades = this.gradesArray;
     this.evaluationService.createEvaluation(this.evaluationToCreate).subscribe(
       (msg: string) => {
@@ -83,12 +88,12 @@ export class ModulesComponent implements OnInit {
     this.evaluationToCreate = new Evaluation();
   }
 
-  public createGrades(subject: string) {
-    this.grade.subject = subject;
+  public createGrades() {
     this.gradeService.createGrade(this.grade).subscribe(
-      (id: number) => {
-        this.grade.id = id;
+      (id: string) => {
+        //this.grade.id = id;
         this.gradesArray.push(this.grade);
+        console.log(this.gradesArray);
       }
     );
   }

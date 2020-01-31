@@ -2,8 +2,7 @@
 
   <div class="float-left mb-4 ml-3">
     <button type="button" class="btn btn-primary btn-md mt-4 float-left"
-      (click)="openModalAddAcademy(templateAddAcademy)">Nova
-      Academia</button>
+      (click)="openModalAddAcademy(templateAddAcademy)">Nova Academia</button>
   </div>
 
   <table class="table table-sm table-striped container m-3 ml-3 col-12 text-center" style="width: 1100px;">
@@ -35,7 +34,7 @@
       </tr>
     </tbody>
   </table>
-  
+
 </div>
 <!-- Modal Add Academy -->
 <ng-template #templateAddAcademy>
@@ -54,7 +53,7 @@
         <div class="col-sm-10">
           <input #edNameField="ngModel" [(ngModel)]="academyToCreate.edName" name="edName" id="edName" type="text"
             class="form-control" placeholder="Digite aqui o nome desta edição" required>
-          <small class="text-danger" [hidden]="edNameField.valid">Campo Obrigatório</small>
+          <small class="text-danger" [hidden]="edNameField.valid || !edNameField.touched">Campo Obrigatório</small>
         </div>
       </div>
 
@@ -63,7 +62,7 @@
         <div class="col-sm-10">
           <input #academyTypeField="ngModel" [(ngModel)]="academyToCreate.academyType" name="academyType"
             id="academyType" type="text" class="form-control" placeholder="Digite aqui o tipo desta academia" required>
-          <small class="text-danger" [hidden]="academyTypeField.valid">Campo Obrigatório</small>
+          <small class="text-danger" [hidden]="academyTypeField.valid || !academyTypeField.touched">Campo Obrigatório</small>
         </div>
       </div>
 
@@ -74,6 +73,7 @@
             #daterangepicker="bsDaterangepicker" bsDaterangepicker
             [bsConfig]="{ rangeInputFormat : 'YYYY-MM-DD', dateInputFormat: 'YYYY-MM-DD' }" (change)="getDates()"
             placement="bottom" required>
+          <small class="text-danger" [hidden]="academyTypeField.valid || !academyTypeField.touched">Campo Obrigatório</small>
         </div>
         <div class="col-sm-1 form-group">
           <button class="btn-sm btn-success" (click)="daterangepicker.toggle()"
@@ -141,7 +141,7 @@
         <div class="col-sm-10">
           <input #edNameField="ngModel" [(ngModel)]="academyToUpdate.edName" name="edName" id="edName" type="text"
             class="form-control" placeholder="Digite aqui o nome desta edição" required>
-          <small class="text-danger" [hidden]="edNameField.valid">Campo Obrigatório</small>
+          <small class="text-danger" [hidden]="edNameField.valid || !edNameField.touched">Campo Obrigatório</small>
         </div>
       </div>
 
@@ -150,7 +150,7 @@
         <div class="col-sm-10">
           <input #academyTypeField="ngModel" [(ngModel)]="academyToUpdate.academyType" name="academyType"
             id="academyType" type="text" class="form-control" placeholder="Digite aqui o tipo desta academia" required>
-          <small class="text-danger" [hidden]="academyTypeField.valid">Campo Obrigatório</small>
+          <small class="text-danger" [hidden]="academyTypeField.valid || !academyTypeField.touched">Campo Obrigatório</small>
         </div>
       </div>
 
@@ -161,6 +161,7 @@
             #daterangepicker="bsDaterangepicker" bsDaterangepicker
             [bsConfig]="{ rangeInputFormat : 'YYYY-MM-DD', dateInputFormat: 'YYYY-MM-DD' }" (change)="getDates()"
             placement="bottom" required>
+          <small class="text-danger" [hidden]="academyTypeField.valid || !academyTypeField.touched">Campo Obrigatório</small>
         </div>
         <div class="col-sm-1 form-group">
           <button class="btn-sm btn-success" (click)="daterangepicker.toggle()"
