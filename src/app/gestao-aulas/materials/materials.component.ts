@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Materials } from '../shared/models/mamaterials/materials';
-import { HttpClient } from '@angular/common/http';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ReplaySubject } from 'rxjs';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Materials } from '../shared/models/mamaterials/materials';
 import { MaterialsService } from '../shared/services/materials.service';
 
 @Component({

@@ -18,6 +18,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MaterialsComponent } from './materials/materials.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NotesNewComponent } from './notes/notes-new/notes-new.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -25,7 +26,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [GestaoAulasComponent, ForumComponent, NotesComponent, AcademiesComponent, CalendarComponent, LessonsComponent, LessonsComponent, NotesComponent, CalendarComponent, MaterialsComponent],
+  declarations: [GestaoAulasComponent, ForumComponent, NotesComponent, AcademiesComponent, CalendarComponent, LessonsComponent, LessonsComponent, NotesComponent, CalendarComponent, MaterialsComponent, NotesNewComponent],
   imports: [
     CommonModule,
     SharedModule,

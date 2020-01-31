@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Account } from '../models/account';
+import { Account } from '../models/account/account';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
-import { Edition } from '../models/edition';
-import { Lesson } from '../models/lesson';
+import { Edition } from '../models/edition/edition';
+import { Lesson } from '../models/lesson/lesson';
 import { Note } from '../models/note/note';
+import { ReplaySubject } from 'rxjs';
  
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceGeneralService {
 
-  private url ='http://localhost:8080/coreFinalProject/aulas/account/'
+  private url ='http://localhost:8080/coreFinalProject/aulas/accounts/'
 
   private currentAccount: Account = new Account();
+  private accountId$: ReplaySubject<number> = new ReplaySubject();
   private edtions: Edition[];
   
 
@@ -29,6 +31,7 @@ export class ServiceGeneralService {
     this.getAccount().subscribe(
       (account: Account) => {
         this.currentAccount = account;
+        this.accountId$.next(account.id);
         this.getEditions();
         console.log(account);
         
@@ -50,6 +53,13 @@ public getLessons(){
 
 public getNotes () {
   return this.simulationNotes;
+}
+
+/**
+ * getCurrentAccountId
+ */
+public getCurrentAccountId() {
+  return this.currentAccount.id;
 }
 
 // public getNotes () {

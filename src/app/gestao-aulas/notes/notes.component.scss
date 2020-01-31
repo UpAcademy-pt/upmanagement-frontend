@@ -1,0 +1,27 @@
+.btn-borderless {
+    width: 30px;
+    height: 30px;
+    border-color: transparent;
+    background-color: transparent;
+    color: #343a40;
+}
+
+.btn-edit:hover {
+    color: darkgray;
+}
+
+.btn-delete:hover {
+    color: red;
+}
+
+.btn-secondary {
+    background-color: #343a40;
+}
+
+textArea {
+    height: 360px;
+}
+
+.btn-link{
+    color: black;
+}

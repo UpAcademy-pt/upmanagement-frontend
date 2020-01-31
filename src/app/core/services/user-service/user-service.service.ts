@@ -10,7 +10,7 @@ import { isUndefined } from 'util';
 })
 export class UserServiceService {
 
-  private url = 'http://localhost:8080/coreFinalProject/aulas/users/';
+  private url = 'http://localhost:8080/coreFinalProject/users/';
  
   private currentUser: User = new User();
   public currentUser$: ReplaySubject<User> = new ReplaySubject(1);
