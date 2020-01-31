@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
+
 import { Academy } from '../shared/models/academy';
+import { Module } from '../shared/models/module';
+
 import { ActivatedRoute } from '@angular/router';
 import { AcademyService } from '../shared/services/academy.service';
+
 
 @Component({
   selector: 'app-teacher-academy',
@@ -12,6 +16,7 @@ import { AcademyService } from '../shared/services/academy.service';
 export class TeacherAcademyComponent implements OnInit {
 
   private academy: Academy;
+  private module: Module;
   public academy$: ReplaySubject<Academy> = new ReplaySubject(1);
 
   constructor(
