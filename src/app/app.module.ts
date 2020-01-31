@@ -20,6 +20,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ValidateComponent } from './validate/validate.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,6 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     ProfileComponent,
     ValidateComponent,
     ProfileComponent,
-    ValidateComponent,
   ],
   imports: [
     BrowserModule,

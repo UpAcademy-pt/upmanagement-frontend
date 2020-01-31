@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
-import { Edition } from '../../models/edition';
+import { Edition } from '../../models/edition/edition';
 import { ServiceGeneralService } from '../../services/service-general.service';
+import { ReplaySubject } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,8 @@ import { ServiceGeneralService } from '../../services/service-general.service';
 export class SideBarComponent implements OnInit {
   public showSuperUserTab: boolean = false;
   private edtions: Edition[];
+  private edtions$: ReplaySubject<any> = new ReplaySubject(1)
+
 
   constructor(
     private router: Router,
@@ -25,7 +28,14 @@ export class SideBarComponent implements OnInit {
     if (this.userApi.isSuperUser()||this.userApi.isAdmin()) {
       this.showSuperUserTab = true;
     }
-    this.edtions = this.serviceApi.getEditions();
+    this.serviceApi.getEditions().subscribe(
+      (data:any) =>{
+        this.edtions$.next(data)
+        console.log(data);
+      }
+    );
+    console.log(this.showSuperUserTab);
+    
    }
 
   ngOnInit() {

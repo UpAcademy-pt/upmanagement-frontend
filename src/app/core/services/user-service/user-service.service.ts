@@ -3,7 +3,6 @@ import { User } from '../../models/user';
 import { ReplaySubject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { isUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +51,7 @@ export class UserServiceService {
     return this.currentUser.name;
   }
 
-  public getCurrentEmail():string {
+  public getCurrentEmail(): string {
     return this.currentUser.email;
   }
 
