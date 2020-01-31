@@ -127,6 +127,6 @@ export class AdminAcademiesComponent implements OnInit {
   }
 
   public openAcademyById(id: number) {
-    this.router.navigate(['academy-manager/academy/' + id]);
+    this.router.navigate(['academy-manager/module/' + id]);
   }
 }
