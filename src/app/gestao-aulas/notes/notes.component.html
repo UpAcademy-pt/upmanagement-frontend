@@ -5,14 +5,14 @@
 <br>
 <div class="container">
   <div>
-    <div *ngFor="let note of notes$ | async; let i = index;">
+    <div *ngFor="let note of notes$ | async; let i = index;" id="{{i}}">
       <accordion [isAnimated]="true">
         <accordion-group heading="{{note.title}} - {{note.createDate}}" style="color: black;">
           <div>
             <button type="button" class="btn-borderless btn-edit">
               <fa-icon [icon]="faEdit" size="lg"></fa-icon>
             </button>
-            <button type="button" class="btn-borderless btn-delete">
+            <button type="button" class="btn-borderless btn-delete" (click)="openModalDeleteNote(templateDeleteNote, i)">
               <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
             </button>
           </div>
@@ -53,14 +53,14 @@
     </button>
   </div>
   <div class="modal-body container">
-    <form class="mg-5 mt-3 container" #updatePasswordForm="ngForm" (ngSubmit)="createNote()">
+    <form class="mg-5 mt-3 container" #newNoteForm="ngForm" (ngSubmit)="createNote()">
       <div class="form-group">
         <label for="títuloInput">Título:</label>
-        <input type="text" class="form-control" id="títuloNota" aria-describedby="emailHelp" placeholder="Escreva aqui o título da sua nota!" [(ngModel)]="note.title">
+        <input #note1Field="ngModel" type="text" class="form-control" id="títuloNota" aria-describedby="títuloNota" placeholder="Escreva aqui o título da sua nota!" [(ngModel)]="title" name="title">
       </div>
       <div>
         <div class="form-group">
-          <textarea class="form-control" id="descriçãoNota" rows="3" placeholder="Escreva aqui o corpo da sua nota!" [(ngModel)]="note.description"></textarea>
+          <textarea #note2Field="ngModel" class="form-control" id="descriçãoNota" rows="3" placeholder="Escreva aqui o corpo da sua nota!" [(ngModel)]="description" name="description"></textarea>
         </div>
       </div>
       <div class="row">
@@ -69,3 +69,5 @@
     </form>
   </div>
 </ng-template>
+
+<!-- Modal Criar Nova Nota -->
