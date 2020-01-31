@@ -1,24 +1,54 @@
 <div>
+  <div class="form-group m-3 col-9">
+    <input type="text" class="form-control" placeholder="Pesquise aqui" [(ngModel)]="term">
+  </div>
   <table class="table table-striped container m-3 col-9 text-center">
     <thead class="thead-dark">
       <tr>
-        <th>Título</th>
-        <!-- <th scope="col-2">Data</th> -->
-        <!-- <th scope="col-1">Ordenar</th> -->
+        <th (click)="sort('name')">Título <span class="glyphicon sort-icon" *ngIf="key =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+        <th (click)="sort('lastModifiedDate')">Data <span class="glyphicon sort-icon" *ngIf="key =='lastModifiedDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of pageOfItems; let i= index">
-        <td>{{row.name}} <button id="btnStat" *ngIf="showViewBtn[i]" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}" routerLink="/questionario/historico/ver" (click)="viewThisQuestionnaire(row.id)">Est</button>
+      <tr *ngFor="let row of history| orderBy: key : reverse|filter: term|paginate: { itemsPerPage: 10, currentPage: p };">
+        <td>{{row.name}}</td>
+        <td>{{dateChange(row)}} <button id="btnStat" *ngIf="showViewBtn[i]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}" routerLink="/questionario/historico/ver" (click)="viewThisQuestionnaire(row.id)">Ver</button>
         </td>
       </tr>
     </tbody>
+    <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event"></pagination-controls>
   </table>
 </div>
+<!-- <div id="pagination">
+  <jw-pagination [items]="history" (changePage)="onChangePage($event)"></jw-pagination>
+</div>  -->
+
+
+<!-- <div class="form-group">
+  <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
+</div>
+
+<table class="table">
+  <thead>
+      <tr>
+          <th scope="col">First</th>
+        <th scope="col">Last</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of history | filter:term">
+        <td>{{item.name}}</td>
+        <td>{{dateChange(item.lastModifiedDate)}} <button id="btnStat" *ngIf="showViewBtn[i]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}" routerLink="/questionario/historico/ver" (click)="viewThisQuestionnaire(row.id)">Ver</button>
+        </td>
+
+      </tr>
+  </tbody>
+</table>
 <div id="pagination">
   <jw-pagination [items]="history" (changePage)="onChangePage($event)"></jw-pagination>
-</div>
+</div>  -->
 
 <!--   <a routerLink= "/questionario/historico/estatisticas">Estatisticas do Formulario Especifico</a>
  -->

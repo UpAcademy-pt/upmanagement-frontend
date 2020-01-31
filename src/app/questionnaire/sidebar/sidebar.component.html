@@ -56,7 +56,7 @@
             </li> -->
             <div class="divider"></div>
              <li>
-                <a id="statists" [ngClass]="{'pushStatsDown' : template == true || newFile == true}"  [ngClass]="{'active': statistics}" (click)="pending=false; history=false; new=false; statistics=true" routerLink="/questionario/dados" href="#"><i>
+                <a routerLink="/questionario/estatisticas" id="statists" [ngClass]="{'pushStatsDown' : template == true || newFile == true}"  [ngClass]="{'active': statistics}" (click)="pending=false; history=false; new=false; statistics=true"  href="#"><i>
                 <fa-icon style=" width: 20; height: 16;"[icon]="faChartPie"></fa-icon> 
                 </i><span>Estatisticas</span></a>
             </li>

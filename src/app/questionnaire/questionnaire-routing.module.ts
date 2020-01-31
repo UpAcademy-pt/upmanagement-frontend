@@ -42,14 +42,14 @@ const routes: Routes = [
         path: 'pendentes/responder',
         component: ToAnswerComponent
       },
-      // {
-      //   path: 'historico/estatisticas', // colocar titulo do formulario depois 
-      //   component: StatisticsComponent
-      // },
+      {
+        path: 'estatisticas', // colocar titulo do formulario depois 
+        component: StatisticsComponent
+      },
       {
         path: 'historico/ver' ,
         component: ViewComponent
-      }
+      },
     ]
   } 
 ];

@@ -30,7 +30,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     FooterComponent,
     AdminComponent,
     ProfileComponent,
-    ValidateComponent
+    ValidateComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +43,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     FontAwesomeModule,
     CollapseModule.forRoot(),
     NgxSelectModule,
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

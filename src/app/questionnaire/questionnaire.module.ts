@@ -20,6 +20,9 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ViewComponent } from './view/view.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,7 @@ import { ViewComponent } from './view/view.component';
     PendingComponent,
     HistoryComponent,
     JwPaginationComponent,
-    ViewComponent
+    ViewComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,10 @@ import { ViewComponent } from './view/view.component';
     BsDropdownModule,
     NgxSelectModule,
     AccordionModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
+    Ng2OrderModule
   ],
   bootstrap: [MainComponent]
 })
