@@ -9,21 +9,20 @@ import { ServiceGeneralService } from './service-general.service';
   providedIn: 'root'
 })
 export class DataService {
-  public note: Note;
-  public notes$: ReplaySubject<Note[]> = new ReplaySubject();
+  public notes$: ReplaySubject<Note[]> = new ReplaySubject(1);
   private notes = [];
 
   constructor(
     private notesAPI: NotesService,
     private accountApi: ServiceGeneralService,
   ) {
-    
   }
 
   /**
    * updateNotes$
    */
   public updateNotes$() {
+    console.log(this.notes);
     this.notes$.next(this.notes);
   }
 
@@ -45,22 +44,13 @@ export class DataService {
   public createNote(note: Note) {
     this.notesAPI.create(note).subscribe(
       (result: number) => {
-        this.note.id = result;
+        console.log(result);
+        note.id = result;
         this.notes.push(note);
         this.updateNotes$();
       }
-    )
+    );
   }
-
-  // public createProduct(product: Product) {
-  //   this.productApi.create(product).subscribe(
-  //     (result: number) => {
-  //       product.id = result;
-  //       this.products.push(product);
-  //       this.updateProducts$();
-  //     }
-  //   );
-  // }
   }
 
 

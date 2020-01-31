@@ -26,6 +26,11 @@ export class NotesComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   faUserPlus = faUserPlus;
 
+  private title: string;
+  private description: string;
+  private editionId: number;
+	private lessonId: number;
+
   constructor(
     private serviceApi: ServiceGeneralService,
     private accountApi: ServiceGeneralService,
@@ -55,13 +60,26 @@ export class NotesComponent implements OnInit {
   this.modalRef = this.modalService.show(template);
 }
 
-  //   /**
-  //    * createNote
-  //    */
-  //   public createNote() {
-  //     this.dataService.createProduct(this.note);
-  //     this.product = new Product();
-  // }
+openModalDeleteNote(template: TemplateRef<any>) {
+  this.modalRef = this.modalService.show(template);
+}
+
+
+     /**
+      * createNote
+      */
+     public createNote() {
+       this.note.title = this.title;
+       this.note.description = this.description;
+       this.note.accountId = this.accountApi.getCurrentAccountId();
+       this.note.editionId = this.editionId;
+       this.note.lessonId = this.lessonId;
+       
+       console.log(this.note);
+       this.dataService.createNote(this.note);
+       this.note = new Note();
+       this.modalRef.hide();
+   }
 }
 
 
