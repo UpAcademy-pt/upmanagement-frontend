@@ -23,11 +23,12 @@ import { AcademyViewComponent } from './academy-view/academy-view.component';
 import { TeacherAcademyComponent } from './teacher-academy/teacher-academy.component';
 import { ModulesComponent } from './modules/modules.component';
 import { SuperuserClassromComponent } from './superuser-classrom/superuser-classrom.component';
+import { TeacherAcademiesComponent } from './teacher-academies/teacher-academies.component';
 
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
-    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent,SuperuserClassromComponent],
+    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent,SuperuserClassromComponent,TeacherAcademyComponent,TeacherAcademiesComponent],
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,
