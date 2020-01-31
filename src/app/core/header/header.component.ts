@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -16,6 +15,7 @@ export class HeaderComponent implements OnInit {
 
   public name: string;
   public showAdminTab: boolean = false;
+  public isCollapsed = true;
   faUserAlt = faUserAlt;
   faSignOutAlt = faSignOutAlt;
 
@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     private userApi: UserServiceService,
     private router: Router
   ) {
-    this.name = this.userApi.getCurrentName().split(' ')[0];
+    this.name = this.userApi.getCurrentName().split[0];
     if (this.userApi.isAdmin()) {
       this.showAdminTab = true;
     }
@@ -37,5 +37,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  public collapse() {
+    if (!this.isCollapsed) {
+      this.isCollapsed = true;
+    }
+  }
 
 }

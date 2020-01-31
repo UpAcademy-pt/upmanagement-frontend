@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSelectModule } from 'ngx-select-ex';
+import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ValidateComponent } from './validate/validate.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { NgxSelectModule } from 'ngx-select-ex';
     NotFoundComponent,
     HeaderComponent,
     FooterComponent,
-    AdminComponent
+    AdminComponent,
+    ProfileComponent,
+    ValidateComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,8 @@ import { NgxSelectModule } from 'ngx-select-ex';
     BsDropdownModule.forRoot(),
     FontAwesomeModule,
     CollapseModule.forRoot(),
-    NgxSelectModule
+    NgxSelectModule,
+    AccordionModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
