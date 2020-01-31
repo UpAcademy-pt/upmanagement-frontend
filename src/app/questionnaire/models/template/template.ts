@@ -7,6 +7,10 @@ export class Template {
     'questionList': Question[];
     'editPrivacy': string[];
     'viewPrivacy': string[];
+    'createDate': number;
+    'lastModifiedDate': number;
+    'formattedCreateDate': string;
+    'formattedLastModifiedDate': string;
 
     constructor(data?: any) {
         Object.assign(this, data);
