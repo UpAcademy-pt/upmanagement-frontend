@@ -21,13 +21,17 @@ export class AcademyManagerComponent implements OnInit {
       this.showAdminSidebar = true;
       this.router.navigate
       (['academy-manager/admin-academies']);
-    } else {
+    } else if (this.userService.isSuperUser())  {
+      this.router.navigate(['academy-manager/teacher-academies']);
+    }
+    else {
       this.router.navigate(['academy-manager/my-academies']);
+
     }
   }
 
   ngOnInit() {
   }
 
-  
 }
+

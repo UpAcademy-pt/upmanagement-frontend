@@ -13,6 +13,7 @@ import { AcademyViewComponent } from './academy-view/academy-view.component';
 import { TeacherAcademyComponent } from './teacher-academy/teacher-academy.component';
 import { ModulesComponent } from './modules/modules.component';
 import { SuperuserClassromComponent } from './superuser-classrom/superuser-classrom.component';
+import { TeacherAcademiesComponent } from './teacher-academies/teacher-academies.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,14 @@ const routes: Routes = [
       {
         path: 'module/:moduleId',
         component: AccountProfileComponent
+      },
+      {
+        path: 'academy-teacher/:academyId',
+        component: TeacherAcademyComponent
+      },
+      {
+        path: 'teacher-academies',
+        component: TeacherAcademiesComponent
       }
     ]
   }

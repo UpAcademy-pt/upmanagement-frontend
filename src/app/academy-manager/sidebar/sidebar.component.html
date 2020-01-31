@@ -6,8 +6,12 @@
 
     <ul routerLinkActive = "active"  class="nav-item mt-3" style="padding-left: 10px;">
        
-        <li *ngIf="isTeacher===true">
+        <!-- <li *ngIf="isTeacher===true">
             <button routerLink = "my-academies" class="btn btn-link btn-md mx-1 my-2" style="color: white;">Academias</button>
+        </li> -->
+        <li *ngIf="isTeacher===true">
+            <button routerLink = "teacher-academies" class="btn btn-link btn-md mx-1 my-2" 
+            style="color: white;">MyAcademies</button>
         </li>
         <li *ngIf="isTeacher===false">
             <button routerLink = "my-academies" class="btn btn-link btn-md mx-1 my-2" style="color: white;">Academia</button>
@@ -23,6 +27,9 @@
             <button routerLink = "superuser-classroom" class="btn btn-link btn-md mx-1 my-2" 
             style="color: white;">Sala</button>
         </li>
+
+       
+        
     </ul>
 
 </div>
