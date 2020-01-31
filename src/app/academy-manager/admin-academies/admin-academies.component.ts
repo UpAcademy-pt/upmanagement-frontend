@@ -59,7 +59,7 @@ export class AdminAcademiesComponent implements OnInit {
     this.academyService.getAllAcademies()
       .subscribe((academies: Academy[]) => {
         this.academies = academies;
-        this.academies$.next(academies);
+        this.academies$.next(this.academies);
         if (this.academies.length > 0) {
           this.showTable = true;
         }
@@ -126,6 +126,6 @@ export class AdminAcademiesComponent implements OnInit {
   }
 
   public openAcademyById(id: number) {
-    this.router.navigate(['academy-manager/modules/' + id]);
+    this.router.navigate(['academy-manager/academy/' + id]);
   }
 }

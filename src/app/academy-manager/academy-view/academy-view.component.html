@@ -1,23 +1,116 @@
 <div class="ml-4" *ngIf="academy$ | async as academy">
-    <form>
-    <div class="py-2">
-        <div class="custom-control custom-switch">
-            <label class="custom-control-label" for="statusSwitch">Activa
-                <input type="checkbox" class="custom-control-input" id="statusSwitch">Inactiva</label>
-          </div>
-    <button class="btn btn-primary float-right" *ngIf="inUpdate===false"
-                    (click)="toggleUpdateAcademy()">Editar</button>
-                <button *ngIf="inUpdate===true" type="submit"
-                    class="btn btn-primary float-right mx-2">Atualizar</button>
-                <button class="btn btn-danger float-right mx-2" *ngIf="inUpdate===true"
-                    (click)="openModal(templateConfirmDeleteAcademy)">Remover Academia</button>
-<h3>{{academy.edName}}</h3>
-</div>
+    <form #updateAcademyForm="ngForm" (ngSubmit)="updateAcademy(datesArray.value)">
+        <div class="py-2">
+            <button class="btn btn-primary float-right" *ngIf="inUpdate===false"
+                (click)="toggleUpdateAcademy()">Editar</button>
+            <button *ngIf="inUpdate===true" type="submit" class="btn btn-primary float-right mx-2">Atualizar</button>
+            <button class="btn btn-danger float-right mx-2" *ngIf="inUpdate===true"
+                (click)="openModal(templateConfirmDeleteAcademy)">Remover Academia</button>
+            <h3>Academia</h3>
+        </div>
 
-<div class="row">
-    <div class="col-4">
+        <div class="row">
+            <div class="col-5">
+                <label style="font-weight: bolder;" for="edName">Nome da edição:</label>
+                <input [readonly]="!inUpdate" #edNameField="ngModel" [(ngModel)]="academy.edName" name="edName" id="edName" type="text"
+                        [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" 
+                        [placeholder]="academy.edName === null ? '' : academy.edName">
+                <div class="h-divider"></div>
+                <p *ngIf="!inUpdate"><b>Status: </b><span *ngIf="academy.status=='ACTIVE'">Activa</span>
+                    <span *ngIf="academy.status=='NOTACTIVE'">Inactiva</span></p>
+                <div *ngIf="inUpdate">
+                    <label style="font-weight: bolder;" for="status">Status:</label>
+                    <select name="satus" id="status"#statusField="ngModel" [(ngModel)]="academy.status" de>
+                        <option value="ACTIVE">Activa</option>
+                        <option value="NOTACTIVE">Inactiva</option>
+                    </select>
+                </div>
+                <label style="font-weight: bolder;" for="academyType">Tipo de Academia:</label>
+                <input [readonly]="!inUpdate" #academyTypeField="ngModel" [(ngModel)]="academy.academyType" id="academyType"
+                        name="academyType" type="text" [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}"
+                        [placeholder]="academy.academyType === null ? '' : academy.academyType">
+                <div class="h-divider"></div>
+                <label style="font-weight: bolder;" for="client">Cliente:</label>
+                <input [readonly]="!inUpdate" #clientField="ngModel" [(ngModel)]="academy.client" name="client" id="client" type="text"
+                        [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}" 
+                        [placeholder]="academy.client === null ? '' : academy.client">
+                <div class="h-divider"></div>
+            </div>
+            <div class="col-5">
+                <div class="form-group row">
+                    <p *ngIf="!inUpdate"><b>Datas: </b>De {{academy.startDate}} a {{academy.endDate}}</p>
+                    <div *ngIf="inUpdate">
+                        <label for="datesArray" class="col-sm-2 col-form-label" style="font-weight: bolder;">Datas:</label>
+                        <input type="text" class="form-control" name="datesArray" #datesArray 
+                            bsDaterangepicker placeholder="Escolha as datas de duração da Academia" placement="bottom"
+                            [bsConfig]="{ rangeInputFormat : 'YYYY-MM-DD', dateInputFormat: 'YYYY-MM-DD' }">
+                    </div>
+                </div>
+                    <div class="h-divider"></div>
+                    <label style="font-weight: bolder;" for="warning">Avisos:</label>
+                    <textarea [readonly]="!inUpdate" #warningField="ngModel" 
+                        [(ngModel)]="academy.warning" id="warning" name="warning" type="text"
+                        [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}"
+                        [placeholder]="academy.warning === null ? '' : academy.warning"></textarea>
+                    <div class="h-divider"></div>
+                    <label style="font-weight: bolder;" for="usefulInfo">Informações úteis:</label>
+                    <textarea [readonly]="!inUpdate"
+                        #usefulInfoField="ngModel" [(ngModel)]="academy.usefulInfo" id="ausefulInfo"
+                        name="ausefulInfo" type="text"
+                        [ngClass]="{'form-control': inUpdate, 'form-control-plaintext': !inUpdate}"
+                        [placeholder]="academy.usefulInfo === null ? '' : academy.usefulInfo"></textarea>
+                    <div class="h-divider"></div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-5">
+                    <p><b>Módulos</b></p>
+                    <table class="table table-sm table-striped">
+                        <thead class="thead-dark">
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>+Info</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let module of academy.modules | async; let i = index;" id="{{i}}">
+                                <td>{{i}}</td>
+                                <td>module.name</td>
+                                <td><button class="btn btn-success" (click) = "showModule(module.id)">Ver</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-5">
+                    <p><b>Formandos</b></p>
+                    <table class="table table-sm table-striped">
+                        <thead class="thead-dark">
+                            <th></th>
+                            <th>Nome</th>
+                            <th>Perfil</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let module of academy.modules | async; let i = index;" id="{{i}}">
+                                <td>{{i}}</td>
+                                <td>module.name</td>
+                                <td><button class="btn btn-success">Ver</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </form>
+    <div class="row">
+        <button (click)="returnToTable()" class="btn btn-secondary mx-auto">Voltar</button>
     </div>
-</div>
-</form>
+
+    <!-- Modal Confirm Delete Academy -->
+<ng-template #templateConfirmDeleteAcademy>
+    <div class="modal-body text-center">
+      <p>Tem a certeza que deseja apagar a academia?</p>
+      <button type="button" class="btn btn-danger" (click)="deleteAcademy()">Sim</button>
+      <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Não</button>
+    </div>
+  </ng-template>
+
 </div>

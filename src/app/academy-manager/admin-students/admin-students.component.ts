@@ -22,7 +22,7 @@ export class AdminStudentsComponent implements OnInit {
   private accountAcademies: string[] = [];
   private sorted = false;
   public faSort = faSort;
-  public allAcademiesNames: string[] = ['Todas'];
+  public allAcademiesNames: {}[] = [{ 'id': undefined, 'text': 'Todas' }];
   private filteredStudents: {}[] = [];
 
 
@@ -80,7 +80,7 @@ export class AdminStudentsComponent implements OnInit {
     this.academyService.getAllAcademies().subscribe(
       (academies: Academy[]) => {
         for (const academy of academies) {
-          this.allAcademiesNames.push(academy.edName);
+          this.allAcademiesNames.push({ 'id': academy.edName, 'text': academy.edName });
         }
       }
     );
@@ -95,20 +95,28 @@ export class AdminStudentsComponent implements OnInit {
     console.log(academyInput);
     
     if (nameInput !== '') {
-     /*  if (academyInput !== 'Todas' || academyInput !== undefined) {
+       if (academyInput !== undefined ) {
+         console.log("ambos");
+         
         this.filteredStudents = this.studentUserAccounts.filter(
           student => student['studentUser'].name.toLowerCase().includes(nameInput.toLowerCase()) 
           && student['academyNames'].includes(academyInput));
         this.studentUserAccounts$.next(this.filteredStudents);
-      } else { */
+      } else {
+        console.log("só nome");
+        
         this.filteredStudents = this.studentUserAccounts.filter(student => 
           student['studentUser'].name.toLowerCase().includes(nameInput.toLowerCase()));
         this.studentUserAccounts$.next(this.filteredStudents);
-/*       }
-    } else if (academyInput !== 'Todas' || academyInput !== undefined) {
+      }
+    } else if (academyInput !== undefined) {
+      console.log("só academia");
+      
       this.filteredStudents = this.studentUserAccounts.filter(student => student['academyNames'].includes(academyInput));
-      this.studentUserAccounts$.next(this.filteredStudents); */
+      this.studentUserAccounts$.next(this.filteredStudents);
     } else {
+      console.log("nada");
+      
       this.studentUserAccounts$.next(this.studentUserAccounts);
     }
   }
