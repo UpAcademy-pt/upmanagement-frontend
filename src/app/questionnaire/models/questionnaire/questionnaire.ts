@@ -13,6 +13,7 @@ export class Questionnaire {
     'score': number;
     'createDate': number;
     'lastModifiedDate': number;
+    'lastModifiedDatestring': string;
     
     constructor(data?: any) {
         Object.assign(this, data);

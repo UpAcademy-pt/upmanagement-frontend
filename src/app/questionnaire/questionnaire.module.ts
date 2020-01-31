@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { QuestionnaireRoutingModule } from './questionnaire-routing.module';
 import { QuestionnaireComponent } from './questionnaire.component';
-import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,11 +20,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ViewComponent } from './view/view.component';
 import { EditorComponent } from './editor/editor.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     QuestionnaireComponent,
-    MainComponent,
     NewQuestionnaireComponent,
     TemplatesComponent,
     NewQuizComponent,
@@ -45,8 +46,10 @@ import { EditorComponent } from './editor/editor.component';
     BsDropdownModule,
     NgxSelectModule,
     AccordionModule.forRoot(),
-    FontAwesomeModule
-  ],
-  bootstrap: [MainComponent]
+    FontAwesomeModule,
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
+    NgxPaginationModule
+  ]
 })
 export class QuestionnaireModule { }
