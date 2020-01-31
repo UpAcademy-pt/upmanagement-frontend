@@ -12,7 +12,6 @@ export class Academy {
     'warning': string;
     'usefulInfo': string;
     'academyType': string;
-    'teachersIds': number[] = [];
 
     constructor(data?: any) {
         Object.assign(this, data);
