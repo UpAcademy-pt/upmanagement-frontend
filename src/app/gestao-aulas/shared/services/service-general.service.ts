@@ -12,7 +12,7 @@ import { Note } from '../models/note/note';
 })
 export class ServiceGeneralService {
 
-  private url ='http://localhost:8080/coreFinalProject/aulas/account/'
+  private url ='http://localhost:8080/coreFinalProject/aulas/accounts/'
 
   private currentAccount: Account = new Account();
   private edtions: Edition[];

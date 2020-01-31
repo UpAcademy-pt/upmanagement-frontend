@@ -19,7 +19,8 @@ export class MaterialsComponent implements OnInit {
   public header=["Titulo","tipo","Url","update","delete"];
   public headerAtt=["title","type","url"];
   public materials$: ReplaySubject<any> = new ReplaySubject(1);
-  private rowUserToDelete: number;
+  private rowMaterialToDelete: number;
+  public updateTo: number;
   private materialToUpdate: Materials = new Materials();
 
   modalRef: BsModalRef;
@@ -46,6 +47,9 @@ export class MaterialsComponent implements OnInit {
 
   ngOnInit() {
   }
+  public updateObs(){
+    this.materials$.next(this.materials)
+  }
 
   public createMaterial(){
     
@@ -57,6 +61,8 @@ export class MaterialsComponent implements OnInit {
 
     return this.apiMaterials.createMaterial(this.material).subscribe(
       (msg: string) => {
+        
+        this.updateObs()
         console.log(msg);
       },(error: string) => {
         console.log(error);
@@ -65,8 +71,10 @@ export class MaterialsComponent implements OnInit {
   }
 
   public deleteById(){
-    this.apiMaterials.deleteById(this.materials[this.rowUserToDelete].id).subscribe(
+    this.apiMaterials.deleteById(this.materials[this.rowMaterialToDelete].id).subscribe(
       (msg: string) => {
+        this.materials.splice(this.rowMaterialToDelete,1);
+        this.updateObs()
         console.log(msg);
         if (this.materials.length <= 0) {
           this.showTable = false;
@@ -82,6 +90,8 @@ export class MaterialsComponent implements OnInit {
     console.log(this.materialToUpdate);
     this.apiMaterials.updateMaterial(this.materialToUpdate).subscribe(
       (msg: string) => {
+        this.materials[this.updateTo] = this.materialToUpdate;
+        this.updateObs()
         console.log(msg);
       }, (error: string) => {
         console.log(error);
@@ -91,11 +101,12 @@ export class MaterialsComponent implements OnInit {
   }
 
   openModalConfirmDeleteMaterial(template: TemplateRef<any>, rowIndex: number) {
-    this.rowUserToDelete = rowIndex;
+    this.rowMaterialToDelete = rowIndex;
     this.modalRef = this.modalService.show(template);
   }
   openModalUpdateMaterial(template: TemplateRef<any>, rowIndex: number) {
     this.materialToUpdate = { ...this.materials[rowIndex] };
+    this.updateTo = rowIndex;
     this.modalRef = this.modalService.show(template);
   }
 

@@ -15,7 +15,6 @@ export class MaterialsService {
   ) { }
 
   public createMaterial(material: Materials){
-    console.log(material);
     return this.http.post(this.url, material)
   }
 
