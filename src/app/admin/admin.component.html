@@ -21,6 +21,7 @@
       </button>
     </div>
 
+<<<<<<< HEAD
     <!-- Filter Fields -->
     <form class="col-12 mx-auto">
       <div class="form-row">
@@ -34,6 +35,32 @@
         </ngx-select>
         <button (click)="getUsers()" type="button" class="btn-borderless col-1">
           <fa-icon [icon]="faSearch" size="2x"></fa-icon>
+=======
+  <!-- Table -->
+  <table *ngIf = "showTable" class="table table-striped container m-3 col-12 text-center">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col-5">Nome</th>
+      <th scope="col-3">Email</th>
+      <th scope="col-2">Role</th>
+      <th scope="col-1">Editar</th>
+      <th scope="col-1">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let row of users; let i = index;" id="{{i}}">
+      <th ></th>
+      <td *ngFor = "let column of headers">{{row[column]}}</td>
+      <td>
+        <button (click)="openModalUpdateUser(templateUpdateUser, i)" type="button" class="btn-borderless btn-edit">
+          <fa-icon [icon]="faEdit" size="lg"></fa-icon>
+        </button>
+      </td>
+      <td>
+        <button (click)="openModalConfirmDeleteUser(templateConfirmDeleteUser, i)" type="button" class="btn-borderless btn-delete">
+          <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
+>>>>>>> db1f82b6f25a48701319d37aa4fcfa71e32a3077
         </button>
       </div>
     </form>

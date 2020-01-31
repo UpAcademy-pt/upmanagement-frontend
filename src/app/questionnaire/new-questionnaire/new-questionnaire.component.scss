@@ -1,0 +1,24 @@
+// input.ng-untouched {
+//     background-color:pink;
+// }
+// input.ng-valid {
+//     background-color:lightgreen;
+// }
+
+// .dropdown-toggle::after {
+//     display: block;
+//     position: absolute;
+//     top: 50%;
+//     right: 20px;
+//     transform: translateY(-50%);
+// }
+
+.btn-borderless {
+    border-color: transparent;
+    background-color: transparent;
+    color: grey;
+}
+
+.btn-down:hover {
+    color: darkgray;
+}
