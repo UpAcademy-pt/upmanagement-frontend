@@ -15,7 +15,13 @@ const routes: Routes = [
 
   {
     path: 'dummy',
-    loadChildren: () => import('./dummy/dummy.module').then(m => m.DummyModule),
+    redirectTo: 'academy-manager',
+    //loadChildren: () => import('./dummy/dummy.module').then(m => m.DummyModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'academy-manager',
+    loadChildren: () => import('./academy-manager/academy-manager.module').then(m => m.AcademyManagerModule),
     canActivate: [AuthGuard]
   },
   {
@@ -43,6 +49,7 @@ const routes: Routes = [
   {
     path: '**', redirectTo: 'not-found'
   }
+
 
   //academias
   //formularios
