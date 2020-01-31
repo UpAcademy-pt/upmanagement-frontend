@@ -19,7 +19,8 @@ export class ServiceGeneralService {
   private accountId$: ReplaySubject<number> = new ReplaySubject();
   private edtions: Edition[];
   private edtions$:ReplaySubject<any> = new ReplaySubject();
-  
+  private lessons: Lesson[];
+  private lessons$:ReplaySubject<any> = new ReplaySubject();
 
   constructor(
     private router: Router,
@@ -35,6 +36,7 @@ export class ServiceGeneralService {
         this.accountId$.next(account.id);
         this.edtions$.next(account.editionsDtos);
         this.edtions = account.editionsDtos;
+      
         }
       )
       
@@ -107,30 +109,34 @@ public simulation: Array<Edition> = [
 public simulationLessons: Array<Lesson> = [
   {
   'id': 1,
-  'name': "html",
+  'editionId' : 1,
+  'title': "html",
   'description': " ola coisas",
 	'materials': [1,2],
-	'notesIds': [1,2],
+	//'notesIds': [1,2],
      
   }, {
     'id': 2,
-    'name': "css",
+    'editionId' : 1,
+    'title': "css",
     'description': " ainda mal estamos ca",
     'materials': [1,2],
-    'notesIds': [1,2],
+    //'notesIds': [1,2],
 
   }, {
     'id': 3,
-    'name': "java",
+    'editionId' : 2,
+    'title': "java",
     'description': " ainda ca estou",
     'materials': [1,2],
-    'notesIds': [1,2],
+   // 'notesIds': [1,2],
   }, {
     'id': 4,
-    'name': "angular",
+    'editionId' : 3,
+    'title': "angular",
     'description': " adeus",
     'materials': [1,2],
-    'notesIds': [1,2],
+    //'notesIds': [1,2],
   }
 ];
 }
