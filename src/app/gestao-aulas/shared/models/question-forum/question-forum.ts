@@ -4,6 +4,7 @@ export class QuestionForum {
     'description': String;
     'editionId': number;
     'nameOfUser': String;
+   'answers':any [];
 
     constructor(data?: any) {
         Object.assign(this, data);

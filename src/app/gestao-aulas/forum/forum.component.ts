@@ -14,26 +14,28 @@ import { Edition } from '../shared/models/edition';
 export class ForumComponent implements OnInit {
   private question: QuestionForum = new QuestionForum();
   private questions: QuestionForum[] = [];
-  private answers: AnswerForum[];
+  private answers: any[] = [];
   public questions$: ReplaySubject<any> = new ReplaySubject(1);
-  public answers$: ReplaySubject<any> = new ReplaySubject(1);
-  public showresult: boolean =false; 
+  public answers$: ReplaySubject<any []>= new ReplaySubject(1);
+
+  public validAnswers: AnswerForum[];
 
 
-//public currentEdition: Edition;
+
+  //public currentEdition: Edition;
 
 
   public title: string;
   public description: string;
 
 
-  
+
   constructor(
     private questionsApi: QuestionServiceService,
     private answersApi: AnswerServiceService
   ) {
     this.questionsApi.getAllQuestions().subscribe(
-     // this.questionsApi.getAllQuestions(this.question.editionId).subscribe(
+      // this.questionsApi.getAllQuestions(this.question.editionId).subscribe(
       (quest: QuestionForum[]) => {
         this.questions$.next(quest);
         console.log(quest);
@@ -48,17 +50,43 @@ export class ForumComponent implements OnInit {
 
 
 
-  public getAnswersByQuestionId(id: number) {
+  public getAnswersByQuestionId(id: number, index: number) {
+
+
+    //let data : any = this.answersApi.getAnswersByQuestionId(id);
 
     return this.answersApi.getAnswersByQuestionId(id).subscribe(
       (answ: AnswerForum[]) => {
+      
+      
+      //  this.questions[index].answers.push(answ)
 
-      //index da questao
-        this.answers$.next(answ);
+        // this.answers.forEach(el => {
+
+        //   el.forEach(e => {
+
+
+        //   });
+        //   if (el.id != id) {
+        //     this.answers.push(answ);
+        //   }
+        //   else {
+        //   }
+        // });
+
+
+
+        // //index da questao
+
+        // if (answ != null) {
+
+        //   // this.questions$[index].validQuestion = true;
+
+        // }
+        this.answers$[index].next(answ);
+
         console.log(answ);
-        if (answ) {
-          
-        }
+
 
       }
     );
@@ -72,7 +100,7 @@ export class ForumComponent implements OnInit {
     return this.questionsApi.createQuestion(this.question).subscribe(
       (msg: string) => {
         console.log(msg);
-      },(error: string) => {
+      }, (error: string) => {
         console.log(error);
       }
     );
