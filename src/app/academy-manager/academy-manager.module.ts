@@ -27,7 +27,8 @@ import { SuperuserClassromComponent } from './superuser-classrom/superuser-class
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
-    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent,SuperuserClassromComponent],
+    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent,
+    SuperuserClassromComponent, AcademyViewComponent, TeacherAcademyComponent, ModulesComponent],
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,

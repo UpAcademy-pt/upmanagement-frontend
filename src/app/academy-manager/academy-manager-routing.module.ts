@@ -58,6 +58,10 @@ const routes: Routes = [
       {
         path: 'superuser-classroom',
         component: SuperuserClassromComponent
+      },
+      {
+        path: 'module/:moduleId',
+        component: AccountProfileComponent
       }
     ]
   }
