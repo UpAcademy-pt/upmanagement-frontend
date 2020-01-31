@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { QuestionnaireRoutingModule } from './questionnaire-routing.module';
 import { QuestionnaireComponent } from './questionnaire.component';
-import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,14 +19,14 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ViewComponent } from './view/view.component';
+import { EditorComponent } from './editor/editor.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     QuestionnaireComponent,
-    MainComponent,
     NewQuestionnaireComponent,
     TemplatesComponent,
     NewQuizComponent,
@@ -38,6 +37,7 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     HistoryComponent,
     JwPaginationComponent,
     ViewComponent,
+    EditorComponent
   ],
   imports: [
     CommonModule,
@@ -48,9 +48,8 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     AccordionModule.forRoot(),
     FontAwesomeModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule,
-    Ng2OrderModule
-  ],
-  bootstrap: [MainComponent]
+    Ng2OrderModule,
+    NgxPaginationModule
+  ]
 })
 export class QuestionnaireModule { }

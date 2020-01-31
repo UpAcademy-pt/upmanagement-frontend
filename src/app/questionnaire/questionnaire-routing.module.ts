@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { QuestionnaireComponent } from './questionnaire.component';
-import { MainComponent } from './main/main.component';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { TemplatesComponent } from './templates/templates.component';
@@ -11,16 +10,13 @@ import { HistoryComponent } from './history/history.component';
 import { AdminGuard } from '../core/guards/admin.guard';
 import { ToAnswerComponent } from './to-answer/to-answer.component';
 import { ViewComponent } from './view/view.component';
+import { EditorComponent} from './editor/editor.component'
 
 const routes: Routes = [
   {
     path: '',
     component: QuestionnaireComponent,
     children: [
-      {
-      path: '',
-      component: MainComponent
-      },
       {
         path: 'novo',
         component: NewQuestionnaireComponent,
@@ -33,6 +29,10 @@ const routes: Routes = [
       {
         path: 'template',
         component: TemplatesComponent
+      },
+      {
+        path: 'template/editor',
+        component: EditorComponent
       },
       {
         path: 'pendentes',
@@ -51,7 +51,7 @@ const routes: Routes = [
         component: ViewComponent
       },
     ]
-  } 
+  }
 ];
 
 @NgModule({

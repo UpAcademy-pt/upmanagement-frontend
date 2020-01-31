@@ -130,14 +130,7 @@ export class NewQuestionnaireComponent implements OnInit {
   }
 
   public checkRightAnswer(index: number, jindex: number){
-    console.log("entou");
     return this.b.questionList[index].rightAnswer.includes(String(jindex));
-    //this.b.questionList[index].rightAnswer.includes(String(jindex)) 
-    // if (this.b.questionList[index].rightAnswer.includes(String(jindex))){
-    //   return true;
-    // } else {
-    //   return false;
-    // }
   }
 
   ngOnInit() {
