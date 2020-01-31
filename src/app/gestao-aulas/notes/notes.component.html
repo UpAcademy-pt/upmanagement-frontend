@@ -1,34 +1,73 @@
 <h4>Lista de Notas</h4>
-
-<div class="container" >
-    <div class="row">
-      <div class="col-xs-6 col-6 col-md-5 col-lg-6" *ngFor="let note of notes; let i = index;">
-            
-            <accordion>
-            <accordion-group heading="{{note.title}} - {{note.createDate}}">
-              <p>{{note.description}}</p>
-              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="openNoteDescription(template)"> Ver Mais</button>
-              <ng-template #template>
-                    <div class="modal-header">
-                      <h4 class="modal-title pull-left">{{note.title}}</h4>
-                      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      "Data : " + {{note.createDate}} <br>
-                      {{note.description}}
-                    </div>
-            </ng-template>
-            </accordion-group>
-            </accordion>
-      </div>
+<div class="container" style="text-align: right; padding-right: 15px;">
+  <button type="button" class="btn btn-secondary" (click)="openModalNewNote(templateNewNote)">Criar nova nota</button>
+</div>
+<br>
+<div class="container">
+  <div>
+    <div *ngFor="let note of notes$ | async; let i = index;" id="{{i}}">
+      <accordion [isAnimated]="true">
+        <accordion-group heading="{{note.title}} - {{note.createDate}}" style="color: black;">
+          <div>
+            <button type="button" class="btn-borderless btn-edit">
+              <fa-icon [icon]="faEdit" size="lg"></fa-icon>
+            </button>
+            <button type="button" class="btn-borderless btn-delete" (click)="openModalDeleteNote(templateDeleteNote, i)">
+              <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
+            </button>
+          </div>
+          <br>
+          <div>
+            <div class="form-group">
+              <textarea id="textArea" class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>
+                    {{note.description}}
+                  </textarea>
+            </div>
+          </div>
+          <ng-template #template>
+            <div class="modal-header">
+              <h4 class="modal-title pull-left">{{note.title}}</h4>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              "Data : " + {{note.createDate}} <br>
+              {{note.description}}
+            </div>
+          </ng-template>
+        </accordion-group>
+      </accordion>
+      <br>
     </div>
-
-
   </div>
+</div>
 
 
+<!-- Modal Criar Nova Nota -->
+<ng-template #templateNewNote>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Criar nova nota</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body container">
+    <form class="mg-5 mt-3 container" #newNoteForm="ngForm" (ngSubmit)="createNote()">
+      <div class="form-group">
+        <label for="títuloInput">Título:</label>
+        <input #note1Field="ngModel" type="text" class="form-control" id="títuloNota" aria-describedby="títuloNota" placeholder="Escreva aqui o título da sua nota!" [(ngModel)]="title" name="title">
+      </div>
+      <div>
+        <div class="form-group">
+          <textarea #note2Field="ngModel" class="form-control" id="descriçãoNota" rows="3" placeholder="Escreva aqui o corpo da sua nota!" [(ngModel)]="description" name="description"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <button type="submit" class="btn btn-secondary mx-auto">Gravar Nota</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
 
-
-  
+<!-- Modal Criar Nova Nota -->

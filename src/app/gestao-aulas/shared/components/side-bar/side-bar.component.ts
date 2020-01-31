@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
-import { Edition } from '../../models/edition';
+import { Edition } from '../../models/edition/edition';
 import { ServiceGeneralService } from '../../services/service-general.service';
 
 
