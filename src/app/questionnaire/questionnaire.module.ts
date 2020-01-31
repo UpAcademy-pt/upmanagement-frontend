@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { QuestionnaireRoutingModule } from './questionnaire-routing.module';
 import { QuestionnaireComponent } from './questionnaire.component';
-import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
 import { NewQuestionnaireComponent } from './new-questionnaire/new-questionnaire.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,7 +24,6 @@ import { EditorComponent } from './editor/editor.component';
 @NgModule({
   declarations: [
     QuestionnaireComponent,
-    MainComponent,
     NewQuestionnaireComponent,
     TemplatesComponent,
     NewQuizComponent,
@@ -46,7 +44,6 @@ import { EditorComponent } from './editor/editor.component';
     NgxSelectModule,
     AccordionModule.forRoot(),
     FontAwesomeModule
-  ],
-  bootstrap: [MainComponent]
+  ]
 })
 export class QuestionnaireModule { }
