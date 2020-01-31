@@ -17,11 +17,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect-dropdown';
 import { MyDeclarationsComponent } from './my-declarations/my-declarations.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { SuperuserClassromComponent } from './superuser-classrom/superuser-classrom.component';
 
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
-    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent],
+    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent,SuperuserClassromComponent],
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,
