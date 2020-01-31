@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Materials } from '../models/mamaterials/materials';
+import { NgForm} from '@angular/forms'
 
 @Injectable({
   providedIn: 'root'
@@ -15,20 +16,14 @@ export class MaterialsService {
 
   public createMaterial(material: Materials){
     console.log(material);
-    return this.http.post(this.url, material).subscribe(
-      (msg: string) => {
-        console.log(msg);
-      },(error: string) => {
-        console.log(error);
-      }
-    )
+    return this.http.post(this.url, material)
   }
 
   public getAllMaterials(){
     return this.http.get(this.url)
   }
 
-  public deleteById(id){
+  public deleteById(id: number){
     return this.http.delete(this.url+ id)
   }
 

@@ -26,6 +26,8 @@ export class SideBarComponent implements OnInit {
       this.showSuperUserTab = true;
     }
     this.edtions = this.serviceApi.getEditions();
+    console.log(this.showSuperUserTab);
+    
    }
 
   ngOnInit() {
