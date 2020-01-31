@@ -1,6 +1,6 @@
 <div>
       <h4 class="text-center"><b>Criar novo material:</b></h4>
-    <form class="mg-5 mt-3 container" (ngSubmit)="createMaterial()">
+    <form class="mg-5 mt-3 container" #updateMaterial="ngForm" (ngSubmit)="createMaterial()">
         <div class="form-group row">
           <label for="title" class="col-sm-2 col-form-label">Titulo:</label>
           <div class="col-sm-10">
@@ -14,18 +14,18 @@
             <label for="type" class="col-sm-2 col-form-label">Tipo:</label>
             <div class="col-sm-10">
               <input [(ngModel)]="type" name="type" id="type"
-              type="text" class="form-control" placeholder="Coloque o tipo do material">
+              type="text" class="form-control" placeholder="Coloque o tipo do material" required>
             </div>
         </div>
         <div class="form-group row">
           <label for="link" class="col-sm-2 col-form-label">Link:</label>
           <div class="col-sm-10">
             <input [(ngModel)]="link" name="link" id="link"
-            type="text" class="form-control" placeholder="Coloque o link">
+            type="text" class="form-control" placeholder="Coloque o link" required>
           </div>
         </div>
         <div class="row">
-          <button type="submit" class="btn btn-secondary mx-auto">Criar</button>
+          <button type="submit" [disabled]="!updateMaterial.valid" class="btn btn-secondary mx-auto">Criar</button>
         </div>
       </form>
       <br>
@@ -44,12 +44,12 @@
                 {{row[col]}}
               </td>
               <td>
-                <button  type="button" class="btn-borderless btn-edit">
+                <button (click)="openModalUpdateMaterial(templateUpdatMaterial, i)" type="button" class="btn-borderless btn-edit">
                   <fa-icon [icon]="faEdit" size="lg"></fa-icon>
                 </button>
               </td>
               <td>
-                <button  type="button" class="btn-borderless btn-delete">
+                <button (click)="openModalConfirmDeleteMaterial(templateConfirmDeleteMaterial,i)" type="button" class="btn-borderless btn-delete">
                   <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
                 </button>
               </td>
@@ -57,4 +57,48 @@
           </tbody>
         </table>
       </div>
+
+
 </div>
+<ng-template #templateUpdatMaterial>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Atualizar material</h4>
+  </div>
+  <div class="modal-body container">
+    Atualize os dados abaixo:
+    <div class="mg-5 mt-3 container">
+      <div class="form-group row">
+        <label for="tituloUpdate" class="col-sm-2 col-form-label">Titulo:</label>
+        <div class="col-sm-10">
+          <input  [(ngModel)]="materialToUpdate.title" name="title" id="tituloUpdate" type="text"
+          class="form-control">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="typeUpdate" class="col-sm-2 col-form-label">Tipo:</label>
+        <div class="col-sm-10">
+          <input [(ngModel)]="materialToUpdate.type" id="typeUpdate" name="type" type="text"
+           class="form-control" >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="urlUpdate" class="col-sm-2 col-form-label">Url:</label>
+        <div class="col-sm-10">
+          <input [(ngModel)]="materialToUpdate.url" id="urlUpdate" name="urlUpdate" type="text"
+           class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <button class="btn btn-primary mx-auto" (click)="updateMat()">Atualizar</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+      <!-- Modal Confirm Delete User -->
+<ng-template #templateConfirmDeleteMaterial>
+  <div class="modal-body text-center">
+    <p>Tem a certeza que deseja remover o material?</p>
+    <button type="button" class="btn btn-danger" (click)="deleteById()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Não</button>
+  </div>
+</ng-template>

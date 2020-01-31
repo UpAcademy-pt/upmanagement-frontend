@@ -2,7 +2,7 @@
 <accordion>
    
     <accordion-group *ngFor="let lesson of lessons; let i = index;" heading="{{lesson.name}} - Aula {{i+1}}">
-<div>
+        <div>
             <p><b>Descriçao</b></p>
             <p>{{lesson.description}}</p>
             <p><b>Materials</b></p>
@@ -16,6 +16,11 @@
                 <p>notas</p> 
             </div>
             <accordion-group heading="notas">
+                <div>
+                    <div>
+                        <p>{{lesson.name}}</p>
+                    </div>
+                </div>
            <p>{{lesson.name}}</p>
 
           
