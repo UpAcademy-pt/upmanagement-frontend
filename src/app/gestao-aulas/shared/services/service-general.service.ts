@@ -18,6 +18,7 @@ export class ServiceGeneralService {
   private currentAccount: Account = new Account();
   private accountId$: ReplaySubject<number> = new ReplaySubject();
   private edtions: Edition[];
+  private edtions$:ReplaySubject<any> = new ReplaySubject();
   
 
   constructor(
@@ -32,9 +33,8 @@ export class ServiceGeneralService {
       (account: Account) => {
         this.currentAccount = account;
         this.accountId$.next(account.id);
-        this.getEditions();
-        console.log(account);
-        
+        this.edtions$.next(account.editionsDtos);
+        this.edtions = account.editionsDtos;
         }
       )
       
@@ -45,7 +45,7 @@ export class ServiceGeneralService {
   }
 
 public getEditions(){
-  return this.simulation
+  return this.edtions$
 }
 public getLessons(){
   return this.simulationLessons

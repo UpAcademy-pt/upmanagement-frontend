@@ -4,7 +4,6 @@ import { AnswerForum } from '../shared/models/answer-forum/answer-forum';
 import { QuestionServiceService } from '../shared/services/forum-service/question-service.service';
 import { AnswerServiceService } from '../shared/services/forum-service/answer-service.service';
 import { ReplaySubject } from 'rxjs';
-import { Edition } from '../shared/models/edition';
 
 @Component({
   selector: 'app-forum',
