@@ -22,12 +22,12 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { AcademyViewComponent } from './academy-view/academy-view.component';
 import { TeacherAcademyComponent } from './teacher-academy/teacher-academy.component';
 import { ModulesComponent } from './modules/modules.component';
+import { SuperuserClassromComponent } from './superuser-classrom/superuser-classrom.component';
 
 
 @NgModule({
   declarations: [AcademyManagerComponent, SidebarComponent, AdminSidebarComponent, AdminAcademiesComponent, AdminStudentsComponent,
-    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent,
-    AcademyViewComponent, TeacherAcademyComponent, ModulesComponent],
+    AdminTeachersComponent, MyAcademiesComponent, MyProfileComponent, AccountProfileComponent, MyDeclarationsComponent,SuperuserClassromComponent],
   imports: [
     CommonModule,
     AcademyManagerRoutingModule,

@@ -12,6 +12,7 @@ import { MyDeclarationsComponent } from './my-declarations/my-declarations.compo
 import { AcademyViewComponent } from './academy-view/academy-view.component';
 import { TeacherAcademyComponent } from './teacher-academy/teacher-academy.component';
 import { ModulesComponent } from './modules/modules.component';
+import { SuperuserClassromComponent } from './superuser-classrom/superuser-classrom.component';
 
 
 const routes: Routes = [
@@ -55,16 +56,8 @@ const routes: Routes = [
         component: MyDeclarationsComponent
       },
       {
-        path: 'academy/:academyId',
-        component: AcademyViewComponent
-      },
-      {
-        path: 'academy-teacher/:academyId',
-        component: TeacherAcademyComponent
-      },
-      {
-        path: 'module/:moduleId',
-        component: ModulesComponent
+        path: 'superuser-classroom',
+        component: SuperuserClassromComponent
       }
     ]
   }
