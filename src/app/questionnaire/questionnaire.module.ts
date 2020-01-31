@@ -20,6 +20,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ViewComponent } from './view/view.component';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ViewComponent } from './view/view.component';
     PendingComponent,
     HistoryComponent,
     JwPaginationComponent,
-    ViewComponent
+    ViewComponent,
+    EditorComponent
   ],
   imports: [
     CommonModule,

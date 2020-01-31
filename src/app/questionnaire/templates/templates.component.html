@@ -1,1 +1,21 @@
-<p>templates works!</p>
+<div class="container row row-cols-1 row-cols-md-3">
+        <div *ngFor="let template of templates$ | async; let i = index;" class="col-sm-6 col-md-4 col-lg-3 mb-4">
+            <div (click)="editTemplate(template.id)" class="card-pointer card h-100">
+                <div *ngIf="template.qType=='QUIZ'">
+                    <img src="https://resultadosdigitais.com.br/blog/files/2015/07/07-02-capa-quiz-marketing-digital.jpg" class="px-3 card-img-top" alt="TemplateDeQuiz">
+                </div>
+                <div *ngIf="template.qType=='EVALUATION'">
+                    <img src="https://www.easypooling.com/images/img-questionnaire.png" class="px-3 card-img-top" alt="TemplateDeEvaluation">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{template["name"]}}</h5>
+                    <p class="card-text"><small class="text-muted">Adicionado em: {{template.formattedCreateDate}}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button (click)="editTemplate(1)">Ir</button>
+    <div *ngIf="(templates$ | async)?.length==0" class="my-5 text-center">
+        <fa-icon size="9x" style="color: green;" [icon]="faSadTear"></fa-icon>
+        <h5 class="my-5">Nenhum template</h5>
+    </div>
