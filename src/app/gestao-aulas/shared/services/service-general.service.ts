@@ -51,10 +51,6 @@ public getLessons(){
   return this.simulationLessons
 }
 
-public getNotes () {
-  return this.simulationNotes;
-}
-
 /**
  * getCurrentAccountId
  */
@@ -137,36 +133,4 @@ public simulationLessons: Array<Lesson> = [
     'notesIds': [1,2],
   }
 ];
-
-public simulationNotes : Array <Note> = [
-  {'id' : 1,
-  'idAccount' : 1,
-  'idEdition' : 1,
-  'title': 'Nota1',
-  'description' : 'atum tunatum',
-  'createDate' : '07 Nov 2019'
-  }, {
-    'id' : 2,
-    'idAccount' : 1,
-    'idEdition' : 1,
-    'title': 'Nota2',
-    'description' : 'sardinha', 
-    'createDate' : '10 Dec 2019'
-  }, {
-    'id' : 3,
-    'idAccount' : 1,
-    'idLesson' : 1,
-    'title' : 'Nota3',
-    'description' : 'bacalhau', 
-    'createDate' : '8 Nov 2019'
-  }, {
-    'id' : 4,
-    'idAccount' : 1,
-    'idLesson' : 2,
-    'title' : 'Nota4',
-    'description' : 'salmao', 
-    'createDate': '10 Nov 2019'
-  }
-
-]
 }
