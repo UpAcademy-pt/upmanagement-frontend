@@ -1,0 +1,56 @@
+<!-- Sidebar -->
+<!--
+<div class="border-right" id="sidebar-wrapper">
+ 
+  <div class="list-group list-group-flush">
+    <div class="btn-group" dropdown>
+      <button *ngIf="showSuperUserTab" id="button-animated" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
+        aria-controls="dropdown-animated">
+        Academias <span class="caret"></span>
+      </button>
+      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+        <li *ngFor="let edition of edtions" role="menuitem">
+          <a class="dropdown-item" routerLink="/lessons">{{edition.name}}</a>
+        </li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/lessons">Academia 1</a></li>
+      </ul>
+    </div>
+    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons" routerLinkActive="active">Aulas</a>
+    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons/notes"
+      routerLinkActive="active">Notas</a>
+    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons/forum"
+      routerLinkActive="active">Forum</a>
+    <a class="list-group-item list-group-item-action bg-light" routerLink="/lessons/calendar"
+      routerLinkActive="active">Calendario</a>
+  </div>
+</div>
+//-->
+<!-- /#sidebar-wrapper -->
+<div class="D-flex">
+  <nav id="sidebar" class="border-right navbar-dark bg-dark ">
+    <div class="sidebar-header">
+      <h4 class="shrink">UpAcademy Moodle</h4>
+    </div>
+  
+    <ul class="list-unstyled navbar-nav">
+      <li class="nav-item nav-menu">
+        <a class="nav-link" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+          [ngClass]="{ 'active': isCollapsed }">Academias</a>
+        <ul class="collapse list-unstyled" [ngClass]="{ 'show': isCollapsed }">
+          <li *ngFor="let edition of edtions" class="nav-item">
+            <a class="nav-link" [routerLinkActive]="['active']" routerLink="/lessons">{{edition.name}}</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/lessons/notes">Notas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/lessons/forum">Forum</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/lessons/materiais">Materiais</a>
+      </li>
+    </ul>
+  </nav>
+</div>

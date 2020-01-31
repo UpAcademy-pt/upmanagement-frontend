@@ -1,0 +1,34 @@
+<h4>Lista de Notas</h4>
+
+<div class="container" >
+    <div class="row">
+      <div class="col-xs-6 col-6 col-md-5 col-lg-6" *ngFor="let note of notes; let i = index;">
+            
+            <accordion>
+            <accordion-group heading="{{note.title}} - {{note.createDate}}">
+              <p>{{note.description}}</p>
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="openNoteDescription(template)"> Ver Mais</button>
+              <ng-template #template>
+                    <div class="modal-header">
+                      <h4 class="modal-title pull-left">{{note.title}}</h4>
+                      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      "Data : " + {{note.createDate}} <br>
+                      {{note.description}}
+                    </div>
+            </ng-template>
+            </accordion-group>
+            </accordion>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+  
