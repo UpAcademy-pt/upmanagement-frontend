@@ -39,20 +39,20 @@
     </div>
   </ng-template>
 
-  <div *ngFor="let evaluation of evaluations$ | async">
 
+  <!-- Table -->
     <table class="table table-sm table-striped container m-3 ml-3 col-12 text-center" style="width: 1100px;">
 
       <thead class="thead-dark">
         <tr>
           <th>Formandos</th>
-          <th *ngFor="let grade of grades | async; let i = index;" id="{{i}}">{{grade.subject}}</th>
+          <th *ngFor="let grade of gradesArray$ | async; let i = index;" id="{{i}}">{{grade.subject}}</th>
           <th>Comentário</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let student of students$ | async; let i = index;" id="{{i}}">
+        <tr *ngFor="let evaluation of evaluations$ | async; let i = index;" id="{{i}}">
           <td>{{student.name}}</td>
           <td></td>
           <td></td>
@@ -60,4 +60,3 @@
       </tbody>
     </table>
   </div>
-</div>

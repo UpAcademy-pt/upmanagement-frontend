@@ -27,7 +27,7 @@ export class ModulesComponent implements OnInit {
   public evaluationToCreate: Evaluation = new Evaluation();
   public grade: Grade = new Grade();
   public gradesArray: Grade[] = [];
-
+  public gradesArray$: ReplaySubject<Grade[]> = new ReplaySubject(1);
   public showTable = false;
 
   modalRef: BsModalRef;
@@ -50,9 +50,21 @@ export class ModulesComponent implements OnInit {
           }
         ); });
     this.getAllStudents();
+    this.getAllGrades();
   }
 
   ngOnInit() {
+  }
+
+  public getAllGrades() {
+    this.gradeService.getAllGrades()
+      .subscribe((grades: Grade[]) => {
+        this.gradesArray = grades;
+        this.gradesArray$.next(this.gradesArray);
+        /* if (this.gradesArray.length > 0) {
+          this.showTable = true;
+        } */
+      });
   }
 
   public getAllStudents() {
@@ -93,6 +105,7 @@ export class ModulesComponent implements OnInit {
       (id: string) => {
         //this.grade.id = id;
         this.gradesArray.push(this.grade);
+        this.gradesArray$.next(this.gradesArray);
         console.log(this.gradesArray);
       }
     );
