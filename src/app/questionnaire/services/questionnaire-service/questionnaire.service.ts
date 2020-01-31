@@ -25,12 +25,6 @@ export class QuestionnaireService {
     let currentUserId: number = this.userService.getCurrentUser().id;
     this.accountService.getAccountByUserId(currentUserId).subscribe(
       (account: Account) => {
-        account.pendingQuestionnaires.forEach(questionnaire => {
-          let dateC = new Date(questionnaire.createDate);
-          questionnaire.formattedCreateDate = dateC.getDate().toString().padStart(2, '0') + "/" + (dateC.getMonth() + 1).toString().padStart(2, '0') + "/" + dateC.getFullYear();
-          let dateLM = new Date(questionnaire.lastModifiedDate);
-          questionnaire.formattedLastModifiedDate = dateLM.getDate().toString().padStart(2, '0') + "/" + (dateLM.getMonth() + 1).toString().padStart(2, '0') + "/" + dateLM.getFullYear();
-        });
         this.accountService.setCurrentAccount(account);
         this.pendingQuestionnaires = account.pendingQuestionnaires;
         this.pendingQuestionnaires$.next(this.pendingQuestionnaires);

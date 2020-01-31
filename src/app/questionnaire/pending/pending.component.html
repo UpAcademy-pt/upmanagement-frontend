@@ -8,8 +8,8 @@
                 <img src="https://www.easypooling.com/images/img-questionnaire.png" class="px-3 card-img-top" alt="Questionário">
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{questionnaire["name"]}}</h5>
-                <p class="card-text"><small class="text-muted">Adicionado em: {{questionnaire.formattedCreateDate}}</small></p>
+                <h5 class="card-title">{{ questionnaire["name"] }}</h5>
+                <p class="card-text"><small class="text-muted">Adicionado em: {{ getCurrentDate(questionnaire.createDate) }}</small></p>
             </div>
         </div>
     </div>

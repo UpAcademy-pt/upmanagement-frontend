@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { QuestionnaireService } from '../services/questionnaire-service/questionnaire.service';
 import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
-import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDoubleDown, faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons';
 import { Answer } from '../models/answer/answer';
 
 @Component({
@@ -16,6 +16,7 @@ export class ToAnswerComponent implements OnInit {
   private currentQuestionnaire: Questionnaire;
   private userName: string;
   faAngleDoubleDown = faAngleDoubleDown;
+  faAngleDoubleUp = faAngleDoubleUp;
 
   constructor(
     private router: Router,
@@ -44,7 +45,7 @@ export class ToAnswerComponent implements OnInit {
           .filter(option => option != "false");
       }
     }
-    console.log("Respontas a enviar: " + JSON.stringify(this.currentQuestionnaire.answerList));
+    console.log("Questionario enviado: " + JSON.stringify(this.currentQuestionnaire));
     this.questionnaireService.updateQuestionnaire(this.currentQuestionnaire).subscribe(
       (msg: string) => {
         console.log(msg);

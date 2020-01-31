@@ -29,6 +29,11 @@ export class PendingComponent implements OnInit {
   ngOnInit() {
   }
 
+  getCurrentDate(createDate: number) {
+    let dateC = new Date(createDate);
+    return dateC.getDate().toString().padStart(2, '0') + "/" + (dateC.getMonth() + 1).toString().padStart(2, '0') + "/" + dateC.getFullYear();
+  }
+
   public solveThisQuestionnaire(questionnaireId: number) {
     this.router.navigate(['/questionario/pendentes/responder'], { state: { id: questionnaireId} });
   }
