@@ -52,6 +52,10 @@ export class UserServiceService {
     return this.currentUser.name;
   }
 
+  public getCurrentEmail():string {
+    return this.currentUser.email;
+  }
+
   public getCurrentUser() {
     return this.currentUser;
   }

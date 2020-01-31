@@ -1,2 +1,14 @@
+<div class="row">
+    <div class="col-2">
+        <div *ngIf="showAdminSidebar===true" class="sidebar-sticky ">
+            <app-admin-sidebar></app-admin-sidebar>
+        </div>
 
-<p>academy-manager works!</p>
+        <div *ngIf="showAdminSidebar===false" class="sidebar-sticky">
+            <app-sidebar></app-sidebar>
+        </div>
+    </div>
+    <div class="col-10" style="position: fixed; top: 76px; left: 190px;">
+        <router-outlet></router-outlet>
+    </div>
+</div>
