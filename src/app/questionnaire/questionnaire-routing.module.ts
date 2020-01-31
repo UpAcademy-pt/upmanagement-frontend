@@ -11,6 +11,7 @@ import { HistoryComponent } from './history/history.component';
 import { AdminGuard } from '../core/guards/admin.guard';
 import { ToAnswerComponent } from './to-answer/to-answer.component';
 import { ViewComponent } from './view/view.component';
+import { EditorComponent} from './editor/editor.component'
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'template',
         component: TemplatesComponent
+      },
+      {
+        path: 'template/editor',
+        component: EditorComponent
       },
       {
         path: 'pendentes',
