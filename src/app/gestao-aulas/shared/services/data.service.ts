@@ -10,7 +10,7 @@ import { ServiceGeneralService } from './service-general.service';
 })
 export class DataService {
   public notes$: ReplaySubject<Note[]> = new ReplaySubject(1);
-  private notes = [];
+  public notes = [];
 
   constructor(
     private notesAPI: NotesService,
@@ -51,9 +51,33 @@ export class DataService {
       }
     );
   }
+
+
+  public getNotesByAccountId(id: number) {
+    this.notesAPI.getByAccountId(this.accountApi.getCurrentAccountId()).subscribe(
+      (notes: Note[]) => {
+        this.notes = notes;
+        this.notes$.next(notes);
+        console.log(notes);
+      });
   }
 
+  /**
+   * deleteNoteById
+   */
+  public deleteNoteById(id: number) {
+    this.notesAPI.delete(id).subscribe(
+      () => {
+        const noteIndex = this.notes.map((note) => note.id).indexOf(id);
+        if (noteIndex !== -1) {
+          this.notes.splice(noteIndex, 1);
+        }
+        this.updateNotes$();
+      }
+    );
+  }
 
+}
 
 
 

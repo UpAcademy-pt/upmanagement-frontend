@@ -71,3 +71,10 @@
 </ng-template>
 
 <!-- Modal Criar Nova Nota -->
+<ng-template #templateDeleteNote>
+  <div class="modal-body text-center">
+    <p>Tem a certeza que deseja remover a nota?</p>
+      <button type="button" class="btn btn-secondary btn-lg" (click)="modalRef.hide()" style="margin-right: 5px">Não</button>
+      <button type="button" class="btn btn-danger" (click)="deleteNoteById()" style="margin-left: 5px">Sim</button>
+  </div>
+</ng-template>

@@ -22,6 +22,7 @@ export class NotesComponent implements OnInit {
   private note: Note = new Note();
   private notes$: ReplaySubject<Note[]> = new ReplaySubject();
   private editValid: Boolean = true;
+  private noteToDelete: number;
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faUserPlus = faUserPlus;
@@ -38,10 +39,9 @@ export class NotesComponent implements OnInit {
     private modalService: BsModalService,
     private dataService: DataService
   ) { 
-    this.notesAPI.getByAccountId(this.accountApi.getCurrentAccountId()).subscribe(
-      (note: Note[]) => {this.notes$.next(note),
-      console.log(note);
-      });
+    this.dataService.getNotesByAccountId(this.accountApi.getCurrentAccountId());
+    this.notes = this.dataService.notes;
+    this.notes$ = dataService.notes$;
   }
 
   ngOnInit() {
@@ -60,7 +60,10 @@ export class NotesComponent implements OnInit {
   this.modalRef = this.modalService.show(template);
 }
 
-openModalDeleteNote(template: TemplateRef<any>) {
+openModalDeleteNote(template: TemplateRef<any>, index: number) {
+  this.noteToDelete = index;
+  console.log(this.noteToDelete);
+  
   this.modalRef = this.modalService.show(template);
 }
 
@@ -74,12 +77,19 @@ openModalDeleteNote(template: TemplateRef<any>) {
        this.note.accountId = this.accountApi.getCurrentAccountId();
        this.note.editionId = this.editionId;
        this.note.lessonId = this.lessonId;
-       
        console.log(this.note);
        this.dataService.createNote(this.note);
        this.note = new Note();
        this.modalRef.hide();
    }
+
+    /**
+     * deleteNoteById
+     */
+    public deleteNoteById() {
+      console.log(this.notes);
+      this.dataService.deleteNoteById(this.notes[this.noteToDelete].id);
+    }
 }
 
 
