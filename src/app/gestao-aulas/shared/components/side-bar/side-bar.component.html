@@ -34,13 +34,16 @@
   
     <ul class="list-unstyled navbar-nav">
       <li class="nav-item nav-menu">
-        <a class="nav-link" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+        <a *ngIf="showSuperUserTab" class="nav-link" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
           [ngClass]="{ 'active': isCollapsed }">Academias</a>
         <ul class="collapse list-unstyled" [ngClass]="{ 'show': isCollapsed }">
-          <li *ngFor="let edition of edtions" class="nav-item">
-            <a class="nav-link" [routerLinkActive]="['active']" routerLink="/lessons">{{edition.name}}</a>
+          <li *ngFor="let edition of edtions$ |async; let i= index;" class="nav-item">
+            <a class="nav-link" [routerLinkActive]="['active']" routerLink="/lessons/:{{edition.id}}">{{edition.name}}</a>
           </li>
         </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" routerLink="/lessons">Aulas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" routerLink="/lessons/notes">Notas</a>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 import { ServiceGeneralService } from '../shared/services/service-general.service';
-import { Lesson } from '../shared/models/lesson';
+import { Lesson } from '../shared/models/lesson/lesson';
 
 @Component({
   selector: 'app-lessons',

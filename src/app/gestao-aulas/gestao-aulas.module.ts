@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, ModalModule } from 'ngx-bootstrap';
 
 import { GestaoAulasRoutingModule } from './gestao-aulas-routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -20,12 +20,24 @@ import { MaterialsComponent } from './materials/materials.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
 @NgModule({
-  declarations: [GestaoAulasComponent, ForumComponent, NotesComponent, AcademiesComponent, CalendarComponent, LessonsComponent, LessonsComponent, NotesComponent, CalendarComponent, MaterialsComponent],
+  declarations: [
+    GestaoAulasComponent,
+    ForumComponent,
+    NotesComponent,
+    AcademiesComponent,
+    CalendarComponent,
+    LessonsComponent,
+    LessonsComponent,
+    NotesComponent,
+    CalendarComponent,
+    MaterialsComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -34,8 +46,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BsDropdownModule,
     BsDropdownModule.forRoot(),
     PerfectScrollbarModule,
-    FontAwesomeModule
-    
+    FontAwesomeModule,
+    ModalModule.forRoot()
+
   ],
   providers: [
     {
