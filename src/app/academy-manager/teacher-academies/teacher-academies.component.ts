@@ -43,10 +43,10 @@ export class TeacherAcademiesComponent implements OnInit {
 public getActiveAcademies (academyId: number) {
   this. academyApi.getbyId(academyId).subscribe(
     (res: Academy) => {
-      if (res.status != 'NOTACTIVE') {
+       if (res.status !== 'NOTACTIVE') {
         this.academies.push(res);
         this.academies$.next(this.academies);
-      }
+       }
       console.log(this.academies);
     }
   )
