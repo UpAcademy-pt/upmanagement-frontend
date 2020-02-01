@@ -45,12 +45,12 @@ const routes: Routes = [
         component: MyProfileComponent
       },
       {
-        path: 'my-profile',
-        component: MyProfileComponent
-      },
-      {
         path: 'profile/:userId',
         component: AccountProfileComponent
+      },
+      {
+        path: 'academy/:academyId',
+        component: AcademyViewComponent
       },
       {
         path: 'my-declarations',
