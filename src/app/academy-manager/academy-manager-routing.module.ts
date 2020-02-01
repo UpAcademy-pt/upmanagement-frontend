@@ -62,7 +62,7 @@ const routes: Routes = [
       },
       {
         path: 'module/:moduleId',
-        component: AccountProfileComponent
+        component: ModulesComponent
       },
       {
         path: 'academy-teacher/:academyId',
