@@ -1,8 +1,8 @@
 <div>
-  <div class="form-group m-3 col-9">
+  <div class="form-group">
     <input type="text" class="form-control" placeholder="Pesquise aqui" [(ngModel)]="term">
   </div>
-  <table class="table table-striped container m-3 col-9 text-center">
+  <table class="table table-striped container text-center">
     <thead class="thead-dark">
       <tr>
         <th (click)="sort('name')">Título <span class="glyphicon sort-icon" *ngIf="key =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
