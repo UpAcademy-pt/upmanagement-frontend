@@ -2,6 +2,7 @@
     <div class="mb-4">
         <h1 class="text-center">{{currentQuestionnaire?.name}}</h1>
         <h6 class="text-center">Nome: {{userName}}</h6>
+        <h6 *ngIf="currentQuestionnaire?.qType=='QUIZ'" class="text-center">Nota: {{currentQuestionnaire?.score}}%</h6>
     </div>
 
     <div>
