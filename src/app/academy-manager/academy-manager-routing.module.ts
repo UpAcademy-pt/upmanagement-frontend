@@ -45,7 +45,7 @@ const routes: Routes = [
         component: MyProfileComponent
       },
       {
-        path: 'profile/:userId',
+        path: 'profile/:accountId',
         component: AccountProfileComponent
       },
       {
@@ -61,7 +61,7 @@ const routes: Routes = [
         component: SuperuserClassromComponent
       },
       {
-        path: 'module/:moduleId',
+        path: 'academy/:academyId/module/:moduleId',
         component: ModulesComponent
       },
       {
