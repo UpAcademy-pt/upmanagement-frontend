@@ -40,7 +40,7 @@ export class DataService {
   public updateNotes(note: Note) {
     this.notesAPI.update(note).subscribe(
       (res: any) => {
-        this.notes = res;
+        this.notes.splice(this.notes.findIndex(element => element.id === note.id), 1, note);
         this.updateNotes$();
       }
     );
