@@ -4,8 +4,6 @@ import { Account } from '../models/account/account';
 import { QuestionnaireService } from '../services/questionnaire-service/questionnaire.service';
 import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
-import { User } from 'src/app/core/models/user';
-import { element } from 'protractor';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,8 +18,6 @@ export class HistoryComponent implements OnInit {
   private history: Questionnaire[];
   public pageOfItems: Array<any>;
   // Lembrar OnDestroy()
-  private showViewBtn: boolean[] = [];
-  counter: number[];
   public filterData: string;
   // sort
   key = 'name'; // set default
@@ -53,20 +49,30 @@ export class HistoryComponent implements OnInit {
   public getQuestionnaires() {
     this.questService.getAnsweredQuestionnaireByAccountId(this.account.id).subscribe((history: Questionnaire[]) => {
       this.history = history; console.log(history);
-      this.showView();
+      // this.showView();
     });
   }
-  public showView() {
+  public showView(data: string[]) {
     // this.history.forEach(element => {
     //   element.viewPrivacy.includes(this.getCurrentUser().role);
     // })
     // this.showStatsBtn = true;
 
-    for (let i = 0; i < this.history.length; i++) {
-      if (this.history[i].viewPrivacy.includes(this.getCurrentUser().role)) {
-        this.showViewBtn[i] = true
+    // for (let i = 0; i < this.history.length; i++) {
+    //   if (this.history[i].viewPrivacy.includes(this.getCurrentUser().role)) {
+    //     this.showViewBtn[i] = true
+    //   } else {
+    //     this.showViewBtn[i] = false
+    //   }
+    //   console.log(this.showViewBtn)
+    // }
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].includes(this.getCurrentUser().role)) {
+        return true;
       }
     }
+
+
   }
   public onChangePage(pageOfItems: Array<any>) {
     // update current page of items
@@ -76,8 +82,6 @@ export class HistoryComponent implements OnInit {
   public viewThisQuestionnaire(questionnaireId: number) {
     this.router.navigate(['/questionario/historico/ver'], { state: { id: questionnaireId } });
   }
-
-  public dateToString(){}
 
   public dateChange(data: Questionnaire) {
 

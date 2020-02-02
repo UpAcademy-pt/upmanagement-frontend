@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,8 +18,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { ProfileComponent } from './profile/profile.component';
 import { ValidateComponent } from './validate/validate.component';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     FooterComponent,
     AdminComponent,
     ProfileComponent,
-    ValidateComponent,
-    ProfileComponent,
+    ValidateComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +43,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     CollapseModule.forRoot(),
     NgxSelectModule,
     AccordionModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
