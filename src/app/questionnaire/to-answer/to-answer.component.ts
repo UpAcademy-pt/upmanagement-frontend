@@ -40,14 +40,6 @@ export class ToAnswerComponent implements OnInit {
   ngOnInit() { }
 
   public sendQuestionnaire() {
-    for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
-      if (this.currentQuestionnaire.questionList[i].aType == "MULTIPLE") {
-        this.currentQuestionnaire.answerList[i].answer = this.currentQuestionnaire.answerList[i].answer
-          .map((option, index) => option = "true" ? "" + index : "false")
-          .filter(option => option != "false");
-      }
-    }
-    console.log("Questionario enviado: " + JSON.stringify(this.currentQuestionnaire));
     this.questionnaireService.updateQuestionnaire(this.currentQuestionnaire).subscribe(
       (msg: string) => {
         console.log(msg);
@@ -62,9 +54,18 @@ export class ToAnswerComponent implements OnInit {
       });
   }
 
+  checkOrUncheck(questionIndex: number, optionIndex: number) {
+    if (this.currentQuestionnaire.answerList[questionIndex].answer.indexOf(String(optionIndex)) == -1) { 
+      this.currentQuestionnaire.answerList[questionIndex].answer.push(String(optionIndex));
+    } else {
+      this.currentQuestionnaire.answerList[questionIndex].answer.splice(this.currentQuestionnaire.answerList[questionIndex].answer.indexOf(String(optionIndex)), 1);
+    }
+  }
+
   showToastSuccess(msg: string) {
     this.toastr.success(msg, 'Sucesso', {timeOut: 3000});
   }
+
   showToastErro(msg: string) {
     this.toastr.warning(msg, 'Erro', {timeOut: 3000});
   }

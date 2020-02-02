@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionnaireService } from '../services/questionnaire-service/questionnaire.service';
-import { faAngleDoubleDown, faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDoubleDown, faAngleDoubleUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 
 @Component({
@@ -35,6 +35,10 @@ export class ViewComponent implements OnInit {
 
    isSelected(i: number, j: number) {
     return this.currentQuestionnaire.answerList[i].answer.includes(String(j));
+   }
+
+   isRightAnswer(i: number, j: number) {
+     return this.currentQuestionnaire.questionList[i].rightAnswer.includes(String(j));
    }
 
   ngOnInit() {
