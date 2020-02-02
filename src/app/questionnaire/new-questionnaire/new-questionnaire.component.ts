@@ -81,6 +81,8 @@ export class NewQuestionnaireComponent implements OnInit {
       let element = this.currentQuestionnaire.questionList[i];
       element.rightAnswer = element.rightAnswer.map((option, index) => option == "true" ? String(index) : "false")
       .filter(option => option != "false");
+
+      element.orderNumber = i;
     }
 
     //Add the type of the questionnaire
