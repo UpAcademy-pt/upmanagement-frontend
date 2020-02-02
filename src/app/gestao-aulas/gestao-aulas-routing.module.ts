@@ -28,7 +28,7 @@ const routes: Routes = [
         component: NotesComponent,
       },
       {
-        path: 'forum',
+        path: 'forum/:id',
         component: ForumComponent,
       },
       {

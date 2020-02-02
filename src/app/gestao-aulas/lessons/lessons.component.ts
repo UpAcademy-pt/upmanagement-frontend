@@ -24,7 +24,11 @@ export class LessonsComponent implements OnInit {
   private rowForEditions$: ReplaySubject<any> = new ReplaySubject(1);
   private materials$: ReplaySubject<any> = new ReplaySubject(1);
   private materials: Materials= new Materials();
-
+  private materialsDisplay$:ReplaySubject<any[][]> = new ReplaySubject(1); 
+  private matsDisplay:any [];
+  public headerAtt=["url","title"];
+  public showMats:boolean= false;
+  
 
   constructor(
     private materialsApi: MaterialsService,
@@ -38,6 +42,8 @@ export class LessonsComponent implements OnInit {
           (data:Edition[])=>{
             let param = data[params.i] == null ? data[0] : data[params.i]
             this.lessons$.next(param.lessonsDtos)
+            this.matsDisplay = Array(param.lessonsDtos.length).fill(0) ;
+            console.log( this.matsDisplay);
           }
         )
         this.rowForEditions$.next(params);
@@ -58,6 +64,7 @@ export class LessonsComponent implements OnInit {
         this.materials$.next(data)
       }
     )
+    
   }
 
   ngOnInit() {  
@@ -67,16 +74,18 @@ export class LessonsComponent implements OnInit {
     
   }
 
-  public getLessonsMaterials(lesson: Lesson){
-    let materials_array$ = []
-
+  public getLessonsMaterials(lesson: Lesson,i :number){
+    let materials_array = []
     for (let i = 0; i < lesson.materialsIds.length; i++) {
-      materials_array$.push(this.materials[i])
-    }
-    console.log(materials_array$);
-    return materials_array$
- 
+      materials_array.push(this.materials[i]);
+    };
+    this.matsDisplay.splice(i,1,materials_array);
+    console.log(this.matsDisplay);
+    this.materialsDisplay$.next(this.matsDisplay);
+    this.showMats= true;
   }
+
+  
   
 
 }
