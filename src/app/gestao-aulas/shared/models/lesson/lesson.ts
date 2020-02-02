@@ -1,8 +1,8 @@
 export class Lesson {
     'id'?: number;
-    'name': string;
+    'title': string;
     'description': string;
-	'materials': number[];
+	'materialsIds': number[];
 	'notesIds': number[];
   
     constructor(data?: any) {
