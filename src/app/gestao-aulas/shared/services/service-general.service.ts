@@ -36,6 +36,8 @@ export class ServiceGeneralService {
         this.accountId$.next(account.id);
         this.edtions$.next(account.editionsDtos);
         this.edtions = account.editionsDtos;
+
+      
       
         }
       )
@@ -50,7 +52,7 @@ public getEditions(){
   return this.edtions$
 }
 public getLessons(){
-  return this.simulationLessons
+  return this.lessons$;
 }
 
 /**
@@ -70,73 +72,61 @@ public simulation: Array<Edition> = [
     'name': "java1",
     'type': "java",
     'accountIds': [],
-	'lessonsIds': [],
-	'notesIds': [],
-	'questionsIds': [],
-	'eventsIds': []
+	'lessonsDtos': []
      
   }, {
     'id': 2,
     'name': 'java2',
     'type': "java",
     'accountIds': [],
-	'lessonsIds': [],
-	'notesIds': [],
-	'questionsIds': [],
-	'eventsIds': []
+    'lessonsDtos': []
 
   }, {
     'id': 3,
     'name': 'Batatas3',
     'type': "java",
     'accountIds': [],
-	'lessonsIds': [],
-	'notesIds': [],
-	'questionsIds': [],
-	'eventsIds': []
+		'lessonsDtos': []
   }, {
     'id': 4,
     'name': 'Cebolas4',
     'type': "java",
     'accountIds': [],
-	'lessonsIds': [],
-	'notesIds': [],
-	'questionsIds': [],
-	'eventsIds': []
+    'lessonsDtos': []
   }
 ];
 
-public simulationLessons: Array<Lesson> = [
-  {
-  'id': 1,
-  'editionId' : 1,
-  'title': "html",
-  'description': " ola coisas",
-	'materials': [1,2],
-	//'notesIds': [1,2],
+// public simulationLessons: Array<Lesson> = [
+//   {
+//   'id': 1,
+//   'editionId' : 1,
+//   'title': "html",
+//   'description': " ola coisas",
+// 	'materials': [1,2],
+// 	//'notesIds': [1,2],
      
-  }, {
-    'id': 2,
-    'editionId' : 1,
-    'title': "css",
-    'description': " ainda mal estamos ca",
-    'materials': [1,2],
-    //'notesIds': [1,2],
+//   }, {
+//     'id': 2,
+//     'editionId' : 1,
+//     'title': "css",
+//     'description': " ainda mal estamos ca",
+//     'materials': [1,2],
+//     //'notesIds': [1,2],
 
-  }, {
-    'id': 3,
-    'editionId' : 2,
-    'title': "java",
-    'description': " ainda ca estou",
-    'materials': [1,2],
-   // 'notesIds': [1,2],
-  }, {
-    'id': 4,
-    'editionId' : 3,
-    'title': "angular",
-    'description': " adeus",
-    'materials': [1,2],
-    //'notesIds': [1,2],
-  }
-];
+//   }, {
+//     'id': 3,
+//     'editionId' : 2,
+//     'title': "java",
+//     'description': " ainda ca estou",
+//     'materials': [1,2],
+//    // 'notesIds': [1,2],
+//   }, {
+//     'id': 4,
+//     'editionId' : 3,
+//     'title': "angular",
+//     'description': " adeus",
+//     'materials': [1,2],
+//     //'notesIds': [1,2],
+//   }
+//];
 }
