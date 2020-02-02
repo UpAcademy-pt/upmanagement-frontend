@@ -73,9 +73,9 @@
                             <th>+Info</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let module of academy.modules | async; let i = index;" id="{{i}}">
-                                <td>{{i}}</td>
-                                <td>module.name</td>
+                            <tr *ngFor="let module of academy.modules let i = index;" id="{{i}}">
+                                <td>{{i + 1}}</td>
+                                <td>{{module.name}}</td>
                                 <td><button class="btn btn-success" (click) = "showModule(module.id)">Ver</button></td>
                             </tr>
                         </tbody>
@@ -90,9 +90,9 @@
                             <th>Perfil</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let module of academy.modules | async; let i = index;" id="{{i}}">
-                                <td>{{i}}</td>
-                                <td>module.name</td>
+                            <tr >
+                                <td></td>
+                                <td></td>
                                 <td><button class="btn btn-success">Ver</button></td>
                             </tr>
                         </tbody>

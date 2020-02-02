@@ -45,12 +45,12 @@ const routes: Routes = [
         component: MyProfileComponent
       },
       {
-        path: 'my-profile',
-        component: MyProfileComponent
+        path: 'profile/:accountId',
+        component: AccountProfileComponent
       },
       {
-        path: 'profile/:userId',
-        component: AccountProfileComponent
+        path: 'academy/:academyId',
+        component: AcademyViewComponent
       },
       {
         path: 'my-declarations',
@@ -61,8 +61,8 @@ const routes: Routes = [
         component: SuperuserClassromComponent
       },
       {
-        path: 'module/:moduleId',
-        component: AccountProfileComponent
+        path: 'academy/:academyId/module/:moduleId',
+        component: ModulesComponent
       },
       {
         path: 'academy-teacher/:academyId',
