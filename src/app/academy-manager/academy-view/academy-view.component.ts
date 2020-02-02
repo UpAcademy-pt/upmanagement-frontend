@@ -121,7 +121,7 @@ export class AcademyViewComponent implements OnInit {
   }
 
   public showModule(moduleId: number) {
-    this.router.navigate(['/academy-manager/module/' + moduleId]);
+    this.router.navigate(['/academy-manager/academy/' + this.academy.id + '/module/' + moduleId]);
   }
 
   public addModuleToAcademy() {
