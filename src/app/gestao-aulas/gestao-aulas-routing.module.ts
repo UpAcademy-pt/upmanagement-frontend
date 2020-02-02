@@ -6,16 +6,22 @@ import { LessonsComponent } from './lessons/lessons.component';
 import { NotesComponent } from './notes/notes.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MaterialsComponent } from './materials/materials.component';
+import { GuardRoleGuard } from './shared/guards/guard-role.guard';
 
 
 const routes: Routes = [
   {
     path: '',
     component: GestaoAulasComponent,
+    canActivate:[GuardRoleGuard],
     children: [
       {
         path: '',
         component: LessonsComponent,
+      },
+      {
+      path: 'aulas/:i',
+      component: LessonsComponent
       },
       {
         path: 'notes',
