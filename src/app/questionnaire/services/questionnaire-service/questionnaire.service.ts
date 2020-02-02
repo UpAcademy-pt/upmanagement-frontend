@@ -60,9 +60,10 @@ export class QuestionnaireService {
   //   return this.http.post(this.url + id + "/accounts", arrayIds, {responseType: 'text'});
   // }
 
-  public createQuestionnaireWithAccountId(questionnaire: Questionnaire, arrayIds: number[]) {
-    let query = "query?id=";
-    arrayIds.forEach(element => { query += "," + String(element) });
+  public createQuestionnaireWithAccountId(questionnaire: Questionnaire, template, arrayIds: number[]) {
+    let query = "query?";
+    if (template) query = "query?template=true&";
+    arrayIds.forEach(element => { query += "id=" + String(element) + "&" });
     return this.http.post(this.url + query, questionnaire, { responseType: 'text' });
   }
 }

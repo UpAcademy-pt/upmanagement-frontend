@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{template["name"]}}</h5>
-                    <p class="card-text"><small class="text-muted">Adicionado em: {{template.formattedCreateDate}}</small></p>
+                    <p class="card-text"><small class="text-muted">Adicionado em: {{template.createDate | date:'dd/MM/yyyy, HH:mm'}}</small></p>
                 </div>
             </div>
         </div>
