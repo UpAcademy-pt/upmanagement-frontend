@@ -36,6 +36,7 @@ export class ServiceGeneralService {
         this.accountId$.next(account.id);
         this.edtions$.next(account.editionsDtos);
         this.edtions = account.editionsDtos;
+console.log("account: ", account);
 
       
       

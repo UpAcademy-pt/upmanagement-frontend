@@ -13,6 +13,9 @@ export class LessonsServiceService {
   ) { }
 
 
+  public getLessons(){
+    return this.http.get(this.url);
+  }
 
 public createLesson(lesson : Lesson){
 return this.http.post(this.url, lesson);
