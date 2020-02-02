@@ -18,7 +18,7 @@ export class AdminGuard implements CanActivate {
       if (this.userApi.isAdmin()) {
         return true;
       }else{
-        this.router.navigate(['/lessons']);
+        this.router.navigate(['/dummy']);
       }
   }
   
