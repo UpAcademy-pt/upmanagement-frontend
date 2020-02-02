@@ -9,19 +9,35 @@
       <accordion [isAnimated]="true">
         <accordion-group heading="{{note.title}} - {{note.createDate}}" style="color: black;">
           <div>
-            <button type="button" class="btn-borderless btn-edit">
+            <button type="button" class="btn-borderless btn-edit" (click)="editValid = true">
               <fa-icon [icon]="faEdit" size="lg"></fa-icon>
             </button>
-            <button type="button" class="btn-borderless btn-delete" (click)="openModalDeleteNote(templateDeleteNote, i)">
+            &nbsp;
+            <button type="button" class="btn-borderless btn-delete"
+              (click)="openModalDeleteNote(templateDeleteNote, i)">
               <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
             </button>
           </div>
           <br>
           <div>
             <div class="form-group">
-              <textarea id="textArea" class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>
+              <div *ngIf="editValid; else elseBlock">
+                <form class="mg-5 mt-3 container" #newNoteForm="ngForm" (ngSubmit)="updateNote(note)">
+                <textarea class="form-control" id="exampleFormControlTextareaTitle" rows="1" [(ngModel)]="note.title" name="title">
+                  {{note.title}}
+                </textarea>
+                <textarea class="form-control" id="formControlTextareaDescription" rows="3" [(ngModel)]="note.description" name="description">
                     {{note.description}}
                   </textarea>
+                  <br>
+                  <button type="submit" class="btn btn-secondary" (click)="editValid = false">Salvar Nota</button>
+                </form>
+              </div>
+              <ng-template #elseBlock>
+                <textarea class="form-control" id="formControlTextareaDescription" rows="3" disabled>
+                    {{note.description}}
+                </textarea>
+              </ng-template>
             </div>
           </div>
           <ng-template #template>
@@ -56,11 +72,13 @@
     <form class="mg-5 mt-3 container" #newNoteForm="ngForm" (ngSubmit)="createNote()">
       <div class="form-group">
         <label for="títuloInput">Título:</label>
-        <input #note1Field="ngModel" type="text" class="form-control" id="títuloNota" aria-describedby="títuloNota" placeholder="Escreva aqui o título da sua nota!" [(ngModel)]="title" name="title">
+        <input #note1Field="ngModel" type="text" class="form-control" id="títuloNota" aria-describedby="títuloNota"
+          placeholder="Escreva aqui o título da sua nota!" [(ngModel)]="title" name="title">
       </div>
       <div>
         <div class="form-group">
-          <textarea #note2Field="ngModel" class="form-control" id="descriçãoNota" rows="3" placeholder="Escreva aqui o corpo da sua nota!" [(ngModel)]="description" name="description"></textarea>
+          <textarea #note2Field="ngModel" class="form-control" id="descriçãoNota" rows="3"
+            placeholder="Escreva aqui o corpo da sua nota!" [(ngModel)]="description" name="description"></textarea>
         </div>
       </div>
       <div class="row">
@@ -70,11 +88,12 @@
   </div>
 </ng-template>
 
-<!-- Modal Criar Nova Nota -->
+<!-- Modal Remover Nota -->
 <ng-template #templateDeleteNote>
   <div class="modal-body text-center">
     <p>Tem a certeza que deseja remover a nota?</p>
-      <button type="button" class="btn btn-secondary btn-lg" (click)="modalRef.hide()" style="margin-right: 5px">Não</button>
-      <button type="button" class="btn btn-danger" (click)="deleteNoteById()" style="margin-left: 5px">Sim</button>
+    <button type="button" class="btn btn-secondary btn-lg" (click)="modalRef.hide()"
+      style="margin-right: 5px">Não</button>
+    <button type="button" class="btn btn-danger" (click)="deleteNoteById()" style="margin-left: 5px">Sim</button>
   </div>
 </ng-template>
