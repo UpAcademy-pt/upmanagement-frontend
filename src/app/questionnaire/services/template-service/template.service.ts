@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Template } from '../../models/template/template';
 import { ReplaySubject } from 'rxjs';
+import { Questionnaire } from '../../models/questionnaire/questionnaire';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TemplateService {
   private url = 'http://localhost:8080/coreFinalProject/questionnaire/template/';
-  public templates: Template[] = [];
-  public templates$: ReplaySubject<Template[]> = new ReplaySubject(1);
+  public templates: Questionnaire[] = [];
+  public templates$: ReplaySubject<Questionnaire[]> = new ReplaySubject(1);
 
   constructor(
     private http: HttpClient
@@ -19,13 +20,7 @@ export class TemplateService {
 
   public getAllTemplates() {
     return this.http.get(this.url).subscribe(
-      (templateSub: Template[]) => {
-        templateSub.forEach(template => {
-          let dateC = new Date(template.createDate);
-          template.formattedCreateDate = dateC.getDate().toString().padStart(2, '0') + "/" + (dateC.getMonth() + 1).toString().padStart(2, '0') + "/" + dateC.getFullYear();
-          let dateLM = new Date(template.lastModifiedDate);
-          template.formattedLastModifiedDate = dateLM.getDate().toString().padStart(2, '0') + "/" + (dateLM.getMonth() + 1).toString().padStart(2, '0') + "/" + dateLM.getFullYear();
-        });
+      (templateSub: Questionnaire[]) => {
         this.templates = templateSub;
         this.templates$.next(this.templates);
       });
@@ -35,11 +30,11 @@ export class TemplateService {
     return this.http.get(this.url + id);
   }
 
-  public createTemplate(template: Template) {
+  public createTemplate(template: Questionnaire) {
     return this.http.post(this.url, template, { responseType: 'text' });
   }
 
-  public updateTemplate(template: Template) {
+  public updateTemplate(template: Questionnaire) {
     return this.http.put(this.url, template, { responseType: 'text' });
   }
 

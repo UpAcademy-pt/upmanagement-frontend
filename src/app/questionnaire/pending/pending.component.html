@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ questionnaire["name"] }}</h5>
-                <p class="card-text"><small class="text-muted">Adicionado em: {{ getCurrentDate(questionnaire.createDate) }}</small></p>
+                <p class="card-text"><small class="text-muted">Adicionado em: {{ questionnaire.createDate | date:'dd/MM/yyyy, HH:mm' }}</small></p>
             </div>
         </div>
     </div>

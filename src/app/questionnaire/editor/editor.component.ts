@@ -13,12 +13,11 @@ import { Questionnaire } from '../models/questionnaire/questionnaire';
 })
 export class EditorComponent implements OnInit {
 
-  private a: Question = new Question();
+  private currentQuestion: Question = new Question();
   private b: Questionnaire = new Questionnaire();
 
-  private currentTemplate: Template;
-  faAngleDoubleDown = faAngleDoubleDown;
-  faAngleDoubleUp = faAngleDoubleUp;
+
+  private currentQuestionnaire: Questionnaire = new Questionnaire();
   private template: boolean;
   private quiz: boolean;
   private anonymous: boolean;
@@ -33,9 +32,10 @@ export class EditorComponent implements OnInit {
   faCheck = faCheck;
   faEdit = faEdit;
   faSave = faSave;
+  faAngleDoubleDown = faAngleDoubleDown;
+  faAngleDoubleUp = faAngleDoubleUp;
   private rightCheck = false
   private teste = false
-  private name: string = "Maria";
 
   constructor(
     private router: Router,
@@ -43,24 +43,16 @@ export class EditorComponent implements OnInit {
   ) { 
     let templateId: number = this.router.getCurrentNavigation().extras.state.id;
     this.templateService.getTemplate(templateId).subscribe(
-      (currentTemplate: Template) => {
-        this.currentTemplate = currentTemplate;
-        console.log(this.currentTemplate);
-        console.log(this.currentTemplate.name)
+      (currentQuestionnaire: Questionnaire) => {
+        this.currentQuestionnaire = currentQuestionnaire;
       });
-    
   }
 
 
   ngOnInit() {
-    this.fillTheTemplate()
+
   }
-   
-  public fillTheTemplate(){
-    console.log("entrou");
-    console.log(this.currentTemplate)
-    this.b.name = this.currentTemplate.name;
-  }
+  
   
   
 
