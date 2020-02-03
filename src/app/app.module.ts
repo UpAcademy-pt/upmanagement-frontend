@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,7 +11,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule, AccordionModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
