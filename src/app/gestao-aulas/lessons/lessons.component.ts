@@ -26,7 +26,6 @@ export class LessonsComponent implements OnInit {
   private materials: Materials= new Materials();
   private materialsDisplay$:ReplaySubject<any[][]> = new ReplaySubject(1); 
   private matsDisplay:any [];
-  public headerAtt=["url","title"];
   public showMats:boolean= false;
   
 
@@ -42,7 +41,7 @@ export class LessonsComponent implements OnInit {
           (data:Edition[])=>{
             let param = data[params.i] == null ? data[0] : data[params.i]
             this.lessons$.next(param.lessonsDtos)
-            this.matsDisplay = Array(param.lessonsDtos.length).fill(0) ;
+            this.matsDisplay = Array(param.lessonsDtos.length).fill(new Array()) ;
             console.log( this.matsDisplay);
           }
         )
