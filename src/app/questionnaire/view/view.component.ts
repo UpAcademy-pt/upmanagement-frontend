@@ -37,8 +37,14 @@ export class ViewComponent implements OnInit {
     return this.currentQuestionnaire.answerList[i].answer.includes(String(j));
    }
 
-   isRightAnswer(i: number, j: number) {
-     return this.currentQuestionnaire.questionList[i].rightAnswer.includes(String(j));
+   checkAnswer(i: number, j: number) {
+     if (this.currentQuestionnaire.questionList[i].rightAnswer.includes(String(j)) && this.isSelected(i, j)) {
+       return "rightAnswer";
+     } else if (!this.currentQuestionnaire.questionList[i].rightAnswer.includes(String(j)) && this.isSelected(i, j)) {
+       return "wrongAnswer";
+     } else if (this.currentQuestionnaire.questionList[i].rightAnswer.includes(String(j)) && !this.isSelected(i, j)) {
+       return "rightAnswerIsh";
+     }
    }
 
   ngOnInit() {
