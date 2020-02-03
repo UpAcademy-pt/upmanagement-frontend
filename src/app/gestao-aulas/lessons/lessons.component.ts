@@ -25,11 +25,11 @@ export class LessonsComponent implements OnInit {
   private id: number;
   private lesson: Lesson = new Lesson();
   public lessons$: ReplaySubject<Lesson[]> = new ReplaySubject(1);
-  private lessons: Lesson[];
+  private lessons: Lesson[]= new Array<Lesson>();
   private notes: any[];
   private edtions: Edition[]=[];
   private edtions$: ReplaySubject<Edition[]> = new ReplaySubject(1);
-  private rowForEditions: any;
+  private rowForEditions: number;
   private rowForEditions$: ReplaySubject<any> = new ReplaySubject(1);
   private materials$: ReplaySubject<any> = new ReplaySubject(1);
   private materials: Materials= new Materials();
@@ -72,17 +72,25 @@ export class LessonsComponent implements OnInit {
     }
     this.route.params.subscribe(
       (params) => {
+        console.log(params);
+        
         this.serviceApi.getEditions().subscribe(
           (data:Edition[])=>{
             let param = data[params.i] == null ? data[0] : data[params.i];
-            this.lessons= params.lessonsDtos;
+            console.log(param.lessonsDtos);
+            this.lessons= param.lessonsDtos;
             this.lessons$.next(param.lessonsDtos);
             this.matsDisplay = Array(param.lessonsDtos.length).fill(new Array()) ;
             console.log( this.matsDisplay);
           }
         )
-        this.rowForEditions$.next(params);
-        this.rowForEditions= params;
+        if (params.i == null) {
+          this.rowForEditions$.next(0);
+        this.rowForEditions= Number(0);
+        }else{
+        this.rowForEditions$.next(params.i);
+        this.rowForEditions= Number(params.i);
+        }
           }
         );
     this.serviceApi.getEditions().subscribe(
@@ -120,7 +128,7 @@ export class LessonsComponent implements OnInit {
 
     this.apiLesson.createLesson(this.lesson).subscribe(
       (result: any) => {
-        console.log(this.lesson);
+        console.log(this.lessons);
         this.lessons.push(this.lesson);
         this.updateLessons$();
         this.lesson = new Lesson();
