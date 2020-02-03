@@ -60,54 +60,49 @@
 <div class="container">
     <accordion [isAnimated]="true">
         <div *ngFor="let lesson of lessons$ | async; let i = index;">
-        <accordion-group (click)="getLessonsMaterials(lesson, i)" heading="{{lesson.title}} - Aula {{i+1}}" id="{{i}}">
-
-            <div *ngIf="isSuperUser">
-                <button type="button" class="btn-borderless btn-edit"
-                    (click)="openModalEditLesson(templateEditLesson, i)">
-                    <fa-icon [icon]="faEdit" size="lg"></fa-icon>
-                </button>
-                <button type="button" class="btn-borderless btn-delete"
-                    (click)="openModalDeleteLesson(templateDeleteLesson, i)">
-                    <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
-                </button>
-            </div>
-            <br>
-
-            <div>
-                <p><b>Descrição:</b></p>
-                <p>{{lesson.description}}</p>
-                <hr>
-
-                <p><b>Materiais:</b></p>
-                <div *ngIf="showMats">
-                    <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
-                    <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary"
-                        href="{{material.url}}" role="button" target="_blank">{{material.title}}</a>
-
+            <accordion-group (click)="getLessonsMaterials(lesson, i)" heading="{{lesson.title}} - Aula {{i+1}}"
+                id="{{i}}">
+                <div *ngIf="isSuperUser">
+                    <button type="button" class="btn-borderless btn-edit"
+                        (click)="openModalEditLesson(templateEditLesson, i)">
+                        <fa-icon [icon]="faEdit" size="lg"></fa-icon>
+                    </button>
+                    <button type="button" class="btn-borderless btn-delete"
+                        (click)="openModalDeleteLesson(templateDeleteLesson, i)">
+                        <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
+                    </button>
                 </div>
-
-                <hr>
-
-                <p><b>Notas:</b></p>
+                <br>
                 <div>
+                    <p><b>Descrição:</b></p>
+                    <p>{{lesson.description}}</p>
+                    <hr>
 
-                    <!-- <div>
+                    <p><b>Materiais:</b></p>
+                    <div *ngIf="showMats">
+                        <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
+                        <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary"
+                            href="{{material.url}}" role="button" target="_blank" popover="I will hide on blur"
+                            triggers="mouseenter:mouseleave">{{material.title}}</a>
+                    </div>
+                    <hr>
+                    <p><b>Notas:</b></p>
+                    <div>
+                        <!-- <div>
                         <p>{{lesson.name}}</p>
                     </div> -->
+                        <hr>
+                    </div>
 
-                    <hr>
+
+
+
+
+
                 </div>
-
-
-
-
-
-
-            </div>
-        </accordion-group>
-        <br>
-    </div>
+            </accordion-group>
+            <br>
+        </div>
     </accordion>
 </div>
 
@@ -216,7 +211,8 @@
         <div class="row">
 
 
-            <button type="submit" class="btn btn-secondary mx-auto" (click)="modalRef.hide()">Adicionar Materiais</button>
+            <button type="submit" class="btn btn-secondary mx-auto" (click)="modalRef.hide()">Adicionar
+                Materiais</button>
         </div>
 
     </form>
