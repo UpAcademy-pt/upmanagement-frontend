@@ -1,26 +1,41 @@
 <div>
     <h3>Forum</h3>
 
-    <h4 class="text-center"><b>Criar nova pergunta:</b></h4>
 
-    <form class="mg-5 mt-3 container" (ngSubmit)="createQuestion()">
-        <div class="form-group row">
-            <label for="title" class="col-sm-2 col-form-label">Titulo:</label>
-            <div class="col-sm-10">
-                <input [(ngModel)]="title" name="title" id="title" type="text" class="form-control" placeholder="Insira o titulo da pergunta">
+    <div *ngIf="!newQuestion; else alternativeBlock">
+        <div class="container" style="text-align: right; padding-right: 15px;">
+            <button type="button" class="btn btn-secondary" (click)="newQuestion = true">Criar nova
+                Pergunta</button>
+        </div>
+    </div>
+    <ng-template #alternativeBlock>
+        <div class="container" style="text-align: right; padding-right: 15px;">
+            <button type="button" class="btn btn-danger" (click)="newQuestion = false">X</button>
+        </div>
+    </ng-template>
+
+    <div *ngIf="newQuestion">
+        <h4 class="text-center"><b>Criar nova pergunta:</b></h4>
+        <form class="mg-5 mt-3 container" (ngSubmit)="createQuestion()">
+            <div class="form-group row">
+                <label for="title" class="col-sm-2 col-form-label">Titulo:</label>
+                <div class="col-sm-10">
+                    <input [(ngModel)]="title" name="title" id="title" type="text" class="form-control"
+                        placeholder="Insira o titulo da pergunta">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="type" class="col-sm-2 col-form-label">Descriçao:</label>
-            <div class="col-sm-10">
-                <textarea [(ngModel)]="description" name="description" id="description" type="text" class="form-control"
-                    placeholder="Insira a descriçao da pergunta" rows="5"></textarea>
+            <div class="form-group row">
+                <label for="type" class="col-sm-2 col-form-label">Descriçao:</label>
+                <div class="col-sm-10">
+                    <textarea [(ngModel)]="description" name="description" id="description" type="text"
+                        class="form-control" placeholder="Insira a descriçao da pergunta" rows="5"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <button type="submit" class="btn btn-secondary mx-auto">Criar</button>
-        </div>
-    </form>
+            <div class="row">
+                <button type="submit" class="btn btn-secondary mx-auto">Criar</button>
+            </div>
+        </form>
+    </div>
     <br>
 
     <h4 class="text-center"><b>Perguntas existentes:</b></h4>
@@ -29,10 +44,10 @@
         <p>Atualmente nao existem perguntas</p>
     </div>
 
-    <div >
-        <accordion>
-
-            <accordion-group *ngFor="let question of questions$ | async; let i = index; " heading="{{question.title}}"
+    <div>
+        <accordion [isAnimated]="true">
+            <div *ngFor="let question of questions$ | async; let i = index; ">
+            <accordion-group heading="{{question.title}}"
                 id="{{i}}" (click)="getAnswersByQuestionId(question.id, i)">
                 <div>
                     <p><b>Descriçao:</b></p>
@@ -50,13 +65,11 @@
                             {{answer.answer}}
                             <hr>
                         </div>
-
                     </div>
-
-
-
                 </div>
             </accordion-group>
+            <br>
+        </div>
         </accordion>
     </div>
 

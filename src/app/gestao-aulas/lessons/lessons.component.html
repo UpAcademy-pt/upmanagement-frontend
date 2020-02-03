@@ -58,9 +58,9 @@
 <br>
 
 <div class="container">
-    <accordion>
-        <accordion-group *ngFor="let lesson of lessons$ | async; let i = index;"
-            (click)="getLessonsMaterials(lesson, i)" heading="{{lesson.title}} - Aula {{i+1}}" id="{{i}}">
+    <accordion [isAnimated]="true">
+        <div *ngFor="let lesson of lessons$ | async; let i = index;">
+        <accordion-group (click)="getLessonsMaterials(lesson, i)" heading="{{lesson.title}} - Aula {{i+1}}" id="{{i}}">
 
             <div *ngIf="isSuperUser">
                 <button type="button" class="btn-borderless btn-edit"
@@ -82,7 +82,7 @@
                 <p><b>Materiais:</b></p>
                 <div *ngIf="showMats">
                     <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
-                    <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary"
+                    <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary"
                         href="{{material.url}}" role="button" target="_blank">{{material.title}}</a>
 
                 </div>
@@ -106,6 +106,8 @@
 
             </div>
         </accordion-group>
+        <br>
+    </div>
     </accordion>
 </div>
 
@@ -150,7 +152,7 @@
             </div>
             <br>
             <div class="row">
-                <button type="submit" class="btn btn-success mx-auto" (click)="modalRef.hide()">Gravar Aula</button>
+                <button type="submit" class="btn btn-secondary mx-auto" (click)="modalRef.hide()">Gravar Aula</button>
                 <button type="button" class="btn btn-danger mx-auto" (click)="modalRef.hide()">Cancelar</button>
             </div>
         </form>

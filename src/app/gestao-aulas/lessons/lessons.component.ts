@@ -119,7 +119,7 @@ export class LessonsComponent implements OnInit {
   // Create
   // ------------
   public createLesson() {
-    // falta a editionId
+    this.lesson.editionId = this.edtions[this.rowForEditions].id;
     this.lesson.title = this.title;
     this.lesson.description = this.description;
     let materialsInLesson=[];
