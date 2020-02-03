@@ -37,7 +37,7 @@ export class LessonsComponent implements OnInit {
   private matsDisplay:any [];
   public showMats:boolean= false;
   public newLesson: boolean = false;
-  
+  public editValid: boolean =false;
 
 
 
