@@ -82,7 +82,7 @@ export class NewQuestionnaireComponent implements OnInit {
       element.rightAnswer = element.rightAnswer.map((option, index) => option == "true" ? String(index) : "false")
       .filter(option => option != "false");
 
-      element.orderNumber = i;
+      element.orderNumber = i + 1;
     }
 
     //Add the type of the questionnaire
