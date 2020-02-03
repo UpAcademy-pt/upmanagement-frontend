@@ -12,8 +12,8 @@ $white: #ffffff;
 $black: #343a40;
 
   #sidebar{
-  z-index: 1; 
-  top: 0; 
+  z-index: 1;
+  top: 0;
   left: 0;
    background-color: #00204A;
    background: linear-gradient(180deg, #343a40 15%, $black 100%);
@@ -22,7 +22,7 @@ $black: #343a40;
    .header{
      text-align: center;
      img{
-       margin: 20px 0;
+       margin: 0;
      }
      .logoSmall{
        width: 28px;
@@ -36,7 +36,7 @@ $black: #343a40;
      width: auto;
      margin: 0 auto;
    }
-  
+
   .userArea{
     padding: 16px 0;
     max-width: 160px;
@@ -58,6 +58,8 @@ $black: #343a40;
         padding-bottom: 100%;
       }
       img {
+        max-width: 100%;
+        max-height: 100%;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -78,16 +80,15 @@ $black: #343a40;
       text-overflow: ellipsis;
     }
   }
-  
+
   ul.navigation{
-    list-style-type: none;
+
     margin-top:22px;
     padding: 0;
     li{
-      margin-left: 16px;
       a{
         font-size: 1em;
-        padding: 11px 24px;
+        padding: 11px 40px;
         color: $white;
         display: block;
         border-left:3px solid transparent;
@@ -98,89 +99,59 @@ $black: #343a40;
           border-color: #e07e37;
           color: #e07e37;
         }
-        span{
-          visibility: visible;
-          opacity: 1;
-          -webkit-transition: opacity 0.2s, visibility 0.2s;
-          transition: opacity 0.2s, visibility 0.2s;
-          -ms-transition: opacity 0.2s, visibility 0.2s;
-        }
       }
-    } 
+    }
     .divider{
       margin: 12px auto;
     }
   }
 
-  .bottomDivider{
-   border-bottom: 1px solid rgba(255,255,255,0.10);
-   width: auto;
-  }
-
   #navbardrop {
     background-color: #494c50;
-    width: auto;
-    margin: 50px;
-    padding: 0;
+    // width: auto;
+    // margin: 0;
+    // padding: 0;
+
   }
 
-  #navbardrop.a:hover {
-    color: #e07e37;
-  }
-
-  .expandBtn{
+  #sidebarButton{
     color: #e07e37;
     font-size: 24px;
     width: 218px;
-    padding-left: 70px;
+    bottom: 3rem;
+    //left:2rem;
+    position:fixed;
     cursor: pointer;
       opacity: 0.8;
-      &:hover{
-        opacity: 1;
-        text-shadow: 0px 0px 50px rgba(248, 153, 75, 0.8);
-        transform: scale(1.2, 1.2);
-        -webkit-transform: scale(1.2, 1.2);
-        -ms-transform:scale(1.2, 1.2);
      }
-     .divider{
-      display: block;
-      width: auto;
-      margin: 0 auto;
-     }
-    }
 
   #sidebar.collapsed {
     min-width: 64px;
-      max-width:80px;
+      max-width:90px;
       ul.navigation{
         li {
           a{
-            padding: 11px 20px;
+            padding: 11px 30px;
           }
         }
-        span{
+        #questPending span, #questHistory span, #questNew span, #questStatistics span {
             visibility: collapse;
             opacity: 0;
-            position: absolute;
+            position: fixed;
             -webkit-transition: opacity 0.2s, visibility 0.2s;
             transition: opacity 0.2s, visibility 0.2s;
-            -ms-transition: opacity 0.2s, visibility 0.2s
+            -ms-transition: opacity 0.2s, visibility 0.2s;
         }
       }
-      .expandBtn{
-        width:64px;
-        font-size: 16px;   
-      }
+
       .divider{
         width: auto;
         display: block;
       }
 
       .userPicture{
-        margin-left: 24px;
-        transform: scale(0.8, 0.8);
-        -webkit-transform: scale(0.8, 0.8);
-        -ms-transform:scale(0.8, 0.8);
+        margin-left: 15px;
+
       }
       .logoSmall{
         display: block;
@@ -193,8 +164,9 @@ $black: #343a40;
         padding: 16px 4px;
         .userName{
           font-size: 12px;
-          margin: auto;
-          margin-left: 14px;;
+          margin: 0;
+          padding-top: 5px;
+
         }
       }
       .userArea .accountMenu{
@@ -203,26 +175,11 @@ $black: #343a40;
       }
   }
 
-  .pushStatsDown{
-    //margin-top: 50px;
-    div.expandBtn {
-      //margin-block-start: auto;
-      
-    }
-  }
-
-  div span.only-show-on-hover {
-    visibility: hidden;
-  }
-  div:hover span.only-show-on-hover  {
-    visibility: visible;
-  }
-  
-
- 
 
 
 
 
 
-  
+
+
+

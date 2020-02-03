@@ -7,6 +7,7 @@ export class Question {
     'questionnaireId': number;
     'createDate': number;
     'lastModifiedDate': number;
+    'orderNumber': number;
 
     constructor(data?: any) {
         Object.assign(this, data);
