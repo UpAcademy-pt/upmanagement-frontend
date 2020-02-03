@@ -18,6 +18,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MaterialsComponent } from './materials/materials.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DisableControlDirective } from './notes/disable-control.directive';
 
 
 
@@ -33,10 +34,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AcademiesComponent,
     CalendarComponent,
     LessonsComponent,
-    LessonsComponent,
     NotesComponent,
     CalendarComponent,
-    MaterialsComponent
+    MaterialsComponent,
+    DisableControlDirective
   ],
   imports: [
     CommonModule,

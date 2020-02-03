@@ -4,6 +4,9 @@ import { ReplaySubject } from 'rxjs';
 import { NotesService } from './notes.service';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 import { ServiceGeneralService } from './service-general.service';
+import { Lesson } from '../models/lesson/lesson';
+import { LessonsService } from './lessons.service';
+import { EditionService } from './edition.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +14,19 @@ import { ServiceGeneralService } from './service-general.service';
 export class DataService {
   public notes$: ReplaySubject<Note[]> = new ReplaySubject(1);
   public notes = [];
+  public lessons$: ReplaySubject<Lesson[][]> = new ReplaySubject(1);
+  private lessonsTable: Lesson[][];
+  private lessons: Lesson[];
+  public lessonNotes = [];
+  public lessonNotes$: ReplaySubject<Note[][]> = new ReplaySubject();
+  public editionIds: number[];
+  public editionIds$: ReplaySubject<number[]> = new ReplaySubject(1);
 
   constructor(
     private notesAPI: NotesService,
     private accountApi: ServiceGeneralService,
+    private lessonApi: LessonsService,
+    private editionApi: EditionService
   ) {
   }
 
@@ -29,10 +41,10 @@ export class DataService {
   /**
    * updateNotes
    */
-  public updateNotes() {
-    this.notesAPI.getByAccountId(this.accountApi.getCurrentAccountId()).subscribe(
+  public updateNotes(note: Note) {
+    this.notesAPI.update(note).subscribe(
       (res: any) => {
-        this.notes = res;
+        this.notes.splice(this.notes.findIndex(element => element.id === note.id), 1, note);
         this.updateNotes$();
       }
     );
@@ -75,6 +87,27 @@ export class DataService {
         this.updateNotes$();
       }
     );
+  }
+
+
+  public getLessonsByEditionId(id: number) {
+    this.lessonApi.getLessonsByEditionId(id).subscribe(
+      (less: Lesson[]) => {
+        this.lessonsTable[id - 1] = less;
+        this.lessons$[id - 1].next(less);
+        console.log(less);
+      });
+    return this.lessonsTable[id - 1];
+  }
+
+  public getEditionIdsByAccount(id: number) {
+    this.editionApi.getEditionIdsByAccount(id).subscribe(
+      (ed: number[]) => {
+        this.editionIds = ed;
+        this.editionIds$.next(ed);
+        console.log(ed);
+      });
+    return this.editionIds;
   }
 
 }
