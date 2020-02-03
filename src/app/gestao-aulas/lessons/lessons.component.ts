@@ -128,7 +128,7 @@ export class LessonsComponent implements OnInit {
     this.apiLesson.createLesson(this.lesson).subscribe(
       (result: any) => {
         console.log(this.lessons);
-        this.lessons.push(result);
+        this.lessons.push(this.lesson);
         this.updateLessons$();
         this.lesson = new Lesson();
       }
