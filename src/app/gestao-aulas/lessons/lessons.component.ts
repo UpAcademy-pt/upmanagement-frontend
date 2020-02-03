@@ -38,9 +38,6 @@ export class LessonsComponent implements OnInit {
   public showMats:boolean= false;
   public newLesson: boolean = false;
   
-
-
-
   public title: string;
   public description: string;
   public material = new Materials();
@@ -53,9 +50,6 @@ export class LessonsComponent implements OnInit {
   indexOfLessonToEdit: number;
 
   form: FormGroup;
-
-
-
 
   constructor(
     private apiLesson: LessonsServiceService,
@@ -153,13 +147,15 @@ export class LessonsComponent implements OnInit {
   }
 
   public getLessonsMaterials(lesson: Lesson,i :number){
-    let materials_array = []
-    for (let i = 0; i < lesson.materialsIds.length; i++) {
-      materials_array.push(this.materials[i]);
-    };
-    this.matsDisplay.splice(i,1,materials_array);
-    console.log(this.matsDisplay);
-    this.materialsDisplay$.next(this.matsDisplay);
+    this.materialsApi.getMaterialsById(lesson.id).subscribe(
+      (data:any )=> {
+        this.matsDisplay.splice(i,1,data);
+        console.log(this.matsDisplay);
+        this.materialsDisplay$.next(this.matsDisplay);
+      }
+    )
+   
+    
     this.showMats= true;
   }
 
@@ -240,7 +236,8 @@ export class LessonsComponent implements OnInit {
 
   //falta testar
   onCheckboxChange(e: any) {
-    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+    
+    let checkArray: FormArray = this.form.get('checkArray') as FormArray;
 
     if (e.target.checked) {
       checkArray.push(new FormControl(e.target.value));

@@ -16,7 +16,7 @@ export class MaterialsComponent implements OnInit {
   private material: Materials = new Materials();
   private showTable: boolean = false;
 
-  public header=["Titulo","tipo","Url","update","delete"];
+  public header=["Titulo","Tecnologia","Url","update","delete"];
   public headerAtt=["title","type","url"];
   public materials$: ReplaySubject<any> = new ReplaySubject(1);
   private rowMaterialToDelete: number;

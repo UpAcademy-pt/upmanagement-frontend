@@ -60,7 +60,7 @@
 <div class="container">
     <accordion>
         <accordion-group *ngFor="let lesson of lessons$ | async; let i = index;"
-            (click)="getLessonsMaterials(lesson, i)" heading="{{lesson.title}} - Aula {{i+1}}" id="{{i}}">
+            (click)="getLessonsMaterials(lesson, i)" heading="Aula {{i+1}} - {{lesson.title}}" id="{{i}}">
 
             <div *ngIf="isSuperUser">
                 <button type="button" class="btn-borderless btn-edit"
