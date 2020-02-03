@@ -1,7 +1,206 @@
-<p>editor works!</p>
-<!-- <app-new-questionnaire></app-new-questionnaire>    -->
+<div class="container-fluid m-auto text-center">
+<h1>Quests Maker</h1>
 
-<div class="row">
-        <label class="col-2" for="#questonnaireName">Nome: </label>
-        <input class="col-8 mb-3" id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="currentTemplate.name" name="questonnaireName">
+<div>
+  <button class="btn btn-primary" (click)="addQuestionnaire()">
+    Submeter Formulário
+  </button>
+</div>
+
+<label for="questdata" style="color: rgb(216, 216, 216);">Dados do Questionário</label>
+<div id="questdata" class="container-fluid bg-light"
+  style="border-radius: 15px; color: black; border: 1px solid black; padding: 35px;">
+  <div class="row">
+    <label class="col-2" for="#questonnaireName">Nome: </label>
+    <input class="col-8 mb-3" id="questonnaireName" type="text" placeholder="Nome" [(ngModel)]="currentQuestionnaire.name" name="questonnaireName">
+  </div>
+
+  <div class="form-check-inline mb-3">
+    <input class="ml-4" type="checkbox" [(ngModel)]="template" name="template">Template
+    <input class="ml-4" type="checkbox" [(ngModel)]="quiz" name="quiz" (click)="currentQuestionnaire.questionList=[]; currentQuestion.rightAnswer=[]; currentQuestion.options=[]">Com resposta certa
+    <input class="ml-4" type="checkbox" [(ngModel)]="anonymous" name="anonymous">Questionário anônimo:
+  </div>
+  <div class="row">
+    <div class="form-group col-6">
+      <label for="editPermissionSelect">Permissão para editar:</label>
+      <select multiple class="form-control" id="editPermissionSelect" [(ngModel)]="currentQuestionnaire.editPrivacy" name="editPermissionSelect">
+        <option value="ADMIN">Admin</option>
+        <option value="SUPERUSER">Formador</option>
+        <option value="USER">Formando</option>
+      </select>
+    </div>
+    <div class="form-group col-6">
+      <label for="viewPermissionSelect">Permissão para visualizar:</label>
+      <select multiple class="form-control" id="viewPermissionSelect" [(ngModel)]="currentQuestionnaire.viewPrivacy" name="viewPermissionSelect">
+        <option value="ADMIN">Admin</option>
+        <option value="SUPERUSER">Formador</option>
+        <option value="USER">Formando</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-2">
+      <input type="checkbox" [(ngModel)]="send" name="sendCheckBox">Enviar?
+    </div>
+    <div class="col-2">Academia</div>
+    <div class="col-3">
+      <ngx-select [disabled]="!send" [items]="academies" [(ngModel)]="academy" name="academy">
+      </ngx-select>
+    </div>
+    <div class="col-2">Para</div>
+    <div class="col-3">
+      <ngx-select [disabled]="traineesId.empty" [multiple]="true" [items]="traineesId"
+        [(ngModel)]="trainees" nome="trainees">
+      </ngx-select>
+    </div>
+  </div>
+</div>
+
+<p>----------------Criador de Questões----------------</p>
+
+<div class="row bg-light" style="border: 1px solid black; border-radius: 15px;" >
+  <div *ngIf="!quiz" class="row col-3" style="border-radius: 15px;">
+    <button  (click)="multi=true; single=false; open=false; currentQuestion.options=[]; select='MULTIPLE'" class="col-12"
+      style="border: unset; border-bottom: 1px solid black; border-radius: 15px 0px 0px 0px; background-color: gray;"
+      [ngClass]="{'bg-light':multi }" [ngStyle]="{'border-right': multi ? '0':'1px solid black'}">Resposta <br>
+      múltipla</button>
+
+    <button (click)="single=true; multi=false; open=false; currentQuestion.options=[]; select='SINGLE_OPTION'" class="col-12"
+      style="background-color: gray;" [ngClass]="{'bg-light':single}"
+      [ngStyle]="{'border-right': single ? '0':'1px solid black'}">
+      Resposta <br> única</button>
+
+    <button (click)="open=true; multi=false; single=false; currentQuestion.options=[]; select='OPEN'" class="col-12"
+      style="border: unset; border-right: 1px solid; border-top: 1px solid black; border-radius: 0px 0px 0px 15px; background-color: gray;"
+      [ngClass]="{'bg-light':open }" [ngStyle]="{'border-right': open ? '0':'1px solid black'}">Resposta <br>
+      aberta</button>
+  </div>
+  <div class="col-9" style="padding: 15px; background-color: transparent;">
+    <div>
+      <textarea style="width: 80%;" name="question" [(ngModel)]="currentQuestion.question" placeholder="Pergunta"></textarea>
+    </div>
+    <div>
+      <div *ngFor="let option of currentQuestion.options; index as i; let toggle = false">
+        <div class="form-row">
+          <div *ngIf="!toggle" class="col-8">{{option}}</div>
+          <div *ngIf="toggle" class="col-1"></div>
+          <input style="height: 25px;" [(ngModel)]="option"  name="rightCheckBoxEdit" *ngIf="toggle" type="text" class="col-7">
+          <fa-icon *ngIf="currentQuestion.rightAnswer[i]=='true' && quiz" class="col-1" style="color: green;" [icon]="faCheck" (click)="toggle?currentQuestion.rightAnswer[i]='false':currentQuestion.rightAnswer[i]='true'"></fa-icon>
+          <fa-icon *ngIf="currentQuestion.rightAnswer[i]=='false' && toggle && quiz" class="col-1" style="color: black;" [icon]="faCheck" (click)="currentQuestion.rightAnswer[i]='true'"></fa-icon>
+          <div *ngIf="currentQuestion.rightAnswer[i]=='false' && !toggle && quiz" class="col-1"></div>
+          <fa-icon [ngStyle]="{'color': toggle ? 'darkcyan':'blue'}" [icon]="toggle?faSave:faEdit" class="col-1" (click)="toggle=!toggle; currentQuestion.options[i]=option "></fa-icon>
+          <fa-icon [icon]="faTrash" (click)="currentQuestion.options.splice(i,1); trueOrfalse.splice(i,1); currentQuestion.rightAnswer.splice(i,1)" style=" color: red;" class="col-1"></fa-icon>
+        </div>
       </div>
+    </div>
+    <div *ngIf="multi || single || quiz">
+      <label>Resposta:
+        <input name="optionText" [(ngModel)]="option" type="text" placeholder="Opção">
+        <label *ngIf="quiz" for="#rightCheckBox">Resposta certa</label>
+        <input *ngIf="quiz" name="rightCheckBox" [(ngModel)]="rightCheck" id ="rightCheckBox" type="checkbox">
+        
+        <button (click)="addMoreOptions(rightCheck); rightCheck=false">Adicionar</button><span [innerHTML]='customHtml' class="ml-2"></span>
+      </label>
+    </div>
+  </div>
+</div>
+
+
+<button class="btn btn-primary" (click)="addQuestion(select)">
+  Adicionar Pergunta
+</button>
+
+<p>----------------Display de Questões----------------</p>
+
+
+<accordion [isAnimated]="true">
+<accordion-group *ngFor="let question of currentQuestionnaire.questionList; let i = index; let toggle = true; let editToggle = false" class="mb-4">
+  <button class="btn btn-link btn-block clearfix" accordion-heading type="button" (click)="toggle=!toggle">
+    <div class="pull-left float-left">Questão {{i + 1}}</div>
+    <span class="badge badge-secondary float-right pull-right btn-borderless btn-down">
+      <fa-icon size="2x" [icon]="toggle?faAngleDoubleUp:faAngleDoubleDown"></fa-icon>
+    </span>
+  </button>
+  <p>{{question.question}}</p>
+
+  
+  <div *ngFor="let option of question.options; let j = index;">
+    <fa-icon *ngIf="question.rightAnswer[j]=='true' && quiz" class="col-1" style="color: green;" [icon]="faCheck" (click)="editToggle?question.rightAnswer[j]='false':question.rightAnswer[j]='true'"></fa-icon>
+    <fa-icon *ngIf="question.rightAnswer[j]=='false' && editToggle && quiz" class="col-1" style="color: black;" [icon]="faCheck" (click)="question.rightAnswer[j]='true'"></fa-icon>
+    <span *ngIf="quiz && !editToggle && question.rightAnswer[j]=='false'" class="col-1">   </span>
+    <label *ngIf="!editToggle" class="form-check-label" for="checkbox{{i}}.{{j}}">{{option}}</label>
+    <input *ngIf="editToggle" [(ngModel)]="question.options[j]" [ngModelOptions]="{updateOn: 'blur'}" style="height: 20px;" type="text">
+  </div>
+  <div>
+      <fa-icon [ngStyle]="{'color': editToggle ? 'darkcyan':'blue'}" [icon]="editToggle?faSave:faEdit" class="col-1" (click)="editToggle=!editToggle" ></fa-icon>
+      <fa-icon [icon]="faTrash" (click)="currentQuestionnaire.questionList.splice(i,1)" style=" color: red;" class="col-1"></fa-icon>
+  </div>
+</accordion-group>
+</accordion>
+
+  <div class="row">
+    <div class="nav nav-tabs col-12" id="myTab" role="tablist">
+
+      <button class="nav-link click col-2" style="border: 2px, black, solid;" data-toggle="pill">Reposta múltipla</button>
+        <button class="nav-link click col-2" data-toggle="pill">Reposta aberta</button>
+        <button class="nav-link click col-2" data-toggle="pill">Reposta aberta</button>
+        <div class="col-6" style="border: 2px, black, solid;">S</div>
+    </div>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active"
+      style="border: 2px, black, solid;"
+        id="multi" role="tabpanel" aria-labelledby="home-tab">
+        Raw denim you
+      </div>
+      <div class="tab-pane fade" id="single" role="tabpanel" aria-labelledby="profile-tab">Food truck fixie
+        locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
+        blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
+        Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
+        PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS
+        salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit,
+        sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+        stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</div>
+      <div class="tab-pane fade" id="open" role="tabpanel" aria-labelledby="contact-tab">
+        LOL #3
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" role="tab" aria-controls="home"
+          aria-selected="true">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="" data-target="#profile" role="tab" aria-controls="profile"
+          aria-selected="false">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="" data-target="#contact" role="tab" aria-controls="contact"
+          aria-selected="false">Contact</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="navigation" aria-labelledby="home-tab">Raw denim you
+        probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master
+        cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip
+        placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi
+        qui.</div>
+      <div class="tab-pane fade" id="profile" role="navigation" aria-labelledby="profile-tab">Food truck fixie
+        locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
+        blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
+        Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
+        PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS
+        salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit,
+        sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+        stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</div>
+      <div class="tab-pane fade" id="contact" role="navigation" aria-labelledby="contact-tab">Etsy mixtape
+        wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack
+        lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard
+        locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify
+        squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie
+        etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog
+        stumptown. Pitchfork sustainable tofu synth chambray yr.</div>
+    </div>
+</div>

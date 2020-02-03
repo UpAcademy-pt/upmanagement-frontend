@@ -23,8 +23,8 @@ export class NewQuestionnaireComponent implements OnInit {
     private templateService: TemplateService
   ) {}
 
- private a: Question = new Question();
- private b: Questionnaire = new Questionnaire();
+ private currentQuestion: Question = new Question();
+ private currentQuestionnaire: Questionnaire = new Questionnaire();
 
  private template: boolean;
  private quiz: boolean;
@@ -34,104 +34,104 @@ export class NewQuestionnaireComponent implements OnInit {
  private trainees: any[] = [];
  private option: string = "";
  private customHtml: string
- private trueOrfalse: boolean[] = [];
- private multi: boolean = true;
  faTrash = faTrash;
  faCheck = faCheck;
  faEdit = faEdit;
  faSave = faSave;
- private rightCheck = false
- private teste = false
  faAngleDoubleDown = faAngleDoubleDown;
  faAngleDoubleUp = faAngleDoubleUp;
- private lala: boolean[] = [];
+ private multi: boolean = true;
+ private select = "MULTIPLE";
+ private rightCheck = false;
 
-  public addQuestion(question: Question, type: string) {
-    console.log(question);
-    
-    //Add the rightAnswer to the question
-    this.a.rightAnswer = this.a.rightAnswer.map((option, index) => option == "true" ? String(index) : "false")
-    .filter(option => option != "false");
-    console.log(this.a.rightAnswer)
 
-    //Add the type of the question
-      this.a.aType=type;
-
-    //Add questions to the questionnaire questionList
-    if (this.b.questionList != undefined) {
-      this.b.questionList.push(question);
-    } else {
-      this.b.questionList = [question];
-    }
-    console.log(this.b.questionList);
-    this.a = new Question(); //ver se existe uma forma melhor
-  }
 
   public addMoreOptions(rightCheck: boolean){
-    console.log(this.option)
-    console.log(rightCheck);
     if(this.option != ""){
-      this.a.options.push(this.option);
-      this.a.rightAnswer.push(String(rightCheck));
+      this.currentQuestion.options.push(this.option);
+      if (this.quiz) this.currentQuestion.rightAnswer.push(String(rightCheck));
       this.customHtml = "";
     } else {
-    this.customHtml = "Necessário escrever opção";
+    this.customHtml = "Necessário escrever resposta";
   }
+  this.option = "";
+
+  }
+
+  public addQuestion(type: string) {
     
-    this.option = "";
-  
-    console.log(this.a.options);
-    console.log(this.a.rightAnswer)
-  }
+    //Add the type of the question
+      this.currentQuestion.aType=type;
 
-  public addQuestionnaire(questionnaire: Questionnaire) {
-
-    if (this.quiz){
-      this.b.qType = "QUIZ";
+    //Add questions to the questionnaire questionList
+    if (this.currentQuestionnaire.questionList != undefined) {
+      this.currentQuestionnaire.questionList.push(this.currentQuestion);
     } else {
-      this.b.qType = "EVALUATION";
+      this.currentQuestionnaire.questionList = [this.currentQuestion];
     }
-    this.b.answerList = [];
+    this.currentQuestion = new Question(); 
+
+  }
+
+
+  public addQuestionnaire() {
+
+    //Change rightAnswer from boolean[] to string[] (of indexes)
+    for (let i = 0; i < this.currentQuestionnaire.questionList.length; i++) {
+      let element = this.currentQuestionnaire.questionList[i];
+      element.rightAnswer = element.rightAnswer.map((option, index) => option == "true" ? String(index) : "false")
+      .filter(option => option != "false");
+
+      element.orderNumber = i;
+    }
+
+    //Add the type of the questionnaire
+    if (this.quiz){
+      this.currentQuestionnaire.qType = "QUIZ";
+    } else {
+      this.currentQuestionnaire.qType = "EVALUATION";
+    }
+
+    //Add answerList empty to the questionnaire
+    this.currentQuestionnaire.answerList = [];
     
-      this.questionnaireService.createQuestionnaireWithAccountId(questionnaire, this.trainees).subscribe(
+
+    // if (this.template) {
+    //   this.currentQuestionnaire.template = true;
+    //   this.questionnaireService.createQuestionnaire(this.currentQuestionnaire).subscribe(
+    //       (msg: string) => {
+    //         console.log("Id do template:")
+    //         console.log(msg);
+    //         this.currentQuestionnaire.templateId = Number(msg);
+    //         // const questionnaireId: number = Number(msg);
+    //         // this.questionnaireService.createQuestionnaireWithAccount(questionnaireId, this.trainees).subscribe();
+    //         // console.log(questionnaireId);
+    //         console.log(this.currentQuestionnaire)
+    //       }, (error: string) => {
+    //         console.log(error);
+    //       });
+    // } 
+    
+   
+    //this.currentQuestionnaire.template = false
+
+      this.questionnaireService.createQuestionnaireWithAccountId(this.currentQuestionnaire, this.template, this.trainees).subscribe(
         (msg: string) => {
               console.log(msg);
             }, (error: string) => {
               console.log(error);
             });
-    
-    
-      // this.questionnaireService.createQuestionnaire(questionnaire).subscribe(
-    //   (msg: string) => {
-    //     console.log(msg);
-    //     const questionnaireId: number = Number(msg);
-    //     this.questionnaireService.createQuestionnaireWithAccount(questionnaireId, this.trainees).subscribe();
-    //     console.log(questionnaireId);
-    //   }, (error: string) => {
-    //     console.log(error);
-    //   });
-    //console.log(questId);
 
-    if (this.template) {
-      let c: Template = new Template(this.b);
-      this.templateService.createTemplate(c).subscribe();
-      console.log("template" );
-      console.log(c);
-    }
-    console.log("questionario")
-    console.log(questionnaire);
-
-    this.b = new Questionnaire(); //ver se existe uma forma melhor
+    this.currentQuestionnaire = new Questionnaire(); 
   }
 
   public viewStuff(thing){
-    console.log(this.lala);
-    
+    console.log(thing);
   }
 
-  public checkRightAnswer(index: number, jindex: number){
-    return this.b.questionList[index].rightAnswer.includes(String(jindex));
-  }
+  // public checkRightAnswer(index: number, jindex: number){
+  //   return this.currentQuestionnaire.questionList[index].rightAnswer.includes(String(jindex));
+  // }
 
   ngOnInit() {
   }

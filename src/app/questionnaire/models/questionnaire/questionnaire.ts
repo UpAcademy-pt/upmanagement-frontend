@@ -14,6 +14,8 @@ export class Questionnaire {
     'createDate': number;
     'lastModifiedDate': number;
     'lastModifiedDatestring': string;
+    'templateId': number;
+    'template': boolean;
     
     constructor(data?: any) {
         Object.assign(this, data);

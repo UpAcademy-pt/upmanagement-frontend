@@ -5,6 +5,7 @@ import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 import { faAngleDoubleDown, faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons';
 import { Answer } from '../models/answer/answer';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-to-answer',
@@ -21,7 +22,8 @@ export class ToAnswerComponent implements OnInit {
   constructor(
     private router: Router,
     private questionnaireService: QuestionnaireService,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private toastr: ToastrService
   ) {
     this.userName = userService.getCurrentName();
     let questionnaireId: number = this.router.getCurrentNavigation().extras.state.id;
@@ -38,22 +40,34 @@ export class ToAnswerComponent implements OnInit {
   ngOnInit() { }
 
   public sendQuestionnaire() {
-    for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
-      if (this.currentQuestionnaire.questionList[i].aType == "MULTIPLE") {
-        this.currentQuestionnaire.answerList[i].answer = this.currentQuestionnaire.answerList[i].answer
-          .map((option, index) => option = "true" ? "" + index : "false")
-          .filter(option => option != "false");
-      }
-    }
-    console.log("Questionario enviado: " + JSON.stringify(this.currentQuestionnaire));
     this.questionnaireService.updateQuestionnaire(this.currentQuestionnaire).subscribe(
       (msg: string) => {
         console.log(msg);
         for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
           this.currentQuestionnaire.answerList[i].answer = [];
         }
+        this.showToastSuccess("Questionário enviado com sucesso");
         this.router.navigate(['/questionario/pendentes']);
+      }, (error: string) => {
+        this.showToastErro("Falha no envio do questionário");
+        console.log(error);
       });
+  }
+
+  checkOrUncheck(questionIndex: number, optionIndex: number) {
+    if (this.currentQuestionnaire.answerList[questionIndex].answer.indexOf(String(optionIndex)) == -1) { 
+      this.currentQuestionnaire.answerList[questionIndex].answer.push(String(optionIndex));
+    } else {
+      this.currentQuestionnaire.answerList[questionIndex].answer.splice(this.currentQuestionnaire.answerList[questionIndex].answer.indexOf(String(optionIndex)), 1);
+    }
+  }
+
+  showToastSuccess(msg: string) {
+    this.toastr.success(msg, 'Sucesso', {timeOut: 3000});
+  }
+
+  showToastErro(msg: string) {
+    this.toastr.warning(msg, 'Erro', {timeOut: 3000});
   }
 
 }
