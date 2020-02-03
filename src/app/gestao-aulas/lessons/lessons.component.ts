@@ -36,6 +36,7 @@ export class LessonsComponent implements OnInit {
   private materialsDisplay$:ReplaySubject<any[][]> = new ReplaySubject(1); 
   private matsDisplay:any [];
   public showMats:boolean= false;
+  public newLesson: boolean = false;
   
 
 
