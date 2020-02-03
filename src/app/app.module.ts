@@ -18,6 +18,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { ProfileComponent } from './profile/profile.component';
 import { ValidateComponent } from './validate/validate.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ValidateComponent } from './validate/validate.component';
     BsDropdownModule.forRoot(),
     FontAwesomeModule,
     CollapseModule.forRoot(),
-    NgxSelectModule
+    NgxSelectModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
