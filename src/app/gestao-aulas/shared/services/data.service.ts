@@ -6,6 +6,7 @@ import { UserServiceService } from 'src/app/core/services/user-service/user-serv
 import { ServiceGeneralService } from './service-general.service';
 import { Lesson } from '../models/lesson/lesson';
 import { LessonsService } from './lessons.service';
+import { EditionService } from './edition.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,14 @@ export class DataService {
   private lessons: Lesson[];
   public lessonNotes = [];
   public lessonNotes$: ReplaySubject<Note[][]> = new ReplaySubject();
+  public editionIds: number[];
+  public editionIds$: ReplaySubject<number[]> = new ReplaySubject(1);
 
   constructor(
     private notesAPI: NotesService,
     private accountApi: ServiceGeneralService,
-    private lessonApi: LessonsService
+    private lessonApi: LessonsService,
+    private editionApi: EditionService
   ) {
   }
 
@@ -96,6 +100,15 @@ export class DataService {
     return this.lessonsTable[id - 1];
   }
 
+  public getEditionIdsByAccount(id: number) {
+    this.editionApi.getEditionIdsByAccount(id).subscribe(
+      (ed: number[]) => {
+        this.editionIds = ed;
+        this.editionIds$.next(ed);
+        console.log(ed);
+      });
+    return this.editionIds;
+  }
 
 }
 

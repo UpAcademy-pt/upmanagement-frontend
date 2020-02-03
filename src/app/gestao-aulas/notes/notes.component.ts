@@ -25,6 +25,8 @@ export class NotesComponent implements OnInit {
   private editValid: Boolean = false;
   private noteToDelete: number;
   private noteToUpdate: Note;
+  public editionIds: number[];
+  public editionIds$: ReplaySubject<number[]> = new ReplaySubject(1);
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faUserPlus = faUserPlus;
@@ -44,6 +46,9 @@ export class NotesComponent implements OnInit {
     this.dataService.getNotesByAccountId(this.accountApi.getCurrentAccountId());
     this.notes = dataService.notes;
     this.notes$ = dataService.notes$;
+    this.editionIds = dataService.editionIds;
+    this.editionIds$ = dataService.editionIds$;
+    this.dataService.getEditionIdsByAccount(this.accountApi.getCurrentAccountId());
   }
 
   ngOnInit() {
