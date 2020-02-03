@@ -17,7 +17,8 @@ import { ReplaySubject } from 'rxjs';
 export class SideBarComponent implements OnInit {
   public showSuperUserTab: boolean = false;
   private edtions: Edition[];
-  private edtions$: ReplaySubject<any> = new ReplaySubject(1)
+  private edtions$: ReplaySubject<any> = new ReplaySubject(1);
+  
 
 
   constructor(
@@ -30,17 +31,18 @@ export class SideBarComponent implements OnInit {
     }
     this.serviceApi.getEditions().subscribe(
       (data:any) =>{
-        this.edtions$.next(data)
-        console.log(data);
+        this.edtions= data;
+        this.edtions$.next(data);
       }
     );
     console.log(this.showSuperUserTab);
-    
    }
 
   ngOnInit() {
   
   }
+  
+
 
 
 }

@@ -7,6 +7,7 @@ import { Edition } from '../models/edition/edition';
 import { Lesson } from '../models/lesson/lesson';
 import { Note } from '../models/note/note';
 import { ReplaySubject } from 'rxjs';
+
  
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,11 @@ export class ServiceGeneralService {
 
   private currentAccount: Account = new Account();
   private accountId$: ReplaySubject<number> = new ReplaySubject();
-  private edtions: Edition[];
-  private edtions$:ReplaySubject<any> = new ReplaySubject();
+  public edtions: Edition[]=[];
+  public edtions$:ReplaySubject<Edition[]> = new ReplaySubject();
+ 
+  public lessons$:ReplaySubject<any[]> = new ReplaySubject();
+
   
 
   constructor(
@@ -26,8 +30,6 @@ export class ServiceGeneralService {
     private userApi: UserServiceService,
     private http: HttpClient,
   ) { 
-  /*   console.log(this.userApi.currentUser$); */
-    
     this.currentAccount.userID = this.userApi.getCurrentUser().id
     this.getAccount().subscribe(
       (account: Account) => {
@@ -35,6 +37,7 @@ export class ServiceGeneralService {
         this.accountId$.next(account.id);
         this.edtions$.next(account.editionsDtos);
         this.edtions = account.editionsDtos;
+        
         }
       )
       
@@ -47,10 +50,6 @@ export class ServiceGeneralService {
 public getEditions(){
   return this.edtions$
 }
-public getLessons(){
-  return this.simulationLessons
-}
-
 /**
  * getCurrentAccountId
  */
@@ -58,79 +57,4 @@ public getCurrentAccountId() {
   return this.currentAccount.id;
 }
 
-// public getNotes () {
-//   return this.simulationNotes;
-// }
-
-public simulation: Array<Edition> = [
-  {
-    'id': 1,
-    'name': "java1",
-    'type': "java",
-    'accountIds': [],
-	'lessonsIds': [],
-	'notesIds': [],
-	'questionsIds': [],
-	'eventsIds': []
-     
-  }, {
-    'id': 2,
-    'name': 'java2',
-    'type': "java",
-    'accountIds': [],
-	'lessonsIds': [],
-	'notesIds': [],
-	'questionsIds': [],
-	'eventsIds': []
-
-  }, {
-    'id': 3,
-    'name': 'Batatas3',
-    'type': "java",
-    'accountIds': [],
-	'lessonsIds': [],
-	'notesIds': [],
-	'questionsIds': [],
-	'eventsIds': []
-  }, {
-    'id': 4,
-    'name': 'Cebolas4',
-    'type': "java",
-    'accountIds': [],
-	'lessonsIds': [],
-	'notesIds': [],
-	'questionsIds': [],
-	'eventsIds': []
-  }
-];
-
-public simulationLessons: Array<Lesson> = [
-  {
-  'id': 1,
-  'name': "html",
-  'description': " ola coisas",
-	'materials': [1,2],
-	'notesIds': [1,2],
-     
-  }, {
-    'id': 2,
-    'name': "css",
-    'description': " ainda mal estamos ca",
-    'materials': [1,2],
-    'notesIds': [1,2],
-
-  }, {
-    'id': 3,
-    'name': "java",
-    'description': " ainda ca estou",
-    'materials': [1,2],
-    'notesIds': [1,2],
-  }, {
-    'id': 4,
-    'name': "angular",
-    'description': " adeus",
-    'materials': [1,2],
-    'notesIds': [1,2],
-  }
-];
 }
