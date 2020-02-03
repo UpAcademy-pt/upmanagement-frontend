@@ -5,6 +5,7 @@ import { Template } from '../models/template/template';
 import { TemplateService } from '../services/template-service/template.service';
 import { Question } from '../models/question/question';
 import { Questionnaire } from '../models/questionnaire/questionnaire';
+import { QuestionnaireService } from '../services/questionnaire-service/questionnaire.service';
 
 @Component({
   selector: 'app-editor',
@@ -39,12 +40,14 @@ export class EditorComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private templateService: TemplateService
+    private templateService: TemplateService,
+    private questionnaireService: QuestionnaireService
   ) { 
     let templateId: number = this.router.getCurrentNavigation().extras.state.id;
     this.templateService.getTemplate(templateId).subscribe(
       (currentQuestionnaire: Questionnaire) => {
         this.currentQuestionnaire = currentQuestionnaire;
+        this.currentQuestionnaire.questionList.sort( (a,b) => (a.orderNumber < b.orderNumber)? -1 : 1)
       });
   }
 
@@ -53,28 +56,66 @@ export class EditorComponent implements OnInit {
 
   }
   
-  
-  
+  public addMoreOptions(rightCheck: boolean){
+    if(this.option != ""){
+      this.currentQuestion.options.push(this.option);
+      if (this.quiz) this.currentQuestion.rightAnswer.push(String(rightCheck));
+      this.customHtml = "";
+    } else {
+    this.customHtml = "Necessário escrever resposta";
+  }
+  this.option = "";
 
+  }
+
+  public addQuestion(type: string) {
+    
+    //Add the type of the question
+      this.currentQuestion.aType=type;
+
+    //Add questions to the questionnaire questionList
+    if (this.currentQuestionnaire.questionList != undefined) {
+      this.currentQuestionnaire.questionList.push(this.currentQuestion);
+    } else {
+      this.currentQuestionnaire.questionList = [this.currentQuestion];
+    }
+    this.currentQuestion = new Question(); 
+
+  }
+
+
+  public addQuestionnaire() {
+
+    //Change rightAnswer from boolean[] to string[] (of indexes)
+    for (let i = 0; i < this.currentQuestionnaire.questionList.length; i++) {
+      let element = this.currentQuestionnaire.questionList[i];
+      element.rightAnswer = element.rightAnswer.map((option, index) => option == "true" ? String(index) : "false")
+      .filter(option => option != "false");
+
+      element.orderNumber = i;
+    }
+
+    //Add the type of the questionnaire
+    if (this.quiz){
+      this.currentQuestionnaire.qType = "QUIZ";
+    } else {
+      this.currentQuestionnaire.qType = "EVALUATION";
+    }
+
+    //Add answerList empty to the questionnaire
+    this.currentQuestionnaire.answerList = [];
+    
+
+      this.questionnaireService.createQuestionnaireWithAccountId(this.currentQuestionnaire, this.template, this.trainees).subscribe(
+        (msg: string) => {
+              console.log(msg);
+            }, (error: string) => {
+              console.log(error);
+            });
+
+    this.currentQuestionnaire = new Questionnaire(); 
+  }
   
-    // public sendQuestionnaire() {
-    //   for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
-    //     if (this.currentQuestionnaire.questionList[i].aType == "MULTIPLE") {
-    //       this.currentQuestionnaire.answerList[i].answer = this.currentQuestionnaire.answerList[i].answer
-    //         .map((option, index) => option = "true" ? "" + index : "false")
-    //         .filter(option => option != "false");
-    //     }
-    //   }
-    //   console.log("Respontas a enviar: " + JSON.stringify(this.currentQuestionnaire.answerList));
-    //   this.questionnaireService.updateQuestionnaire(this.currentQuestionnaire).subscribe(
-    //     (msg: string) => {
-    //       console.log(msg);
-    //       for (let i = 0; i < this.currentQuestionnaire.answerList.length; i++) {
-    //         this.currentQuestionnaire.answerList[i].answer = [];
-    //       }
-    //       this.router.navigate(['/questionario/pendentes']);
-    //     });
-    // }
   
   }
   

@@ -1,41 +1,49 @@
-<div>
+<div >
+  <a id="sidebarButton" [ngStyle]="{'left':collapsed ? '2rem' : '5rem' }" ><i>
+    <fa-icon [icon]="collapsed ? faExpand : faCompress " (click)="collapsed = !collapsed"></fa-icon>
+  </i></a>
+</div>
+
+<div class="container-fluid" style="padding-left: 0; padding-right: 0;">
     <nav id="sidebar" [class.collapsed]= "collapsed" >
-        <div class="header">
-        </div>
         <span style="padding-top: 9px;" class="divider"></span>
         <div class="userArea">
             <div class="userPicture">
-                <img src="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/3556/s200/up-academy-logo.png"
+                <img  *ngIf = "admin" src="{{adminImg}}"
+                    alt="profile picture" />
+                <img  *ngIf = "superUser"  src="{{superUserImg}}"
+                    alt="profile picture" />
+                <img  *ngIf = "user"  src="{{userImg}}"
                     alt="profile picture" />
             </div>
             <div class="userName">
-                Administrador
+                {{userName}}
             </div>
         </div>
         <span class="divider"></span>
         <ul class="navigation">
-            <li>
-                <a [ngClass]="{'active': pending}" (click)="pending=true; history=false; new=false; newFile=false; template=false; " routerLink="/questionario/pendentes" href="#"><i>
-                <fa-icon style=" width: 20; height: 16; margin-right: 10%;"[icon]="faQuestion"></fa-icon>  
+            <li id="questPending">
+                <a [ngClass]="{'active': pending}" (click)="pending=true; history=false; new=false; newFile=false; template=false; statistics=false " routerLink="/questionario/pendentes" href="#"><i>
+                <fa-icon style=" width: 20; height: 16; margin-right: 10%;"[icon]="faQuestion"></fa-icon>
                 </i><span>Pendentes</span></a>
             </li>
-            <li>
-                <a  [ngClass]="{'active': history}" (click)="pending=false; history=true; new=false; newFile=false; template=false" routerLink="/questionario/historico" href="#"><i>
-                <fa-icon style=" width: 20; height: 16; margin-right: 6%;"[icon]="faHistory"></fa-icon> 
+            <li id="questHistory">
+                <a  [ngClass]="{'active': history}" (click)="pending=false; history=true; new=false; newFile=false; template=false; statistics=false" routerLink="/questionario/historico" href="#"><i>
+                <fa-icon style=" width: 20; height: 16; margin-right: 6%;"[icon]="faHistory"></fa-icon>
                 </i><span>Histórico</span></a>
             </li>
-            <li *ngIf="showSideBar" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                (mouveleave)="dp.hide()" (mouseover)="dp.show()" class="nav-item dropdown" dropdown triggers="hover" #dp="bs-dropdown" role="menu"
+            <li id="questNew" style="padding: 0;" *ngIf="showSideBar" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+              class="dropdown nav-link" dropdown triggers="" #dp="bs-dropdown" role="menu"
                 >
-                <a  [ngClass]="{'active': new}" (click)="pending=false; history=false; new=true; newFile=false; template=false" class="nav-link dropdown-toggle" 
+                <a  style="cursor: pointer;" (click)="new = !new" class="dropdown-toggle dropdown"
                     data-toggle="dropdown" dropdownToggle><i>
-                <fa-icon style=" width: 20; height: 16; margin-right: 7%;"[icon]="faPlusSquare"></fa-icon> 
+                <fa-icon style=" width: 20; height: 16; margin-right: 7%;"[icon]="faPlusSquare"></fa-icon>
                 </i><span>Criar</span></a>
-                <div id="navbardrop"  class="dropdown-menu dropdown-menu-center" *dropdownMenu>
-                    <a id="droppNew" [ngClass]="{'active': newFile}" (click)="pending=false; history=false; new=true; newFile=true; template=false " class="dropdown-item" href="#new" routerLink="/questionario/novo">
+                <div id="navbardrop" class="dropdown-menu dropdown-menu-right" [ngStyle]="{'left' : new ? '0px' : 'auto' }" *dropdownMenu> <!-- ver expand drop -->
+                    <a id="droppNew" [ngClass]="{'active': newFile}" (click)="pending=false; history=false; newFile=true; template=false; statistics=false " class="menu-item" href="#new" routerLink="/questionario/novo">
                         <fa-icon style=" width: 20; height: 16; margin-right: 6px"[icon]="faFile"></fa-icon> <span>Novo</span>
                     </a>
-                    <a id="dropTemplate" [ngClass]="{'active': template}" (click)="pending=false; history=false; new=true; newFile=false; template=true " class="dropdown-item" href="#template" routerLink="/questionario/template">
+                    <a id="dropTemplate" [ngClass]="{'active': template}"  (click)="pending=false; history=false; newFile=false; template=true; statistics=false " class="menu-item" href="#template" routerLink="/questionario/template">
                         <fa-icon style=" width: 20; height: 16; margin-right: 6px"[icon]="faFileAlt"></fa-icon><span>Template</span>
                     </a>
                 </div>
@@ -54,21 +62,32 @@
                     </a>
                 </div>
             </li> -->
-            <div class="divider"></div>
-             <li>
-                <a routerLink="/questionario/estatisticas" id="statists" [ngClass]="{'pushStatsDown' : template == true || newFile == true}"  [ngClass]="{'active': statistics}" (click)="pending=false; history=false; new=false; statistics=true"  href="#"><i>
-                <fa-icon style=" width: 20; height: 16;"[icon]="faChartPie"></fa-icon> 
+
+             <li id="questStatistics">
+              <div  class="divider "></div>
+                <a  [ngStyle]="{'margin-top' : template || newFile  ? '100px' : '0px'}" routerLink="/questionario/estatisticas"  [ngClass]="{'active': statistics}" (click)="pending=false; history=false; new=false; statistics=true;"  href="#"><i>
+                <fa-icon style=" width: 20; height: 16; margin-right: 3%"[icon]="faChartPie"></fa-icon>
                 </i><span>Estatisticas</span></a>
+                <span class="divider"></span>
             </li>
-            <span class="divider"></span>
-          
-        </ul>
-            <div style="position: fixed; bottom: 7%;"  >
-            <span id="sidebarCollapsed" style="" class="expandBtn"><fa-icon [icon]="collapsed ? faExpand : faCompress " (click)="collapsed = !collapsed"
-                    ></fa-icon></span>
-            <span class="bottomDivider" ></span>       
+
+
+
+            <li >
+              <div class="container fixed-bottom" style=" margin: 0; padding-left: 0; padding-right: 0; bottom: 1.8rem; "  >
+              <span class="divider" style=" width:auto; "></span>
+            </div>
+            </li>
+            <!--  <li id="questSideBarBottom" >
+                   <div class="container fixed-bottom" style=" margin: 0; padding-left: 0; padding-right: 0; bottom: 1.8rem; "  >
+                   <a  id="stats2" ><i>
+                    <span id="sidebarButton"><fa-icon  [icon]="collapsed ? faExpand : faCompress " (click)="collapsed = !collapsed"></fa-icon></span></a>
+                    <span class="divider" style=" width:auto; "></span>
         </div>
-        
-        
+      </li>-->
+
+      </ul>
+
+
     </nav>
 </div>
