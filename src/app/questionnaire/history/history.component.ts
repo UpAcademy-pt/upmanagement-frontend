@@ -5,6 +5,7 @@ import { QuestionnaireService } from '../services/questionnaire-service/question
 import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-history',
@@ -13,10 +14,13 @@ import { Router } from '@angular/router';
 })
 export class HistoryComponent implements OnInit {
 
-
+ private user: User;
   private account: Account;
+  private currentRole : string;
+  private allHistory: Questionnaire[];
   private history: Questionnaire[];
   public pageOfItems: Array<any>;
+  public viewNameQuest = false;
   // Lembrar OnDestroy()
   public filterData: string;
   // sort
@@ -40,7 +44,13 @@ export class HistoryComponent implements OnInit {
   ngOnInit(
 
   ) {
-    this.getQuestionnaires();
+    
+    this.viewName();
+    this.getCurrentRole();
+    console.log(this.currentRole);
+    this.chooseGet();
+    //this.getQuestionnaires();
+    
   }
   public getCurrentUser() {
     return this.userService.getCurrentUser();
@@ -52,6 +62,24 @@ export class HistoryComponent implements OnInit {
       // this.showView();
     });
   }
+  public getCurrentRole() {
+    this.currentRole = this.getCurrentUser().role;
+  }
+
+  public viewAllQuestionnaires(role: string){
+    this.questService.getAllAnsweredQuestionnaireByRole(role).subscribe((allHistory: Questionnaire[]) => {
+      this.allHistory = allHistory; console.log(allHistory)
+    })
+  }
+
+public chooseGet() {
+  if(this.currentRole=="USER"){
+    this.getQuestionnaires();
+  } else if (this.currentRole== "ADMIN" || this.currentRole=="SUPERUSER"){
+    this.viewAllQuestionnaires(this.currentRole);
+  }
+}
+
   public showView(data: string[]) {
     // this.history.forEach(element => {
     //   element.viewPrivacy.includes(this.getCurrentUser().role);
@@ -91,9 +119,15 @@ export class HistoryComponent implements OnInit {
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const day = ('0' + date.getDate()).slice(-2);
 
-    let a = (`${day}/${month}/${year}`).toString();
+    const a = (`${day}/${month}/${year}`).toString();
     data.lastModifiedDatestring = a;
     return a;
+  }
+
+  public viewName() {
+    if (this.userService.isAdmin() || this.userService.isSuperUser()) {
+      this.viewNameQuest = true;
+    }
   }
 }
 
