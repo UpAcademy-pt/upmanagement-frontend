@@ -1,21 +1,27 @@
 <div class="container">
     <div class="mb-4">
         <h1 class="text-center">{{currentQuestionnaire?.name}}</h1>
-        <h6 class="text-center">Nome: {{userName}}</h6>
-        <h6 *ngIf="currentQuestionnaire?.qType=='QUIZ'" class="text-center">Nota: {{currentQuestionnaire?.score}}%</h6>
+
+        <!-- Colocar o nome do user que vem no questionário -->
+        <div>Nome: nome do User</div>
+        <div>Respondido em: {{ currentQuestionnaire?.lastModifiedDate | date:'dd/MM/yyyy, HH:mm:ss' }}</div>
+        <h5><span class="badge badge-secondary" *ngIf="currentQuestionnaire?.qType=='QUIZ'">Nota: {{currentQuestionnaire?.score}}%</span></h5>
     </div>
 
     <div>
         <accordion [isAnimated]="true">
             <accordion-group *ngFor="let question of currentQuestionnaire?.questionList; let i = index; let toggle = true;" class="mb-4">
+                
                 <button class="btn btn-link btn-block clearfix" accordion-heading type="button" (click)="toggle=!toggle">
-                    <div class="pull-left float-left">Questão {{i + 1}}: {{question.question}}</div>
+                    <span *ngIf="question.aType=='SINGLE_OPTION'"></span>
+                    <div class="pull-left float-left">
+                        <span style="color: black;" [ngClass]="currentQuestionnaire?.qType=='QUIZ'&&(currentQuestionnaire?.answerList[i].rightAnswer ? 'rightAnswer' : 'wrongAnswer')">Questão {{i + 1}}</span>
+                        <span style="color: black;">: {{question.question}}</span>
+                    </div>
                     <span class="badge badge-secondary float-right pull-right btn-borderless btn-down">
                         <fa-icon size="2x" [icon]="toggle?faAngleDoubleUp:faAngleDoubleDown"></fa-icon>
                     </span>
                 </button>
-
-                <!-- <p>{{question.question}}</p> -->
 
                 <div *ngIf="question.aType=='OPEN'">
                     <div class="form-group">
@@ -42,9 +48,6 @@
 
             </accordion-group>
         </accordion>
-        <!-- <div class="text-center">
-            <button (click)="sendQuestionnaire()" type="button" class="btn btn-primary">Enviar Questionário</button>
-        </div> -->
 
     </div>
 </div>
