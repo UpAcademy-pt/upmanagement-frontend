@@ -14,8 +14,9 @@
     color: red;
 }
 
-.teste1 {
-    overflow-x: scroll;
+.table-responsive {
+    max-height: 350px;
+    overflow-y: scroll;
 }
 table {
     table-layout: fixed;
