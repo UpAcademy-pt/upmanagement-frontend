@@ -47,4 +47,11 @@ export class NotesService {
     public delete(id: number) {
       return this.http.delete(this.url + id);
     }
+
+    // /**
+    //  * getEditionIdsByAccount
+    //  */
+    // public getEditionIdsByAccount(id: number) {
+    //   return this.http.get('http://localhost:8080/coreFinalProject/aulas/editions/accounts/ids/' + `${id}` );
+    // }
 }

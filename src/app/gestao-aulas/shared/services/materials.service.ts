@@ -17,6 +17,9 @@ export class MaterialsService {
   public createMaterial(material: Materials){
     return this.http.post(this.url, material)
   }
+  public getMaterialsById(id:number){
+    return this.http.get(this.url+id)
+  }
 
   public getAllMaterials(){
     return this.http.get(this.url)

@@ -1,11 +1,11 @@
 export class Lesson {
     'id'?: number;
-    'name': string;
+    'editionId': number;
+    'title': string;
     'description': string;
-	'materials': number[];
-	'notesIds': number[];
-  
+    'materialsIds': number[];
+
     constructor(data?: any) {
-      Object.assign(this, data);
+        Object.assign(this, data);
     }
 }
