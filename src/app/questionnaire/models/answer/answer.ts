@@ -5,6 +5,7 @@ export class Answer {
     'questionId': number;
     'createDate': number;
     'lastModifiedDate': number;
+    'rightAnswer': boolean;
 
 constructor(data?: any) {
     Object.assign(this, data);
