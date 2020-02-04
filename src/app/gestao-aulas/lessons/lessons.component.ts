@@ -36,6 +36,7 @@ export class LessonsComponent implements OnInit {
   private materialsDisplay$:ReplaySubject<any[][]> = new ReplaySubject(1); 
   private matsDisplay:any [];
   public showMats:boolean= false;
+  editValid: boolean = false;
   public newLesson: boolean = false;
   
   public title: string;
@@ -47,10 +48,12 @@ export class LessonsComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   indexOfLessonToDelete: number;
   modalRef: BsModalRef;
-  indexOfLessonToEdit: number;
+  private indexOfLessonToEdit: number;
 
   form: FormGroup;
   checkArray: FormArray;
+
+
 
   constructor(
     private apiLesson: LessonsServiceService,
@@ -114,22 +117,23 @@ export class LessonsComponent implements OnInit {
   // Create
   // ------------
   public createLesson() {
-    // falta a editionId
+   this.lesson.editionId = this.edtions[this.rowForEditions].id;
     this.lesson.title = this.title;
     this.lesson.description = this.description;
    // let materialsInLesson = [];
-    this.lesson.materialsIds = this.idMatAdded;     // ids
+    this.lesson.materialsIds = this.idMatAdded;  
     console.log(this.lesson);
 
     this.apiLesson.createLesson(this.lesson).subscribe(
       (result: any) => {
         console.log(this.lessons);
+        this.lesson.id=result;
         this.lessons.push(this.lesson);
         this.updateLessons$();
         this.lesson = new Lesson();
-      }
+      }      
     )
-
+    this.checkArray.clear();
   }
 
   public updateLessons$() {
@@ -146,21 +150,6 @@ export class LessonsComponent implements OnInit {
     console.log(this.indexOfLessonToDelete);
     this.modalRef = this.modalService.show(template);
   }
-
-  public getLessonsMaterials(lesson: Lesson,i :number){
-    this.materialsApi.getMaterialsById(lesson.id).subscribe(
-      (data:any )=> {
-        this.matsDisplay.splice(i,1,data);
-        console.log(this.matsDisplay);
-        this.materialsDisplay$.next(this.matsDisplay);
-      }
-    )
-   
-    
-    this.showMats= true;
-  }
-
-  
   
   public deleteLessonById() {
     let id = this.lessons[this.indexOfLessonToDelete].id;
@@ -168,34 +157,34 @@ export class LessonsComponent implements OnInit {
       () => {
         const lessonIndex = this.lessons.map((lesson) => lesson.id).indexOf(id);
         console.log(lessonIndex);
-
         if (lessonIndex !== -1) {
           this.lessons.splice(lessonIndex, 1);
         }
         this.updateLessons$();
       }
     );
-
   }
 
   // ------------
   // Edit
   // ------------
 
-  public openModalEditLesson(template: TemplateRef<any>, index: number) {
-    this.indexOfLessonToEdit = index;
-    this.modalRef = this.modalService.show(template);
-  }
+  // public openModalEditLesson(template: TemplateRef<any>, index: number) {
+  //   this.indexOfLessonToEdit = index;
+  //   this.modalRef = this.modalService.show(template);
+  // }
 
-  public editLesson() {
-    this.lesson.id = this.lessons[this.indexOfLessonToEdit].id
-    this.lesson.description = this.description;
-    this.lesson.title = this.title;
-   /*  this.lesson.materialsIds = this.materials.id; */
+  public updateLesson(lesson: Lesson) {
 
-    this.apiLesson.updateLesson(this.lesson).subscribe(
-      () => {
-        this.lessons[this.indexOfLessonToEdit] = this.lesson;
+  //   this.lesson.id = this.lessons[this.indexOfLessonToEdit].id
+  //   this.lesson.description = this.description;
+  //   this.lesson.title = this.title;
+  //  /*  this.lesson.materialsIds = this.materials.id; */
+
+    this.apiLesson.updateLesson(lesson).subscribe(
+      (res:any) => {
+        this.lessons.splice(this.lessons.findIndex(element => element.id === lesson.id), 1, lesson);
+       // this.lessons[this.indexOfLessonToEdit] = this.lesson;
         this.updateLessons$();
       }
     );
@@ -206,9 +195,30 @@ export class LessonsComponent implements OnInit {
   // ADICIONAR MATERIAIS
   // ------------
 
-  public openModaladdMaterials(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  public getLessonsMaterials(lesson: Lesson,i :number){
+
+    let materials_array = []
+    for (let i = 0; i < lesson.materialsIds.length; i++) {
+      materials_array.push(this.materials[i]);
+    };
+    this.matsDisplay.splice(i, 1, materials_array);
+    console.log(this.matsDisplay);
+    this.materialsDisplay$.next(this.matsDisplay);
+    this.showMats = true;
+
+    // this.materialsApi.getMaterialsById(lesson.id).subscribe(
+    //   (data:any )=> {
+    //     this.matsDisplay.splice(i,1,data);
+    //     console.log(this.matsDisplay);
+    //     this.materialsDisplay$.next(this.matsDisplay);
+    //   }
+    // )   
+    //     this.showMats= true;
   }
+
+  // public openModaladdMaterials(template: TemplateRef<any>) {
+  //   this.modalRef = this.modalService.show(template);
+  // }
 
   public onCheckboxChange(e: any) {
     this.idMatAdded = new Array();
