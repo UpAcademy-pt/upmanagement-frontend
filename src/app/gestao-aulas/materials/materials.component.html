@@ -1,3 +1,5 @@
+<div class="scrollContainer">
+  <h4>Materiais de apoio</h4>
 <div>
       <h4 class="text-center"><b>Criar novo material:</b></h4>
     <form class="mg-5 mt-3 container" #updateMaterial="ngForm" (ngSubmit)="createMaterial()">
@@ -99,7 +101,9 @@
 <ng-template #templateConfirmDeleteMaterial>
   <div class="modal-body text-center">
     <p>Tem a certeza que deseja remover o material?</p>
-    <button type="button" class="btn btn-danger" (click)="deleteById()" >Sim</button>
-    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Não</button>
+    <button type="button" class="btn btn-secondary btn-lg" (click)="modalRef.hide()"
+      style="margin-right: 5px">Não</button>
+    <button type="button" class="btn btn-danger" (click)="deleteById()" style="margin-left: 5px">Sim</button>
   </div>
 </ng-template>
+</div>

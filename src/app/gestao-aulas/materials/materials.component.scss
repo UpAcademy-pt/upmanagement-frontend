@@ -22,3 +22,19 @@ table {
     word-wrap: break-word;
 }
 
+.scrollContainer {
+    height: 100%;
+    overflow-y: scroll;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.btn-secondary {
+    background-color: #343a40;
+}
+
+.btn-danger {
+    background-color: #b52d3a;
+    border-color: #b52d3a;
+}
