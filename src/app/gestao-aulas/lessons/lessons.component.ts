@@ -25,19 +25,19 @@ export class LessonsComponent implements OnInit {
   private id: number;
   private lesson: Lesson = new Lesson();
   public lessons$: ReplaySubject<Lesson[]> = new ReplaySubject(1);
-  private lessons: Lesson[]= new Array<Lesson>();
+  private lessons: Lesson[] = new Array<Lesson>();
   private notes: any[];
-  private edtions: Edition[]=[];
+  private edtions: Edition[] = [];
   private edtions$: ReplaySubject<Edition[]> = new ReplaySubject(1);
   private rowForEditions: number;
   private rowForEditions$: ReplaySubject<any> = new ReplaySubject(1);
   private materials$: ReplaySubject<any> = new ReplaySubject(1);
-  private materials: Materials= new Materials();
-  private materialsDisplay$:ReplaySubject<any[][]> = new ReplaySubject(1); 
-  private matsDisplay:any [];
-  public showMats:boolean= false;
+  private materials: Materials = new Materials();
+  private materialsDisplay$: ReplaySubject<any[][]> = new ReplaySubject(1);
+  private matsDisplay: any[];
+  public showMats: boolean = false;
   public newLesson: boolean = false;
-  public editValid: boolean =false;
+  public editValid: boolean = false;
 
 
 
@@ -61,48 +61,48 @@ export class LessonsComponent implements OnInit {
     private apiLesson: LessonsServiceService,
     private userApi: UserServiceService,
     private materialsApi: MaterialsService,
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router,
     private serviceApi: ServiceGeneralService,
     private modalService: BsModalService,
     private fb: FormBuilder
-  ) { 
+  ) {
     if (this.userApi.isSuperUser() || this.userApi.isAdmin()) {
       this.isSuperUser = true;
     }
     this.route.params.subscribe(
       (params) => {
         console.log(params);
-        
+
         this.serviceApi.getEditions().subscribe(
-          (data:Edition[])=>{
+          (data: Edition[]) => {
             let param = data[params.i] == null ? data[0] : data[params.i];
             console.log(param.lessonsDtos);
-            this.lessons= param.lessonsDtos;
+            this.lessons = param.lessonsDtos;
             this.lessons$.next(param.lessonsDtos);
-            this.matsDisplay = Array(param.lessonsDtos.length).fill(new Array()) ;
-            console.log( this.matsDisplay);
+            this.matsDisplay = Array(param.lessonsDtos.length).fill(new Array());
+            console.log(this.matsDisplay);
           }
         )
         if (params.i == null) {
           this.rowForEditions$.next(0);
-        this.rowForEditions= Number(0);
-        }else{
-        this.rowForEditions$.next(params.i);
-        this.rowForEditions= Number(params.i);
+          this.rowForEditions = Number(0);
+        } else {
+          this.rowForEditions$.next(params.i);
+          this.rowForEditions = Number(params.i);
         }
-          }
-        );
+      }
+    );
     this.serviceApi.getEditions().subscribe(
-      (data:any) =>{
+      (data: any) => {
         console.log(data);
-        this.edtions= data;
+        this.edtions = data;
         this.edtions$.next(data);
       }
     );
     this.materialsApi.getAllMaterials().subscribe(
-      (data:any) =>{
-        this.materials= data;
+      (data: any) => {
+        this.materials = data;
         console.log(data);
         this.materials$.next(data)
       }
@@ -122,7 +122,7 @@ export class LessonsComponent implements OnInit {
     this.lesson.editionId = this.edtions[this.rowForEditions].id;
     this.lesson.title = this.title;
     this.lesson.description = this.description;
-    let materialsInLesson=[];
+    let materialsInLesson = [];
     this.lesson.materialsIds = materialsInLesson;     // ids
     console.log(this.lesson);
 
@@ -154,19 +154,19 @@ export class LessonsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  public getLessonsMaterials(lesson: Lesson,i :number){
+  public getLessonsMaterials(lesson: Lesson, i: number) {
     let materials_array = []
     for (let i = 0; i < lesson.materialsIds.length; i++) {
       materials_array.push(this.materials[i]);
     };
-    this.matsDisplay.splice(i,1,materials_array);
+    this.matsDisplay.splice(i, 1, materials_array);
     console.log(this.matsDisplay);
     this.materialsDisplay$.next(this.matsDisplay);
-    this.showMats= true;
+    this.showMats = true;
   }
 
-  
-  
+
+
   public deleteLessonById() {
     let id = this.lessons[this.indexOfLessonToDelete].id;
     this.apiLesson.deleteById(id).subscribe(
@@ -227,7 +227,7 @@ export class LessonsComponent implements OnInit {
   }
 
   public addMaterials() {
-    console.log(this.form.value)
+    console.log(this.form.value);
 
     // for (let i = 0; i < this.form.value.length; i++) {
 
