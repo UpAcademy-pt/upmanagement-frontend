@@ -4,7 +4,7 @@ import { ReplaySubject } from 'rxjs';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { MaterialsService } from '../shared/services/materials.service';
-import { BsModalService,BsModalRef } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-materials',
@@ -12,12 +12,12 @@ import { BsModalService,BsModalRef } from 'ngx-bootstrap';
   styleUrls: ['./materials.component.scss']
 })
 export class MaterialsComponent implements OnInit {
-  private materials: Materials[]= [];
+  private materials: Materials[] = [];
   private material: Materials = new Materials();
   private showTable: boolean = false;
 
-  public header=["Titulo","tipo","Url","update","delete"];
-  public headerAtt=["title","type","url"];
+  public header = ["Titulo", "tipo", "Url", "update", "delete"];
+  public headerAtt = ["title", "type", "url"];
   public materials$: ReplaySubject<any> = new ReplaySubject(1);
   private rowMaterialToDelete: number;
   public updateTo: number;
@@ -29,51 +29,54 @@ export class MaterialsComponent implements OnInit {
   public type: string;
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
-  
+
 
   constructor(
     private apiMaterials: MaterialsService,
     private modalService: BsModalService,
-   
+
   ) {
-  this.apiMaterials.getAllMaterials().subscribe(
-    (mat: Materials[]) => {
-      this.materials$.next(mat);
-      this.materials = mat
-      console.log(this.materials);
-      }
-  )
-   }
-
-  ngOnInit() {
-  }
-  public updateObs(){
-    this.materials$.next(this.materials)
-  }
-
-  public createMaterial(){
-    
-    this.material.title = this.title;
-    this.material.url = this.link;
-    this.material.type = this.type;
-   
-    console.log(this.material);
-
-    return this.apiMaterials.createMaterial(this.material).subscribe(
-      (msg: string) => {
-        
-        this.updateObs()
-        console.log(msg);
-      },(error: string) => {
-        console.log(error);
+    this.apiMaterials.getAllMaterials().subscribe(
+      (mat: Materials[]) => {
+        this.materials$.next(mat);
+        this.materials = mat
+        console.log(this.materials);
       }
     )
   }
 
-  public deleteById(){
+  ngOnInit() {
+  }
+  public updateObs() {
+    this.materials$.next(this.materials)
+  }
+
+  public createMaterial() {
+
+    this.material.title = this.title;
+    this.material.url = this.link;
+    this.material.type = this.type;
+
+    console.log(this.material);
+
+    return this.apiMaterials.createMaterial(this.material).subscribe(
+      (msg: number) => {
+        this.material.id = msg;
+        this.materials.push(this.material);
+        this.updateObs();
+        console.log(this.material);
+        this.material = new Materials();
+      }, (error: string) => {
+        console.log(error);
+        this.material = new Materials();
+      }
+    )
+  }
+
+  public deleteById() {
     this.apiMaterials.deleteById(this.materials[this.rowMaterialToDelete].id).subscribe(
       (msg: string) => {
-        this.materials.splice(this.rowMaterialToDelete,1);
+        this.materials.splice(this.rowMaterialToDelete, 1);
         this.updateObs()
         console.log(msg);
         if (this.materials.length <= 0) {
@@ -86,7 +89,7 @@ export class MaterialsComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  public updateMat(){
+  public updateMat() {
     console.log(this.materialToUpdate);
     this.apiMaterials.updateMaterial(this.materialToUpdate).subscribe(
       (msg: string) => {
