@@ -11,7 +11,7 @@
         </div>
         <ng-template #alternativeBlock>
             <div class="container" style="text-align: right; padding-right: 15px;">
-                <button type="button" class="btn btn-danger" (click)="newLesson = false  ; clearCheckArray()">X</button>
+                <button type="button" class="btn btn-danger" (click)="newLesson = false; addMaterial = false">X</button>
             </div>
         </ng-template>
         <div *ngIf="newLesson">
@@ -79,9 +79,11 @@
                                         <td>
                                             {{material.url}}
                                         </td>
-                                        <td class="text-center">
-                                            <input type="checkbox" [value]="material.id"
-                                                (change)="onCheckboxChange($event)">
+                                        <td>
+                                            <!-- <input class="form-check-input" type="checkbox" [value]="material.id"
+                                                (change)="onCheckboxChange($event)"> -->
+                                            <input class="form-check-input" type="checkbox" [value]="material.id"
+                                                id="materialCheck{{i}}" (change)="onCheckboxChange($event)">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -98,7 +100,7 @@
                     </form>
                 </div>
                 <div class="row">
-                    <button (click)="createLesson(); newLesson = false" class="btn btn-secondary mx-auto">Criar
+                    <button (click)="createLesson(); newLesson = false; addMaterial = false" class="btn btn-secondary mx-auto">Criar
                         aula</button>
                 </div>
             </form>
@@ -113,7 +115,7 @@
     <div class="container">
         <accordion [isAnimated]="true">
             <div *ngFor="let lesson of lessons$ | async; let i = index;">
-                <accordion-group (click)="getLessonsMaterials(lesson, i)" heading="{{lesson.title}} - Aula {{i+1}}"
+                <accordion-group (click)="getLessonsMaterials(lesson, i)" heading="Aula {{i+1}} - {{lesson.title}}"
                     id="{{i}}">
                     <div *ngIf="isSuperUser">
                         <button type="button" class="btn-borderless btn-edit" (click)="editValid = true">
@@ -131,22 +133,26 @@
                                 <div *ngIf="editValid; else elseBlock">
                                     <form class="mg-5 mt-3 container" #newNoteForm="ngForm"
                                         (ngSubmit)="updateLesson(lesson)">
-                                        <textarea class="form-control" id="exampleFormControlTextareaTitle" rows="1"
+                                        <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}" rows="1"
                                             [(ngModel)]="lesson.title" name="title">
                                   {{lesson.title}}
                                 </textarea>
-                                        <textarea class="form-control" id="formControlTextareaDescription" rows="3"
+                                        <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
                                             [(ngModel)]="lesson.description" name="description">
                                     {{lesson.description}}
                                   </textarea>
                                         <br>
-                                        <button type="button" class="btn btn-secondary"
-                                            (click)="editValid = false; updateLesson(lesson)">Salvar
-                                            Aula</button>
+                                        <div *ngIf="editValid">
+                                            <button type="button" class="btn btn-secondary"
+                                                (click)="editValid = false; updateLesson(lesson)">Salvar
+                                                Aula</button> &nbsp;
+                                                <button type="button" class="btn btn-danger" (click)="editValid = false">X</button>
+                                            
+                                        </div>
                                     </form>
                                 </div>
                                 <ng-template #elseBlock>
-                                    <textarea class="form-control" id="formControlTextareaDescription" rows="3"
+                                    <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
                                         disabled>
                                     {{lesson.description}}
                                 </textarea>
@@ -188,7 +194,7 @@
     </ng-template>
 
     <!-- Modal Editar Aula -->
-    <ng-template #templateEditLesson>
+    <!-- <ng-template #templateEditLesson>
         <div class="modal-header">
             <h4 class="modal-title pull-left">Editar Aula</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -222,7 +228,7 @@
             </form>
         </div>
     </ng-template>
-
+-->
 
 
     <!-- Modal Adicionar Materiais -->
@@ -285,5 +291,5 @@
             </div>
 
         </form>
-    </ng-template>
+    </ng-template> -->
 </div>
