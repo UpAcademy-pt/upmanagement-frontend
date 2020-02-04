@@ -25,91 +25,83 @@ export class LessonsComponent implements OnInit {
   private id: number;
   private lesson: Lesson = new Lesson();
   public lessons$: ReplaySubject<Lesson[]> = new ReplaySubject(1);
-  private lessons: Lesson[] = new Array<Lesson>();
+  private lessons: Lesson[]= new Array<Lesson>();
   private notes: any[];
-  private edtions: Edition[] = [];
+  private edtions: Edition[]=[];
   private edtions$: ReplaySubject<Edition[]> = new ReplaySubject(1);
   private rowForEditions: number;
   private rowForEditions$: ReplaySubject<any> = new ReplaySubject(1);
   private materials$: ReplaySubject<any> = new ReplaySubject(1);
-  private materials: Materials = new Materials();
-  private materialsDisplay$: ReplaySubject<any[][]> = new ReplaySubject(1);
-  private matsDisplay: any[];
-  public showMats: boolean = false;
+  private materials: Materials= new Materials();
+  private materialsDisplay$:ReplaySubject<any[][]> = new ReplaySubject(1); 
+  private matsDisplay:any [];
+  public showMats:boolean= false;
   public newLesson: boolean = false;
-  public editValid: boolean = false;
-
-  private idMatAdded: number[] = [];
-
-
-  private title: string;
-  private description: string;
-  private material = new Materials();
-  private materialsInLesson: any[] = [];
+  
+  public title: string;
+  public description: string;
+  public material = new Materials();
+  public idMatAdded: any[] = [];
 
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   indexOfLessonToDelete: number;
   modalRef: BsModalRef;
+  indexOfLessonToEdit: number;
+
   form: FormGroup;
-
-  private indexOfLessonToEdit: number;
-
-
-   checkArray: FormArray;
+  checkArray: FormArray;
 
   constructor(
     private apiLesson: LessonsServiceService,
     private userApi: UserServiceService,
     private materialsApi: MaterialsService,
-    private route: ActivatedRoute,
+    private route:ActivatedRoute,
     private router: Router,
     private serviceApi: ServiceGeneralService,
     private modalService: BsModalService,
     private fb: FormBuilder
-  ) {
+  ) { 
     if (this.userApi.isSuperUser() || this.userApi.isAdmin()) {
       this.isSuperUser = true;
     }
     this.route.params.subscribe(
       (params) => {
         console.log(params);
-
+        
         this.serviceApi.getEditions().subscribe(
-          (data: Edition[]) => {
+          (data:Edition[])=>{
             let param = data[params.i] == null ? data[0] : data[params.i];
             console.log(param.lessonsDtos);
-            this.lessons = param.lessonsDtos;
+            this.lessons= param.lessonsDtos;
             this.lessons$.next(param.lessonsDtos);
-            this.matsDisplay = Array(param.lessonsDtos.length).fill(new Array());
-            console.log(this.matsDisplay);
+            this.matsDisplay = Array(param.lessonsDtos.length).fill(new Array()) ;
+            console.log( this.matsDisplay);
           }
         )
         if (params.i == null) {
           this.rowForEditions$.next(0);
-          this.rowForEditions = Number(0);
-        } else {
-          this.rowForEditions$.next(params.i);
-          this.rowForEditions = Number(params.i);
+        this.rowForEditions= Number(0);
+        }else{
+        this.rowForEditions$.next(params.i);
+        this.rowForEditions= Number(params.i);
         }
-      }
-    );
+          }
+        );
     this.serviceApi.getEditions().subscribe(
-      (data: any) => {
+      (data:any) =>{
         console.log(data);
-        this.edtions = data;
+        this.edtions= data;
         this.edtions$.next(data);
       }
     );
     this.materialsApi.getAllMaterials().subscribe(
-      (data: any) => {
-        this.materials = data;
+      (data:any) =>{
+        this.materials= data;
         console.log(data);
         this.materials$.next(data)
       }
     )
-
-    
     this.form = this.fb.group({
       checkArray: this.fb.array([])
     })
@@ -122,7 +114,7 @@ export class LessonsComponent implements OnInit {
   // Create
   // ------------
   public createLesson() {
-    this.lesson.editionId = this.edtions[this.rowForEditions].id;
+    // falta a editionId
     this.lesson.title = this.title;
     this.lesson.description = this.description;
    // let materialsInLesson = [];
@@ -132,15 +124,12 @@ export class LessonsComponent implements OnInit {
     this.apiLesson.createLesson(this.lesson).subscribe(
       (result: any) => {
         console.log(this.lessons);
-        this.lesson.id = result;
-        console.log(this.lesson);
         this.lessons.push(this.lesson);
         this.updateLessons$();
         this.lesson = new Lesson();
       }
     )
-    this.checkArray.clear();
-    
+
   }
 
   public updateLessons$() {
@@ -158,10 +147,23 @@ export class LessonsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  public getLessonsMaterials(lesson: Lesson,i :number){
+    this.materialsApi.getMaterialsById(lesson.id).subscribe(
+      (data:any )=> {
+        this.matsDisplay.splice(i,1,data);
+        console.log(this.matsDisplay);
+        this.materialsDisplay$.next(this.matsDisplay);
+      }
+    )
+   
+    
+    this.showMats= true;
+  }
+
+  
+  
   public deleteLessonById() {
     let id = this.lessons[this.indexOfLessonToDelete].id;
-    console.log(id);
-
     this.apiLesson.deleteById(id).subscribe(
       () => {
         const lessonIndex = this.lessons.map((lesson) => lesson.id).indexOf(id);
@@ -173,6 +175,7 @@ export class LessonsComponent implements OnInit {
         this.updateLessons$();
       }
     );
+
   }
 
   // ------------
@@ -184,46 +187,24 @@ export class LessonsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  // public editLesson() {
-  //   this.lesson.id = this.lessons[this.indexOfLessonToEdit].id
-  //   this.lesson.description = this.description;
-  //   this.lesson.title = this.title;
-  //  /*  this.lesson.materialsIds = this.materials.id; */
+  public editLesson() {
+    this.lesson.id = this.lessons[this.indexOfLessonToEdit].id
+    this.lesson.description = this.description;
+    this.lesson.title = this.title;
+   /*  this.lesson.materialsIds = this.materials.id; */
 
-  //   this.apiLesson.updateLesson(this.lesson).subscribe(
-  //     () => {
-  //       this.lessons[this.indexOfLessonToEdit] = this.lesson;
-  //       this.updateLessons$();
-  //     }
-  //   );
-  // }
-
-  public updateLesson(lesson: Lesson) {
-    this.apiLesson.updateLesson(lesson).subscribe(
-      (res: any) => {
-        this.lessons.splice(this.lessons.findIndex(element => element.id === lesson.id), 1, lesson);
+    this.apiLesson.updateLesson(this.lesson).subscribe(
+      () => {
+        this.lessons[this.indexOfLessonToEdit] = this.lesson;
         this.updateLessons$();
       }
     );
   }
 
 
-
-
   // ------------
   // ADICIONAR MATERIAIS
   // ------------
-
-  public getLessonsMaterials(lesson: Lesson, i: number) {
-    let materials_array = []
-    for (let i = 0; i < lesson.materialsIds.length; i++) {
-      materials_array.push(this.materials[i]);
-    };
-    this.matsDisplay.splice(i, 1, materials_array);
-    console.log(this.matsDisplay);
-    this.materialsDisplay$.next(this.matsDisplay);
-    this.showMats = true;
-  }
 
   public openModaladdMaterials(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
@@ -239,7 +220,7 @@ export class LessonsComponent implements OnInit {
       let i: number = 0;
       this.checkArray.controls.forEach((item: FormControl) => {
         if (item.value == e.target.value) {
-         this. checkArray.removeAt(i);
+          this.checkArray.removeAt(i);
           return;
         }
         i++;
