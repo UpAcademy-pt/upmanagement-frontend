@@ -32,12 +32,12 @@ export class LessonsComponent implements OnInit {
   private rowForEditions: number;
   private rowForEditions$: ReplaySubject<any> = new ReplaySubject(1);
   private materials$: ReplaySubject<any> = new ReplaySubject(1);
-  private materials: Materials= new Materials();
-  private materialsDisplay$:ReplaySubject<any[][]> = new ReplaySubject(1); 
-  private matsDisplay:any [];
-  public showMats:boolean= false;
+  private materials: Materials = new Materials();
+  private materialsDisplay$: ReplaySubject<any[][]> = new ReplaySubject(1);
+  private matsDisplay: any[];
+  public showMats: boolean = false;
   public newLesson: boolean = false;
-  public editValid: boolean =false;
+  public editValid: boolean = false;
 
   private idMatAdded: number[] = [];
 
@@ -125,12 +125,15 @@ export class LessonsComponent implements OnInit {
     this.lesson.editionId = this.edtions[this.rowForEditions].id;
     this.lesson.title = this.title;
     this.lesson.description = this.description;
-    this.lesson.materialsIds = this.idMatAdded;     // ids
+    let materialsInLesson = [];
+    this.lesson.materialsIds = materialsInLesson;     // ids
     console.log(this.lesson);
 
     this.apiLesson.createLesson(this.lesson).subscribe(
       (result: any) => {
         console.log(this.lessons);
+        this.lesson.id = result;
+        console.log(this.lesson);
         this.lessons.push(this.lesson);
         this.updateLessons$();
         this.lesson = new Lesson();
@@ -181,19 +184,30 @@ export class LessonsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  public editLesson() {
-    this.lesson.id = this.lessons[this.indexOfLessonToEdit].id
-    this.lesson.description = this.description;
-    this.lesson.title = this.title;
-    /*  this.lesson.materialsIds = this.materials.id; */
+  // public editLesson() {
+  //   this.lesson.id = this.lessons[this.indexOfLessonToEdit].id
+  //   this.lesson.description = this.description;
+  //   this.lesson.title = this.title;
+  //  /*  this.lesson.materialsIds = this.materials.id; */
 
-    this.apiLesson.updateLesson(this.lesson).subscribe(
-      () => {
-        this.lessons[this.indexOfLessonToEdit] = this.lesson;
+  //   this.apiLesson.updateLesson(this.lesson).subscribe(
+  //     () => {
+  //       this.lessons[this.indexOfLessonToEdit] = this.lesson;
+  //       this.updateLessons$();
+  //     }
+  //   );
+  // }
+
+  public updateLesson(lesson: Lesson) {
+    this.apiLesson.updateLesson(lesson).subscribe(
+      (res: any) => {
+        this.lessons.splice(this.lessons.findIndex(element => element.id === lesson.id), 1, lesson);
         this.updateLessons$();
       }
     );
   }
+
+
 
 
   // ------------

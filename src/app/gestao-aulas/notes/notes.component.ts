@@ -87,7 +87,7 @@ export class NotesComponent implements OnInit {
     console.log(this.note);
     this.dataService.createNote(this.note);
     this.note = new Note();
-    this.modalRef.hide();
+    // this.modalRef.hide();
   }
 
   /**

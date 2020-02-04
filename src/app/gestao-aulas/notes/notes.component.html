@@ -1,7 +1,55 @@
-<h4>Lista de Notas</h4>
-<div class="container" style="text-align: right; padding-right: 15px;">
-  <button type="button" class="btn btn-secondary" (click)="openModalNewNote(templateNewNote)">Criar nova nota</button>
+<h4>Notas</h4>
+
+<div *ngIf="!newNote; else alternativeBlock">
+  <div class="container" style="text-align: right; padding-right: 15px;">
+    <button type="button" class="btn btn-secondary" (click)="newNote = true">Criar nova
+      nota</button>
+  </div>
 </div>
+<ng-template #alternativeBlock>
+  <div class="container" style="text-align: right; padding-right: 15px;">
+    <button type="button" class="btn btn-danger" (click)="newNote = false">X</button>
+  </div>
+</ng-template>
+<div *ngIf="newNote">
+  <h4 class="text-center"><b>Criar nova nota:</b></h4>
+  <div *ngIf="editionIds$.length > 1">
+    <label for="títuloEdition">Edição:</label>
+    &nbsp;
+    <div class="form-check form-check-inline">
+      <div *ngFor="let edition of editionIds$ | async; let i = index;" id="{{i}}">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio{{i}}" value="{{edition}}"
+          [(ngModel)]="editionId">
+        <label class="form-check-label" for="inlineRadio1">{{edition}}</label>
+        &nbsp;
+      </div>
+    </div>
+  </div>
+  <form class="mg-5 mt-3 container">
+    <div class="form-group row">
+      <label for="title" class="col-sm-2 col-form-label">Titulo:</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="title" name="title" id="title" type="text" class="form-control"
+          placeholder="Insira o titulo da nota">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="type" class="col-sm-2 col-form-label">Descriçao:</label>
+      <div class="col-sm-10">
+        <textarea [(ngModel)]="description" name="description" id="description" type="text" class="form-control"
+          placeholder="Escreva aqui a sua nota" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <button (click)="createNote(); newNote = false" class="btn btn-secondary mx-auto">Criar aula</button>
+    </div>
+  </form>
+</div>
+
+
+<!-- <div class="container" style="text-align: right; padding-right: 15px;">
+  <button type="button" class="btn btn-secondary" (click)="openModalNewNote(templateNewNote)">Criar nova nota</button>
+</div> -->
 <br>
 <div class="container">
   <div>

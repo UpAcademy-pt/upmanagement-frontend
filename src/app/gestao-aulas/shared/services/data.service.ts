@@ -55,10 +55,8 @@ export class DataService {
    */
   public createNote(note: Note) {
     this.notesAPI.create(note).subscribe(
-      (result: number) => {
-        console.log(result);
-        note.id = result;
-        this.notes.push(note);
+      (result: Note) => {
+        this.notes.push(result);
         this.updateNotes$();
       }
     );
