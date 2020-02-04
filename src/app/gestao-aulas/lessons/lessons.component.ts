@@ -125,8 +125,8 @@ export class LessonsComponent implements OnInit {
     this.lesson.editionId = this.edtions[this.rowForEditions].id;
     this.lesson.title = this.title;
     this.lesson.description = this.description;
-    let materialsInLesson = [];
-    this.lesson.materialsIds = materialsInLesson;     // ids
+   // let materialsInLesson = [];
+    this.lesson.materialsIds = this.idMatAdded;     // ids
     console.log(this.lesson);
 
     this.apiLesson.createLesson(this.lesson).subscribe(
@@ -229,11 +229,7 @@ export class LessonsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  public addMaterials() {
-  
-  }
-
-  onCheckboxChange(e: any) {
+  public onCheckboxChange(e: any) {
     this.idMatAdded = new Array();
     this.checkArray = this.form.get('checkArray') as FormArray;
 
@@ -248,16 +244,19 @@ export class LessonsComponent implements OnInit {
         }
         i++;
       });
-    }
+    }    
 
     this.checkArray.value.forEach(el => {
       let id = Number(el);
-
       this.idMatAdded.push(id);
     });
-
     console.log("idMatAdded: ", this.idMatAdded);
-    
+  }
+
+
+  public clearCheckArray(){
+    this.checkArray.clear();
+    this.idMatAdded = new Array();
   }
 
 
