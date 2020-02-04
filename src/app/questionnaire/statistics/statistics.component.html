@@ -1,5 +1,10 @@
-<p>statistics works!</p>
+<p style="padding-top: 4%;">statistics works!</p>
   
+
+<h1>Historico de cenas</h1>
+<div *ngFor="let questionnaire of questionnaireData">
+    <div [ngStyle]="{'color': questionnare?.score > 70 ? 'green':'red'}">{{questionnaire.name}} -- {{questionnaire.score}}</div>
+</div>
   <div class="d3BarChart">
     <app-pie-graph [data]="passedScore"></app-pie-graph>
   </div>

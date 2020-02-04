@@ -11,7 +11,7 @@ export class PieGraphComponent implements OnInit {
 
   @ViewChild('chart', { static: true }) private chartContainer: ElementRef<HTMLElement>;
   //public data: any = { fail: 2, notfinish: 4, pass: 9 };
-  @Input() private data: Array<any>;
+  @Input() private data: any;
   private margin: any = { top: 20, bottom: 20, left: 20, right: 20 };
   private width = 400;
   private height = 400;
@@ -26,7 +26,7 @@ export class PieGraphComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.draw();
+    //this.draw();
   }
 
   draw() {
@@ -43,7 +43,7 @@ export class PieGraphComponent implements OnInit {
 
     this.color = d3.scaleOrdinal()
       .domain(this.data)
-      .range(['red', 'green']);
+      .range(['green', 'red']);
 
     // Compute the position of each group on the pie:
     this.pie = d3.pie()
