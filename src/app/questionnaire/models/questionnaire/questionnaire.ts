@@ -3,13 +3,13 @@ import { Answer } from '../answer/answer';
 
 export class Questionnaire {
     'id': number;
-    'questionList': Question[];
+    'questionList': Question[] = [];
     'answerList': Answer[];
     'name': string;
     'qType': string;
     'accountId': number;
-    'editPrivacy': string[];
-    'viewPrivacy': string[];
+    'editPrivacy': any[] = [];
+    'viewPrivacy': any[] = [];
     'score': number;
     'createDate': number;
     'lastModifiedDate': number;
