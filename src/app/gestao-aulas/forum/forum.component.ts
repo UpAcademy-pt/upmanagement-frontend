@@ -18,6 +18,7 @@ export class ForumComponent implements OnInit {
   public answers$: ReplaySubject<any []>= new ReplaySubject(1);
 
   public validAnswers: AnswerForum[];
+  public newQuestion: boolean = false;
 
 
 
@@ -82,7 +83,7 @@ export class ForumComponent implements OnInit {
         //   // this.questions$[index].validQuestion = true;
 
         // }
-        this.answers$[index].next(answ);
+        this.answers$.next(answ);
 
         console.log(answ);
 

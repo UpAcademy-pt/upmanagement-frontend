@@ -1,204 +1,205 @@
-<h4>Titulo da edicao selecionada no side bar</h4>
+<div style="height: 100%;">
+    <h4>Titulo da edicao selecionada no side bar</h4>
 
 
-<div *ngIf="isSuperUser">
-    <h4 class="text-center"><b>Criar nova aula:</b></h4>
-
-    <form class="mg-5 mt-3 container" >
-        <div class="form-group row">
-            <label for="title" class="col-sm-2 col-form-label">Titulo:</label>
-            <div class="col-sm-10">
-                <input [(ngModel)]="title" name="title" id="title" type="text" class="form-control"
-                    placeholder="Insira o titulo da aula">
+    <div *ngIf="isSuperUser">
+        <div *ngIf="!newLesson; else alternativeBlock">
+            <div class="container" style="text-align: right; padding-right: 15px;">
+                <button type="button" class="btn btn-secondary" (click)="newLesson = true">Criar nova
+                    aula</button>
             </div>
         </div>
-        <div class="form-group row">
-            <label for="type" class="col-sm-2 col-form-label">Descriçao:</label>
-            <div class="col-sm-10">
-                <textarea [(ngModel)]="description" name="description" id="description" type="text" class="form-control"
-                    placeholder="Insira a descriçao da aula" rows="5"></textarea>
+        <ng-template #alternativeBlock>
+            <div class="container" style="text-align: right; padding-right: 15px;">
+                <button type="button" class="btn btn-danger" (click)="newLesson = false">X</button>
             </div>
-        </div>
-
-        <div class="form-group row">
-            <button class="btn btn-secondary mx-auto" 
-                (click)="openModaladdMaterials(templateAddMaterials)">Adicionar Material</button>
-        </div>
-
-        <div class="row">
-            <button (click)="createLesson()"  class="btn btn-secondary mx-auto">Criar aula</button>
-        </div>
-    </form>
-
-</div>
-
-<br>
-
-
-
-
-<!-- lista de aulas -->
-<h4>Lista de Aulas</h4>
-<br>
-
-<div class="container">
-    <accordion>
-        <accordion-group *ngFor="let lesson of lessons$ | async; let i = index;" 
-        (click)="getLessonsMaterials(lesson, i)"
-         heading="{{lesson.title}} - Aula {{i+1}}" id="{{i}}">
-
-            <div *ngIf="isSuperUser">
-                <button type="button" class="btn-borderless btn-edit"
-                    (click)="openModalEditLesson(templateEditLesson, i)">
-                    <fa-icon [icon]="faEdit" size="lg"></fa-icon>
-                </button>
-                <button type="button" class="btn-borderless btn-delete"
-                    (click)="openModalDeleteLesson(templateDeleteLesson, i)">
-                    <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
-                </button>
-            </div>
-            <br>
-
-            <div>
-                <p><b>Descrição:</b></p>
-                <p>{{lesson.description}}</p>
-                <hr>
-
-                <p><b>Materiais:</b></p>
-                <div *ngIf="showMats" >
-                    <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
-                    <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" href="{{material.url}}" role="button" target="_blank">{{material.title}}</a>
-                  
+        </ng-template>
+        <div *ngIf="newLesson">
+            <h4 class="text-center"><b>Criar nova aula:</b></h4>
+            <form class="mg-5 mt-3 container">
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label">Titulo:</label>
+                    <div class="col-sm-10">
+                        <input [(ngModel)]="title" name="title" id="title" type="text" class="form-control"
+                            placeholder="Insira o titulo da aula">
+                    </div>
                 </div>
+                <div class="form-group row">
+                    <label for="type" class="col-sm-2 col-form-label">Descriçao:</label>
+                    <div class="col-sm-10">
+                        <textarea [(ngModel)]="description" name="description" id="description" type="text"
+                            class="form-control" placeholder="Insira a descriçao da aula" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="container" style="text-align: right; padding-right: 15px;">
+                        <button type="button" class="btn btn-secondary"
+                            (click)="openModaladdMaterials(templateAddMaterials) ; getAllMaterials() ; newLesson = true">Adicionar
+                            Material</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <button (click)="createLesson()" class="btn btn-secondary mx-auto">Criar aula</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
 
-                <hr>
+    <!-- lista de aulas -->
+    <h4>Lista de Aulas</h4>
+    <br>
 
-                <p><b>Notas:</b></p>
-                <div>
-
-                    <!-- <div>
+    <div class="container">
+        <accordion [isAnimated]="true">
+            <div *ngFor="let lesson of lessons$ | async; let i = index;">
+                <accordion-group (click)="getLessonsMaterials(lesson, i)" heading="{{lesson.title}} - Aula {{i+1}}"
+                    id="{{i}}">
+                    <div *ngIf="isSuperUser">
+                        <button type="button" class="btn-borderless btn-edit"
+                            (click)="openModalEditLesson(templateEditLesson, i)">
+                            <fa-icon [icon]="faEdit" size="lg"></fa-icon>
+                        </button>
+                        <button type="button" class="btn-borderless btn-delete"
+                            (click)="openModalDeleteLesson(templateDeleteLesson, i)">
+                            <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
+                        </button>
+                    </div>
+                    <br>
+                    <div>
+                        <p><b>Descrição:</b></p>
+                        <p>{{lesson.description}}</p>
+                        <hr>
+                        <p><b>Materiais:</b></p>
+                        <div *ngIf="showMats">
+                            <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
+                            <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary"
+                                href="{{material.url}}" role="button" target="_blank" popover="I will hide on blur"
+                                triggers="mouseenter:mouseleave">{{material.title}}</a>
+                        </div>
+                        <hr>
+                        <p><b>Notas:</b></p>
+                        <div>
+                            <!-- <div>
                         <p>{{lesson.name}}</p>
                     </div> -->
-
-                    <hr>
-                </div>
-
-
-
-
-
-
-            </div>
-        </accordion-group>
-    </accordion>
-</div>
-
-
-
-<!-- Modal Apagar Lesson -->
-<ng-template #templateDeleteLesson>
-    <div class="modal-body text-center">
-        <p>Tem a certeza que deseja remover esta aula?</p>
-        <button type="button" class="btn btn-secondary btn-lg" (click)="modalRef.hide()"
-            style="margin-right: 5px">Não</button>
-        <button type="button" class="btn btn-danger" (click)="deleteLessonById(); modalRef.hide()"
-            style="margin-left: 5px">Sim</button>
-    </div>
-</ng-template>
-
-<!-- Modal Editar Aula -->
-<ng-template #templateEditLesson>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Editar Aula</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body container">
-        <form class="mg-5 mt-3 container" #editLessonForm="ngForm" (ngSubmit)="editLesson()">
-            <div class="form-group">
-                <label for="títuloInput">Título:</label>
-                <input type="text" class="form-control" id="tituloAula" [(ngModel)]="title" name="title">
-            </div>
-            <div>
-                <div class="form-group">
-                    <label for="descricaoInput">Descrição:</label>
-                    <textarea class="form-control" id="descriçãoAula" rows="5" [(ngModel)]="description"
-                        name="description"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <label for="Materials">Materiais:</label>
+                            <hr>
+                        </div>
+                    </div>
+                </accordion-group>
                 <br>
-                <button class="btn btn-secondary mx-auto">Adicionar novo Material</button>
             </div>
-            <br>
-            <div class="row">
-                <button type="submit" class="btn btn-success mx-auto" (click)="modalRef.hide()">Gravar Aula</button>
-                <button type="button" class="btn btn-danger mx-auto" (click)="modalRef.hide()">Cancelar</button>
-            </div>
-        </form>
-    </div>
-</ng-template>
-
-
-
-<!-- Modal Adicionar Materiais -->
-<ng-template #templateAddMaterials>
- 
-    <div class="modal-header ">
-        <h4 class="modal-title pull-left">Adicionar Materiais</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        </accordion>
     </div>
 
-    <form  class="mg-5 mt-3 container" #addMaterialsForm="ngForm" (ngSubmit)="addMaterials()">
-        <!-- [formGroup]="form" -->
-            <div class="table-responsive">
-            <table class="table" [ngClass]='theme'>
-                <thead>
-                    <tr>                      
-                        <th>
-                            TÍTULO
-                        </th>
-                        <th>
-                            TIPO
-                        </th>
-                        <th>
-                            URL
-                        </th>
-                        <th>
-                            Selecionar:
-                        </th>
-                        <th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
-                        <td>
-                            {{material.title}}
-                        </td>
-                        <td>
-                            {{material.type}}
-                        </td>
-                        <td>
-                            {{material.url}}
-                        </td>
-                        <td>
-                        <input class="form-check-input" type="checkbox"  [value]="material.id" (change)="onCheckboxChange($event)">                        
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- Modal Apagar Lesson -->
+    <ng-template #templateDeleteLesson>
+        <div class="modal-body text-center">
+            <p>Tem a certeza que deseja remover esta aula?</p>
+            <button type="button" class="btn btn-secondary btn-lg" (click)="modalRef.hide()"
+                style="margin-right: 5px">Não</button>
+            <button type="button" class="btn btn-danger" (click)="deleteLessonById(); modalRef.hide()"
+                style="margin-left: 5px">Sim</button>
+        </div>
+    </ng-template>
+
+    <!-- Modal Editar Aula -->
+    <ng-template #templateEditLesson>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Editar Aula</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body container">
+            <form class="mg-5 mt-3 container" #editLessonForm="ngForm" (ngSubmit)="editLesson()">
+                <div class="form-group">
+                    <label for="títuloInput">Título:</label>
+                    <input type="text" class="form-control" id="tituloAula" [(ngModel)]="title" name="title">
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="descricaoInput">Descrição:</label>
+                        <textarea class="form-control" id="descriçãoAula" rows="5" [(ngModel)]="description"
+                            name="description"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="Materials">Materiais:</label>
+                    <br>
+                    <button class="btn btn-secondary mx-auto">Adicionar novo Material</button>
+                </div>
+                <br>
+                <div class="row">
+                    <button type="submit" class="btn btn-secondary mx-auto" (click)="modalRef.hide()">Gravar
+                        Aula</button>
+                    <button type="button" class="btn btn-danger mx-auto" (click)="modalRef.hide()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+
+
+
+    <!-- Modal Adicionar Materiais -->
+    <ng-template #templateAddMaterials>
+
+        <div class="modal-header ">
+            <h4 class="modal-title pull-left">Adicionar Materiais</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
 
+        <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm" (ngSubmit)="addMaterials()">
+            <!-- [formGroup]="form" -->
+            <div class="table-responsive">
+                <table class="table" [ngClass]='theme'>
+                    <thead>
+                        <tr>
+                            <th>
+                                TÍTULO
+                            </th>
+                            <th>
+                                TIPO
+                            </th>
+                            <th>
+                                URL
+                            </th>
+                            <th>
+                                Selecionar:
+                            </th>
+                            <th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
+                            <td>
+                                {{material.title}}
+                            </td>
+                            <td>
+                                {{material.type}}
+                            </td>
+                            <td>
+                                {{material.url}}
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" [value]="material.id"
+                                    (change)="onCheckboxChange($event)">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="row">
+
+            <div class="row">
 
 
-        <button type="submit" class="btn btn-success mx-auto" (click)="modalRef.hide()">Adicionar Materiais</button>
+                <button type="submit" class="btn btn-secondary mx-auto" (click)="modalRef.hide()">Adicionar
+                    Materiais</button>
+            </div>
+
+        </form>
+    </ng-template>
 </div>
-    
-    </form>
-</ng-template>

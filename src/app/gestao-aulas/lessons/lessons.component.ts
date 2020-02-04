@@ -32,10 +32,12 @@ export class LessonsComponent implements OnInit {
   private rowForEditions: number;
   private rowForEditions$: ReplaySubject<any> = new ReplaySubject(1);
   private materials$: ReplaySubject<any> = new ReplaySubject(1);
-  private materials: Materials = new Materials();
-  private materialsDisplay$: ReplaySubject<any[][]> = new ReplaySubject(1);
-  private matsDisplay: any[];
-  private showMats: boolean = false;
+  private materials: Materials= new Materials();
+  private materialsDisplay$:ReplaySubject<any[][]> = new ReplaySubject(1); 
+  private matsDisplay:any [];
+  public showMats:boolean= false;
+  public newLesson: boolean = false;
+  public editValid: boolean =false;
 
   private idMatAdded: number[] = [];
 
