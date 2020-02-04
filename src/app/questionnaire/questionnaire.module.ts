@@ -23,6 +23,8 @@ import { EditorComponent } from './editor/editor.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {SelectDropDownModule } from 'ngx-select-dropdown';
+import { PieGraphComponent } from './shared/graphs/pie-graph/pie-graph.component'
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     HistoryComponent,
     JwPaginationComponent,
     ViewComponent,
-    EditorComponent
+    EditorComponent,
+    PieGraphComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +52,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FontAwesomeModule,
     Ng2SearchPipeModule,
     Ng2OrderModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SelectDropDownModule
   ]
 })
 export class QuestionnaireModule { }
