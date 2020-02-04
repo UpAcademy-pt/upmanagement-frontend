@@ -39,14 +39,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button (click)="createLesson()" class="btn btn-secondary mx-auto">Criar aula</button>
+                    <button (click)="createLesson(); newLesson = false" class="btn btn-secondary mx-auto">Criar aula</button>
                 </div>
             </form>
         </div>
     </div>
     <br>
 
-    <!-- lista de aulas -->
+    <!-- lista de aulas                     "openModalEditLesson(templateEditLesson, i)"         -->
     <h4>Lista de Aulas</h4>
     <br>
 
@@ -57,7 +57,7 @@
                     id="{{i}}">
                     <div *ngIf="isSuperUser">
                         <button type="button" class="btn-borderless btn-edit"
-                            (click)="openModalEditLesson(templateEditLesson, i)">
+                            (click)="editValid = true">
                             <fa-icon [icon]="faEdit" size="lg"></fa-icon>
                         </button>
                         <button type="button" class="btn-borderless btn-delete"
@@ -67,8 +67,30 @@
                     </div>
                     <br>
                     <div>
-                        <p><b>Descrição:</b></p>
-                        <p>{{lesson.description}}</p>
+                        <div>
+                            <div class="form-group">
+                              <div *ngIf="editValid; else elseBlock">
+                                <form class="mg-5 mt-3 container" #newNoteForm="ngForm" (ngSubmit)="updateLesson(lesson)">
+                                  <textarea class="form-control" id="exampleFormControlTextareaTitle" rows="1" [(ngModel)]="lesson.title"
+                                    name="title">
+                                  {{lesson.title}}
+                                </textarea>
+                                  <textarea class="form-control" id="formControlTextareaDescription" rows="3"
+                                    [(ngModel)]="lesson.description" name="description">
+                                    {{lesson.description}}
+                                  </textarea>
+                                  <br>
+                                  <button type="button" class="btn btn-secondary" (click)="editValid = false; updateLesson(lesson)">Salvar
+                                    Aula</button>
+                                </form>
+                              </div>
+                              <ng-template #elseBlock>
+                                <textarea class="form-control" id="formControlTextareaDescription" rows="3" disabled>
+                                    {{lesson.description}}
+                                </textarea>
+                              </ng-template>
+                            </div>
+                          </div>
                         <hr>
                         <p><b>Materiais:</b></p>
                         <div *ngIf="showMats">

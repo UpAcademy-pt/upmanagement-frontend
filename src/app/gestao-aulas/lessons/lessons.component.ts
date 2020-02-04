@@ -129,6 +129,7 @@ export class LessonsComponent implements OnInit {
     this.apiLesson.createLesson(this.lesson).subscribe(
       (result: any) => {
         console.log(this.lessons);
+        this.lesson.id = result;
         this.lessons.push(this.lesson);
         this.updateLessons$();
         this.lesson = new Lesson();
@@ -190,19 +191,30 @@ export class LessonsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  public editLesson() {
-    this.lesson.id = this.lessons[this.indexOfLessonToEdit].id
-    this.lesson.description = this.description;
-    this.lesson.title = this.title;
-   /*  this.lesson.materialsIds = this.materials.id; */
+  // public editLesson() {
+  //   this.lesson.id = this.lessons[this.indexOfLessonToEdit].id
+  //   this.lesson.description = this.description;
+  //   this.lesson.title = this.title;
+  //  /*  this.lesson.materialsIds = this.materials.id; */
 
-    this.apiLesson.updateLesson(this.lesson).subscribe(
-      () => {
-        this.lessons[this.indexOfLessonToEdit] = this.lesson;
+  //   this.apiLesson.updateLesson(this.lesson).subscribe(
+  //     () => {
+  //       this.lessons[this.indexOfLessonToEdit] = this.lesson;
+  //       this.updateLessons$();
+  //     }
+  //   );
+  // }
+
+  public updateLesson(lesson: Lesson) {
+    this.apiLesson.updateLesson(lesson).subscribe(
+      (res: any) => {
+        this.lessons.splice(this.lessons.findIndex(element => element.id === lesson.id), 1, lesson);
         this.updateLessons$();
       }
     );
   }
+
+
 
 
   // ------------
