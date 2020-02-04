@@ -1,7 +1,7 @@
 <div style="height: 100%;">
     <h4>Titulo da edicao selecionada no side bar</h4>
 
-<!--  openModaladdMaterials(templateAddMaterials)                                  (ngSubmit)="addMaterials()"-->
+    <!--  openModaladdMaterials(templateAddMaterials)                                  (ngSubmit)="addMaterials()"-->
     <div *ngIf="isSuperUser">
         <div *ngIf="!newLesson; else alternativeBlock">
             <div class="container" style="text-align: right; padding-right: 15px;">
@@ -33,20 +33,22 @@
                 </div>
                 <div *ngIf="!addMaterial; else alternativeBlock">
                     <div class="container" style="text-align: right; padding-right: 15px;">
-                        <button type="button" class="btn btn-secondary" (click)="addMaterial = true ; newLesson = true">Adicionar
+                        <button type="button" class="btn btn-secondary"
+                            (click)="addMaterial = true ; newLesson = true">Adicionar
                             Material</button>
                     </div>
                 </div>
                 <ng-template #alternativeBlock>
                     <div class="container" style="text-align: right; padding-right: 15px;">
-                        <button type="button" class="btn btn-danger" (click)="addMaterial = false ; clearCheckArray()">X</button>
+                        <button type="button" class="btn btn-danger"
+                            (click)="addMaterial = false ; clearCheckArray()">X</button>
                     </div>
                 </ng-template>
                 <div *ngIf="addMaterial" class="form-group row">
                     <div>
                         <h4 class="modal-title pull-left">Adicionar Materiais:</h4>
                     </div>
-                    <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm" >
+                    <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm">
                         <!-- [formGroup]="form" -->
                         <div class="table-responsive">
                             <table class="table" [ngClass]='theme'>
@@ -61,10 +63,9 @@
                                         <th>
                                             URL
                                         </th>
-                                        <th>
+                                        <th class="text-center">
                                             Selecionar:
                                         </th>
-                                        <th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,25 +79,27 @@
                                         <td>
                                             {{material.url}}
                                         </td>
-                                        <td>
-                                            <input class="form-check-input" type="checkbox" [value]="material.id"
+                                        <td class="text-center">
+                                            <input type="checkbox" [value]="material.id"
                                                 (change)="onCheckboxChange($event)">
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-            
-            
-                        <div class="row">
-                            <button type="button" class="btn btn-secondary mx-auto" (click)="addMaterials(); addMaterial = false">Adicionar
+
+
+                        <!-- <div class="row">
+                            <button type="button" class="btn btn-secondary mx-auto"
+                                (click)=" addMaterial = false">Adicionar
                                 Materiais</button>
-                        </div>
-            
+                        </div> -->
+
                     </form>
                 </div>
                 <div class="row">
-                    <button (click)="createLesson(); newLesson = false" class="btn btn-secondary mx-auto">Criar aula</button>
+                    <button (click)="createLesson(); newLesson = false" class="btn btn-secondary mx-auto">Criar
+                        aula</button>
                 </div>
             </form>
         </div>
@@ -113,8 +116,7 @@
                 <accordion-group (click)="getLessonsMaterials(lesson, i)" heading="{{lesson.title}} - Aula {{i+1}}"
                     id="{{i}}">
                     <div *ngIf="isSuperUser">
-                        <button type="button" class="btn-borderless btn-edit"
-                            (click)="editValid = true">
+                        <button type="button" class="btn-borderless btn-edit" (click)="editValid = true">
                             <fa-icon [icon]="faEdit" size="lg"></fa-icon>
                         </button>
                         <button type="button" class="btn-borderless btn-delete"
@@ -126,28 +128,31 @@
                     <div>
                         <div>
                             <div class="form-group">
-                              <div *ngIf="editValid; else elseBlock">
-                                <form class="mg-5 mt-3 container" #newNoteForm="ngForm" (ngSubmit)="updateLesson(lesson)">
-                                  <textarea class="form-control" id="exampleFormControlTextareaTitle" rows="1" [(ngModel)]="lesson.title"
-                                    name="title">
+                                <div *ngIf="editValid; else elseBlock">
+                                    <form class="mg-5 mt-3 container" #newNoteForm="ngForm"
+                                        (ngSubmit)="updateLesson(lesson)">
+                                        <textarea class="form-control" id="exampleFormControlTextareaTitle" rows="1"
+                                            [(ngModel)]="lesson.title" name="title">
                                   {{lesson.title}}
                                 </textarea>
-                                  <textarea class="form-control" id="formControlTextareaDescription" rows="3"
-                                    [(ngModel)]="lesson.description" name="description">
+                                        <textarea class="form-control" id="formControlTextareaDescription" rows="3"
+                                            [(ngModel)]="lesson.description" name="description">
                                     {{lesson.description}}
                                   </textarea>
-                                  <br>
-                                  <button type="button" class="btn btn-secondary" (click)="editValid = false; updateLesson(lesson)">Salvar
-                                    Aula</button>
-                                </form>
-                              </div>
-                              <ng-template #elseBlock>
-                                <textarea class="form-control" id="formControlTextareaDescription" rows="3" disabled>
+                                        <br>
+                                        <button type="button" class="btn btn-secondary"
+                                            (click)="editValid = false; updateLesson(lesson)">Salvar
+                                            Aula</button>
+                                    </form>
+                                </div>
+                                <ng-template #elseBlock>
+                                    <textarea class="form-control" id="formControlTextareaDescription" rows="3"
+                                        disabled>
                                     {{lesson.description}}
                                 </textarea>
-                              </ng-template>
+                                </ng-template>
                             </div>
-                          </div>
+                        </div>
                         <hr>
                         <p><b>Materiais:</b></p>
                         <div *ngIf="showMats">
