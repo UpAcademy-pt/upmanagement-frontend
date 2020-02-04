@@ -1,7 +1,7 @@
 <div style="height: 100%;">
     <h4>Titulo da edicao selecionada no side bar</h4>
 
-
+<!--  openModaladdMaterials(templateAddMaterials)                                  (ngSubmit)="addMaterials()"-->
     <div *ngIf="isSuperUser">
         <div *ngIf="!newLesson; else alternativeBlock">
             <div class="container" style="text-align: right; padding-right: 15px;">
@@ -31,12 +31,69 @@
                             class="form-control" placeholder="Insira a descriçao da aula" rows="5"></textarea>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div *ngIf="!addMaterial; else alternativeBlock">
                     <div class="container" style="text-align: right; padding-right: 15px;">
-                        <button type="button" class="btn btn-secondary"
-                            (click)="openModaladdMaterials(templateAddMaterials) ; getAllMaterials() ; newLesson = true">Adicionar
+                        <button type="button" class="btn btn-secondary" (click)="addMaterial = true ; getAllMaterials() ; newLesson = true">Adicionar
                             Material</button>
                     </div>
+                </div>
+                <ng-template #alternativeBlock>
+                    <div class="container" style="text-align: right; padding-right: 15px;">
+                        <button type="button" class="btn btn-danger" (click)="addMaterial = false">X</button>
+                    </div>
+                </ng-template>
+                <div *ngIf="addMaterial" class="form-group row">
+                    <div>
+                        <h4 class="modal-title pull-left">Adicionar Materiais:</h4>
+                    </div>
+                    <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm" >
+                        <!-- [formGroup]="form" -->
+                        <div class="table-responsive">
+                            <table class="table" [ngClass]='theme'>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            TÍTULO
+                                        </th>
+                                        <th>
+                                            TIPO
+                                        </th>
+                                        <th>
+                                            URL
+                                        </th>
+                                        <th>
+                                            Selecionar:
+                                        </th>
+                                        <th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
+                                        <td>
+                                            {{material.title}}
+                                        </td>
+                                        <td>
+                                            {{material.type}}
+                                        </td>
+                                        <td>
+                                            {{material.url}}
+                                        </td>
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" [value]="material.id"
+                                                (change)="onCheckboxChange($event)">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+            
+            
+                        <div class="row">
+                            <button type="button" class="btn btn-secondary mx-auto" (click)="addMaterials(); addMaterial = false">Adicionar
+                                Materiais</button>
+                        </div>
+            
+                    </form>
                 </div>
                 <div class="row">
                     <button (click)="createLesson(); newLesson = false" class="btn btn-secondary mx-auto">Criar aula</button>

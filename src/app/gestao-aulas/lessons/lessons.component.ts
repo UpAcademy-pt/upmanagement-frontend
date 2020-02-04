@@ -130,6 +130,7 @@ export class LessonsComponent implements OnInit {
       (result: any) => {
         console.log(this.lessons);
         this.lesson.id = result;
+        console.log(this.lesson);
         this.lessons.push(this.lesson);
         this.updateLessons$();
         this.lesson = new Lesson();
@@ -226,8 +227,6 @@ export class LessonsComponent implements OnInit {
   }
 
   public addMaterials() {
-
-
     console.log(this.form.value)
 
     // for (let i = 0; i < this.form.value.length; i++) {
