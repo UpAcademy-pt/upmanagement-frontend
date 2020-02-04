@@ -247,6 +247,10 @@ export class LessonsComponent implements OnInit {
   public clearCheckArray(){
     this.checkArray.clear();
     this.idMatAdded = new Array();
+    console.log(this.checkArray.value);
+    console.log(this.idMatAdded);
+    
+
   }
 
 
