@@ -17,6 +17,7 @@ export class Questionnaire {
     'templateId': number;
     'template': boolean;
     'answerTime': number;
+    'userName': string;
     
     constructor(data?: any) {
         Object.assign(this, data);
