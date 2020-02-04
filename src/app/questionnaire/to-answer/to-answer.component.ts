@@ -16,6 +16,7 @@ export class ToAnswerComponent implements OnInit {
 
   private currentQuestionnaire: Questionnaire;
   private userName: string;
+  private startingTime: number;
   faAngleDoubleDown = faAngleDoubleDown;
   faAngleDoubleUp = faAngleDoubleUp;
 
@@ -29,6 +30,7 @@ export class ToAnswerComponent implements OnInit {
     let questionnaireId: number = this.router.getCurrentNavigation().extras.state.id;
     this.questionnaireService.getQuestionnaire(questionnaireId).subscribe(
       (currentQuestionnaire: Questionnaire) => {
+        this.startingTime = new Date().getTime();
         this.currentQuestionnaire = currentQuestionnaire;
         for (let i = 0; i < this.currentQuestionnaire.questionList.length; i++) {
           let answer: Answer = new Answer({questionnaireId: this.currentQuestionnaire.id, answer: [], questionId: this.currentQuestionnaire.questionList[i].id});
@@ -40,6 +42,9 @@ export class ToAnswerComponent implements OnInit {
   ngOnInit() { }
 
   public sendQuestionnaire() {
+    this.currentQuestionnaire.answerTime = new Date().getTime() - this.startingTime;
+    console.log(this.currentQuestionnaire.answerTime);
+        
     this.questionnaireService.updateQuestionnaire(this.currentQuestionnaire).subscribe(
       (msg: string) => {
         console.log(msg);

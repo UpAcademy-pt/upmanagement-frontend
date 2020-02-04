@@ -8,7 +8,16 @@
     color: darkgray;
 }
 
-.rightCheck {
+.rightAnswer {
+    color: green !important;
+}
+
+.rightAnswerIsh {
     font-style: italic;
     font-weight: bold;
+    color: gray !important;
+}
+
+.wrongAnswer {
+    color: red !important;
 }

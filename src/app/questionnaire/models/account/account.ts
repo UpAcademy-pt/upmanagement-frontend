@@ -3,7 +3,6 @@ import { Questionnaire } from '../questionnaire/questionnaire';
 export class Account {
     'id': number;
     'pendingQuestionnaires': Questionnaire[];
-    'idTeste' = 1;
     'createDate': number;
     'lastModifiedDate': number;
 

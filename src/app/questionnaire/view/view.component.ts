@@ -3,7 +3,6 @@ import { Questionnaire } from '../models/questionnaire/questionnaire';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionnaireService } from '../services/questionnaire-service/questionnaire.service';
 import { faAngleDoubleDown, faAngleDoubleUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 
 @Component({
   selector: 'app-view',
@@ -13,16 +12,13 @@ import { UserServiceService } from 'src/app/core/services/user-service/user-serv
 export class ViewComponent implements OnInit {
 
   private currentQuestionnaire: Questionnaire;
-  private userName: string;
   faAngleDoubleDown = faAngleDoubleDown;
   faAngleDoubleUp = faAngleDoubleUp;
 
   constructor(
     private router: Router,
     private questionnaireService: QuestionnaireService,
-    private userService: UserServiceService
   ) {
-    this.userName = userService.getCurrentName();
     let questionnaireId: number = this.router.getCurrentNavigation().extras.state.id;
     this.questionnaireService.getQuestionnaire(questionnaireId).subscribe(
       (currentQuestionnaire: Questionnaire) => {
@@ -31,17 +27,26 @@ export class ViewComponent implements OnInit {
         this.currentQuestionnaire = currentQuestionnaire;
         console.log(this.currentQuestionnaire);
       });
-   }
+  }
 
-   isSelected(i: number, j: number) {
+  isSelected(i: number, j: number) {
     return this.currentQuestionnaire.answerList[i].answer.includes(String(j));
-   }
+  }
 
-   isRightAnswer(i: number, j: number) {
-     return this.currentQuestionnaire.questionList[i].rightAnswer.includes(String(j));
-   }
+  checkAnswer(i: number, j: number) {
+    if (this.currentQuestionnaire.qType != "QUIZ") {
+      return "";
+    }
+    if (this.currentQuestionnaire.questionList[i].rightAnswer.includes(String(j)) && this.isSelected(i, j)) {
+      return "rightAnswer";
+    } else if (!this.currentQuestionnaire.questionList[i].rightAnswer.includes(String(j)) && this.isSelected(i, j)) {
+      return "wrongAnswer";
+    } else if (this.currentQuestionnaire.questionList[i].rightAnswer.includes(String(j)) && !this.isSelected(i, j)) {
+      return "rightAnswerIsh";
+    }
+  }
 
   ngOnInit() {
   }
- 
+
 }
