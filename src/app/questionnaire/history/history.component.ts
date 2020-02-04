@@ -44,13 +44,10 @@ export class HistoryComponent implements OnInit {
   ngOnInit(
 
   ) {
-    
     this.viewName();
     this.getCurrentRole();
-    console.log(this.currentRole);
     this.chooseGet();
     //this.getQuestionnaires();
-    
   }
   public getCurrentUser() {
     return this.userService.getCurrentUser();
@@ -107,8 +104,10 @@ public chooseGet() {
     this.pageOfItems = pageOfItems;
   }
 
-  public viewThisQuestionnaire(questionnaireId: number) {
-    this.router.navigate(['/questionario/historico/ver'], { state: { id: questionnaireId } });
+  public viewThisQuestionnaire(questionnaire: Questionnaire) {
+    this.router.navigate(['/questionario/historico/ver'], { state: { quest: questionnaire }, });
+    console.log(questionnaire);
+    
   }
 
   public dateChange(data: Questionnaire) {
