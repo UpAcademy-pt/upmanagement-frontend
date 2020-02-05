@@ -5,6 +5,7 @@ import { UserServiceService } from 'src/app/core/services/user-service/user-serv
 import { Edition } from '../../models/edition/edition';
 import { ServiceGeneralService } from '../../services/service-general.service';
 import { ReplaySubject } from 'rxjs';
+import { User } from 'src/app/core/models/user';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class SideBarComponent implements OnInit {
   public showSuperUserTab: boolean = false;
   private edtions: Edition[];
   private edtions$: ReplaySubject<any> = new ReplaySubject(1);
-  
+  private userName: string;
 
 
   constructor(
@@ -36,6 +37,9 @@ export class SideBarComponent implements OnInit {
       }
     );
     console.log(this.showSuperUserTab);
+    this.userName = this.userApi.getCurrentName();
+    console.log(this.userName);
+    
    }
 
   ngOnInit() {
